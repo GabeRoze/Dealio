@@ -1,0 +1,264 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C0FE219114F4410E00F03DFF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0FE219014F4410E00F03DFF /* UIKit.framework */; };
+		C0FE219314F4410E00F03DFF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0FE219214F4410E00F03DFF /* Foundation.framework */; };
+		C0FE219514F4410E00F03DFF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0FE219414F4410E00F03DFF /* CoreGraphics.framework */; };
+		C0FE219B14F4410F00F03DFF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C0FE219914F4410F00F03DFF /* InfoPlist.strings */; };
+		C0FE219D14F4410F00F03DFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C0FE219C14F4410F00F03DFF /* main.m */; };
+		C0FE21A114F4410F00F03DFF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C0FE21A014F4410F00F03DFF /* AppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C0FE218C14F4410E00F03DFF /* Dealio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dealio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0FE219014F4410E00F03DFF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C0FE219214F4410E00F03DFF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C0FE219414F4410E00F03DFF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C0FE219814F4410E00F03DFF /* Dealio-Info.plist */ = {isa = PBXFileReference; path = "Dealio-Info.plist"; sourceTree = "<group>"; };
+		C0FE219A14F4410F00F03DFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C0FE219C14F4410F00F03DFF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C0FE219E14F4410F00F03DFF /* Dealio-Prefix.pch */ = {isa = PBXFileReference; path = "Dealio-Prefix.pch"; sourceTree = "<group>"; };
+		C0FE219F14F4410F00F03DFF /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		C0FE21A014F4410F00F03DFF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C0FE218914F4410E00F03DFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0FE219114F4410E00F03DFF /* UIKit.framework in Frameworks */,
+				C0FE219314F4410E00F03DFF /* Foundation.framework in Frameworks */,
+				C0FE219514F4410E00F03DFF /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C0FE218114F4410E00F03DFF = {
+			isa = PBXGroup;
+			children = (
+				C0FE219614F4410E00F03DFF /* Dealio */,
+				C0FE218F14F4410E00F03DFF /* Frameworks */,
+				C0FE218D14F4410E00F03DFF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C0FE218D14F4410E00F03DFF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C0FE218C14F4410E00F03DFF /* Dealio.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C0FE218F14F4410E00F03DFF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0FE219014F4410E00F03DFF /* UIKit.framework */,
+				C0FE219214F4410E00F03DFF /* Foundation.framework */,
+				C0FE219414F4410E00F03DFF /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C0FE219614F4410E00F03DFF /* Dealio */ = {
+			isa = PBXGroup;
+			children = (
+				C0FE219F14F4410F00F03DFF /* AppDelegate.h */,
+				C0FE21A014F4410F00F03DFF /* AppDelegate.m */,
+				C0FE219714F4410E00F03DFF /* Supporting Files */,
+			);
+			path = Dealio;
+			sourceTree = "<group>";
+		};
+		C0FE219714F4410E00F03DFF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C0FE219814F4410E00F03DFF /* Dealio-Info.plist */,
+				C0FE219914F4410F00F03DFF /* InfoPlist.strings */,
+				C0FE219C14F4410F00F03DFF /* main.m */,
+				C0FE219E14F4410F00F03DFF /* Dealio-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C0FE218B14F4410E00F03DFF /* Dealio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0FE21A414F4410F00F03DFF /* Build configuration list for PBXNativeTarget "Dealio" */;
+			buildPhases = (
+				C0FE218814F4410E00F03DFF /* Sources */,
+				C0FE218914F4410E00F03DFF /* Frameworks */,
+				C0FE218A14F4410E00F03DFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dealio;
+			productName = Dealio;
+			productReference = C0FE218C14F4410E00F03DFF /* Dealio.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C0FE218314F4410E00F03DFF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "University of Waterloo";
+			};
+			buildConfigurationList = C0FE218614F4410E00F03DFF /* Build configuration list for PBXProject "Dealio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C0FE218114F4410E00F03DFF;
+			productRefGroup = C0FE218D14F4410E00F03DFF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C0FE218B14F4410E00F03DFF /* Dealio */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C0FE218A14F4410E00F03DFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0FE219B14F4410F00F03DFF /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C0FE218814F4410E00F03DFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0FE219D14F4410F00F03DFF /* main.m in Sources */,
+				C0FE21A114F4410F00F03DFF /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C0FE219914F4410F00F03DFF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C0FE219A14F4410F00F03DFF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C0FE21A214F4410F00F03DFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C0FE21A314F4410F00F03DFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C0FE21A514F4410F00F03DFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dealio/Dealio-Prefix.pch";
+				INFOPLIST_FILE = "Dealio/Dealio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C0FE21A614F4410F00F03DFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Dealio/Dealio-Prefix.pch";
+				INFOPLIST_FILE = "Dealio/Dealio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C0FE218614F4410E00F03DFF /* Build configuration list for PBXProject "Dealio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0FE21A214F4410F00F03DFF /* Debug */,
+				C0FE21A314F4410F00F03DFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0FE21A414F4410F00F03DFF /* Build configuration list for PBXNativeTarget "Dealio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0FE21A514F4410F00F03DFF /* Debug */,
+				C0FE21A614F4410F00F03DFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C0FE218314F4410E00F03DFF /* Project object */;
+}
