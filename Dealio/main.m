@@ -1,18 +1,18 @@
 //
 //  main.m
-//  Dealio
+//  The Restaurant
 //
-//  Created by Gabe Rozenberg on 2/21/12.
-//  Copyright (c) 2012 University of Waterloo. All rights reserved.
+//  Created by Gabe Rozenberg on 11-12-12.
+//  Copyright (c) 2011 University of Waterloo. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-#import "AppDelegate.h"
+#import "TheRestaurantAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([TheRestaurantAppDelegate class]));
     }
 }
