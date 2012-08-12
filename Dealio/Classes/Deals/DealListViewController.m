@@ -13,13 +13,10 @@
 #import "CalculationHelper.h"
 #import "BorderedSpinnerView.h"
 #import <CoreLocation/CoreLocation.h>
-#import "DayControlBar.h"
-
 
 @implementation DealListViewController
 
 @synthesize listData;
-@synthesize dayControlBar;
 @synthesize table;
 @synthesize dealData;
 @synthesize messageText;
@@ -36,7 +33,15 @@
 @synthesize wednesdayButton;
 @synthesize thursdayButton;
 @synthesize fridayButton;
+@synthesize sundayLabel;
+@synthesize saturdayLabel;
+@synthesize mondayLabel;
+@synthesize tuesdayLabel;
+@synthesize wednesdayLabel;
+@synthesize thursdayLabel;
+@synthesize fridayLabel;
 @synthesize dayButtons;
+@synthesize dayLabels;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,50 +61,13 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    dayButtons = [[NSMutableArray alloc] initWithObjects:sundayButton, mondayButton, tuesdayButton, wednesdayButton,
-            thursdayButton, fridayButton, saturdaybutton, nil];
-
-
-
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sundayTap:)];
-    [sundayButton addGestureRecognizer:tapGesture];
-
-    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mondayTap:)];
-    [mondayButton addGestureRecognizer:tapGesture];
-
-    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tuesdayTap:)];
-    [tuesdayButton addGestureRecognizer:tapGesture];
-
-    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(wednesdayTap:)];
-    [wednesdayButton addGestureRecognizer:tapGesture];
-
-    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(thursdayTap:)];
-    [thursdayButton addGestureRecognizer:tapGesture];
-
-    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fridayTap:)];
-    [fridayButton addGestureRecognizer:tapGesture];
-
-    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(saturdayTap:)];
-    [saturdaybutton addGestureRecognizer:tapGesture];
-
-    tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sundayTap:)];
-    [sundayButton addGestureRecognizer:tapGesture];
-    tapGesture = nil;
-
-    sundayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
-    mondayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
-    tuesdayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
-    wednesdayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
-    thursdayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
-    fridayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
-    saturdaybutton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
+    [self initDayButtons];
 
     // locationManager update as location
     locationManager = [[CLLocationManager alloc] init];
@@ -107,7 +75,6 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = kCLDistanceFilterNone;
     [locationManager startUpdatingLocation];
-
 
     borderedSpinnerView = [[BorderedSpinnerView alloc] init];
 
@@ -123,7 +90,9 @@
     NSDateComponents *weekdayComponents =
             [gregorian components:(NSDayCalendarUnit | NSWeekdayCalendarUnit) fromDate:today];
     NSInteger weekday = [weekdayComponents weekday];
-    [self selectDay:(weekday-1)];
+//    [self selectDay:(weekday-1)];
+    UIImageView *currentDay = (UIImageView *)[dayButtons objectAtIndex:(weekday-1)];
+    currentDay.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"selected_day_button_color"]];
 
     //alloc required vars
     self.dealData = [[NSMutableArray alloc] init];
@@ -136,9 +105,31 @@
 
 -(void)initDayButtons
 {
+    dayButtons = [[NSMutableArray alloc] initWithObjects:sundayButton,
+                                                         mondayButton,
+                                                         tuesdayButton,
+                                                         wednesdayButton,
+                                                         thursdayButton,
+                                                         fridayButton,
+                                                         saturdaybutton,
+                                                         nil];
+
+    dayLabels = [[NSMutableArray alloc] initWithObjects:mondayLabel, tuesdayLabel, wednesdayLabel, thursdayLabel, fridayLabel, saturdayLabel, sundayLabel, nil];
+
+    NSLog(@"day labels :%i", dayLabels.count);
+
     for (NSUInteger i = 0; i < [dayButtons count]; i++)
     {
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dayButtonTapped:)];
 
+        UIImageView *dayButton = [dayButtons objectAtIndex:i];
+
+        [dayButton addGestureRecognizer:tapGesture];
+        dayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
+        dayButton.tag = i;
+
+        UILabel *currentDayLabel = (UILabel *)[dayLabels objectAtIndex:i];
+        [currentDayLabel setFont:[UIFont fontWithName:@"Eurofurenceregular" size:24]];
     }
 }
 
@@ -150,7 +141,7 @@
 {
     //[self stopSpinner];
     [borderedSpinnerView.view removeFromSuperview];
-    [self setDayControlBar:nil];
+//    [self setDayControlBar:nil];
     [self setTable:nil];
     [self setSaturdaybutton:nil];
     [self setSundayButton:nil];
@@ -160,11 +151,20 @@
     [self setWednesdayButton:nil];
     [self setThursdayButton:nil];
     [self setFridayButton:nil];
+    [self setSundayLabel:nil];
+    [self setMondayLabel:nil];
+    [self setTuesdayLabel:nil];
+    [self setWednesdayLabel:nil];
+    [self setThursdayLabel:nil];
+    [self setFridayLabel:nil];
+    [self setSundayLabel:nil];
+    [self setSaturdayLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     self.listData = nil;
     self.dealData = nil;
+    self.dayButtons = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -175,13 +175,12 @@
 
 #pragma mark -
 #pragma mark Handle UI Interation
-
 -(void) favoritesButtonPressed:(NSNotification*) notification
 {
     //[self stopSpinner];
     [borderedSpinnerView.view removeFromSuperview];
 
-    dayControlBar.momentary = YES;
+//    dayControlBar.momentary = YES;
 
     [self reloadDataForInfo:@"Favorites"];
 
@@ -189,204 +188,41 @@
      NSArray* data = [[NSArray alloc] initWithObjects:@"poop", nil];
      [self connectToServer:data];
      */
-    [dayControlBar setSelectedSegmentIndex:-1];
-}
-
-- (IBAction)dayButtonPressed:(id)sender
-{
-    //[self createAndDisplaySpinner];
-    [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
-
-
-    dayControlBar.momentary = NO;
-    NSLog(@"Selected index:%i", [dayControlBar selectedSegmentIndex]);
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"controlBarButtonPressed" object:self];
-
-    [self reloadDataForInfo:[CalculationHelper convertIntToDay:[dayControlBar selectedSegmentIndex]]];
-
+//    [dayControlBar setSelectedSegmentIndex:-1];
 }
 
 -(void) reloadDataForInfo:(NSString *)data
 {
     //call server with day
-
     [self connectToServer:data];
-
 
     //if favorites:
     //still receive an array
-
 }
 
 
--(IBAction)sundayTap:(id)sender
+-(IBAction)dayButtonTapped:(id)sender
 {
-    if (!sundayButton.isHighlighted) {
+    UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer *)sender;
+    UIImageView *selectedDayButton = (UIImageView *) tapGestureRecognizer.view;
 
-        //show loading notification
-        [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
-
-        //fetch data
-        [self reloadDataForInfo:[CalculationHelper convertIntToDay:0]];
-
-        [sundayButton setHighlighted:YES];
-        [tuesdayButton setHighlighted:NO];
-        [wednesdayButton setHighlighted:NO];
-        [thursdayButton setHighlighted:NO];
-        [fridayButton setHighlighted:NO];
-        [saturdaybutton setHighlighted:NO];
-        [mondayButton setHighlighted:NO];
+    //change all colors to normal
+    for (NSUInteger i = 0; i < [dayButtons count]; i++)
+    {
+        UIImageView *dayButton = [dayButtons objectAtIndex:i];
+        dayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
     }
-}
+    //change selected day button to selected color
+    selectedDayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"selected_day_button_color"]];
 
--(IBAction)mondayTap:(id)sender {
-
-    if (!mondayButton.isHighlighted) {
-
-        //show loading notification
-        [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
-
-        //fetch data
-        [self reloadDataForInfo:[CalculationHelper convertIntToDay:1]];
-
-        //Set monday to highlight and set all others to no
-        [mondayButton setHighlighted:YES];
-        [tuesdayButton setHighlighted:NO];
-        [wednesdayButton setHighlighted:NO];
-        [thursdayButton setHighlighted:NO];
-        [fridayButton setHighlighted:NO];
-        [saturdaybutton setHighlighted:NO];
-        [sundayButton setHighlighted:NO];
-    }
-}
--(IBAction)tuesdayTap:(id)sender {
-
-    if (!tuesdayButton.isHighlighted) {
-
-        //show loading notification
-        [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
-
-        //fetch data
-        [self reloadDataForInfo:[CalculationHelper convertIntToDay:2]];
-        [tuesdayButton setHighlighted:YES];
-        [mondayButton setHighlighted:NO];
-        [wednesdayButton setHighlighted:NO];
-        [thursdayButton setHighlighted:NO];
-        [fridayButton setHighlighted:NO];
-        [saturdaybutton setHighlighted:NO];
-        [sundayButton setHighlighted:NO];
-    }
-}
--(IBAction)wednesdayTap:(id)sender {
-
-    if (!wednesdayButton.isHighlighted) {
-
-        //show loading notification
-        [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
-
-        //fetch data
-        [self reloadDataForInfo:[CalculationHelper convertIntToDay:3]];
-        [wednesdayButton setHighlighted:YES];
-        [tuesdayButton setHighlighted:NO];
-        [mondayButton setHighlighted:NO];
-        [thursdayButton setHighlighted:NO];
-        [fridayButton setHighlighted:NO];
-        [saturdaybutton setHighlighted:NO];
-        [sundayButton setHighlighted:NO];
-    }
-}
--(IBAction)thursdayTap:(id)sender {
-
-    if (!thursdayButton.isHighlighted) {
-
-        //show loading notification
-        [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
-
-        //fetch data
-        [self reloadDataForInfo:[CalculationHelper convertIntToDay:4]];
-        [thursdayButton setHighlighted:YES];
-        [tuesdayButton setHighlighted:NO];
-        [wednesdayButton setHighlighted:NO];
-        [mondayButton setHighlighted:NO];
-        [fridayButton setHighlighted:NO];
-        [saturdaybutton setHighlighted:NO];
-        [sundayButton setHighlighted:NO];
-    }
-}
--(IBAction)fridayTap:(id)sender {
-
-    if (!fridayButton.isHighlighted) {
-
-        //show loading notification
-        [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
-
-        //fetch data
-        [self reloadDataForInfo:[CalculationHelper convertIntToDay:5]];
-        [fridayButton setHighlighted:YES];
-        [tuesdayButton setHighlighted:NO];
-        [wednesdayButton setHighlighted:NO];
-        [thursdayButton setHighlighted:NO];
-        [mondayButton setHighlighted:NO];
-        [saturdaybutton setHighlighted:NO];
-        [sundayButton setHighlighted:NO];
-    }
-}
--(IBAction)saturdayTap:(id)sender {
-
-    if (!saturdaybutton.isHighlighted) {
-
-        //show loading notification
-        [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
-
-        //fetch data
-        [self reloadDataForInfo:[CalculationHelper convertIntToDay:6]];
-        [saturdaybutton setHighlighted:YES];
-        [tuesdayButton setHighlighted:NO];
-        [wednesdayButton setHighlighted:NO];
-        [thursdayButton setHighlighted:NO];
-        [fridayButton setHighlighted:NO];
-        [mondayButton setHighlighted:NO];
-        [sundayButton setHighlighted:NO];
-    }
-}
-
-
-
-
--(void) selectDay:(int) day {
-
-    switch (day) {
-        case 0:
-            [sundayButton setHighlighted:YES];
-            break;
-        case 1:
-            [mondayButton setHighlighted:YES];
-            break;
-        case 2:
-            [tuesdayButton setHighlighted:YES];
-            break;
-        case 3:
-            [wednesdayButton setHighlighted:YES];
-            break;
-        case 4:
-            [thursdayButton setHighlighted:YES];
-            break;
-        case 5:
-            [fridayButton setHighlighted:YES];
-            break;
-        case 6:
-            [saturdaybutton setHighlighted:YES];
-            break;
-
-        default:
-            break;
-    }
+    //load new days data
+    [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
+    [self reloadDataForInfo:[CalculationHelper convertIntToDay:selectedDayButton.tag]];
+    NSLog(@"SELECTED DAY IS %@", [CalculationHelper convertIntToDay:selectedDayButton.tag]);
 }
 
 #pragma mark -
 #pragma mark Server Connectivity and XML
-
 -(void) connectToServer:(NSString*)data {
 
     CLLocation *location = [locationManager location];
@@ -481,18 +317,14 @@
 
 
 #pragma mark -
-
 #pragma mark Table View Data Source Methods
-
-//Calculate number of rows
-//called by table when it needs to draw one of its rows
--(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+-(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
+{
     return[self.dealData count];
 }
 
-//Draws individual rows
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     // Represents the type of or table cell
     static NSString* CellTableIdentifier = @"CellTableIdentifier";
 
@@ -515,8 +347,6 @@
 
     cell.rating = dealRating;
 
-
-
     cell.distance = [rowData objectForKey:@"calculateddistance"];//[rowData objectForKey:@"distance"];
 
     NSString* dealTime = [CalculationHelper convert24HourTimesToString:[rowData objectForKey:@"starttime"] endTime:[rowData objectForKey:@"endtime"]];
@@ -531,9 +361,6 @@
     return cell;
 }
 
-
-
-//specifes row selection
 -(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     /*
@@ -572,25 +399,15 @@
     [self presentModalViewController:self.dealViewController animated:YES];
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-
-
-
-
 }
-
 
 //Set cell height
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 75;
 }
 
-
-
-
--(void)loadImageToCellWithString:(NSArray*)array {
-
-
+-(void)loadImageToCellWithString:(NSArray*)array
+{
     int cellPosition =  (int) [array objectAtIndex:1];
 
     NSIndexPath *a = [NSIndexPath indexPathForRow:cellPosition inSection:0]; // I wanted to update this cell specifically
@@ -614,8 +431,8 @@
 }
 
 
--(void)refreshCellAtPosition:(NSNumber*)num {
-
+-(void)refreshCellAtPosition:(NSNumber*)num
+{
     NSInteger rowInteger = [num integerValue];
     //NSLog(@"array int at index: %i",rowInteger);
     NSMutableArray* mutArray = [[NSMutableArray alloc] init];
@@ -623,17 +440,14 @@
     [mutArray insertObject:path atIndex:0];
     //NSLog(@"array to reload: %@", mutArray);
     [self.table reloadRowsAtIndexPaths:mutArray withRowAnimation:UITableViewRowAnimationNone];
-
 }
-
-
 
 #pragma mark -
 #pragma mark Spinner (defunct)
-
--(void) createAndDisplaySpinner {
-
-    if (spinner != nil) {
+-(void) createAndDisplaySpinner
+{
+    if (spinner != nil)
+    {
         [self stopSpinner];
     }
 

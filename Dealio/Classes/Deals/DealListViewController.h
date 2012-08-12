@@ -16,7 +16,6 @@
 @interface DealListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 {
     UIActivityIndicatorView* spinner;
-
 }
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
@@ -24,7 +23,8 @@
 @property (assign, nonatomic) BOOL FAVORITES_MODE;
 @property (strong, nonatomic) NSArray *listData;
 @property (strong, nonatomic) NSMutableArray *dayButtons;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *dayControlBar;
+@property (strong, nonatomic) NSMutableArray *dayLabels;
+//@property (strong, nonatomic) IBOutlet UISegmentedControl *dayControlBar;
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (strong, nonatomic) NSString* messageText;
 @property (strong, nonatomic) XMLParser* parser;
@@ -40,12 +40,19 @@
 @property (weak, nonatomic) IBOutlet UIImageView *wednesdayButton;
 @property (weak, nonatomic) IBOutlet UIImageView *thursdayButton;
 @property (weak, nonatomic) IBOutlet UIImageView *fridayButton;
+@property (weak, nonatomic) IBOutlet UILabel *sundayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *mondayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tuesdayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *wednesdayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *thursdayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fridayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *saturdayLabel;
 
 
 
 
 -(void) favoritesButtonPressed:(NSNotification*) notification;
-- (IBAction)dayButtonPressed:(id)sender;
+//- (IBAction)dayButtonPressed:(id)sender;
 
 
 -(void) reloadDataForInfo:(NSString*)data;
@@ -57,7 +64,7 @@
 -(void) createAndDisplaySpinner;
 -(void) connectToServer:(NSString*)data;
 -(void)loadImageToCellWithString:(NSArray*)array;
--(void)selectDay:(int)day;
+//-(void)selectDay:(int)day;
 
 
 @end

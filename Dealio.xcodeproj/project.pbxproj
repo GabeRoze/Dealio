@@ -23,6 +23,7 @@
 		9CFC342F15D728C6008C47B0 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC342315D728C6008C47B0 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9CFC343015D728C6008C47B0 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC342515D728C6008C47B0 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9CFC343115D728C6008C47B0 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC342715D728C6008C47B0 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9CFC343415D7313C008C47B0 /* selected_day_button_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFC343315D7313C008C47B0 /* selected_day_button_color.png */; };
 		C047535814F4B3C800B3AD79 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C047534E14F4B3C600B3AD79 /* LoginViewController.m */; };
 		C047535914F4B3C800B3AD79 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C047534F14F4B3C700B3AD79 /* LoginViewController.xib */; };
 		C047535A14F4B3C800B3AD79 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C047535114F4B3C700B3AD79 /* RegistrationViewController.m */; };
@@ -211,6 +212,7 @@
 		9CFC342515D728C6008C47B0 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		9CFC342615D728C6008C47B0 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		9CFC342715D728C6008C47B0 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		9CFC343315D7313C008C47B0 /* selected_day_button_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selected_day_button_color.png; path = "Graphics/Version 2/UI/Deals/selected_day_button_color.png"; sourceTree = SOURCE_ROOT; };
 		C047534D14F4B3C600B3AD79 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/Main/LoginViewController.h; sourceTree = "<group>"; };
 		C047534E14F4B3C600B3AD79 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/Main/LoginViewController.m; sourceTree = "<group>"; };
 		C047534F14F4B3C700B3AD79 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Classes/Main/LoginViewController.xib; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 		C0655F3914F5721200869736 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				9CFC343315D7313C008C47B0 /* selected_day_button_color.png */,
 				9CFC33E815D72594008C47B0 /* unselected_day_button_color.png */,
 			);
 			path = Buttons;
@@ -1053,6 +1056,7 @@
 				C09B8340150495A30072DCBA /* default.png in Resources */,
 				C055A19D151285D500BEE3A5 /* DealViewSocialCell.xib in Resources */,
 				9CFC33E915D72594008C47B0 /* unselected_day_button_color.png in Resources */,
+				9CFC343415D7313C008C47B0 /* selected_day_button_color.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

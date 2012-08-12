@@ -39,64 +39,64 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     //Use this NIB file for the tab bar controller as the main window
-    
-    
+
+
     // User Manager
     UserManager* userManager = [[UserManager alloc] init];
     ImageCache* imageCache = [[ImageCache alloc] init];
-    
+
 
 //    [[UINavigationBar appearance] setBackground:[UIImage imageNamed:@"topnav.png"
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"topnav.png"] forBarMetrics:UIBarMetricsDefault];
 
-    
+
     // Notifications
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(logoutButtonPressed:)
-                                                 name:@"logoutButtonPressed" 
+                                                 name:@"logoutButtonPressed"
                                                object:nil];
-    
-    
-    
+
+
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(controlBarButtonPressed:)
-                                                 name:@"controlBarButtonPressed" 
+                                                 name:@"controlBarButtonPressed"
                                                object:nil];
-    
+
     // end notifications
-    
-    
-    
+
+
+
     [[NSBundle mainBundle] loadNibNamed:@"TabBarController" owner:self options:nil];
     [self.window addSubview:rootController.view];
-    
-    
-    
-    
-    
+
+
+
+
+
     //create the login view controller and instantiate as a modal view controller
     //loginViewController = [[LoginViewController alloc] init];
     editProfileViewController = [[EditProfileViewController alloc] init];
 
-    
+
    // registrationViewController = [[RegistrationViewController alloc] init];
-    
+
 
     //[self.rootController presentModalViewController:loginViewController animated:NO];
-    
+
     [self displayLoginPage];
-    
+
     //self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
-    
+
     UILabel* dealListLabel = [CalculationHelper createNavBarLabelWithTitle:@"Deals"];
     [dealListview.view addSubview:dealListLabel];
     UILabel* filterLabel = [CalculationHelper createNavBarLabelWithTitle:@"Filters"];
     [filterView.view addSubview:filterLabel];
     UILabel* mapLabel = [CalculationHelper createNavBarLabelWithTitle:@"Overview"];
     [mapView.view addSubview:mapLabel];
-    
+
     return YES;
 }
 
@@ -105,8 +105,8 @@
     //Sets Deals to selected tab
     [self.rootController setSelectedIndex:1];
     //Hide the login page
-    [self.rootController dismissModalViewControllerAnimated:YES];   
-    
+    [self.rootController dismissModalViewControllerAnimated:YES];
+
     //[[self.rootController.viewControllers objectAtIndex:0] temp];
    // DealListViewController* controller = (DealListViewController*) [rootController.viewControllers objectAtIndex:1];
 //    [controller temp];
@@ -116,12 +116,12 @@
 -(void)logoutButtonPressed:(NSNotification*) notification {
 
     NSLog(@"logout");
-    
+
     //set userData to nil
     // set cookie to logged out/nil
-    
+
     [self displayLoginPage];
-        
+
 
 
 }
@@ -151,7 +151,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
+     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
     [[UserManager sharedManager] saveData];
@@ -179,27 +179,27 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
-    
+
     [[UserManager sharedManager] saveData];
-    
+
 }
 
 - (IBAction)optionsButtonPressed:(id)sender {
-    
-    //create options menu 
+
+    //create options menu
     //use modal controller
         //allow user to logout with bottom prompt
         //if user logs out, create
-    
-   
-    
-    
+
+
+
+
     [self.rootController presentModalViewController:editProfileViewController animated:YES];
 
 }
 
 - (IBAction)favoritesButtonPressed:(id)sender {
-    
+
    // DealListViewController* controller = (DealListViewController*)[rootController.viewControllers objectAtIndex:1];
    // [controller temp];
     NSLog(@"faves");
@@ -208,7 +208,7 @@
 }
 
 -(void)controlBarButtonPressed:(NSNotification*) notification {
-    favoritesButton.style = UIBarButtonItemStyleBordered;   
+    favoritesButton.style = UIBarButtonItemStyleBordered;
 }
 
 
