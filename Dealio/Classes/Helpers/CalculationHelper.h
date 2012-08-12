@@ -23,4 +23,5 @@
 +(NSMutableArray*) sortAndFormatDealListData:(NSMutableArray*)xmlData atLocation:(CLLocation*)currentLocation;
 +(NSMutableArray*)mergeSort:(NSMutableArray*)unsortedArray;
 +(NSMutableArray*)quicksort:(NSMutableArray*)unsortedArray;
++(NSString *)convertFloatToString:(double)r;
 @end

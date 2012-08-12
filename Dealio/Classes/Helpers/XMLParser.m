@@ -24,164 +24,128 @@
 @synthesize registerResult;
 
 - (XMLParser *)initXMLParser:(NSData*)data {
-    
+
     self = [super init];
-    
+
     commentCount = 0;
-    
+
     xmlParser = [[NSXMLParser alloc] initWithData:data];
     self.xmlParser.delegate = self;
-    
-    
-    if ([self.xmlParser parse]) {
+
+    if ([self.xmlParser parse])
+    {
         NSLog(@"THE XML IS PARSED.");
     }
-    else {
+    else
+    {
         NSError *error = [xmlParser parserError];
         NSLog(@"Error: %@", error);
         NSLog(@"PARSING FAIL");
     }
-    
-    
-    // NSLog(@"data: %@", [self.xmlParser parse]);
-    
+
     return self;
 }
 
-
-
-
-
-
 #pragma mark Delegate Calls
-
--(void)parserDidStartDocument:(NSXMLParser *)parser {
+-(void)parserDidStartDocument:(NSXMLParser *)parser
+{
     self.rootElement = nil;
     self.currentElementPointer = nil;
 }
 
 -(void) parser:(NSXMLParser*)parser
-didStartElement:(NSString*)elementName
-  namespaceURI:(NSString *)namespaceURI 
- qualifiedName:(NSString *)qName
-    attributes:(NSDictionary *)attributeDict {
-    
-    
-    if ([elementName isEqualToString:@"loginresult"]){
-        //  NSLog(@"loginResultFound");
-        
-        //Create a mutabledictionary if one does not exist
-        if (!loginResult){
-            //NSLog(@"login result instantiauted");
+        didStartElement:(NSString*)elementName
+           namespaceURI:(NSString *)namespaceURI
+          qualifiedName:(NSString *)qName
+             attributes:(NSDictionary *)attributeDict
+{
+    if ([elementName isEqualToString:@"loginresult"])
+    {
+        if (!loginResult)
+        {
             loginResult = [[NSMutableDictionary alloc] init];
             dealTagStatus = @"Login info began";
-
         }
-        
-        
     }
-    else if ([dealTagStatus isEqualToString:@"Login info began"]) {
-        
-        currentTag = elementName;    
+    else if ([dealTagStatus isEqualToString:@"Login info began"])
+    {
+        currentTag = elementName;
     }
-    else if ([elementName isEqualToString:@"registerresult"]){
-        //Create a mutabledictionary if one does not exist
-        if (!registerResult){
+    else if ([elementName isEqualToString:@"registerresult"])
+    {
+        if (!registerResult)
+        {
             registerResult = [[NSMutableDictionary alloc] init];
         }
     }
-    else if ([elementName isEqualToString:@"deals"]) {
-        
-        
-        //NSLog(@"THIS IS A DEAL LIST!");
-        
-        if (!dealListArray) {
+    else if ([elementName isEqualToString:@"deals"])
+    {
+        if (!dealListArray)
+        {
             dealListArray = [[NSMutableArray alloc] init];
         }
     }
-    else  if ([elementName isEqualToString:@"deal"]) {
-        
-        //NSLog(@"Deal began %@", elementName);
+    else  if ([elementName isEqualToString:@"deal"])
+    {
         dealTagStatus = @"Deal info began";
         dealItem = [[NSMutableDictionary alloc] init];
     }
-    else  if ([elementName isEqualToString:@"dealdetail"]) {
-        
-        //NSLog(@"Deal began %@", elementName);
-        //dealTagStatus = @"Deal detail began";
+    else  if ([elementName isEqualToString:@"dealdetail"])
+    {
         dealItem = [[NSMutableDictionary alloc] init];
         dealComments = [[NSMutableArray alloc] init];
         dealTagStatus = @"Deal detail began";
-        
     }
-    else  if ([elementName isEqualToString:@"comment"]) {
-        
-        //NSLog(@"Deal began %@", elementName);
-        //dealTagStatus = @"Deal detail began";
-        //dealItem = [[NSMutableDictionary alloc] init];
-        //dealComments = [[NSMutableArray alloc] init];
+    else  if ([elementName isEqualToString:@"comment"])
+    {
         dealTagStatus = @"Deal comments began";
-        
     }
-    
-    else  if ([elementName isEqualToString:@"updatefav"]) {
-
+    else  if ([elementName isEqualToString:@"updatefav"])
+    {
         dealTagStatus = @"Updatefav began";
         favoriteResult = [[NSMutableDictionary alloc] init];
-        
     }
-    /*
-    else if ([dealTagStatus isEqualToString:@"Updatefav began"]) {
-        
-        currentTag = elementName;    
-    }*/
-    else if ([dealTagStatus isEqualToString:@"Deal detail began"]) {
-        
-        currentTag = elementName;    
-    }
-    
-    else if ([dealTagStatus isEqualToString:@"Deal comments began"]) {
-        
+    else if ([dealTagStatus isEqualToString:@"Deal detail began"])
+    {
         currentTag = elementName;
     }
-    
-    else if ( [dealTagStatus isEqualToString:@"Deal info began"] ){
-        
-        
+    else if ([dealTagStatus isEqualToString:@"Deal comments began"])
+    {
         currentTag = elementName;
-        //NSLog(@"set current tag to: %@", currentTag);
     }
-    
-    
-    
-    //root element DNE, create and point to it    
-    if (self.rootElement == nil) {
+    else if ( [dealTagStatus isEqualToString:@"Deal info began"] )
+    {
+        currentTag = elementName;
+    }
+
+//    root element DNE, create and point to it
+    if (self.rootElement == nil)
+    {
         self.rootElement = [[XMLElement alloc] init];
         self.currentElementPointer = self.rootElement;
     }
-    //else root already exists
-    else {
+//            else root already exists
+    else
+    {
         XMLElement* newElement = [[XMLElement alloc] init];
         newElement.parent = self.currentElementPointer;
         [self.currentElementPointer.subElements addObject:newElement];
         self.currentElementPointer = newElement;
     }
-    
     self.currentElementPointer.name = elementName;
     self.currentElementPointer.attributes = attributeDict;
 }
 
-
-
--(void) parser:(NSXMLParser *)parser 
-foundCharacters:(NSString *)string {
-    
-    if ([self.currentElementPointer.text length] > 0) {
+-(void) parser:(NSXMLParser *)parser
+        foundCharacters:(NSString *)string
+{
+    if ([self.currentElementPointer.text length] > 0)
+    {
         self.currentElementPointer.text = [self.currentElementPointer.text stringByAppendingString:string];
     }
-    else {
+    else
+    {
         self.currentElementPointer.text = string;
-        
         //add result for login
         if ([dealTagStatus isEqualToString:@"Login info began"] && currentTag!= NULL)
         {
@@ -193,106 +157,65 @@ foundCharacters:(NSString *)string {
         {
             [registerResult setObject:string forKey:@"registerresult"];
         }
-        //add item to favorite result (might change to user-func result
-        else if (favoriteResult) {
+                //add item to favorite result (might change to user-func result
+        else if (favoriteResult)
+        {
             [favoriteResult setObject:string forKey:@"updatefav"];
         }
-        //Add deal list items to dictionary
-        else if ([dealTagStatus isEqualToString:@"Deal info began"] && currentTag != NULL && ![string isEqualToString:@"\n"] &&![string isEqualToString:@""] ) {
-            
-            NSLog(@"Deal list key: %@", currentTag);
-            NSLog(@"Deal list item: %@", string);
-            //NSLog(@"This was added to dictionary, %@",currentTag);
-            //NSLog(@"the string is, %@",string);
+                //Add deal list items to dictionary
+        else if ([dealTagStatus isEqualToString:@"Deal info began"] && currentTag != NULL && ![string isEqualToString:@"\n"] &&![string isEqualToString:@""] )
+        {
+
             [dealItem setObject:string forKey:currentTag];
-            
         }
-        
-        //add deal detail items to dictionary
+                //add deal detail items to dictionary
         else if ([dealTagStatus isEqualToString:@"Deal detail began"]
-                 && currentTag != NULL 
-                 && ![string isEqualToString:@""]) {
-            
-            NSLog(@"DEAL ITEM::: %@ \n STRING = %@", currentTag, string);
+                && currentTag != NULL
+                && ![string isEqualToString:@""])
+        {
             [dealItem setObject:string forKey:currentTag];
-            
+
         }
-        
-        //add comments to array
+                //add comments to array
         else if ([dealTagStatus isEqualToString:@"Deal comments began"]
-                 && currentTag != NULL 
-                 && ![string isEqualToString:@""]) {
-            
+                && currentTag != NULL
+                && ![string isEqualToString:@""])
+        {
             [dealComments insertObject:string atIndex:commentCount];
             commentCount++;
-            
-           // NSLog(@"dealComments, %@", dealComments);
-            
         }
-        
-        
     }
 }
-
 
 //called when reaches end of an element
 -(void)     parser:(NSXMLParser*)parser
-     didEndElement:(NSString *)elementName 
-      namespaceURI:(NSString *)namespaceURI 
-     qualifiedName:(NSString *)qName {
-    
+     didEndElement:(NSString *)elementName
+      namespaceURI:(NSString *)namespaceURI
+     qualifiedName:(NSString *)qName
+{
     self.currentElementPointer = self.currentElementPointer.parent;
-    //NSLog(@"didEndElement: %@",elementName);
-    
-    if ([elementName isEqualToString:@"deal"]) {
+
+    if ([elementName isEqualToString:@"deal"])
+    {
         //add deal to dictionary
         [dealListArray addObject:dealItem];
-        //NSLog(@"deal item inserted");
-        //dealTagStatus = @"Deal ended";
     }
-    
 
-    if ([elementName isEqualToString:@"comments"]) {
-        
-        
+    if ([elementName isEqualToString:@"comments"])
+    {
         dealTagStatus = @"Deal detail began";
-        
-        //[dealComments addObject:dealItem];
-        
-        
-        //dealTagStatus = @"Deal ended";
     }
-    
-    
-    if ([elementName isEqualToString:@"deals"] 
-        || [elementName isEqualToString:@"dealdetail"] ) {
+    if ([elementName isEqualToString:@"deals"]
+            || [elementName isEqualToString:@"dealdetail"] )
+    {
         dealTagStatus = @"Deals ended";
-        //NSLog(@"deal list ended");
     }
-    
-    /*
-    if ([elementName isEqualToString:@"deals"] 
-        || [elementName isEqualToString:@"dealdetail"] ) {
-        dealTagStatus = @"Deals ended";
-        //NSLog(@"deal list ended");
-    }*/
-    
-    
 }
-
 
 //dispose of currentelemntpointer cuz document ended
 -(void)parserDidEndDocument:(NSXMLParser *)parser {
-    
+
     self.currentElementPointer = nil;
 }
-
-
-
-
-
-
-
-
 
 @end

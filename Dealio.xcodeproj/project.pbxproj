@@ -475,6 +475,13 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		9CFC343515D7403F008C47B0 /* Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Connectivity;
+			sourceTree = "<group>";
+		};
 		C0655F3814F5721200869736 /* Version 2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,6 +722,7 @@
 		C0FE21B014F442CA00F03DFF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9CFC343515D7403F008C47B0 /* Connectivity */,
 				9CFC341115D728C6008C47B0 /* Third Party */,
 				C0FE21B614F4433A00F03DFF /* Deals */,
 				C0FE21B414F4431500F03DFF /* Main */,

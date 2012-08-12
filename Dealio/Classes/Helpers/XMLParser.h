@@ -6,23 +6,18 @@
 //  Copyright (c) 2011 University of Waterloo. All rights reserved.
 //
 
-//#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 @class XMLElement;
 
-@interface XMLParser : UIResponder <UIApplicationDelegate, NSXMLParserDelegate> {
-    
+@interface XMLParser : UIResponder <UIApplicationDelegate, NSXMLParserDelegate>
+{
     int commentCount;
 }
 
-
-
 @property (strong, nonatomic) NSXMLParser* xmlParser;
-
 @property (strong, nonatomic) XMLElement* rootElement;
 @property (strong, nonatomic) XMLElement* currentElementPointer;
-
 @property (strong, nonatomic) NSMutableDictionary* favoriteResult;
 @property (strong, nonatomic) NSMutableDictionary* loginResult;
 @property (strong, nonatomic) NSMutableDictionary* registerResult;
@@ -33,7 +28,5 @@
 @property (strong, nonatomic) NSString* currentTag;
 
 - (XMLParser *) initXMLParser:(NSData*)data;
-
-
 
 @end

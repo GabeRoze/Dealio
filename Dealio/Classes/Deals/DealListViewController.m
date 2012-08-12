@@ -6,13 +6,13 @@
 //  Copyright (c) 2011 University of Waterloo. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import "DealListViewController.h"
 #import "DealViewController.h"
 #import "DealListViewCell.h"
 #import "XMLParser.h"
 #import "CalculationHelper.h"
 #import "BorderedSpinnerView.h"
-#import <CoreLocation/CoreLocation.h>
 
 @implementation DealListViewController
 
@@ -62,7 +62,6 @@
 }
 
 #pragma mark - View lifecycle
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -90,9 +89,10 @@
     NSDateComponents *weekdayComponents =
             [gregorian components:(NSDayCalendarUnit | NSWeekdayCalendarUnit) fromDate:today];
     NSInteger weekday = [weekdayComponents weekday];
-//    [self selectDay:(weekday-1)];
     UIImageView *currentDay = (UIImageView *)[dayButtons objectAtIndex:(weekday-1)];
     currentDay.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"selected_day_button_color"]];
+    UILabel *currentDayLabel = (UILabel *)[dayLabels objectAtIndex:(weekday-1)];
+    [currentDayLabel setTextColor:[UIColor whiteColor]];
 
     //alloc required vars
     self.dealData = [[NSMutableArray alloc] init];
@@ -114,34 +114,38 @@
                                                          saturdaybutton,
                                                          nil];
 
-    dayLabels = [[NSMutableArray alloc] initWithObjects:mondayLabel, tuesdayLabel, wednesdayLabel, thursdayLabel, fridayLabel, saturdayLabel, sundayLabel, nil];
-
-    NSLog(@"day labels :%i", dayLabels.count);
+    dayLabels = [[NSMutableArray alloc] initWithObjects:sundayLabel,
+                                                        mondayLabel,
+                                                        tuesdayLabel,
+                                                        wednesdayLabel,
+                                                        thursdayLabel,
+                                                        fridayLabel,
+                                                        saturdayLabel,
+                                                        nil];
 
     for (NSUInteger i = 0; i < [dayButtons count]; i++)
     {
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dayButtonTapped:)];
-
         UIImageView *dayButton = [dayButtons objectAtIndex:i];
+        UILabel *currentDayLabel = (UILabel *)[dayLabels objectAtIndex:i];
 
         [dayButton addGestureRecognizer:tapGesture];
         dayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
         dayButton.tag = i;
 
-        UILabel *currentDayLabel = (UILabel *)[dayLabels objectAtIndex:i];
         [currentDayLabel setFont:[UIFont fontWithName:@"Eurofurenceregular" size:24]];
     }
 }
 
 //Implement this to select the current day once the user logs out/in
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewDidAppear:(BOOL)animated
+{
 
 }
 - (void)viewDidUnload
 {
     //[self stopSpinner];
     [borderedSpinnerView.view removeFromSuperview];
-//    [self setDayControlBar:nil];
     [self setTable:nil];
     [self setSaturdaybutton:nil];
     [self setSundayButton:nil];
@@ -180,45 +184,37 @@
     //[self stopSpinner];
     [borderedSpinnerView.view removeFromSuperview];
 
-//    dayControlBar.momentary = YES;
-
     [self reloadDataForInfo:@"Favorites"];
-
-    /*
-     NSArray* data = [[NSArray alloc] initWithObjects:@"poop", nil];
-     [self connectToServer:data];
-     */
-//    [dayControlBar setSelectedSegmentIndex:-1];
 }
 
 -(void) reloadDataForInfo:(NSString *)data
 {
     //call server with day
     [self connectToServer:data];
-
-    //if favorites:
-    //still receive an array
 }
-
 
 -(IBAction)dayButtonTapped:(id)sender
 {
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer *)sender;
     UIImageView *selectedDayButton = (UIImageView *) tapGestureRecognizer.view;
+    UILabel *currentDayLabel = (UILabel *)[dayLabels objectAtIndex:selectedDayButton.tag];
 
     //change all colors to normal
     for (NSUInteger i = 0; i < [dayButtons count]; i++)
     {
         UIImageView *dayButton = [dayButtons objectAtIndex:i];
         dayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
+        UILabel *dayLabel = (UILabel *)[dayLabels objectAtIndex:i];
+        [dayLabel setTextColor:[UIColor brownColor]];
     }
+
     //change selected day button to selected color
     selectedDayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"selected_day_button_color"]];
+    [currentDayLabel setTextColor:[UIColor whiteColor]];
 
     //load new days data
     [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
     [self reloadDataForInfo:[CalculationHelper convertIntToDay:selectedDayButton.tag]];
-    NSLog(@"SELECTED DAY IS %@", [CalculationHelper convertIntToDay:selectedDayButton.tag]);
 }
 
 #pragma mark -
@@ -231,7 +227,6 @@
     CLLocationCoordinate2D coordinate = [location coordinate];
 
     currentLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
-
 
     //attempt to connect to server
     NSString* urlAsString = @"";
@@ -289,32 +284,23 @@
 
 }
 
-
--(void) parseXMLFile:(NSData*)data {
+-(void) parseXMLFile:(NSData*)data
+{
     parser = [[XMLParser alloc] initXMLParser:data];
 
     dealData = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
 
-    NSLog(@"DEAL DATA POST XML IS: %@", dealData);
+//    NSLog(@"DEAL DATA POST XML IS: %@", dealData);
 
     [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
 }
 
 
--(void) serverResponseAcquired {
-
-    // set the deal data to the parsers data
-    //dealData = parser.dealListArray;
-
-    // reload the table
+-(void) serverResponseAcquired
+{
     [table reloadData];
-
-    // stop spinner
-    //[self stopSpinner];
     [borderedSpinnerView.view removeFromSuperview];
-
 }
-
 
 #pragma mark -
 #pragma mark Table View Data Source Methods
@@ -351,50 +337,25 @@
 
     NSString* dealTime = [CalculationHelper convert24HourTimesToString:[rowData objectForKey:@"starttime"] endTime:[rowData objectForKey:@"endtime"]];
 
-
     cell.dealTime = dealTime;
     //[cell setLogoWithString:[rowData objectForKey:@"logoname"]];
 
     [cell setLogoWithString:(NSString*)[rowData objectForKey:@"logoname"]];
 
-
     return cell;
 }
 
--(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    /*
-     NSUInteger row = [indexPath row];
-     //if first row is selected, no row should be selected
-     if (row==0){
-     //return nil;
-     return indexPath;
-     }
-     */
-
-
+-(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return indexPath;
 }
 
-
-//Implement row selection here
-// Will create a new view with the deal
-// Get the rows data
-// Pass it to the new window (dealview)
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-
-
-    //Set up the deal info
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     NSUInteger row = [indexPath row];
 
     NSDictionary* rowData = [self.dealData objectAtIndex:row];
     [self.dealViewController loadDealFromList:rowData];
-
-
-
-
-    // NSLog(@"rowData: %@", rowData);
 
     [self presentModalViewController:self.dealViewController animated:YES];
 
@@ -402,76 +363,9 @@
 }
 
 //Set cell height
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return 75;
 }
-
--(void)loadImageToCellWithString:(NSArray*)array
-{
-    int cellPosition =  (int) [array objectAtIndex:1];
-
-    NSIndexPath *a = [NSIndexPath indexPathForRow:cellPosition inSection:0]; // I wanted to update this cell specifically
-    DealListViewCell *c = (DealListViewCell *)[table cellForRowAtIndexPath:a];
-
-
-    //set logo on cell c with image name
-
-    //NSLog(@"ADD THESE IMAGE w/data TO CELL! %@",array);
-    [c setLogoWithString:(NSString*)[array objectAtIndex:0]];
-
-    //call initialize on this cell
-
-    [self performSelectorOnMainThread:@selector(refreshCellAtPosition:) withObject:[array objectAtIndex:1]  waitUntilDone:YES];
-
-
-    //create cell with info
-    //get image to download
-
-    //create the cell
-}
-
-
--(void)refreshCellAtPosition:(NSNumber*)num
-{
-    NSInteger rowInteger = [num integerValue];
-    //NSLog(@"array int at index: %i",rowInteger);
-    NSMutableArray* mutArray = [[NSMutableArray alloc] init];
-    NSIndexPath* path = [NSIndexPath indexPathForRow:rowInteger inSection:0];
-    [mutArray insertObject:path atIndex:0];
-    //NSLog(@"array to reload: %@", mutArray);
-    [self.table reloadRowsAtIndexPaths:mutArray withRowAnimation:UITableViewRowAnimationNone];
-}
-
-#pragma mark -
-#pragma mark Spinner (defunct)
--(void) createAndDisplaySpinner
-{
-    if (spinner != nil)
-    {
-        [self stopSpinner];
-    }
-
-    //NSLog(@"spiner displayed");
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
-    CGFloat height = [UIScreen mainScreen].bounds.size.height;
-
-    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [spinner setCenter:CGPointMake(width/2.0 ,(height-44)/2.0)];
-    [self.view addSubview:spinner];
-    [spinner startAnimating];
-    //[self.view setNeedsDisplay];
-
-}
-
--(void) stopSpinner {
-
-    //NSLog(@"spinner hidden");
-
-    [spinner stopAnimating];
-    [spinner removeFromSuperview];
-
-}
-
-
 
 @end
