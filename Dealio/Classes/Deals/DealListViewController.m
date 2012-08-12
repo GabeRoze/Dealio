@@ -36,7 +36,7 @@
 @synthesize wednesdayButton;
 @synthesize thursdayButton;
 @synthesize fridayButton;
-@synthesize dayButtons
+@synthesize dayButtons;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
