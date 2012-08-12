@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>American</key>
+	<string>YES</string>
+	<key>Cafe</key>
+	<string>YES</string>
+	<key>Chinese</key>
+	<string>YES</string>
+	<key>Korean</key>
+	<string>YES</string>
+	<key>Bar/Alcohol</key>
+	<string>YES</string>
+	<key>Dessert</key>
+	<string>YES</string>
+	<key>Fast Food</key>
+	<string>YES</string>
+	<key>French</key>
+	<string>YES</string>
+	<key>Indian</key>
+	<string>YES</string>
+	<key>Italian</key>
+	<string>YES</string>
+	<key>Japanese</key>
+	<string>YES</string>
+	<key>Vietnamese/Thai</key>
+	<string>YES</string>
+	<key>Greek</key>
+	<string>YES</string>
+	<key>International</key>
+	<string>YES</string>
+	<key>Vegetarian</key>
+	<string>YES</string>
+</dict>
+</plist>
