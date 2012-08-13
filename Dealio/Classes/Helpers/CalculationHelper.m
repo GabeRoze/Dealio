@@ -171,7 +171,7 @@
      */
 
     NSString* urlAsString = data;
-//    NSLog(@"urlstr: %@", urlAsString);
+    NSLog(@"urlstr: %@", urlAsString);
     NSData *myRequestData = [NSData dataWithBytes: [urlAsString UTF8String] length: [urlAsString length]];
 
     //    NSURL* url = [NSURL URLWithString:@"http://www.cinnux.com/userlogin-func.php/"];

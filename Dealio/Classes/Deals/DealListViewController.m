@@ -242,7 +242,7 @@
     urlAsString = [urlAsString stringByAppendingString:longitude];
     urlAsString = [urlAsString stringByAppendingString:maxDistance];
 
-    NSString* functionURL = @"http://www.cinnux.com/dealheader-func.php/";
+    NSString* functionURL = @"http://www.cinnux.com/newdealheader-func.php/";
 
 
     NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:urlAsString];
@@ -260,7 +260,7 @@
                                   initWithData:data
                                       encoding:NSUTF8StringEncoding];
 
-                          //NSLog (@"Deal List = %@", html);
+                          NSLog (@"Deal List = %@", html);
 
                           // parse file
                           [self performSelectorInBackground:@selector(parseXMLFile:) withObject:data];

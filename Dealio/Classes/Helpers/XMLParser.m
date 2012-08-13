@@ -22,6 +22,7 @@
 @synthesize dealComments;
 @synthesize favoriteResult;
 @synthesize registerResult;
+@synthesize featuredDeal;
 
 - (XMLParser *)initXMLParser:(NSData*)data {
 
@@ -59,6 +60,9 @@
           qualifiedName:(NSString *)qName
              attributes:(NSDictionary *)attributeDict
 {
+
+    NSLog(@"element name :%@", elementName);
+
     if ([elementName isEqualToString:@"loginresult"])
     {
         if (!loginResult)
@@ -85,6 +89,11 @@
             dealListArray = [[NSMutableArray alloc] init];
         }
     }
+    else if ([elementName isEqualToString:@"featured"])
+    {
+        dealTagStatus = @"Featured info began";
+        featuredDeal = [[NSMutableDictionary alloc] init];
+    }
     else  if ([elementName isEqualToString:@"deal"])
     {
         dealTagStatus = @"Deal info began";
@@ -104,6 +113,10 @@
     {
         dealTagStatus = @"Updatefav began";
         favoriteResult = [[NSMutableDictionary alloc] init];
+    }
+    else if ([dealTagStatus isEqualToString:@"Featured info began"])
+    {
+        currentTag = elementName;
     }
     else if ([dealTagStatus isEqualToString:@"Deal detail began"])
     {
@@ -150,8 +163,6 @@
         if ([dealTagStatus isEqualToString:@"Login info began"] && currentTag!= NULL)
         {
             [loginResult setObject:string forKey:currentTag];
-            //[loginArray addObject:loginResult];
-
         }
         else if (registerResult)
         {
@@ -162,10 +173,13 @@
         {
             [favoriteResult setObject:string forKey:@"updatefav"];
         }
+        else if ([dealTagStatus isEqualToString:@"Featured info began"] && currentTag != NULL && ![string isEqualToString:@"\n"] &&![string isEqualToString:@""] )
+        {
+            [featuredDeal setObject:string forKey:currentTag];
+        }
                 //Add deal list items to dictionary
         else if ([dealTagStatus isEqualToString:@"Deal info began"] && currentTag != NULL && ![string isEqualToString:@"\n"] &&![string isEqualToString:@""] )
         {
-
             [dealItem setObject:string forKey:currentTag];
         }
                 //add deal detail items to dictionary

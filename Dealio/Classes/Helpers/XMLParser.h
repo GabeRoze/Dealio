@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSMutableDictionary* loginResult;
 @property (strong, nonatomic) NSMutableDictionary* registerResult;
 @property (strong, nonatomic) NSMutableDictionary* dealItem;
+@property (strong, nonatomic) NSMutableDictionary* featuredDeal;
 @property (strong, nonatomic) NSMutableArray* dealListArray;
 @property (strong, nonatomic) NSMutableArray* dealComments;
 @property (strong, nonatomic) NSString* dealTagStatus;
