@@ -65,24 +65,13 @@
                                                object:nil];
 
     // end notifications
-
-
-
     [[NSBundle mainBundle] loadNibNamed:@"TabBarController" owner:self options:nil];
     [self.window addSubview:rootController.view];
-
-
-
-
 
     //create the login view controller and instantiate as a modal view controller
     //loginViewController = [[LoginViewController alloc] init];
     editProfileViewController = [[EditProfileViewController alloc] init];
-
-
-   // registrationViewController = [[RegistrationViewController alloc] init];
-
-
+    // registrationViewController = [[RegistrationViewController alloc] init];
     //[self.rootController presentModalViewController:loginViewController animated:NO];
 
     [self displayLoginPage];
@@ -90,49 +79,34 @@
     //self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
 
-    UILabel* dealListLabel = [CalculationHelper createNavBarLabelWithTitle:@"Deals"];
+    UILabel* dealListLabel = [CalculationHelper createNavBarLabelWithTitle:@"Dealio"];
     [dealListview.view addSubview:dealListLabel];
     UILabel* filterLabel = [CalculationHelper createNavBarLabelWithTitle:@"Filters"];
     [filterView.view addSubview:filterLabel];
-    UILabel* mapLabel = [CalculationHelper createNavBarLabelWithTitle:@"Overview"];
+    UILabel* mapLabel = [CalculationHelper createNavBarLabelWithTitle:@"Map"];
     [mapView.view addSubview:mapLabel];
 
     return YES;
 }
 
 //close login window and instantiate the tab bar
--(void)loginSuccess{
-    //Sets Deals to selected tab
-    [self.rootController setSelectedIndex:1];
-    //Hide the login page
+-(void)loginSuccess
+{
+    [self.rootController setSelectedIndex:2];
     [self.rootController dismissModalViewControllerAnimated:YES];
-
-    //[[self.rootController.viewControllers objectAtIndex:0] temp];
-   // DealListViewController* controller = (DealListViewController*) [rootController.viewControllers objectAtIndex:1];
-//    [controller temp];
 }
 
 
--(void)logoutButtonPressed:(NSNotification*) notification {
-
-    NSLog(@"logout");
-
-    //set userData to nil
-    // set cookie to logged out/nil
-
+-(void)logoutButtonPressed:(NSNotification*) notification
+{
     [self displayLoginPage];
-
-
-
 }
 
-
-
--(void) displayLoginPage {
+-(void) displayLoginPage
+{
     loginViewController = nil;
     loginViewController = [[LoginViewController alloc] init];
     [self.rootController presentModalViewController:loginViewController animated:NO];
-
 }
 
 
@@ -184,32 +158,27 @@
 
 }
 
-- (IBAction)optionsButtonPressed:(id)sender {
-
+- (IBAction)optionsButtonPressed:(id)sender
+{
     //create options menu
     //use modal controller
-        //allow user to logout with bottom prompt
-        //if user logs out, create
-
-
-
-
+    //allow user to logout with bottom prompt
+    //if user logs out, create
     [self.rootController presentModalViewController:editProfileViewController animated:YES];
-
 }
 
-- (IBAction)favoritesButtonPressed:(id)sender {
-
-   // DealListViewController* controller = (DealListViewController*)[rootController.viewControllers objectAtIndex:1];
-   // [controller temp];
+- (IBAction)favoritesButtonPressed:(id)sender
+{
+    // DealListViewController* controller = (DealListViewController*)[rootController.viewControllers objectAtIndex:1];
+    // [controller temp];
     NSLog(@"faves");
     [[NSNotificationCenter defaultCenter] postNotificationName:@"favoritesButtonPressed" object:self];
     favoritesButton.style = UIBarButtonItemStyleDone;
 }
 
--(void)controlBarButtonPressed:(NSNotification*) notification {
+-(void)controlBarButtonPressed:(NSNotification*) notification
+{
     favoritesButton.style = UIBarButtonItemStyleBordered;
 }
-
 
 @end

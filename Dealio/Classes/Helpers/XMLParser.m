@@ -60,9 +60,6 @@
           qualifiedName:(NSString *)qName
              attributes:(NSDictionary *)attributeDict
 {
-
-    NSLog(@"element name :%@", elementName);
-
     if ([elementName isEqualToString:@"loginresult"])
     {
         if (!loginResult)
@@ -176,6 +173,7 @@
         else if ([dealTagStatus isEqualToString:@"Featured info began"] && currentTag != NULL && ![string isEqualToString:@"\n"] &&![string isEqualToString:@""] )
         {
             [featuredDeal setObject:string forKey:currentTag];
+            NSLog(@"featuredDeal %@", featuredDeal);
         }
                 //Add deal list items to dictionary
         else if ([dealTagStatus isEqualToString:@"Deal info began"] && currentTag != NULL && ![string isEqualToString:@"\n"] &&![string isEqualToString:@""] )
