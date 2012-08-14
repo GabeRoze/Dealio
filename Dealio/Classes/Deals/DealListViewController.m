@@ -33,6 +33,7 @@
 @synthesize wednesdayButton;
 @synthesize thursdayButton;
 @synthesize fridayButton;
+@synthesize filterButton;
 @synthesize sundayLabel;
 @synthesize saturdayLabel;
 @synthesize mondayLabel;
@@ -163,6 +164,7 @@
     [self setFridayLabel:nil];
     [self setSundayLabel:nil];
     [self setSaturdayLabel:nil];
+    [self setFilterButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
