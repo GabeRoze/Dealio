@@ -237,7 +237,7 @@
     NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",data ];
     NSString *latitude = [NSString stringWithFormat:@"&userlat=%f", coordinate.latitude];
     NSString *longitude = [NSString stringWithFormat:@"&userlong=%f", coordinate.longitude];
-    NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=150.0"];
+    NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=2.0"];
 
     urlAsString = [urlAsString stringByAppendingString:currentDay];
     urlAsString = [urlAsString stringByAppendingString:latitude];
@@ -289,11 +289,8 @@
 -(void) parseXMLFile:(NSData*)data
 {
     parser = [[XMLParser alloc] initXMLParser:data];
-
-    dealData = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
-
 //    NSLog(@"DEAL DATA POST XML IS: %@", dealData);
-
+    dealData = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
     [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
 }
 
@@ -302,13 +299,18 @@
 {
     [table reloadData];
     [borderedSpinnerView.view removeFromSuperview];
+
+    for (NSUInteger i = 0; i < dealData.count;i++)
+    {
+        NSLog(@"other deals %@", [dealData objectAtIndex:i]);
+    }
 }
 
 #pragma mark -
 #pragma mark Table View Data Source Methods
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return[self.dealData count];
+    return [self.dealData count];
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -329,19 +331,16 @@
     NSDictionary* rowData = [self.dealData objectAtIndex:row];
 
     cell.restaurantName = [rowData objectForKey:@"businessname"];
-    cell.dealName = [rowData objectForKey:@"name"];
+    cell.dealName = [rowData objectForKey:@"dealname"];
 
-    NSString* dealRating = [CalculationHelper convertLikesToRating:[rowData objectForKey:@"like"] dislikes: [rowData objectForKey:@"dislike"]];
+//    NSString* dealRating = [CalculationHelper convertLikesToRating:[rowData objectForKey:@"numlikes"] dislikes: [rowData objectForKey:@"dislike"]];
+//    NSString *dealRating
 
-    cell.rating = dealRating;
-
-    cell.distance = [rowData objectForKey:@"calculateddistance"];//[rowData objectForKey:@"distance"];
-
-    NSString* dealTime = [CalculationHelper convert24HourTimesToString:[rowData objectForKey:@"starttime"] endTime:[rowData objectForKey:@"endtime"]];
-
-    cell.dealTime = dealTime;
+    cell.rating = [NSString stringWithFormat:@"%@ Love it!", [rowData objectForKey:@"numlikes"]];
+    cell.distance = [rowData objectForKey:@"distance"];//[rowData objectForKey:@"distance"];
+//    NSString* dealTime = [CalculationHelper convert24HourTimesToString:[rowData objectForKey:@"starttime"] endTime:[rowData objectForKey:@"endtime"]];
+//    cell.dealTime = dealTime;
     //[cell setLogoWithString:[rowData objectForKey:@"logoname"]];
-
     [cell setLogoWithString:(NSString*)[rowData objectForKey:@"logoname"]];
 
     return cell;

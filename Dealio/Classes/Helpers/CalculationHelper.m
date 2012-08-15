@@ -273,12 +273,9 @@
 
 }
 
-+(NSMutableArray*) sortAndFormatDealListData:(NSMutableArray*)xmlData atLocation:(CLLocation*)currentLocation {
-
-
-
++(NSMutableArray*) sortAndFormatDealListData:(NSMutableArray*)xmlData atLocation:(CLLocation*)currentLocation
+{
     //Perform distance calculation
-
     NSMutableArray* returnArray = [[NSMutableArray alloc] init];
 
     for (id object in xmlData)
@@ -286,52 +283,19 @@
         NSMutableDictionary* rowData = (NSMutableDictionary*)object;
 
         //Get the restaurants location
-        CLLocation *restaurantLocation = [[CLLocation alloc] initWithLatitude:[[rowData objectForKey:@"storelatitude"] doubleValue] longitude:[[rowData objectForKey:@"storelongitude"] doubleValue]];
+        CLLocation *restaurantLocation = [[CLLocation alloc] initWithLatitude:[[rowData objectForKey:@"latitude"] doubleValue] longitude:[[rowData objectForKey:@"longitude"] doubleValue]];
         //Get the distance to the restaurant in meters
         CLLocationDistance distanceFloat = [currentLocation distanceFromLocation:restaurantLocation];
 
         NSString* distanceString = [NSString stringWithFormat:@"%f", distanceFloat];
 
-        [rowData setObject:distanceString forKey:@"calculateddistance"];
+        [rowData setObject:distanceString forKey:@"distance"];
         [returnArray addObject:rowData];
-
-        /*
-         //String to be converted
-         NSString* distanceString;
-
-         if (distanceFloat < 1000) {
-
-         int distanceInt = (int) distanceFloat;
-         distanceString = [NSString stringWithFormat:@"(%im)", distanceInt];
-         }
-         else {
-         distanceFloat = distanceFloat/1000;
-         distanceString = [NSString stringWithFormat:@"(%.1fkm)", distanceFloat];
-         }
-
-         [rowData setObject:distanceString forKey:@"calculateddistance"];
-         [returnArray addObject:rowData];
-         */
     }
 
     //Sort array
-
-
-    NSArray* sortedArray = [[NSArray alloc] init];
-
-
-    /*
-    NSSortDescriptor *aSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"calculateddistance" ascending:YES];
-
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:aSortDescriptor, nil];
-
-    sortedArray =    [returnArray sortedArrayUsingDescriptors:sortDescriptors];
-
-     */
-
-    //[returnArray sortUsingDescriptors:[NSMutableArray arrayWithObject:aSortDescriptor]];
-    //    returnArray = [self mergeSort:returnArray];
-
+//    NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
+    NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
 
     sortedArray = [self quicksort:returnArray];
 
@@ -340,7 +304,7 @@
     {
         NSMutableDictionary* rowData = (NSMutableDictionary*)object;
 
-        NSString* distanceString = [rowData objectForKey:@"calculateddistance"];
+        NSString* distanceString = [rowData objectForKey:@"distance"];
 
         //NSLog(@"distance: %@",distanceString);
 
@@ -356,7 +320,7 @@
             distanceString = [NSString stringWithFormat:@"(%.1fkm)", distanceFloat];
         }
 
-        [rowData setObject:distanceString forKey:@"calculateddistance"];
+        [rowData setObject:distanceString forKey:@"distance"];
     }
 
     //Update values in array
@@ -439,10 +403,10 @@
     //NSMutableDictionary* rowData = [[NSMutableDictionary alloc] init];
 
     for (int i = 0; i < [unsortedArray count]; i++) {
-        if ( [[[unsortedArray objectAtIndex:i] objectForKey:@"calculateddistance"]floatValue] > [[[unsortedArray objectAtIndex:pivot]objectForKey:@"calculateddistance"]floatValue] ) {
+        if ( [[[unsortedArray objectAtIndex:i] objectForKey:@"distance"]floatValue] > [[[unsortedArray objectAtIndex:pivot]objectForKey:@"distance"]floatValue] ) {
             [greaterArray addObject:[unsortedArray objectAtIndex:i]];
         }
-        else if ( [[[unsortedArray objectAtIndex:i] objectForKey:@"calculateddistance"]floatValue] < [[[unsortedArray objectAtIndex:pivot]objectForKey:@"calculateddistance"]floatValue] ) {
+        else if ( [[[unsortedArray objectAtIndex:i] objectForKey:@"distance"]floatValue] < [[[unsortedArray objectAtIndex:pivot]objectForKey:@"distance"]floatValue] ) {
             [lesserArray addObject:[unsortedArray objectAtIndex:i]];
         }
         else {

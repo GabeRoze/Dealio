@@ -58,91 +58,91 @@
 
 
 -(void) createAndDisplaySpinner {
-    
+
     if (spinner != nil) {
         [self stopSpinner];
     }
-    
+
     // NSLog(@"spiner displayed");
     CGFloat width = restaurantLogoImageView.bounds.size.width;
     CGFloat height = restaurantLogoImageView.bounds.size.height;
-    
+
     spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner setCenter:CGPointMake(width/2.0,height/2.0)];
     [self.restaurantLogoImageView addSubview:spinner];
     [spinner startAnimating];
     //[self.view setNeedsDisplay];
-    
+
 }
 
 -(void) stopSpinner {
-    
+
     //NSLog(@"spinner hidden");
-    
+
     [spinner stopAnimating];
     [spinner removeFromSuperview];
-    
+
 }
 
 -(void)setLogoWithString:(NSString*)str {
-    
+
     //call get image on background
     //when returns change image on foreground
-    
+
     //self.restaurantLogoImageView.image =  [[ImageCache sharedImageCache] getImageWithString:str];
-    
+
     if ([[ImageCache sharedImageCache] checkForImage:str]) {
-        
+
         //NSLog(@"setLogoWithString: %@", str);
-        
+
         self.restaurantLogoImageView.image = [[ImageCache sharedImageCache] getImage:str];
     }
     else {
-        
+
         //show loading symbol
         //NSLog(@"image spinner!");
         [self createAndDisplaySpinner];
-        
+
         [self performSelectorInBackground:@selector(loadImageWithString:) withObject:str];
-        
+
     }
-    
-    
+
+
     //check if the image is in the image cache
-    
-    
+
+
     //[self performSelectorInBack ground:@selector(setImageFromCache:) withObject:str];
-    
+
 }
 
 
--(void)loadImageWithString:(NSString*)str {
-    
-    NSString* imageUrlString = [NSString stringWithFormat:@"http://www.cinnux.com/logos/%@",str];
-    
+-(void)loadImageWithString:(NSString*)str
+{
+    NSString* imageUrlString = [NSString stringWithFormat:@"http://www.dealio.cinnux.com/app/%@",str];
+
     NSURL *url = [NSURL URLWithString:imageUrlString];
     UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
-    
-    
+
+
     NSArray* data = [[NSArray alloc] initWithObjects:image, str, nil];
-    
-    
+
+
     [self performSelectorOnMainThread:@selector(setImageWithData:) withObject:data waitUntilDone:YES];
-    
+
 }
 
 -(void)setImageWithData:(NSArray*)data {
-    
+
     [self stopSpinner];
-    
+
     //NSLog(@"imageWithdataarray: %@", data);
-    
-    
-    if ([data count] > 0) {        
-        
+
+
+    if ([data count] > 0) {
+
         self.restaurantLogoImageView.image = (UIImage*)[data objectAtIndex:0];
         [[ImageCache sharedImageCache] setImageWithUIImage:(UIImage*)[data objectAtIndex:0] withString:(NSString*)[data objectAtIndex:1]];
-        
+
     }
 }
 

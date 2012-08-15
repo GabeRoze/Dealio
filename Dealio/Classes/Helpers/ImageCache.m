@@ -33,27 +33,25 @@ static ImageCache* imageCacheInstance;
 
 }
 
-
+/*
 -(UIImage*)setImageWithString:(NSString *)str {
 
     //if the image dictionary does not contain the string
     //meaning the image has not been loaded
 
-    if ([imageDictionary objectForKey:str] == nil ) {
-
+    if ([imageDictionary objectForKey:str] == nil )
+    {
         //the object is the array position
         //the key is the variable name
         NSString* arrayCountAsString = [NSString stringWithFormat:@"%i", arrayCount];
         [imageDictionary setObject:arrayCountAsString forKey:str];
 
-
-
         //get image from server
-         NSString* imageUrlString = [NSString stringWithFormat:@"http://www.cinnux.com/logos/%@",str];
+        NSString* imageUrlString = [NSString stringWithFormat:@"http://www.dealio.cinnux.com/app/%@",str];
+        NSLog(@"the image str is %@", str);
 
-         NSURL *url = [NSURL URLWithString:imageUrlString];
-         UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
-
+        NSURL *url = [NSURL URLWithString:imageUrlString];
+        UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
 
         //add object to array
 //        NSLog(@"array count: %i", arrayCount);
@@ -70,25 +68,28 @@ static ImageCache* imageCacheInstance;
 
 
 }
+*/
 
-
--(void)setImageWithUIImage:(UIImage*)image withString:(NSString*)str {
+-(void)setImageWithUIImage:(UIImage*)image withString:(NSString*)str
+{
     [imageDictionary setObject:image forKey:str];
 }
 
--(BOOL) checkForImage:(NSString*)str {
-
-    if ([imageDictionary objectForKey:str]) {
+-(BOOL) checkForImage:(NSString*)str
+{
+    if ([imageDictionary objectForKey:str])
+    {
         return YES;
     }
-    else {
+    else
+    {
         return NO;
     }
 
 }
 
--(UIImage*)getImage:(NSString*)str {
-
+-(UIImage*)getImage:(NSString*)str
+{
     return (UIImage*)[imageDictionary objectForKey:str];
 }
 
@@ -100,7 +101,7 @@ static ImageCache* imageCacheInstance;
 
  */
 
-
+/*
 -(UIImage*)getImageWithString:(NSString *)str {
 
 
@@ -126,9 +127,10 @@ static ImageCache* imageCacheInstance;
     return nil;
 
 }
+*/
 
-+(ImageCache*) sharedImageCache {
-
++(ImageCache*) sharedImageCache
+{
     NSAssert(imageCacheInstance != nil, @"UserManager not available!");
     return imageCacheInstance;
 }

@@ -16,8 +16,8 @@
 @property (assign, nonatomic) int arrayCount;
 
 
--(UIImage*)setImageWithString:(NSString*)str;
--(UIImage*)getImageWithString:(NSString*)str;
+//-(UIImage*)setImageWithString:(NSString*)str;
+//-(UIImage*)getImageWithString:(NSString*)str;
 
 +(ImageCache*) sharedImageCache;
 -(void)setImageWithUIImage:(UIImage*)image withString:(NSString*)str;

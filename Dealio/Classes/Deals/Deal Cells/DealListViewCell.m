@@ -65,8 +65,8 @@
 
 }
 
--(void)setLogoWithString:(NSString*)str {
-
+-(void)setLogoWithString:(NSString*)str
+{
     //call get image on background
     //when returns change image on foreground
 
@@ -78,14 +78,13 @@
     {
 //        NSLog(@"stringempty");
     }
-    else if ([[ImageCache sharedImageCache] checkForImage:str]) {
-
+    else if ([[ImageCache sharedImageCache] checkForImage:str])
+    {
 //        NSLog(@"set logo 2nd else: %@", str);
-
         self.restaurantLogoImageView.image = [[ImageCache sharedImageCache] getImage:str];
     }
-    else {
-
+    else
+    {
         //show loading symbol
         //NSLog(@"image spinner!");
         [self createAndDisplaySpinner];
@@ -102,10 +101,10 @@
 
 }
 
-
--(void)loadImageWithString:(NSString*)str {
-
-    NSString* imageUrlString = [NSString stringWithFormat:@"http://www.cinnux.com/logos/%@",str];
+-(void)loadImageWithString:(NSString*)str
+{
+    NSString* imageUrlString = [NSString stringWithFormat:@"http://www.dealio.cinnux.com/app/%@",str];
+    NSLog(@"imageURLSTR %@", imageUrlString);
 
     NSURL *url = [NSURL URLWithString:imageUrlString];
     UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
@@ -113,24 +112,16 @@
 
     NSArray* data = [[NSArray alloc] initWithObjects:image, str, nil];
 
-
     [self performSelectorOnMainThread:@selector(setImageWithData:) withObject:data waitUntilDone:YES];
-
 }
 
--(void)setImageWithData:(NSArray*)data {
-
+-(void)setImageWithData:(NSArray*)data
+{
     [self stopSpinner];
-
-    //NSLog(@"imageWithdataarray: %@", data);
-
-
-    if ([data count] > 0) {
-
-        //NSLog(@"weee this happened");
+    if ([data count] > 0)
+    {
         self.restaurantLogoImageView.image = (UIImage*)[data objectAtIndex:0];
         [[ImageCache sharedImageCache] setImageWithUIImage:(UIImage*)[data objectAtIndex:0] withString:(NSString*)[data objectAtIndex:1]];
-
     }
 }
 
