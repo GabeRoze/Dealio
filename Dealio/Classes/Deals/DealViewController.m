@@ -60,26 +60,17 @@
 
 - (void)didReceiveMemoryWarning
 {
-    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-
-    // Release any cached data, images, etc that aren't in use.
 }
 
 
--(void)loadDealFromList:(NSDictionary *)data {
-
-
+-(void)loadDealFromList:(NSDictionary *)data
+{
     self.dealListData = [NSMutableDictionary dictionaryWithDictionary:data];
-
-    NSLog(@"businessname : %@", [dealListData objectForKey:@"businessname"]);
-
+    NSLog(@"dela list data %@", dealListData);
     [self connectToServer:[dealListData objectForKey:@"uid"]];
-
     [table reloadData];
     [self createAndDisplaySpinner];
-
-
 }
 
 
@@ -108,41 +99,10 @@
     [self.table setSeparatorColor:[UIColor clearColor]];
     [self.table setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
-    //    dealListData = [[NSMutableDictionary alloc] init];
-    //    parserData = [[NSMutableDictionary alloc] init];
-    //    comments = [[NSMutableArray alloc] init];
-    // Do any additional setup after loading the view from its nib.
-
-    // Set table to no borders
-    // self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
-
-
-
-    /*
-     NSDictionary* com1 = [[NSDictionary alloc] initWithObjectsAndKeys:@"This is first comment Are you sure you've actually got a SnakeMenuController that's receiving the message, rather than something else?", @"Comment", nil];
-     NSDictionary* com2 = [[NSDictionary alloc] initWithObjectsAndKeys:@"This is second comment In my .xib file, I defined the SnakeMenuController as Fil's Owner and then I connected the buttonClicked: method to the Touch Up Inside Event of my button (which is inserted on the View). Reading the error message I tought my mistake was I called buttonClicked under the wrong object so I decided to connect my action manually but the result was exactly the same. I really do not understand why I have this problem because I checked with example given by Apple ", @"Comment", nil];
-     NSDictionary* com3 = [[NSDictionary alloc] initWithObjectsAndKeys:@"This is third comment", @"Comment", nil];
-     NSDictionary* com4 = [[NSDictionary alloc] initWithObjectsAndKeys:@"This is fourth commen To conclude, I'd like to inform you I used (or maybe tried to use) Interface Builder to connect my action with the TouchUpInside Event of my button.t", @"Comment", nil];
-     NSDictionary* com5 = [[NSDictionary alloc] initWithObjectsAndKeys:@"This is fifth comment. I thinkv ery good for stuff eating yummmy woot!", @"Comment", nil];
-
-     self.comments = [[NSArray alloc] initWithObjects:com1,com2,com3,com4,com5, nil];
-
-     //call DB method to pull all relevant data
-     //allocate cell inforrmation here
-
-     //display location informatino
-     //generate a google maps
-     //create a back button
-     //c
-
-     userCommentPosted = YES;
-     */
-
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(favoriteRemoved:)
                                                  name:@"favoriteRemoved"
                                                object:nil];
-
 }
 
 
@@ -166,7 +126,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)returnToDealsListView:(id)sender {
+- (IBAction)returnToDealsListView:(id)sender
+{
     [self dismissModalViewControllerAnimated:YES];
     //release this instance (may not be needed due to ARC
     //[self viewDidUnload];
@@ -177,13 +138,11 @@
 
 
 
--(void) connectToServer:(NSString*)data {
-
-
-
+-(void) connectToServer:(NSString*)data
+{
     //attempt to connect to server
 
-    NSString* functionURL = @"http://www.cinnux.com/dealdetail-func.php";
+    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php";
 
     // NSString* emailString = [NSString stringWithFormat:@"?useremail=%@",(NSString*)[userData objectAtIndex:0] ];
     // NSString* encryptedPassword = (NSString*)[userData objectAtIndex:1];
@@ -273,14 +232,8 @@
     [self performSelectorOnMainThread:@selector(resizeDescription) withObject:nil waitUntilDone:YES];
 
 }
--(void) serverResponseAcquired {
-
-
-    // set the deal data to the parsers data
-    //parserData = parser.dealItem;
-    //comments = parser.dealComments;
-
-
+-(void) serverResponseAcquired
+{
     NSLog(@"parser.dealitem: %@", parser.dealItem);
 
     parserData = [NSMutableDictionary dictionaryWithDictionary:parser.dealItem];
@@ -288,50 +241,13 @@
     NSLog(@"comments: %@", parser.dealComments);
     comments = parser.dealComments;
 
-
-    //set liked
-    //set commented
-    //set favorited
-
     [table reloadData];
-
-    //[self performSelectorInBackground:@selector(reloadTableData) withObject:nil];// waitUntilDone:YES];
-
-    //[self performSelectorOnMainThread:@selector(resizeDescription) withObject:nil waitUntilDone:YES];
-
 
     [self performSelector:@selector(resizeDescription) withObject:nil afterDelay:0.1];
 
 
-    // reload the table
-
-
-   // NSIndexSet* indexSet = [NSIndexPath indexPathForRow:0 inSection:2];
-    //NSUInteger indexArr[] = {3,5};
-
-    //NSIndexSet *indexSet = [NSIndexPath indexPathWithIndexes:indexArr length:2];
-
-
-    /*
-    NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
-
-    [indexSet addIndex:2];
-   // [indexSet addIndex:4];
-
-
-    [table reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-
-*/
-
-
-    //[self.view setNeedsDisplay];
-    //[self.view setNeedsLayout];
-
     // stop spinner
     [self stopSpinner];
-
-
-
 }
 
 
@@ -339,9 +255,10 @@
 #pragma mark -
 #pragma mark Spinner
 
--(void) createAndDisplaySpinner {
-
-    if (spinner != nil) {
+-(void) createAndDisplaySpinner
+{
+    if (spinner != nil)
+    {
         [self stopSpinner];
     }
 
@@ -354,11 +271,10 @@
     [self.view addSubview:spinner];
     [spinner startAnimating];
     //[self.view setNeedsDisplay];
-
 }
 
--(void) stopSpinner {
-
+-(void) stopSpinner
+{
     //NSLog(@"spinner hidden");
 
     [spinner stopAnimating];
@@ -371,16 +287,13 @@
 
 #pragma mark -
 #pragma mark Table Data Source Method
-
-
--(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 6;
 }
 
-
--(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //return [self.computers count];
-
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     switch (section) {
         case 0:
             return 1;
@@ -417,8 +330,8 @@
 }
 
 
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     //Logo and info cells
     static NSString* CellTableIdentifier1 = @"CellTableIdentifier1";
     static NSString* CellTableIdentifier2 = @"CellTableIdentifier2";
@@ -447,15 +360,14 @@
 
     UITableViewCell* cell;
 
-    if (!nibsRegistered){
-
+    if (!nibsRegistered)
+    {
         UINib* nib1 = [UINib nibWithNibName:@"DealViewLogoCell" bundle:nil];
         UINib* nib2 = [UINib nibWithNibName:@"DealViewInfoCell" bundle:nil];
         UINib* nib3 = [UINib nibWithNibName:@"DealViewPhoneCell" bundle:nil];
         UINib* nib4 = [UINib nibWithNibName:@"DealViewMapInfoCell" bundle:nil];
         UINib* nib5 = [UINib nibWithNibName:@"DealViewUrlCell" bundle:nil];
         UINib* nib6 = [UINib nibWithNibName:@"DealViewResizableCell" bundle:nil];
-
 
         //Like and fave cells
         UINib* likeCellNib = [UINib nibWithNibName:@"DealViewLikeCell" bundle:nil];
@@ -468,7 +380,6 @@
 
         //New deal info cell
         UINib* restaurantInfoCellNib = [UINib nibWithNibName:@"DealViewRestaurantInfoCell" bundle:nil];
-
 
         //header cells
         [tableView registerNib:nib1 forCellReuseIdentifier:CellTableIdentifier1];
@@ -494,19 +405,12 @@
         //New deal info cell
         [tableView registerNib:restaurantInfoCellNib forCellReuseIdentifier:DealInfoCell];
 
-
         nibsRegistered = YES;
-
     }
 
-
-
-
-    //[tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    switch (indexPath.section) {
+    switch (indexPath.section)
+    {
         case 0:
-
             //Header cell
             if (indexPath.row == 0) {
                 DealViewLogoCell *cell1 = [tableView dequeueReusableCellWithIdentifier:@"CellTableIdentifier1"];
@@ -525,7 +429,7 @@
                     cell1.restaurantName = [dealListData objectForKey:@"businessname"];
 
                     //  cell1.dealName = @"Free Burgers!";
-                    cell1.dealName = (NSString*)[dealListData objectForKey:@"name"];
+                    cell1.dealName = (NSString*)[dealListData objectForKey:@"dealname"];
                     //  cell1.restaurantLogoImageView.image = [UIImage imageNamed:@"mcdonalds_logo.png"];
 
 
@@ -557,18 +461,15 @@
                 else {
 
 
-                    NSString* dealRating = [CalculationHelper convertLikesToRating:[dealListData objectForKey:@"like"] dislikes: [dealListData objectForKey:@"dislike"]];
-
+//                    NSString* dealRating = [CalculationHelper convertLikesToRating:[dealListData objectForKey:@"numlikes"] dislikes: [dealListData objectForKey:@"dislike"]];
+                    NSString *dealRating = [dealListData objectForKey:@"numlikes"];
                     NSString* dealTime = [CalculationHelper convert24HourTimesToString:[dealListData objectForKey:@"starttime"] endTime:[dealListData objectForKey:@"endtime"]];
-
-
 
                     cell1.rating = dealRating;
                     cell1.dealTime = dealTime;
                     //     cell1.dealDays = @"M/W/F";
                     cell1.backgroundImage.image = [UIImage imageNamed:@"info_background.png"];
                     cell = cell1;
-
                 }
             }
             break;
@@ -576,34 +477,15 @@
         case 1:
 
             //Restaurant Info
-            if (indexPath.row == 0) {
-
-
+            if (indexPath.row == 0)
+            {
                 DealViewRestaurantInfoCell *cell1 = [tableView dequeueReusableCellWithIdentifier:@"DealViewRestaurantInfoCell"];
-
-
-
-
-                if (!cell1) {
+                if (!cell1)
+                {
                     cell = [[DealViewRestaurantInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DealViewRestaurantInfoCell"];
-
                 }
-                else {
-
-                    //cell1.phone = [parserData objectForKey:@"storenumber"];
-
-                    //           cell1.phone = @"226-220-8750";
-
-                    /*
-                    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 15, 150, 25)];
-                    label.tag = 42;
-                    label.font = [UIFont fontWithName:@"Eurofurenceregular" size:22];
-                    label.backgroundColor = [UIColor clearColor];
-                    label.textColor = [UIColor whiteColor];
-                    label.text = [parserData objectForKey:@"storeaddress"];
-                    [cell1.contentView addSubview:label];
-                     */
-
+                else
+                {
                     [cell1 setStreetAddress:[parserData objectForKey:@"storeaddress"]];
                     [cell1 setCityAddress: [parserData objectForKey:@"storecity"] withState:[parserData objectForKey:@"storestate"]];
                     [cell1 setUrl:[parserData objectForKey:@"businesswebaddress"]];
@@ -875,12 +757,10 @@
 
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-
-
-
-    switch (indexPath.section) {
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section)
+    {
         case 0:
             if (indexPath.row == 0)
             {
@@ -956,26 +836,8 @@
 
         default:
             break;
-
-
     }
-
-
     return 0;
-    /*
-     if (indexPath.section == 1 88 indexPath.row == 1) {
-     return SPECIAL_HEIGHT;
-     }
-     return normal_height;
-     */
-
-    /*
-     NSIndexPath *a = [NSIndexPath indexPathForRow:0 inSection:0]; // I wanted to update this cell specifically
-     CustomTableViewCell *c = (CustomTableViewCell *)[theTableView cellForRowAtIndexPath:a];
-     // allocate tableCell = (tablecell*)[tableview cellforrowatindexpath:indexPath];
-
-     */
-
 }
 
 

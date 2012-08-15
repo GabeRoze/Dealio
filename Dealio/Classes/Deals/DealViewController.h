@@ -21,20 +21,12 @@
 @property (assign, nonatomic) NSString* liked;
 @property (assign, nonatomic) NSString* favorited;
 @property (assign, nonatomic) NSString* commented;
-
 @property (strong, nonatomic) NSArray* computers;
-
-
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 @property (weak, nonatomic) IBOutlet UITableView *table;
-
-
 @property (strong, nonatomic) NSString* description;
-
-
 @property (strong, nonatomic) NSString* messageText;
 @property (strong, nonatomic) XMLParser* parser;
-
 @property (strong, nonatomic) NSMutableDictionary* dealListData;
 @property (strong, nonatomic) NSMutableDictionary* parserData;
 @property (strong, nonatomic) NSMutableArray* comments;

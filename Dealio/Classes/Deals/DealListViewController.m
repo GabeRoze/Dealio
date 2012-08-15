@@ -289,7 +289,6 @@
 -(void) parseXMLFile:(NSData*)data
 {
     parser = [[XMLParser alloc] initXMLParser:data];
-//    NSLog(@"DEAL DATA POST XML IS: %@", dealData);
     dealData = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
     [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
 }
@@ -299,11 +298,6 @@
 {
     [table reloadData];
     [borderedSpinnerView.view removeFromSuperview];
-
-    for (NSUInteger i = 0; i < dealData.count;i++)
-    {
-        NSLog(@"other deals %@", [dealData objectAtIndex:i]);
-    }
 }
 
 #pragma mark -
