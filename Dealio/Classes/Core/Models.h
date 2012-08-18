@@ -7,7 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface Models : NSObject
+
+@end
+
+
+@interface SearchLocation : NSObject <CLLocationManagerDelegate>
+{
+}
+
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) NSString *savedAddress;
+@property (assign) CLLocationCoordinate2D savedLocation;
+@property (assign) BOOL useCurrentLocation;
++ (SearchLocation*)instance;
+-(CLLocationCoordinate2D)getCurrentLocation;
+-(CLLocationCoordinate2D)getLocation;
 
 @end

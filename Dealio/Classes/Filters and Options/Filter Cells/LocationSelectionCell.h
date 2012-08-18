@@ -7,13 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Models.h"
 
 @interface LocationSelectionCell : UITableViewCell
 {
-    IBOutlet UIButton *GPSButton;
-    IBOutlet UIButton *AddressButton;
+    IBOutlet UIButton *gpsButton;
+    IBOutlet UIButton *addressButton;
     IBOutlet  UITextField *addressTextField;
 }
 
+- (IBAction)gpsButtonTapped:(id)sender;
+- (IBAction)addressButtonTapped:(id)sender;
 
+- (IBAction)addressChanged:(id)sender;
+-(void)updateLocationDisplay;
 @end

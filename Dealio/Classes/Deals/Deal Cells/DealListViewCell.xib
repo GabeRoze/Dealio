@@ -103,7 +103,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">default.png</string>
+									<string key="NSResourceName">default_image_background.png</string>
 								</object>
 							</object>
 							<object class="IBUILabel" id="174960836">
@@ -140,7 +140,7 @@
 								<string key="NSFrame">{{83, 20}, {216, 34}}</string>
 								<reference key="NSSuperview" ref="891019518"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="174960836"/>
 								<string key="NSReuseIdentifierKey">_NS:328</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -164,6 +164,7 @@
 								<string key="NSFrame">{{219, 53}, {100, 21}}</string>
 								<reference key="NSSuperview" ref="891019518"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:328</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -387,7 +388,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="dealList.png">{320, 75}</string>
-			<string key="default.png">{75, 75}</string>
+			<string key="default_image_background.png">{16, 16}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>

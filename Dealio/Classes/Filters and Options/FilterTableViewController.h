@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface FilterTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+{
+    IBOutlet UITableView* table;
+}
 
 @end

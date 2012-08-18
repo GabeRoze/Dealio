@@ -12,6 +12,8 @@
 	<array>
 		<string>app-icon.png</string>
 		<string>app-icon@2x.png</string>
+		<string>Default@2x.png</string>
+		<string>Default.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -21,6 +23,8 @@
 			<array>
 				<string>app-icon.png</string>
 				<string>app-icon@2x.png</string>
+				<string>Default@2x.png</string>
+				<string>Default.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
@@ -42,6 +46,15 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>eurof35_0.ttf</string>
+		<string>eurof36_0.ttf</string>
+		<string>eurof55.ttf</string>
+		<string>eurof56.ttf</string>
+		<string>eurof75.ttf</string>
+		<string>Rokkitt.otf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -51,15 +64,6 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>eurof35_0.ttf</string>
-		<string>eurof36_0.ttf</string>
-		<string>eurof55.ttf</string>
-		<string>eurof56.ttf</string>
-		<string>eurof75.ttf</string>
-		<string>Rokkitt.otf</string>
 	</array>
 </dict>
 </plist>

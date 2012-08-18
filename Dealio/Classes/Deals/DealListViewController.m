@@ -14,6 +14,7 @@
 #import "XMLParser.h"
 #import "CalculationHelper.h"
 #import "BorderedSpinnerView.h"
+#import "Models.h"
 
 @implementation DealListViewController
 
@@ -71,12 +72,12 @@
     [self initFilterButton];
     [self initDayButtons];
 
-    // locationManager update as location
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    [locationManager startUpdatingLocation];
+//    // locationManager update as location
+//    locationManager = [[CLLocationManager alloc] init];
+//    locationManager.delegate = self;
+//    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+//    locationManager.distanceFilter = kCLDistanceFilterNone;
+//    [locationManager startUpdatingLocation];
 
     borderedSpinnerView = [[BorderedSpinnerView alloc] init];
 
@@ -166,12 +167,7 @@
 #pragma mark Server Connectivity and XML
 -(void) connectToServer:(NSString*)data
 {
-    CLLocation *location = [locationManager location];
-
-    // Configure the new event with information from the location
-    CLLocationCoordinate2D coordinate = [location coordinate];
-
-    currentLocation = [[CLLocation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    CLLocationCoordinate2D coordinate = SearchLocation.instance.getLocation;
 
     NSString* urlAsString = @"";
     // NSString* emailString = [NSString stringWithFormat:@"?useremail=%@",(NSString*)[userData objectAtIndex:0] ];
@@ -296,20 +292,14 @@
 {
     if (!filterViewDisplayed)
     {
-        NSLog(@"filter displayed");
         filterViewDisplayed = YES;
-//        [UIView transitionWithView:self.view duration:0.9 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
         [self disableAllDays];
         [self.view addSubview:filterTableViewController.view];
-//        } completion:nil];
     }
     else
     {
-        NSLog(@"filter view hidden");
         filterViewDisplayed = NO;
-//        [UIView transitionWithView:self.table duration:0.9 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
         [filterTableViewController.view removeFromSuperview];
-//        } completion:nil];
     }
 }
 

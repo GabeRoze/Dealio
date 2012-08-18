@@ -24,6 +24,14 @@
     // e.g. self.myOutlet = nil;
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    LocationSelectionCell *cell = (LocationSelectionCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    [cell updateLocationDisplay];
+}
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -50,6 +58,7 @@
         }
 
         locationSelectionCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        locationSelectionCell.updateLocationDisplay;
 
         return locationSelectionCell;
     }
@@ -71,7 +80,7 @@
     {
         if (indexPath.row == 0)
         {
-            return 206;
+            return 160;
         }
     }
 }
