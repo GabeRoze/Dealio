@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DealListViewCell : UITableViewCell {
-    
+@interface DealListViewCell : UITableViewCell
+{
     UIActivityIndicatorView* spinner;
-
 }
 
 @property (copy, nonatomic) NSString *restaurantName;
@@ -20,8 +19,6 @@
 @property (copy, nonatomic) NSString *distance;
 @property (copy, nonatomic) NSString *dealTime;
 @property (strong, nonatomic) UIImage *restaurantLogo;
-
-
 
 @property (strong, nonatomic) IBOutlet UILabel* restaurantNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel* dealNameLabel;
@@ -35,7 +32,7 @@
 -(void)loadImageWithString:(NSString*)str;
 -(void)setImageWithData:(NSArray*)data;
 
--(void) createAndDisplaySpinner; 
+-(void) createAndDisplaySpinner;
 -(void) stopSpinner;
 
 @end

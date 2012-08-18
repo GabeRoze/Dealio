@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "FilterTableViewController.h"
 
 @class DealViewController;
 @class XMLParser;
@@ -15,7 +16,11 @@
 
 @interface DealListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 {
+    FilterTableViewController *filterTableViewController;
+
     UIActivityIndicatorView* spinner;
+
+    BOOL filterViewDisplayed;    
 }
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
@@ -37,7 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *wednesdayButton;
 @property (weak, nonatomic) IBOutlet UIImageView *thursdayButton;
 @property (weak, nonatomic) IBOutlet UIImageView *fridayButton;
-@property (strong, nonatomic) IBOutlet UIImageView *filterButton;
+@property (weak, nonatomic) IBOutlet UIImageView *filterButton;
 @property (weak, nonatomic) IBOutlet UILabel *sundayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *mondayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tuesdayLabel;

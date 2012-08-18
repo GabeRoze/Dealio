@@ -12,6 +12,11 @@
 		2A8E6DE614FDDAA4003CB224 /* deals-top.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A8E6DE414FDDAA4003CB224 /* deals-top.png */; };
 		2A8E6DE714FDDAA4003CB224 /* deals-top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A8E6DE514FDDAA4003CB224 /* deals-top@2x.png */; };
 		2AE8D30C1503DF3E00DFCC1D /* sat.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AE8D30B1503DF3E00DFCC1D /* sat.png */; };
+		9C153C8E15DFF47D00365E2C /* FilterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153C8C15DFF47D00365E2C /* FilterTableViewController.m */; };
+		9C153C8F15DFF47D00365E2C /* FilterTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C153C8D15DFF47D00365E2C /* FilterTableViewController.xib */; };
+		9C153C9415E0196B00365E2C /* LocationSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153C9315E0196B00365E2C /* LocationSelectionCell.m */; };
+		9C153C9615E0197D00365E2C /* LocationSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C153C9515E0197D00365E2C /* LocationSelectionCell.xib */; };
+		9C153C9E15E0217800365E2C /* Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153C9D15E0217800365E2C /* Models.m */; };
 		9CFC33E915D72594008C47B0 /* unselected_day_button_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFC33E815D72594008C47B0 /* unselected_day_button_color.png */; };
 		9CFC342815D728C6008C47B0 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC341415D728C6008C47B0 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9CFC342915D728C6008C47B0 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC341615D728C6008C47B0 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -195,6 +200,14 @@
 		2A8E6DE414FDDAA4003CB224 /* deals-top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "deals-top.png"; path = "Deals/deals-top.png"; sourceTree = "<group>"; };
 		2A8E6DE514FDDAA4003CB224 /* deals-top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "deals-top@2x.png"; path = "Deals/deals-top@2x.png"; sourceTree = "<group>"; };
 		2AE8D30B1503DF3E00DFCC1D /* sat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sat.png; path = Deals/dates/sat.png; sourceTree = "<group>"; };
+		9C153C8B15DFF47C00365E2C /* FilterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterTableViewController.h; path = "Classes/Filters and Options/FilterTableViewController.h"; sourceTree = "<group>"; };
+		9C153C8C15DFF47D00365E2C /* FilterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterTableViewController.m; path = "Classes/Filters and Options/FilterTableViewController.m"; sourceTree = "<group>"; };
+		9C153C8D15DFF47D00365E2C /* FilterTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FilterTableViewController.xib; path = "Classes/Filters and Options/FilterTableViewController.xib"; sourceTree = "<group>"; };
+		9C153C9215E0196B00365E2C /* LocationSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSelectionCell.h; sourceTree = "<group>"; };
+		9C153C9315E0196B00365E2C /* LocationSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSelectionCell.m; sourceTree = "<group>"; };
+		9C153C9515E0197D00365E2C /* LocationSelectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationSelectionCell.xib; sourceTree = "<group>"; };
+		9C153C9C15E0217800365E2C /* Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Models.h; sourceTree = "<group>"; };
+		9C153C9D15E0217800365E2C /* Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Models.m; sourceTree = "<group>"; };
 		9CFC33E815D72594008C47B0 /* unselected_day_button_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unselected_day_button_color.png; path = "Graphics/Version 2/UI/Deals/unselected_day_button_color.png"; sourceTree = SOURCE_ROOT; };
 		9CFC341315D728C6008C47B0 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		9CFC341415D728C6008C47B0 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
@@ -446,6 +459,27 @@
 				2A8E6DE514FDDAA4003CB224 /* deals-top@2x.png */,
 			);
 			name = Deals;
+			sourceTree = "<group>";
+		};
+		9C153C9115E00CC500365E2C /* Filter Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9C153C9215E0196B00365E2C /* LocationSelectionCell.h */,
+				9C153C9315E0196B00365E2C /* LocationSelectionCell.m */,
+				9C153C9515E0197D00365E2C /* LocationSelectionCell.xib */,
+			);
+			name = "Filter Cells";
+			path = "Classes/Filters and Options/Filter Cells";
+			sourceTree = "<group>";
+		};
+		9C153C9B15E0216600365E2C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9C153C9C15E0217800365E2C /* Models.h */,
+				9C153C9D15E0217800365E2C /* Models.m */,
+			);
+			name = Core;
+			path = Classes/Core;
 			sourceTree = "<group>";
 		};
 		9CFC341115D728C6008C47B0 /* Third Party */ = {
@@ -737,6 +771,7 @@
 		C0FE21B014F442CA00F03DFF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9C153C9B15E0216600365E2C /* Core */,
 				9CFC343515D7403F008C47B0 /* Connectivity */,
 				9CFC341115D728C6008C47B0 /* Third Party */,
 				C0FE21B614F4433A00F03DFF /* Deals */,
@@ -778,6 +813,7 @@
 		C0FE21B214F442E100F03DFF /* Filters and Options */ = {
 			isa = PBXGroup;
 			children = (
+				9C153C9115E00CC500365E2C /* Filter Cells */,
 				C0FE225E14F4499200F03DFF /* EditProfileViewController.h */,
 				C0FE225F14F4499200F03DFF /* EditProfileViewController.m */,
 				C0FE226014F4499200F03DFF /* EditProfileViewController.xib */,
@@ -790,6 +826,9 @@
 				C0FE226614F4499200F03DFF /* ProfileViewController.h */,
 				C0FE226714F4499200F03DFF /* ProfileViewController.m */,
 				C0FE226814F4499200F03DFF /* ProfileViewController.xib */,
+				9C153C8B15DFF47C00365E2C /* FilterTableViewController.h */,
+				9C153C8C15DFF47D00365E2C /* FilterTableViewController.m */,
+				9C153C8D15DFF47D00365E2C /* FilterTableViewController.xib */,
 			);
 			name = "Filters and Options";
 			sourceTree = "<group>";
@@ -1085,6 +1124,8 @@
 				9CFC346E15D9FD2F008C47B0 /* 14-tag.png in Resources */,
 				9CFC346F15D9FD2F008C47B0 /* 14-tag@2x.png in Resources */,
 				9CFC347115DA03D7008C47B0 /* filter.png in Resources */,
+				9C153C8F15DFF47D00365E2C /* FilterTableViewController.xib in Resources */,
+				9C153C9615E0197D00365E2C /* LocationSelectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1141,6 +1182,9 @@
 				9CFC342F15D728C6008C47B0 /* AFURLConnectionOperation.m in Sources */,
 				9CFC343015D728C6008C47B0 /* AFXMLRequestOperation.m in Sources */,
 				9CFC343115D728C6008C47B0 /* UIImageView+AFNetworking.m in Sources */,
+				9C153C8E15DFF47D00365E2C /* FilterTableViewController.m in Sources */,
+				9C153C9415E0196B00365E2C /* LocationSelectionCell.m in Sources */,
+				9C153C9E15E0217800365E2C /* Models.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
