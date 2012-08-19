@@ -19,6 +19,10 @@
 		9C153C9E15E0217800365E2C /* Models.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153C9D15E0217800365E2C /* Models.m */; };
 		9C153CA115E02DCE00365E2C /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C153C9F15E02DCE00365E2C /* splashscreen.png */; };
 		9C153CA215E02DCE00365E2C /* splashscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C153CA015E02DCE00365E2C /* splashscreen@2x.png */; };
+		9C153CA515E0AE1C00365E2C /* MaximumDistanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153CA415E0AE1C00365E2C /* MaximumDistanceCell.m */; };
+		9C153CA715E0AE5500365E2C /* MaximumDistanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C153CA615E0AE5400365E2C /* MaximumDistanceCell.xib */; };
+		9C153CAA15E0B20200365E2C /* UpdateButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153CA915E0B20200365E2C /* UpdateButtonCell.m */; };
+		9C153CAC15E0B22300365E2C /* UpdateButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C153CAB15E0B22300365E2C /* UpdateButtonCell.xib */; };
 		9CFC33E915D72594008C47B0 /* unselected_day_button_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFC33E815D72594008C47B0 /* unselected_day_button_color.png */; };
 		9CFC342815D728C6008C47B0 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC341415D728C6008C47B0 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9CFC342915D728C6008C47B0 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC341615D728C6008C47B0 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -212,6 +216,12 @@
 		9C153C9D15E0217800365E2C /* Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Models.m; sourceTree = "<group>"; };
 		9C153C9F15E02DCE00365E2C /* splashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashscreen.png; path = Other/splashscreen.png; sourceTree = "<group>"; };
 		9C153CA015E02DCE00365E2C /* splashscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "splashscreen@2x.png"; path = "Other/splashscreen@2x.png"; sourceTree = "<group>"; };
+		9C153CA315E0AE1B00365E2C /* MaximumDistanceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaximumDistanceCell.h; sourceTree = "<group>"; };
+		9C153CA415E0AE1C00365E2C /* MaximumDistanceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaximumDistanceCell.m; sourceTree = "<group>"; };
+		9C153CA615E0AE5400365E2C /* MaximumDistanceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MaximumDistanceCell.xib; sourceTree = "<group>"; };
+		9C153CA815E0B20200365E2C /* UpdateButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateButtonCell.h; sourceTree = "<group>"; };
+		9C153CA915E0B20200365E2C /* UpdateButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateButtonCell.m; sourceTree = "<group>"; };
+		9C153CAB15E0B22300365E2C /* UpdateButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateButtonCell.xib; sourceTree = "<group>"; };
 		9CFC33E815D72594008C47B0 /* unselected_day_button_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unselected_day_button_color.png; path = "Graphics/Version 2/UI/Deals/unselected_day_button_color.png"; sourceTree = SOURCE_ROOT; };
 		9CFC341315D728C6008C47B0 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		9CFC341415D728C6008C47B0 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
@@ -471,6 +481,12 @@
 				9C153C9215E0196B00365E2C /* LocationSelectionCell.h */,
 				9C153C9315E0196B00365E2C /* LocationSelectionCell.m */,
 				9C153C9515E0197D00365E2C /* LocationSelectionCell.xib */,
+				9C153CA315E0AE1B00365E2C /* MaximumDistanceCell.h */,
+				9C153CA415E0AE1C00365E2C /* MaximumDistanceCell.m */,
+				9C153CA615E0AE5400365E2C /* MaximumDistanceCell.xib */,
+				9C153CA815E0B20200365E2C /* UpdateButtonCell.h */,
+				9C153CA915E0B20200365E2C /* UpdateButtonCell.m */,
+				9C153CAB15E0B22300365E2C /* UpdateButtonCell.xib */,
 			);
 			name = "Filter Cells";
 			path = "Classes/Filters and Options/Filter Cells";
@@ -1134,6 +1150,8 @@
 				9C153C9615E0197D00365E2C /* LocationSelectionCell.xib in Resources */,
 				9C153CA115E02DCE00365E2C /* splashscreen.png in Resources */,
 				9C153CA215E02DCE00365E2C /* splashscreen@2x.png in Resources */,
+				9C153CA715E0AE5500365E2C /* MaximumDistanceCell.xib in Resources */,
+				9C153CAC15E0B22300365E2C /* UpdateButtonCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1193,6 +1211,8 @@
 				9C153C8E15DFF47D00365E2C /* FilterTableViewController.m in Sources */,
 				9C153C9415E0196B00365E2C /* LocationSelectionCell.m in Sources */,
 				9C153C9E15E0217800365E2C /* Models.m in Sources */,
+				9C153CA515E0AE1C00365E2C /* MaximumDistanceCell.m in Sources */,
+				9C153CAA15E0B20200365E2C /* UpdateButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

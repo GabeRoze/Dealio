@@ -8,6 +8,8 @@
 
 #import "FilterTableViewController.h"
 #import "LocationSelectionCell.h"
+#import "MaximumDistanceCell.h"
+#import "UpdateButtonCell.h"
 
 @implementation FilterTableViewController
 
@@ -29,7 +31,7 @@
     [super viewDidAppear:animated];
 
     LocationSelectionCell *cell = (LocationSelectionCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    [cell updateLocationDisplay];
+    cell.updateLocationDisplay;
 }
 
 #pragma mark - Table view data source
@@ -40,7 +42,7 @@
 
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return 3;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -49,7 +51,7 @@
 
     if (indexPath.row == 0)
     {
-        CellTableIdentifier = @"locationSelectionCellIdentifier";
+        CellTableIdentifier = @"LocationSelectionCellIdentifier";
         LocationSelectionCell *locationSelectionCell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
 
         if (!locationSelectionCell)
@@ -58,19 +60,32 @@
         }
 
         locationSelectionCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        locationSelectionCell.updateLocationDisplay;
+//        locationSelectionCell.updateLocationDisplay;
 
         return locationSelectionCell;
     }
+    else if (indexPath.row == 1)
+    {
+        CellTableIdentifier = @"MaximumDistanceCellIdentifier";
+        MaximumDistanceCell *maximumDistanceCell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
 
-//    UITableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
-//
-//    if (!tableViewCell)
-//    {
-//        tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier];
-//    }
-//
-//    return tableViewCell;
+        if (!maximumDistanceCell)
+        {
+            maximumDistanceCell = [MaximumDistanceCell new];
+        }
+        return maximumDistanceCell;
+    }
+    else if (indexPath.row == 2)
+    {
+        CellTableIdentifier = @"UpdateButtonCellIdentifier";
+        UpdateButtonCell *updateButtonCell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
+
+        if (!updateButtonCell)
+        {
+            updateButtonCell = [UpdateButtonCell new];
+        }
+        return updateButtonCell;
+    }
 }
 
 
@@ -81,6 +96,14 @@
         if (indexPath.row == 0)
         {
             return 160;
+        }
+        else if (indexPath.row == 1)
+        {
+            return 44;
+        }
+        else if (indexPath.row == 2)
+        {
+            return 44;
         }
     }
 }

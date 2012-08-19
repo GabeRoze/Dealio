@@ -19,8 +19,8 @@
 }
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) NSString *savedAddress;
-@property (assign) CLLocationCoordinate2D savedLocation;
+@property (nonatomic, strong) NSString *savedAddressString;
+@property (assign) CLLocationCoordinate2D savedAddressCoordinate;
 @property (assign) BOOL useCurrentLocation;
 + (SearchLocation*)instance;
 -(CLLocationCoordinate2D)getCurrentLocation;

@@ -18,19 +18,24 @@
                                                options:nil];
     self = [nib objectAtIndex:0];
     gpsButton.highlighted = YES;
-    addressTextField.returnKeyType = UIReturnKeyDone;
+    self.updateLocationDisplay;
+
     return self;
 }
 
 -(void)updateLocationDisplay
 {
-    if ([SearchLocation instance].useCurrentLocation)
+    if (SearchLocation.instance.savedAddressString)
+    {
+        addressTextField.text = SearchLocation.instance.savedAddressString;
+    }
+    else if ([SearchLocation instance].useCurrentLocation)
     {
         [self setAddressWithLatitude:SearchLocation.instance.getCurrentLocation.latitude longitude:SearchLocation.instance.getCurrentLocation.longitude];
     }
     else
     {
-        [self setAddressWithLatitude:SearchLocation.instance.savedLocation.latitude longitude:SearchLocation.instance.savedLocation.longitude];
+        [self setAddressWithLatitude:SearchLocation.instance.savedAddressCoordinate.latitude longitude:SearchLocation.instance.savedAddressCoordinate.longitude];
     }
 }
 
@@ -49,25 +54,17 @@
 
                 if (SearchLocation.instance.useCurrentLocation)
                 {
-                    addressTextField.placeholder = address;
+                    addressTextField.text = address;
+                    addressTextField.textColor = [UIColor grayColor];
                 }
                 else
                 {
                     addressTextField.text = address;
+                    addressTextField.textColor = [UIColor blackColor];
                 }
             }
         });
     }];
-}
-
-- (IBAction)gpsButtonTapped:(id)sender
-{
-    SearchLocation.instance.useCurrentLocation = YES;
-    [self performSelector:@selector(flipGpsButtonOn) withObject:nil afterDelay:0.0];
-    addressButton.highlighted = NO;
-    addressTextField.userInteractionEnabled = NO;
-    addressTextField.textColor = [UIColor grayColor];
-    [self updateLocationDisplay];
 }
 
 -(void)flipGpsButtonOn
@@ -78,6 +75,16 @@
 -(void)flipAddressButtonOn
 {
     addressButton.highlighted = YES;
+}
+
+- (IBAction)gpsButtonTapped:(id)sender
+{
+    SearchLocation.instance.useCurrentLocation = YES;
+    [self performSelector:@selector(flipGpsButtonOn) withObject:nil afterDelay:0.0];
+    addressButton.highlighted = NO;
+    addressTextField.userInteractionEnabled = NO;
+    addressTextField.textColor = [UIColor grayColor];
+    [self updateLocationDisplay];
 }
 
 - (IBAction)addressButtonTapped:(id)sender
@@ -92,12 +99,7 @@
 - (IBAction)addressChanged:(id)sender
 {
     [NSUserDefaults.standardUserDefaults setObject:addressTextField.text forKey:@"savedAddress"];
-}
-
--(void)geocodeAndSaveAddress
-{
-    //geocode the address
-
+    SearchLocation.instance.savedAddressString = addressTextField.text;
 }
 
 @end

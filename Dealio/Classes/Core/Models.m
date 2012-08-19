@@ -17,9 +17,9 @@
 @implementation SearchLocation
 
 @synthesize locationManager;
-@synthesize savedLocation;
+@synthesize savedAddressCoordinate;
 @synthesize useCurrentLocation;
-@synthesize savedAddress;
+@synthesize savedAddressString;
 
 + (SearchLocation*)instance
 {
@@ -45,21 +45,18 @@
 
         double longitude = [NSUserDefaults.standardUserDefaults doubleForKey:@"savedLongitude"];
         double latitude = [NSUserDefaults.standardUserDefaults doubleForKey:@"savedLatitude"];
-        savedAddress = [NSUserDefaults.standardUserDefaults stringForKey:@"savedAddress"];
-        savedLocation.longitude = longitude;
-        savedLocation.latitude = latitude;
+        savedAddressString = [NSUserDefaults.standardUserDefaults stringForKey:@"savedAddress"];
+        savedAddressCoordinate.longitude = longitude;
+        savedAddressCoordinate.latitude = latitude;
         useCurrentLocation = YES;
     }
     return self;
 }
 
-//-(void)setSavedLocationWith
-
-
 -(CLLocationCoordinate2D)getCurrentLocation
 {
-    CLLocation *location = [locationManager location];
-    return [location coordinate];
+    CLLocation *location = locationManager.location;
+    return location.coordinate;
 }
 
 -(CLLocationCoordinate2D)getLocation
@@ -70,7 +67,7 @@
     }
     else
     {
-        return savedLocation;
+        return savedAddressCoordinate;
     }
 }
 
