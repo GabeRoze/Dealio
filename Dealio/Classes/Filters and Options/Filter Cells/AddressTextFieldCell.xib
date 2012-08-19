@@ -31,20 +31,21 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUITableViewCell" id="988016645">
+			<object class="IBUITableViewCell" id="663163984">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIView" id="771643960">
-						<reference key="NSNextResponder" ref="988016645"/>
+					<object class="IBUIView" id="578590621">
+						<reference key="NSNextResponder" ref="663163984"/>
 						<int key="NSvFlags">256</int>
 						<array class="NSMutableArray" key="NSSubviews">
-							<object class="IBUITextField" id="7658683">
-								<reference key="NSNextResponder" ref="771643960"/>
+							<object class="IBUITextField" id="1067276743">
+								<reference key="NSNextResponder" ref="578590621"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{20, 6}, {280, 31}}</string>
-								<reference key="NSSuperview" ref="771643960"/>
+								<reference key="NSSuperview" ref="578590621"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -78,9 +79,9 @@
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 43}</string>
-						<reference key="NSSuperview" ref="988016645"/>
+						<reference key="NSSuperview" ref="663163984"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="1067276743"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -96,10 +97,10 @@
 				<string key="NSFrameSize">{320, 44}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="771643960"/>
+				<reference key="NSNextKeyView" ref="578590621"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-				<reference key="IBUIContentView" ref="771643960"/>
+				<reference key="IBUIContentView" ref="578590621"/>
 				<string key="IBUIReuseIdentifier">AddressTextFieldCellIdentifier</string>
 			</object>
 		</array>
@@ -108,28 +109,28 @@
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">addressTextField</string>
-						<reference key="source" ref="988016645"/>
-						<reference key="destination" ref="7658683"/>
+						<reference key="source" ref="663163984"/>
+						<reference key="destination" ref="1067276743"/>
 					</object>
 					<int key="connectionID">4</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">addressTextFieldDonePressed:</string>
-						<reference key="source" ref="7658683"/>
-						<reference key="destination" ref="988016645"/>
-						<int key="IBEventType">20</int>
+						<string key="label">addressTextFieldEditingDidEnd:</string>
+						<reference key="source" ref="1067276743"/>
+						<reference key="destination" ref="663163984"/>
+						<int key="IBEventType">19</int>
 					</object>
-					<int key="connectionID">5</int>
+					<int key="connectionID">7</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">addressTextFieldChanged:</string>
-						<reference key="source" ref="7658683"/>
-						<reference key="destination" ref="988016645"/>
-						<int key="IBEventType">18</int>
+						<string key="label">addressTextFieldDonePressed:</string>
+						<reference key="source" ref="1067276743"/>
+						<reference key="destination" ref="663163984"/>
+						<int key="IBEventType">20</int>
 					</object>
-					<int key="connectionID">6</int>
+					<int key="connectionID">8</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -153,16 +154,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2</int>
-						<reference key="object" ref="988016645"/>
+						<reference key="object" ref="663163984"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="7658683"/>
+							<reference ref="1067276743"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">3</int>
-						<reference key="object" ref="7658683"/>
-						<reference key="parent" ref="988016645"/>
+						<reference key="object" ref="1067276743"/>
+						<reference key="parent" ref="663163984"/>
 					</object>
 				</array>
 			</object>
@@ -178,7 +179,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">6</int>
+			<int key="maxID">8</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -186,16 +187,16 @@
 					<string key="className">AddressTextFieldCell</string>
 					<string key="superclassName">UITableViewCell</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addressTextFieldChanged:">id</string>
 						<string key="addressTextFieldDonePressed:">id</string>
+						<string key="addressTextFieldEditingDidEnd:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addressTextFieldChanged:">
-							<string key="name">addressTextFieldChanged:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="addressTextFieldDonePressed:">
 							<string key="name">addressTextFieldDonePressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="addressTextFieldEditingDidEnd:">
+							<string key="name">addressTextFieldEditingDidEnd:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

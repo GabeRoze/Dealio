@@ -732,7 +732,6 @@
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="filterButton">UIImageView</string>
-						<string key="filterTableView">UITableView</string>
 						<string key="fridayButton">UIImageView</string>
 						<string key="fridayLabel">UILabel</string>
 						<string key="mondayButton">UIImageView</string>
@@ -753,10 +752,6 @@
 						<object class="IBToOneOutletInfo" key="filterButton">
 							<string key="name">filterButton</string>
 							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="filterTableView">
-							<string key="name">filterTableView</string>
-							<string key="candidateClassName">UITableView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="fridayButton">
 							<string key="name">fridayButton</string>

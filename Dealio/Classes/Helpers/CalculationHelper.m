@@ -11,29 +11,14 @@
 
 @implementation CalculationHelper
 
-+ (NSString*) convertLikesToRating:(NSString*)likes dislikes:(NSString*)dislikes {
-
-
-    //NSLog(@"helper likes %@", likes);
-    //NSLog(@"helper dislikes %@", dislikes);
-
++ (NSString*) convertLikesToRating:(NSString*)likes dislikes:(NSString*)dislikes
+{
     int numLikes = [likes intValue];
     int numDislikes = [dislikes intValue];
-
-    //NSLog(@"likes:%i dislikes:%i", numLikes, numDislikes);
-
-
-    /*
-
-     Check to see if the denominator of like % calulation is zero
-     If 0, set to 1
-     Therefore no calculation error
-     Will still return 0
-
-
-     */
     int denominator = numLikes + numDislikes;
-    if (denominator == 0) {
+
+    if (denominator == 0)
+    {
         denominator = 1;
     }
 
@@ -43,82 +28,60 @@
 
     NSString* ratingString;
 
-    if (rating == 0) {
+    if (rating == 0)
+    {
         ratingString = @"Not enough votes";
     }
-    else {
+    else
+    {
         ratingString = [NSString stringWithFormat:@"%i%",rating];
     }
-
-    //NSLog(@"ratingString: %@", ratingString);
-
     return ratingString;
-
 }
 
-+(NSString*)convert24HourTimesToString:(NSString *)startTime endTime:(NSString *)endTime {
-
++(NSString*)convert24HourTimesToString:(NSString *)startTime endTime:(NSString *)endTime
+{
     int startTimeInt = [startTime intValue];
     int endTimeInt = [endTime intValue];
 
     NSString* startTimeStamp = @"AM";
     NSString* endTimeStamp = @"AM";
-
     //convert strings to 12 hour
-
-    if (startTimeInt == 0) {
-
+    if (startTimeInt == 0)
+    {
         startTimeInt = 12;
-
     }
-    else if (startTimeInt >= 12) {
-
-
+    else if (startTimeInt >= 12)
+    {
         startTimeStamp = @"PM";
-
-        if (startTimeInt > 12) {
+        if (startTimeInt > 12)
+        {
             startTimeInt -= 12;
         }
-
-
-
     }
-
-    if (endTimeInt == 0) {
-
+    if (endTimeInt == 0)
+    {
         endTimeInt = 12;
-
     }
-    else if (endTimeInt >= 12) {
-
+    else if (endTimeInt >= 12)
+    {
         endTimeStamp = @"PM";
-
-
-        if (endTimeInt > 12) {
+        if (endTimeInt > 12)
+        {
             endTimeInt -= 12;
         }
-
     }
-
-
-
-
     NSString* returnString = [NSString stringWithFormat:@"%i%@ - %i%@", startTimeInt, startTimeStamp, endTimeInt, endTimeStamp ];
 
     return returnString;
-
-
 }
 
-
-
-+(NSString*) convertIntToDay:(int)num {
-
-
++(NSString*) convertIntToDay:(int)num
+{
     NSString* returnString;
 
-    switch (num) {
-
+    switch (num)
+    {
         case 0:
             returnString = @"sunday";
             break;
@@ -140,44 +103,18 @@
         case 6:
             returnString = @"saturday";
             break;
-
         default:
             break;
     }
-
     return returnString;
-
 }
 
-
-
-+(NSMutableURLRequest*) getURLRequest:(NSString*)functionURL withData:(NSString*)data {
-
-    //data0 = url
-    //data1 = appended data
-
-
-    /*
-     NSString* urlAsString = @"";
-     NSString* emailString = [NSString stringWithFormat:@"useremail=%@",(NSString*)[userData objectAtIndex:0] ];
-     NSString* encryptedPassword = (NSString*)[userData objectAtIndex:1];
-     NSString* passwordString = [NSString stringWithFormat:@"&userpw=%@",encryptedPassword ];
-
-
-
-     urlAsString = [urlAsString stringByAppendingString:emailString];
-     urlAsString = [urlAsString stringByAppendingString:passwordString];
-
-     */
-
++(NSMutableURLRequest*) getURLRequest:(NSString*)functionURL withData:(NSString*)data
+{
     NSString* urlAsString = data;
     NSLog(@"urlstr: %@", urlAsString);
     NSData *myRequestData = [NSData dataWithBytes: [urlAsString UTF8String] length: [urlAsString length]];
-
-    //    NSURL* url = [NSURL URLWithString:@"http://www.cinnux.com/userlogin-func.php/"];
-
     NSURL* url = [NSURL URLWithString:functionURL];
-
 
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     [urlRequest setTimeoutInterval:30.0f];
@@ -185,13 +122,11 @@
     [urlRequest setHTTPBody:myRequestData];
     [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
 
-
     return urlRequest;
 }
 
-
-+(UILabel*) createNavBarLabelWithTitle:(NSString*)title {
-
++(UILabel*) createNavBarLabelWithTitle:(NSString*)title
+{
     CGFloat width = [UIScreen mainScreen].bounds.size.width;
     //Create label
     UILabel *label =  [[UILabel alloc] initWithFrame: CGRectZero];
@@ -211,23 +146,7 @@
     frame.origin.y =  22 - (label.frame.size.height/2);
     label.frame = frame;
 
-    /*
-
-     //Lists all available fonts in log
-     NSArray *familyNames = [UIFont familyNames];
-     for(NSString *family in familyNames)
-     {
-     NSLog(@"Font Family %@",family);
-     NSArray *availableFonts = [UIFont fontNamesForFamilyName:family];
-     for(NSString *ft in availableFonts)
-     {
-     NSLog(@"Font: %@",ft);
-     }
-     }
-     */
-
     return label;
-
 }
 /*taken from
 
@@ -246,7 +165,6 @@
 
 +(BOOL) doesPasswordContainsLettersAndNumbers:(NSString *)checkString
 {
-
     NSString *alphaRegex = @"[A-Z0-9a-z]|[A-Za-z]+[0-9]+|[0-9]+[A-Za-z]+";
     //not[A-Za-z] OR [0-9]
     NSPredicate *alphaTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", alphaRegex];
@@ -260,17 +178,16 @@
     /*
      NSLog(@"contains numbers??  %d", containsNumbers);
      */
-
-    if (containsLetters == YES) {
+    if (containsLetters == YES)
+    {
         NSLog(@"YESPASS!");
         return YES;
     }
-    else {
+    else
+    {
         NSLog(@"NO FAIL!");
         return NO;
     }
-
-
 }
 
 +(NSMutableArray*) sortAndFormatDealListData:(NSMutableArray*)xmlData atLocation:(CLLocation*)currentLocation
@@ -292,9 +209,6 @@
         [rowData setObject:distanceString forKey:@"distance"];
         [returnArray addObject:rowData];
     }
-
-    //Sort array
-//    NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
     NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
 
     sortedArray = [self quicksort:returnArray];
@@ -310,19 +224,18 @@
 
         float distanceFloat = [distanceString floatValue];
 
-        if (distanceFloat < 1000) {
-
+        if (distanceFloat < 1000)
+        {
             int distanceInt = (int) distanceFloat;
             distanceString = [NSString stringWithFormat:@"(%im)", distanceInt];
         }
-        else {
+        else
+        {
             distanceFloat = distanceFloat/1000;
             distanceString = [NSString stringWithFormat:@"(%.1fkm)", distanceFloat];
         }
-
         [rowData setObject:distanceString forKey:@"distance"];
     }
-
     //Update values in array
 
     /*
@@ -335,21 +248,15 @@
 
      }*/
 
-
     return sortedArray;
-
-
-
 }
 
-
-+(NSMutableArray*)mergeSort:(NSMutableArray*)unsortedArray {
-
-
++(NSMutableArray*)mergeSort:(NSMutableArray*)unsortedArray
+{
     NSMutableDictionary* rowData = [[NSMutableDictionary alloc] init];
-
     //if list size is 1, consider sorted
-    if ([unsortedArray count] <= 1) {
+    if ([unsortedArray count] <= 1)
+    {
         return unsortedArray;
     }
     //else  list size > 1 so split into 2 sublists
@@ -358,16 +265,16 @@
     int middle = [unsortedArray count]/2;
 
     //add to left array
-    for (int i = 0; i < middle; i++) {
+    for (int i = 0; i < middle; i++)
+    {
         rowData = [unsortedArray objectAtIndex:i];
         [leftArray addObject:rowData];
-
     }
     //add to right array
-    for (int i = middle; i < [unsortedArray count]; i++) {
+    for (int i = middle; i < [unsortedArray count]; i++)
+    {
         rowData = [unsortedArray objectAtIndex:i];
         [rightArray addObject:rowData];
-
     }
 
     leftArray = [self mergeSort:leftArray];
@@ -375,12 +282,14 @@
 
     NSMutableArray* mergedArray = [[NSMutableArray alloc] init];
     //add to left array
-    for (int i = 0; i < [leftArray count]; i++) {
+    for (int i = 0; i < [leftArray count]; i++)
+    {
         rowData = [leftArray objectAtIndex:i];
         [mergedArray addObject:rowData];
     }
     //add to right array
-    for (int i = 0; i < [rightArray count]; i++) {
+    for (int i = 0; i < [rightArray count]; i++)
+    {
         rowData = [rightArray objectAtIndex:i];
         [mergedArray addObject:rowData];
     }
@@ -389,9 +298,10 @@
 }
 
 
-+(NSMutableArray*)quicksort:(NSMutableArray*)unsortedArray {
-
-    if ([unsortedArray count] <= 1) {
++(NSMutableArray*)quicksort:(NSMutableArray*)unsortedArray
+{
+    if ([unsortedArray count] <= 1)
+    {
         return unsortedArray;
     }
 
@@ -402,7 +312,8 @@
 
     //NSMutableDictionary* rowData = [[NSMutableDictionary alloc] init];
 
-    for (int i = 0; i < [unsortedArray count]; i++) {
+    for (int i = 0; i < [unsortedArray count]; i++)
+    {
         if ( [[[unsortedArray objectAtIndex:i] objectForKey:@"distance"]floatValue] > [[[unsortedArray objectAtIndex:pivot]objectForKey:@"distance"]floatValue] ) {
             [greaterArray addObject:[unsortedArray objectAtIndex:i]];
         }
@@ -416,31 +327,53 @@
 
     lesserArray = [self quicksort:lesserArray];
 
-    for (int i = 0; i < sameAsPivot; i++) {
+    for (int i = 0; i < sameAsPivot; i++)
+    {
         [lesserArray addObject:[unsortedArray objectAtIndex:pivot]];
-
     }
 
     greaterArray = [self quicksort:greaterArray];
 
     NSMutableArray* sortedArray = [[NSMutableArray alloc] init];
 
-    for (int i = 0; i < [lesserArray count]; i++) {
+    for (int i = 0; i < [lesserArray count]; i++)
+    {
         [sortedArray addObject:[lesserArray objectAtIndex:i]];
     }
 
-    for (int i = 0; i < [greaterArray count]; i++) {
+    for (int i = 0; i < [greaterArray count]; i++)
+    {
         [sortedArray addObject:[greaterArray objectAtIndex:i]];
     }
 
     return sortedArray;
-
 }
 
 
 +(NSString *)convertFloatToString:(double)r
 {
     return [NSString stringWithFormat:@"%f", r];
+}
+
++(int)convertMaximumDistanceStringToInt:(NSString *)maximumDistanceString
+{
+    if ([maximumDistanceString isEqualToString:@"1 km"])
+    {
+        return 1;
+    }
+    else if ([maximumDistanceString isEqualToString:@"2 km"])
+    {
+        return 2;
+    }
+    else if ([maximumDistanceString isEqualToString:@"5 km"])
+    {
+        return 5;
+    }
+    else if ([maximumDistanceString isEqualToString:@"10 km"])
+    {
+        return 10;
+    }
+    return 0;
 }
 
 @end

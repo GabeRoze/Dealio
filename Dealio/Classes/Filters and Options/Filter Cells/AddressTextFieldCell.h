@@ -14,6 +14,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *addressTextField;
 
 - (IBAction)addressTextFieldDonePressed:(id)sender;
-- (IBAction)addressTextFieldChanged:(id)sender;
+- (IBAction)addressTextFieldEditingDidEnd:(id)sender;
 
 @end

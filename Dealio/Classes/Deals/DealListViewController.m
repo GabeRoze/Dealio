@@ -15,9 +15,11 @@
 #import "CalculationHelper.h"
 #import "BorderedSpinnerView.h"
 #import "Models.h"
+#import "UIAlertView+Blocks.h"
 
 @implementation DealListViewController
 
+@synthesize currentSelectedDay;
 @synthesize listData;
 @synthesize table;
 @synthesize dealData;
@@ -46,12 +48,13 @@
 @synthesize dayButtons;
 @synthesize dayLabels;
 
+static DealListViewController *instance;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-
     }
     return self;
 }
@@ -69,15 +72,10 @@
 {
     [super viewDidLoad];
 
+    instance = self;
+
     [self initFilterButton];
     [self initDayButtons];
-
-//    // locationManager update as location
-//    locationManager = [[CLLocationManager alloc] init];
-//    locationManager.delegate = self;
-//    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//    locationManager.distanceFilter = kCLDistanceFilterNone;
-//    [locationManager startUpdatingLocation];
 
     borderedSpinnerView = [[BorderedSpinnerView alloc] init];
 
@@ -103,12 +101,9 @@
     dealViewController = [[DealViewController alloc] init];
 
     //Show loading bar and reload the data
-    [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
     [self reloadDataForInfo:[CalculationHelper convertIntToDay:(weekday-1)]];
+    currentSelectedDay = weekday-1;
 }
-
-
-
 
 //Implement this to select the current day once the user logs out/in
 -(void)viewDidAppear:(BOOL)animated
@@ -156,11 +151,24 @@
 #pragma mark -
 #pragma mark Handle UI Interation
 
-
 -(void) reloadDataForInfo:(NSString *)data
 {
-    //call server with day
-    [self connectToServer:data];
+    if (SearchLocation.instance.savedAddressCoordinate.latitude == 9999 && SearchLocation.instance.savedAddressCoordinate.longitude == 9999)
+    {
+        RIButtonItem *okayButton = [RIButtonItem item];
+        okayButton.label = @"Okay";
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Address"
+                                                            message:@"Please enter another address"
+                                                   cancelButtonItem:okayButton
+                                                   otherButtonItems:nil];
+        [alertView show];
+        [self filterButtonTapped];
+    }
+    else
+    {
+        [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
+        [self connectToServer:data];
+    }
 }
 
 #pragma mark -
@@ -175,7 +183,7 @@
     NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",data ];
     NSString *latitude = [NSString stringWithFormat:@"&userlat=%f", coordinate.latitude];
     NSString *longitude = [NSString stringWithFormat:@"&userlong=%f", coordinate.longitude];
-    NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=2.0"];
+    NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=%i", FilterData.instance.maximumSearchDistance];
 
     urlAsString = [urlAsString stringByAppendingString:currentDay];
     urlAsString = [urlAsString stringByAppendingString:latitude];
@@ -324,6 +332,7 @@
     //load new days data
     [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
     [self reloadDataForInfo:[CalculationHelper convertIntToDay:selectedDayButton.tag]];
+    self.currentSelectedDay = selectedDayButton.tag;
 }
 
 -(void)disableAllDays
@@ -382,6 +391,7 @@
 -(void)initFilterButton
 {
     filterTableViewController = [FilterTableViewController new];
+//    filterTableViewController = [[FilterTableViewController alloc] initWithDealListViewController:self];
     CGRect frame = filterTableViewController.view.frame;
     frame.size.height = self.table.frame.size.height;
     frame.origin.y = self.table.frame.origin.y;
@@ -396,4 +406,16 @@
 {
     [super viewDidUnload];
 }
+
+
+#pragma mark - Singleton
++(DealListViewController *)instance
+{
+    if (!instance)
+    {
+        return [DealListViewController new];
+    }
+    return instance;
+}
+
 @end

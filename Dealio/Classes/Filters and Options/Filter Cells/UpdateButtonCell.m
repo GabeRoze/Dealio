@@ -16,7 +16,6 @@
                                                  owner:self
                                                options:nil];
     self = [nib objectAtIndex:0];
-
     return self;
 }
 
@@ -26,7 +25,5 @@
     //update savedcoordinate
     //save nsuerdefaults
     //open table and reload data for currently selected day
-
-
 }
 @end

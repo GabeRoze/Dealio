@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DealListViewController.h"
 
 @interface FilterTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {

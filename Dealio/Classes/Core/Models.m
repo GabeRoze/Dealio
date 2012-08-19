@@ -13,6 +13,35 @@
 
 @end
 
+@implementation FilterData
+
+@synthesize maximumSearchDistance;
+
++ (FilterData*)instance
+{
+    static FilterData* instance = nil;
+
+    if (!instance)
+    {
+        instance = [[FilterData alloc] initData];
+    }
+    return instance;
+}
+
+-(id)initData
+{
+    if (self = [super init])
+    {
+        maximumSearchDistance = [NSUserDefaults.standardUserDefaults integerForKey:@"maximumSearchDistance"];
+        if (!maximumSearchDistance)
+        {
+            maximumSearchDistance = 1;
+        }
+    }
+    return self;
+}
+
+@end
 
 @implementation SearchLocation
 

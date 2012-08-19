@@ -13,7 +13,7 @@
 
 
 
-+ (NSString*) convertLikesToRating:(NSString*)likes dislikes:(NSString*)dislikes;
++(NSString*) convertLikesToRating:(NSString*)likes dislikes:(NSString*)dislikes;
 +(NSString*) convertIntToDay:(int)num;
 +(NSString*) convert24HourTimesToString:(NSString*)startTime endTime:(NSString*)endTime;
 +(NSMutableURLRequest*) getURLRequest:(NSString*)functionURL withData:(NSString*)data;
@@ -24,4 +24,6 @@
 +(NSMutableArray*)mergeSort:(NSMutableArray*)unsortedArray;
 +(NSMutableArray*)quicksort:(NSMutableArray*)unsortedArray;
 +(NSString *)convertFloatToString:(double)r;
++(int)convertMaximumDistanceStringToInt:(NSString *)maximumDistanceString;
+
 @end

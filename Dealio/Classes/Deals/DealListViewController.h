@@ -16,25 +16,26 @@
 
 @interface DealListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 {
-    FilterTableViewController *filterTableViewController;
+    UIViewController *filterTableViewController;
 
     UIActivityIndicatorView* spinner;
 
-    BOOL filterViewDisplayed;    
+    BOOL filterViewDisplayed;
 }
 
+@property (nonatomic, assign) int currentSelectedDay;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (assign, nonatomic) BOOL FAVORITES_MODE;
 @property (strong, nonatomic) NSArray *listData;
 @property (strong, nonatomic) NSMutableArray *dayButtons;
 @property (strong, nonatomic) NSMutableArray *dayLabels;
-@property (weak, nonatomic) IBOutlet UITableView *table;
 @property (strong, nonatomic) NSString* messageText;
 @property (strong, nonatomic) XMLParser* parser;
 @property (strong, nonatomic) NSMutableArray* dealData;
 @property (strong, nonatomic) DealViewController* dealViewController;
 @property (strong, nonatomic) BorderedSpinnerView* borderedSpinnerView;
 @property (strong, nonatomic) CLLocation* currentLocation;
+@property (weak, nonatomic) IBOutlet UITableView *table;
 @property (weak, nonatomic) IBOutlet UIImageView *saturdaybutton;
 @property (weak, nonatomic) IBOutlet UIImageView *sundayButton;
 @property (weak, nonatomic) IBOutlet UIImageView *mondayButton;
@@ -55,5 +56,7 @@
 -(void) reloadDataForInfo:(NSString*)data;
 -(void)parseXMLFile:(NSData*)data;
 -(void) connectToServer:(NSString*)data;
+-(void)filterButtonTapped;
++(DealListViewController *)instance;
 
 @end

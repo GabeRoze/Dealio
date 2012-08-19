@@ -6,18 +6,37 @@
 //  Copyright (c) 2012 University of Waterloo. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import "FilterTableViewController.h"
 #import "LocationSelectionCell.h"
 #import "MaximumDistanceCell.h"
 #import "UpdateButtonCell.h"
 #import "AddressTextFieldCell.h"
+#import "ActionSheetPicker.h"
+#import "CalculationHelper.h"
+#import "UIAlertView+Blocks.h"
 
 @implementation FilterTableViewController
+
+//@synthesize dealListViewController;
+//@synthesize dealListTableView;
+
+//-(id)initWithDealListViewController:(DealListViewController *)theDealListViewController
+//{
+//    if (self = [super init])
+//    {
+//        dealListViewController = theDealListViewController;
+//        dealListTableView = theDealListTableView;
+//    }
+//    return self;
+//}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    MaximumDistanceCell *cell = (MaximumDistanceCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    cell.maxKmLabel.text = [NSString stringWithFormat:@"%i km", FilterData.instance.maximumSearchDistance];
 }
 
 - (void)viewDidUnload
@@ -75,8 +94,7 @@
         {
             tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellTableIdentifier];
         }
-
-        tableViewCell.detailTextLabel.text = @"Use Gps";
+        tableViewCell.detailTextLabel.text = @"Use Current Location (GPS)";
 
         return  tableViewCell;
     }
@@ -89,7 +107,6 @@
         {
             tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellTableIdentifier];
         }
-
         tableViewCell.detailTextLabel.text = @"Use Address";
 
         return  tableViewCell;
@@ -157,17 +174,41 @@
     }
     else if (indexPath.row == 4)
     {
-
+        ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue)
+        {
+            MaximumDistanceCell *maximumDistanceCell = (MaximumDistanceCell *)[tableView cellForRowAtIndexPath:indexPath];
+            maximumDistanceCell.maxKmLabel.text = selectedValue;
+            FilterData.instance.maximumSearchDistance = [CalculationHelper convertMaximumDistanceStringToInt:selectedValue];
+            [NSUserDefaults.standardUserDefaults setObject:selectedValue forKey:@"maximumSearchDistance"];
+        };
+        NSArray *colors = [NSArray arrayWithObjects:@"1 km", @"2 km", @"5 km", @"10 km", nil];
+        [ActionSheetStringPicker showPickerWithTitle:@"Select A Distance" rows:colors initialSelection:0 doneBlock:done cancelBlock:nil origin:self.view];
     }
     else if (indexPath.row == 5)
     {
-
+        if (SearchLocation.instance.savedAddressCoordinate.latitude == 9999 && SearchLocation.instance.savedAddressCoordinate.longitude == 9999)
+        {
+            RIButtonItem *okayButton = [RIButtonItem item];
+            okayButton.label = @"Okay";
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Address"
+                                                                message:@"Please enter another address"
+                                                       cancelButtonItem:okayButton
+                                                       otherButtonItems:nil];
+            [alertView show];
+        }
+        else
+        {
+            UIImageView *currentDay = (UIImageView *)[DealListViewController.instance.dayButtons objectAtIndex:(DealListViewController.instance.currentSelectedDay)];
+            currentDay.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"selected_day_button_color"]];
+            UILabel *currentDayLabel = (UILabel *)[DealListViewController.instance.dayLabels objectAtIndex:(DealListViewController.instance.currentSelectedDay)];
+            [currentDayLabel setTextColor:[UIColor whiteColor]];
+            [DealListViewController.instance reloadDataForInfo:[CalculationHelper convertIntToDay:(DealListViewController.instance.currentSelectedDay)]];
+            DealListViewController.instance.filterButtonTapped;
+        }
     }
 }
 
-
 #pragma mark - Filter Cell Interaction
-
 -(void)setAddressTextFieldCellEnabled:(BOOL)enabled
 {
     SearchLocation.instance.useCurrentLocation = !enabled;
@@ -205,7 +246,6 @@
         if (SearchLocation.instance.savedAddressString.length > 0)
         {
             cell.addressTextField.text = SearchLocation.instance.savedAddressString;
-//            [self setAddressWithLatitude:SearchLocation.instance.savedAddressCoordinate.latitude longitude:SearchLocation.instance.savedAddressCoordinate.longitude];
         }
         else
         {
@@ -230,7 +270,6 @@
                 NSString *address = [NSString stringWithFormat:@"%@, %@", [place.addressDictionary objectForKey:@"Street"], [place.addressDictionary objectForKey:@"City"]];
                 cell.addressTextField.text = address;
 //                [self setAddressTextFieldCellEnabled:!SearchLocation.instance.useCurrentLocation];
-
             }
         });
     }];

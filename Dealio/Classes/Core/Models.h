@@ -13,6 +13,15 @@
 
 @end
 
+@interface FilterData : NSObject
+{
+}
+
+@property (nonatomic, assign) int maximumSearchDistance;
+
++ (FilterData*)instance;
+
+@end
 
 @interface SearchLocation : NSObject <CLLocationManagerDelegate>
 {
