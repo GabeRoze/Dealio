@@ -23,6 +23,9 @@
 		9C153CA715E0AE5500365E2C /* MaximumDistanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C153CA615E0AE5400365E2C /* MaximumDistanceCell.xib */; };
 		9C153CAA15E0B20200365E2C /* UpdateButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153CA915E0B20200365E2C /* UpdateButtonCell.m */; };
 		9C153CAC15E0B22300365E2C /* UpdateButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C153CAB15E0B22300365E2C /* UpdateButtonCell.xib */; };
+		9C153CAF15E0B7A900365E2C /* DealioService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153CAE15E0B7A900365E2C /* DealioService.m */; };
+		9C153CB315E1379C00365E2C /* AddressTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153CB215E1379B00365E2C /* AddressTextFieldCell.m */; };
+		9C153CB715E137E100365E2C /* AddressTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C153CB615E137E000365E2C /* AddressTextFieldCell.xib */; };
 		9CFC33E915D72594008C47B0 /* unselected_day_button_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFC33E815D72594008C47B0 /* unselected_day_button_color.png */; };
 		9CFC342815D728C6008C47B0 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC341415D728C6008C47B0 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9CFC342915D728C6008C47B0 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC341615D728C6008C47B0 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -209,9 +212,9 @@
 		9C153C8B15DFF47C00365E2C /* FilterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FilterTableViewController.h; path = "Classes/Filters and Options/FilterTableViewController.h"; sourceTree = "<group>"; };
 		9C153C8C15DFF47D00365E2C /* FilterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FilterTableViewController.m; path = "Classes/Filters and Options/FilterTableViewController.m"; sourceTree = "<group>"; };
 		9C153C8D15DFF47D00365E2C /* FilterTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FilterTableViewController.xib; path = "Classes/Filters and Options/FilterTableViewController.xib"; sourceTree = "<group>"; };
-		9C153C9215E0196B00365E2C /* LocationSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSelectionCell.h; sourceTree = "<group>"; };
-		9C153C9315E0196B00365E2C /* LocationSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSelectionCell.m; sourceTree = "<group>"; };
-		9C153C9515E0197D00365E2C /* LocationSelectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LocationSelectionCell.xib; sourceTree = "<group>"; };
+		9C153C9215E0196B00365E2C /* LocationSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationSelectionCell.h; path = "Classes/Filters and Options/Filter Cells/LocationSelectionCell.h"; sourceTree = "<group>"; };
+		9C153C9315E0196B00365E2C /* LocationSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationSelectionCell.m; path = "Classes/Filters and Options/Filter Cells/LocationSelectionCell.m"; sourceTree = "<group>"; };
+		9C153C9515E0197D00365E2C /* LocationSelectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LocationSelectionCell.xib; path = "Classes/Filters and Options/Filter Cells/LocationSelectionCell.xib"; sourceTree = "<group>"; };
 		9C153C9C15E0217800365E2C /* Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Models.h; sourceTree = "<group>"; };
 		9C153C9D15E0217800365E2C /* Models.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Models.m; sourceTree = "<group>"; };
 		9C153C9F15E02DCE00365E2C /* splashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashscreen.png; path = Other/splashscreen.png; sourceTree = "<group>"; };
@@ -222,6 +225,11 @@
 		9C153CA815E0B20200365E2C /* UpdateButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateButtonCell.h; sourceTree = "<group>"; };
 		9C153CA915E0B20200365E2C /* UpdateButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateButtonCell.m; sourceTree = "<group>"; };
 		9C153CAB15E0B22300365E2C /* UpdateButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateButtonCell.xib; sourceTree = "<group>"; };
+		9C153CAD15E0B7A900365E2C /* DealioService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealioService.h; sourceTree = "<group>"; };
+		9C153CAE15E0B7A900365E2C /* DealioService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealioService.m; sourceTree = "<group>"; };
+		9C153CB115E1379B00365E2C /* AddressTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTextFieldCell.h; sourceTree = "<group>"; };
+		9C153CB215E1379B00365E2C /* AddressTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTextFieldCell.m; sourceTree = "<group>"; };
+		9C153CB615E137E000365E2C /* AddressTextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressTextFieldCell.xib; sourceTree = "<group>"; };
 		9CFC33E815D72594008C47B0 /* unselected_day_button_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unselected_day_button_color.png; path = "Graphics/Version 2/UI/Deals/unselected_day_button_color.png"; sourceTree = SOURCE_ROOT; };
 		9CFC341315D728C6008C47B0 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		9CFC341415D728C6008C47B0 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
@@ -478,15 +486,15 @@
 		9C153C9115E00CC500365E2C /* Filter Cells */ = {
 			isa = PBXGroup;
 			children = (
-				9C153C9215E0196B00365E2C /* LocationSelectionCell.h */,
-				9C153C9315E0196B00365E2C /* LocationSelectionCell.m */,
-				9C153C9515E0197D00365E2C /* LocationSelectionCell.xib */,
 				9C153CA315E0AE1B00365E2C /* MaximumDistanceCell.h */,
 				9C153CA415E0AE1C00365E2C /* MaximumDistanceCell.m */,
 				9C153CA615E0AE5400365E2C /* MaximumDistanceCell.xib */,
 				9C153CA815E0B20200365E2C /* UpdateButtonCell.h */,
 				9C153CA915E0B20200365E2C /* UpdateButtonCell.m */,
 				9C153CAB15E0B22300365E2C /* UpdateButtonCell.xib */,
+				9C153CB115E1379B00365E2C /* AddressTextFieldCell.h */,
+				9C153CB215E1379B00365E2C /* AddressTextFieldCell.m */,
+				9C153CB615E137E000365E2C /* AddressTextFieldCell.xib */,
 			);
 			name = "Filter Cells";
 			path = "Classes/Filters and Options/Filter Cells";
@@ -497,9 +505,33 @@
 			children = (
 				9C153C9C15E0217800365E2C /* Models.h */,
 				9C153C9D15E0217800365E2C /* Models.m */,
+				9C153CAD15E0B7A900365E2C /* DealioService.h */,
+				9C153CAE15E0B7A900365E2C /* DealioService.m */,
 			);
 			name = Core;
 			path = Classes/Core;
+			sourceTree = "<group>";
+		};
+		9C153CB015E1323700365E2C /* Old */ = {
+			isa = PBXGroup;
+			children = (
+				9C153C9215E0196B00365E2C /* LocationSelectionCell.h */,
+				9C153C9315E0196B00365E2C /* LocationSelectionCell.m */,
+				9C153C9515E0197D00365E2C /* LocationSelectionCell.xib */,
+				C0FE225E14F4499200F03DFF /* EditProfileViewController.h */,
+				C0FE225F14F4499200F03DFF /* EditProfileViewController.m */,
+				C0FE226014F4499200F03DFF /* EditProfileViewController.xib */,
+				C0FE226114F4499200F03DFF /* FiltersViewController.h */,
+				C0FE226214F4499200F03DFF /* FiltersViewController.m */,
+				C0FE226314F4499200F03DFF /* FiltersViewController.xib */,
+				C0FE226414F4499200F03DFF /* FilterViewCell.h */,
+				C0FE226514F4499200F03DFF /* FilterViewCell.m */,
+				C0655F2214F5448600869736 /* FilterViewCell.xib */,
+				C0FE226614F4499200F03DFF /* ProfileViewController.h */,
+				C0FE226714F4499200F03DFF /* ProfileViewController.m */,
+				C0FE226814F4499200F03DFF /* ProfileViewController.xib */,
+			);
+			name = Old;
 			sourceTree = "<group>";
 		};
 		9CFC341115D728C6008C47B0 /* Third Party */ = {
@@ -835,19 +867,8 @@
 		C0FE21B214F442E100F03DFF /* Filters and Options */ = {
 			isa = PBXGroup;
 			children = (
+				9C153CB015E1323700365E2C /* Old */,
 				9C153C9115E00CC500365E2C /* Filter Cells */,
-				C0FE225E14F4499200F03DFF /* EditProfileViewController.h */,
-				C0FE225F14F4499200F03DFF /* EditProfileViewController.m */,
-				C0FE226014F4499200F03DFF /* EditProfileViewController.xib */,
-				C0FE226114F4499200F03DFF /* FiltersViewController.h */,
-				C0FE226214F4499200F03DFF /* FiltersViewController.m */,
-				C0FE226314F4499200F03DFF /* FiltersViewController.xib */,
-				C0FE226414F4499200F03DFF /* FilterViewCell.h */,
-				C0FE226514F4499200F03DFF /* FilterViewCell.m */,
-				C0655F2214F5448600869736 /* FilterViewCell.xib */,
-				C0FE226614F4499200F03DFF /* ProfileViewController.h */,
-				C0FE226714F4499200F03DFF /* ProfileViewController.m */,
-				C0FE226814F4499200F03DFF /* ProfileViewController.xib */,
 				9C153C8B15DFF47C00365E2C /* FilterTableViewController.h */,
 				9C153C8C15DFF47D00365E2C /* FilterTableViewController.m */,
 				9C153C8D15DFF47D00365E2C /* FilterTableViewController.xib */,
@@ -1152,6 +1173,7 @@
 				9C153CA215E02DCE00365E2C /* splashscreen@2x.png in Resources */,
 				9C153CA715E0AE5500365E2C /* MaximumDistanceCell.xib in Resources */,
 				9C153CAC15E0B22300365E2C /* UpdateButtonCell.xib in Resources */,
+				9C153CB715E137E100365E2C /* AddressTextFieldCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1213,6 +1235,8 @@
 				9C153C9E15E0217800365E2C /* Models.m in Sources */,
 				9C153CA515E0AE1C00365E2C /* MaximumDistanceCell.m in Sources */,
 				9C153CAA15E0B20200365E2C /* UpdateButtonCell.m in Sources */,
+				9C153CAF15E0B7A900365E2C /* DealioService.m in Sources */,
+				9C153CB315E1379C00365E2C /* AddressTextFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,49 +23,49 @@
     return self;
 }
 
--(void)updateLocationDisplay
-{
-    if (SearchLocation.instance.savedAddressString)
-    {
-        addressTextField.text = SearchLocation.instance.savedAddressString;
-    }
-    else if ([SearchLocation instance].useCurrentLocation)
-    {
-        [self setAddressWithLatitude:SearchLocation.instance.getCurrentLocation.latitude longitude:SearchLocation.instance.getCurrentLocation.longitude];
-    }
-    else
-    {
-        [self setAddressWithLatitude:SearchLocation.instance.savedAddressCoordinate.latitude longitude:SearchLocation.instance.savedAddressCoordinate.longitude];
-    }
-}
+//-(void)updateLocationDisplay
+//{
+//    if (SearchLocation.instance.savedAddressString)
+//    {
+//        addressTextField.text = SearchLocation.instance.savedAddressString;
+//    }
+//    else if ([SearchLocation instance].useCurrentLocation)
+//    {
+//        [self setAddressWithLatitude:SearchLocation.instance.getCurrentLocation.latitude longitude:SearchLocation.instance.getCurrentLocation.longitude];
+//    }
+//    else
+//    {
+//        [self setAddressWithLatitude:SearchLocation.instance.savedAddressCoordinate.latitude longitude:SearchLocation.instance.savedAddressCoordinate.longitude];
+//    }
+//}
 
--(void)setAddressWithLatitude:(double)latitude longitude:(double)longitude
-{
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
-    {
-        dispatch_async(dispatch_get_main_queue(),^ {
-            if (placemarks.count == 1)
-            {
-                CLPlacemark *place = [placemarks objectAtIndex:0];
-                NSString *address = [NSString stringWithFormat:@"%@, %@", [place.addressDictionary objectForKey:@"Street"], [place.addressDictionary objectForKey:@"City"]];
-
-                if (SearchLocation.instance.useCurrentLocation)
-                {
-                    addressTextField.text = address;
-                    addressTextField.textColor = [UIColor grayColor];
-                }
-                else
-                {
-                    addressTextField.text = address;
-                    addressTextField.textColor = [UIColor blackColor];
-                }
-            }
-        });
-    }];
-}
+//-(void)setAddressWithLatitude:(double)latitude longitude:(double)longitude
+//{
+//    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+//    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+//
+//    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
+//    {
+//        dispatch_async(dispatch_get_main_queue(),^ {
+//            if (placemarks.count == 1)
+//            {
+//                CLPlacemark *place = [placemarks objectAtIndex:0];
+//                NSString *address = [NSString stringWithFormat:@"%@, %@", [place.addressDictionary objectForKey:@"Street"], [place.addressDictionary objectForKey:@"City"]];
+//
+//                if (SearchLocation.instance.useCurrentLocation)
+//                {
+//                    addressTextField.text = address;
+//                    addressTextField.textColor = [UIColor grayColor];
+//                }
+//                else
+//                {
+//                    addressTextField.text = address;
+//                    addressTextField.textColor = [UIColor blackColor];
+//                }
+//            }
+//        });
+//    }];
+//}
 
 -(void)flipGpsButtonOn
 {

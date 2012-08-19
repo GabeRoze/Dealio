@@ -89,13 +89,11 @@
     return YES;
 }
 
-//close login window and instantiate the tab bar
 -(void)loginSuccess
 {
     [self.rootController setSelectedIndex:2];
     [self.rootController dismissModalViewControllerAnimated:YES];
 }
-
 
 -(void)logoutButtonPressed:(NSNotification*) notification
 {
@@ -108,9 +106,6 @@
     loginViewController = [[LoginViewController alloc] init];
     [self.rootController presentModalViewController:loginViewController animated:NO];
 }
-
-
-
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

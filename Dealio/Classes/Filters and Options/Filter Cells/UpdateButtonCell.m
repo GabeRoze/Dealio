@@ -10,7 +10,6 @@
 
 @implementation UpdateButtonCell
 
-
 -(id)init
 {
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"UpdateButtonCell"
