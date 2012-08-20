@@ -21,6 +21,7 @@
     UIActivityIndicatorView* spinner;
 
     BOOL filterViewDisplayed;
+    BOOL firstLoadFinished;
 }
 
 @property (nonatomic, assign) int currentSelectedDay;

@@ -13,6 +13,8 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *addressTextField;
 
+
+-(void)geoCodeAddressWithString:(NSString *)address;
 - (IBAction)addressTextFieldDonePressed:(id)sender;
 - (IBAction)addressTextFieldEditingDidEnd:(id)sender;
 

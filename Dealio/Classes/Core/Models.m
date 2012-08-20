@@ -35,7 +35,7 @@
         maximumSearchDistance = [NSUserDefaults.standardUserDefaults integerForKey:@"maximumSearchDistance"];
         if (!maximumSearchDistance)
         {
-            maximumSearchDistance = 1;
+            maximumSearchDistance = 5;
         }
     }
     return self;
@@ -78,6 +78,24 @@
         savedAddressCoordinate.longitude = longitude;
         savedAddressCoordinate.latitude = latitude;
         useCurrentLocation = YES;
+
+//        NSLog(@"long %f, lat %f", longitude, latitude);
+//        if (savedAddressString.length < 1)
+//        {
+//            CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+//            CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+//            [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
+//               {
+//                   dispatch_async(dispatch_get_main_queue(),^ {
+//                       if (placemarks.count == 1)
+//                       {
+//                           CLPlacemark *place = [placemarks objectAtIndex:0];
+//                           NSString *address = [NSString stringWithFormat:@"%@, %@", [place.addressDictionary objectForKey:@"Street"], [place.addressDictionary objectForKey:@"City"]];
+//                           savedAddressString = address;
+//                       }
+//                   });
+//               }];
+//        }
     }
     return self;
 }

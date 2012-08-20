@@ -35,8 +35,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    MaximumDistanceCell *cell = (MaximumDistanceCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
-    cell.maxKmLabel.text = [NSString stringWithFormat:@"%i km", FilterData.instance.maximumSearchDistance];
+
 }
 
 - (void)viewDidUnload
@@ -49,6 +48,9 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
+    MaximumDistanceCell *cell = (MaximumDistanceCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    cell.maxKmLabel.text = [NSString stringWithFormat:@"%i km", FilterData.instance.maximumSearchDistance];
 
     [self setAddressTextFieldCellEnabled:!SearchLocation.instance.useCurrentLocation];
     [self updateAddressTextField];
@@ -186,7 +188,13 @@
     }
     else if (indexPath.row == 5)
     {
-        if (SearchLocation.instance.savedAddressCoordinate.latitude == 9999 && SearchLocation.instance.savedAddressCoordinate.longitude == 9999)
+        AddressTextFieldCell *addressTextFieldCell = (AddressTextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+
+        if (!SearchLocation.instance.useCurrentLocation
+                && SearchLocation.instance.savedAddressCoordinate.latitude == 9999
+                && SearchLocation.instance.savedAddressCoordinate.longitude == 9999
+                || addressTextFieldCell.addressTextField.text.length < 1
+                        && !SearchLocation.instance.useCurrentLocation)
         {
             RIButtonItem *okayButton = [RIButtonItem item];
             okayButton.label = @"Okay";
@@ -249,8 +257,8 @@
         }
         else
         {
-            cell.addressTextField.text = nil;
-            cell.addressTextField.placeholder = @"Enter Address";
+//            [self setAddressWithLatitude:SearchLocation.instance.getCurrentLocation.latitude longitude:SearchLocation.instance.getCurrentLocation.longitude];
+//            cell.addressTextField.placeholder =
         }
     }
 }

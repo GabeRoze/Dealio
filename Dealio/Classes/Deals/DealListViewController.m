@@ -72,6 +72,7 @@ static DealListViewController *instance;
 {
     [super viewDidLoad];
 
+    firstLoadFinished = NO;
     instance = self;
 
     [self initFilterButton];
@@ -108,7 +109,7 @@ static DealListViewController *instance;
 //Implement this to select the current day once the user logs out/in
 -(void)viewDidAppear:(BOOL)animated
 {
-
+    firstLoadFinished = YES;
 }
 /* only called when memory is low
 - (void)viewDidUnload
@@ -153,7 +154,12 @@ static DealListViewController *instance;
 
 -(void) reloadDataForInfo:(NSString *)data
 {
-    if (SearchLocation.instance.savedAddressCoordinate.latitude == 9999 && SearchLocation.instance.savedAddressCoordinate.longitude == 9999)
+    if (SearchLocation.instance.savedAddressCoordinate.latitude == 9999
+            && SearchLocation.instance.savedAddressCoordinate.longitude == 9999
+            && !SearchLocation.instance.useCurrentLocation
+            || SearchLocation.instance.savedAddressString.length < 1
+                    && firstLoadFinished
+                    && !SearchLocation.instance.useCurrentLocation)
     {
         RIButtonItem *okayButton = [RIButtonItem item];
         okayButton.label = @"Okay";
@@ -330,7 +336,7 @@ static DealListViewController *instance;
     [currentDayLabel setTextColor:[UIColor whiteColor]];
 
     //load new days data
-    [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
+//    [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
     [self reloadDataForInfo:[CalculationHelper convertIntToDay:selectedDayButton.tag]];
     self.currentSelectedDay = selectedDayButton.tag;
 }
@@ -383,7 +389,6 @@ static DealListViewController *instance;
         dayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"unselected_day_button_color"]];
         dayButton.tag = i;
 
-//        [currentDayLabel setFont:[UIFont fontWithName:@"Eurofurenceregular" size:24]];
         [currentDayLabel setFont:[UIFont systemFontOfSize:16]];
     }
 }

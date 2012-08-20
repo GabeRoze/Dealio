@@ -12,6 +12,7 @@
 #import "UIAlertView+Blocks.h"
 
 @implementation AddressTextFieldCell
+
 @synthesize addressTextField;
 
 -(id)init
@@ -33,8 +34,8 @@
     [NSUserDefaults.standardUserDefaults setObject:addressTextField.text forKey:@"savedAddress"];
     SearchLocation.instance.savedAddressString = addressTextField.text;
 
-    if (addressTextField.text.length > 0)
-        [self geoCodeAddressWithString:addressTextField.text];
+//    if (addressTextField.text.length > 0)
+    [self geoCodeAddressWithString:addressTextField.text];
 }
 
 -(void)geoCodeAddressWithString:(NSString *)address
@@ -82,14 +83,6 @@
         }
         else
         {
-            RIButtonItem *okayButton = [RIButtonItem item];
-            okayButton.label = @"Okay";
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Address"
-                                                                message:@"Please enter another address"
-                                                       cancelButtonItem:okayButton
-                                                       otherButtonItems:nil];
-            [alertView show];
-
             CLLocationCoordinate2D emptyCoordinate;
             emptyCoordinate.latitude = 9999;
             emptyCoordinate.longitude = 9999;
