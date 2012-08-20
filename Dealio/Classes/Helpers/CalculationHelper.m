@@ -195,23 +195,44 @@
     //Perform distance calculation
     NSMutableArray* returnArray = [[NSMutableArray alloc] init];
 
-    for (id object in xmlData)
-    {
-        NSMutableDictionary* rowData = (NSMutableDictionary*)object;
+//    NSLog(@"xml data %@", xmlData);
 
-        //Get the restaurants location
-        CLLocation *restaurantLocation = [[CLLocation alloc] initWithLatitude:[[rowData objectForKey:@"latitude"] doubleValue] longitude:[[rowData objectForKey:@"longitude"] doubleValue]];
-        //Get the distance to the restaurant in meters
-        CLLocationDistance distanceFloat = [currentLocation distanceFromLocation:restaurantLocation];
+//    for (id object in xmlData)
+//    {
+//        NSMutableDictionary* rowData = (NSMutableDictionary*)object;
+//
+//        //Get the restaurants location
+//        CLLocation *restaurantLocation = [[CLLocation alloc] initWithLatitude:[[rowData objectForKey:@"latitude"] doubleValue] longitude:[[rowData objectForKey:@"longitude"] doubleValue]];
+//        //Get the distance to the restaurant in meters
+//        CLLocationDistance distanceFloat = [currentLocation distanceFromLocation:restaurantLocation];
+//
+//        NSString* distanceString = [NSString stringWithFormat:@"%f", distanceFloat];
+//
+//        [rowData setObject:distanceString forKey:@"distance"];
+//        [returnArray addObject:rowData];
+//    }
 
-        NSString* distanceString = [NSString stringWithFormat:@"%f", distanceFloat];
 
-        [rowData setObject:distanceString forKey:@"distance"];
-        [returnArray addObject:rowData];
-    }
-    NSMutableArray *sortedArray = [[NSMutableArray alloc] init];
 
-    sortedArray = [self quicksort:returnArray];
+
+
+    NSArray *sortedArray = [[NSMutableArray alloc] init];
+
+//    sortedArray = [self quicksort:xmlData];
+
+
+
+    NSSortDescriptor *sortDescriptor;
+    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES];
+    NSMutableArray *sortDescriptors = [NSMutableArray arrayWithObject:sortDescriptor];
+//    NSArray *sortedArray;
+    sortedArray = [xmlData sortedArrayUsingDescriptors:sortDescriptors];
+    NSLog(@"sorted array %@", xmlData);
+    NSLog(@"sorted array count %i", sortedArray.count);
+    NSLog(@"xml data array count %i", xmlData.count);
+
+//    NSLog(@"first objec %@", [sortedArray objectAtIndex:0]);
+
 
     //format sorted results
     for (id object in xmlData)
@@ -219,8 +240,6 @@
         NSMutableDictionary* rowData = (NSMutableDictionary*)object;
 
         NSString* distanceString = [rowData objectForKey:@"distance"];
-
-        //NSLog(@"distance: %@",distanceString);
 
         float distanceFloat = [distanceString floatValue];
 
@@ -236,19 +255,7 @@
         }
         [rowData setObject:distanceString forKey:@"distance"];
     }
-    //Update values in array
-
-    /*
-     for (int i = 0; i < [returnArray count] ; i++) {
-
-     NSMutableDictionary* rowData = [returnArray objectAtIndex:i];
-     NSString* distanceString = [rowData objectForKey:@"calculateddistance"];
-     NSLog(@"####### distance: %@",distanceString);
-
-
-     }*/
-
-    return sortedArray;
+    return [[NSMutableArray alloc] initWithArray:sortedArray];
 }
 
 +(NSMutableArray*)mergeSort:(NSMutableArray*)unsortedArray

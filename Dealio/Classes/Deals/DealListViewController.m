@@ -186,7 +186,7 @@ static DealListViewController *instance;
     NSString* urlAsString = @"";
     // NSString* emailString = [NSString stringWithFormat:@"?useremail=%@",(NSString*)[userData objectAtIndex:0] ];
     // NSString* encryptedPassword = (NSString*)[userData objectAtIndex:1];
-    NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",data ];
+    NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",data];
     NSString *latitude = [NSString stringWithFormat:@"&userlat=%f", coordinate.latitude];
     NSString *longitude = [NSString stringWithFormat:@"&userlong=%f", coordinate.longitude];
     NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=%i", FilterData.instance.maximumSearchDistance];
@@ -212,6 +212,7 @@ static DealListViewController *instance;
                           NSString* html = [[NSString alloc]
                                   initWithData:data
                                       encoding:NSUTF8StringEncoding];
+//                          NSLog(@"html %@", html);
                           [self performSelectorInBackground:@selector(parseXMLFile:) withObject:data];
                       }
                       else if ([data length] == 0 && error == nil)
@@ -232,6 +233,9 @@ static DealListViewController *instance;
 -(void) parseXMLFile:(NSData*)data
 {
     parser = [[XMLParser alloc] initXMLParser:data];
+    SearchLocation.instance.savedAddressCoordinate;
+//    CLLocation *location = [[CLLocation alloc] initWithLatitude:<#(CLLocationDegrees)latitude#> longitude:<#(CLLocationDegrees)longitude#>]
+    //todo remove use of at
     dealData = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
     [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
 }
@@ -338,6 +342,7 @@ static DealListViewController *instance;
     //load new days data
 //    [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
     [self reloadDataForInfo:[CalculationHelper convertIntToDay:selectedDayButton.tag]];
+//    [self reloadDataForInfo:[NSString stringWithFormat:@"%i",selectedDayButton.tag]];
     self.currentSelectedDay = selectedDayButton.tag;
 }
 
