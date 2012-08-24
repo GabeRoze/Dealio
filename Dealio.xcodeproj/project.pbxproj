@@ -43,6 +43,8 @@
 		9C246A8F15E72FE20094293B /* DealViewDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C246A8A15E72FE20094293B /* DealViewDetailCell.xib */; };
 		9C246A9015E72FE20094293B /* DealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C246A8C15E72FE20094293B /* DealViewController.m */; };
 		9C246A9115E72FE20094293B /* DealViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C246A8D15E72FE20094293B /* DealViewController.xib */; };
+		9C246A9415E735BB0094293B /* ContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C246A9315E735BB0094293B /* ContactInfoCell.m */; };
+		9C246A9615E735CA0094293B /* ContactInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C246A9515E735CA0094293B /* ContactInfoCell.xib */; };
 		9CBA7D0E15E6E83200778484 /* ProfileDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA7D0615E6E83200778484 /* ProfileDataCell.m */; };
 		9CBA7D0F15E6E83200778484 /* ProfileDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CBA7D0715E6E83200778484 /* ProfileDataCell.xib */; };
 		9CBA7D1015E6E83200778484 /* TableFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA7D0915E6E83200778484 /* TableFooterCell.m */; };
@@ -306,6 +308,9 @@
 		9C246A8B15E72FE20094293B /* DealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealViewController.h; sourceTree = "<group>"; };
 		9C246A8C15E72FE20094293B /* DealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealViewController.m; sourceTree = "<group>"; };
 		9C246A8D15E72FE20094293B /* DealViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealViewController.xib; sourceTree = "<group>"; };
+		9C246A9215E735BB0094293B /* ContactInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInfoCell.h; sourceTree = "<group>"; };
+		9C246A9315E735BB0094293B /* ContactInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfoCell.m; sourceTree = "<group>"; };
+		9C246A9515E735CA0094293B /* ContactInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactInfoCell.xib; sourceTree = "<group>"; };
 		9CBA7D0515E6E83200778484 /* ProfileDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileDataCell.h; sourceTree = "<group>"; };
 		9CBA7D0615E6E83200778484 /* ProfileDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileDataCell.m; sourceTree = "<group>"; };
 		9CBA7D0715E6E83200778484 /* ProfileDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileDataCell.xib; sourceTree = "<group>"; };
@@ -727,6 +732,9 @@
 				9C246A8815E72FE20094293B /* DealViewDetailCell.h */,
 				9C246A8915E72FE20094293B /* DealViewDetailCell.m */,
 				9C246A8A15E72FE20094293B /* DealViewDetailCell.xib */,
+				9C246A9215E735BB0094293B /* ContactInfoCell.h */,
+				9C246A9315E735BB0094293B /* ContactInfoCell.m */,
+				9C246A9515E735CA0094293B /* ContactInfoCell.xib */,
 			);
 			path = "Deal View Cells";
 			sourceTree = "<group>";
@@ -1465,6 +1473,7 @@
 				9C246A7F15E72D9B0094293B /* DealListViewController.xib in Resources */,
 				9C246A8F15E72FE20094293B /* DealViewDetailCell.xib in Resources */,
 				9C246A9115E72FE20094293B /* DealViewController.xib in Resources */,
+				9C246A9615E735CA0094293B /* ContactInfoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1528,6 +1537,7 @@
 				9C246A7E15E72D9B0094293B /* DealListViewController.m in Sources */,
 				9C246A8E15E72FE20094293B /* DealViewDetailCell.m in Sources */,
 				9C246A9015E72FE20094293B /* DealViewController.m in Sources */,
+				9C246A9415E735BB0094293B /* ContactInfoCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
