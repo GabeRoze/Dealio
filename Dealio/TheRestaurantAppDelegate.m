@@ -48,6 +48,9 @@
 
 //    [[UINavigationBar appearance] setBackground:[UIImage imageNamed:@"topnav.png"
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"topnav.png"] forBarMetrics:UIBarMetricsDefault];
+//    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+//    [image setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_light.png"]]];
+//    [[UINavigationBar appearance] setBackgroundImage:image.image forBarMetrics:UIBarMetricsDefault];
 
 
     // Notifications
