@@ -35,4 +35,12 @@
 -(CLLocationCoordinate2D)getCurrentLocation;
 -(CLLocationCoordinate2D)getLocation;
 
+
+@end 
+
+@interface DealData : NSObject
+
+@property (nonatomic, strong) NSMutableArray *dealList;
+@property (nonatomic, strong) NSMutableArray *dealView;
+
 @end

@@ -119,3 +119,32 @@
 }
 
 @end
+
+
+@implementation DealData
+
+@synthesize dealList;
+@synthesize dealView;
+
++ (DealData*)instance
+{
+    static DealData* instance = nil;
+    
+    if (!instance)
+    {
+        instance = [DealData new];
+    }
+    return instance;
+}
+
+-(id)init
+{
+    if (self = [super init])
+    {
+        dealList = [NSMutableArray new];
+        dealView = [NSMutableArray new];
+    }
+    return self;
+}
+    
+@end
