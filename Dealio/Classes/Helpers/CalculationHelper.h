@@ -13,6 +13,7 @@
 
 
 
++ (NSString *) platformString;
 +(NSString*) convertLikesToRating:(NSString*)likes dislikes:(NSString*)dislikes;
 +(NSString*) convertIntToDay:(int)num;
 +(NSString*) convert24HourTimesToString:(NSString*)startTime endTime:(NSString*)endTime;

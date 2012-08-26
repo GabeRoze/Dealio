@@ -82,8 +82,8 @@
     //self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
 
-    UILabel* dealListLabel = [CalculationHelper createNavBarLabelWithTitle:@"Dealio"];
-    [dealListview.view addSubview:dealListLabel];
+//    UILabel* dealListLabel = [CalculationHelper createNavBarLabelWithTitle:@"Dealio"];
+//    [dealListview.view addSubview:dealListLabel];
     UILabel* filterLabel = [CalculationHelper createNavBarLabelWithTitle:@"Filters"];
     [filterView.view addSubview:filterLabel];
     UILabel* mapLabel = [CalculationHelper createNavBarLabelWithTitle:@"Map"];

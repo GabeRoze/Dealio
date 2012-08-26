@@ -94,6 +94,10 @@
 		9C58284615E9552B006543A2 /* renameFile in Resources */ = {isa = PBXBuildFile; fileRef = 9C58281815E9552B006543A2 /* renameFile */; };
 		9C58284715E9552B006543A2 /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C58281915E9552B006543A2 /* splashscreen.png */; };
 		9C75E1AE15E9629B009E3461 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C75E1AD15E9629B009E3461 /* MessageUI.framework */; };
+		9C75E1B315EAA9A5009E3461 /* GRCustomSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C75E1B115EAA9A5009E3461 /* GRCustomSpinnerView.m */; };
+		9C75E1B415EAA9A5009E3461 /* GRCustomSpinnerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C75E1B215EAA9A5009E3461 /* GRCustomSpinnerView.xib */; };
+		9C75E1B815EAAA4C009E3461 /* ChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C75E1B615EAAA4A009E3461 /* ChangePasswordViewController.m */; };
+		9C75E1B915EAAA4C009E3461 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C75E1B715EAAA4B009E3461 /* ChangePasswordViewController.xib */; };
 		9CBA7D0E15E6E83200778484 /* ProfileDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA7D0615E6E83200778484 /* ProfileDataCell.m */; };
 		9CBA7D0F15E6E83200778484 /* ProfileDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CBA7D0715E6E83200778484 /* ProfileDataCell.xib */; };
 		9CBA7D1015E6E83200778484 /* TableFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CBA7D0915E6E83200778484 /* TableFooterCell.m */; };
@@ -402,6 +406,12 @@
 		9C58281815E9552B006543A2 /* renameFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = renameFile; sourceTree = "<group>"; };
 		9C58281915E9552B006543A2 /* splashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splashscreen.png; sourceTree = "<group>"; };
 		9C75E1AD15E9629B009E3461 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		9C75E1B015EAA9A5009E3461 /* GRCustomSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCustomSpinnerView.h; sourceTree = "<group>"; };
+		9C75E1B115EAA9A5009E3461 /* GRCustomSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRCustomSpinnerView.m; sourceTree = "<group>"; };
+		9C75E1B215EAA9A5009E3461 /* GRCustomSpinnerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRCustomSpinnerView.xib; sourceTree = "<group>"; };
+		9C75E1B515EAAA4A009E3461 /* ChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordViewController.h; sourceTree = "<group>"; };
+		9C75E1B615EAAA4A009E3461 /* ChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordViewController.m; sourceTree = "<group>"; };
+		9C75E1B715EAAA4B009E3461 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		9CBA7D0515E6E83200778484 /* ProfileDataCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileDataCell.h; sourceTree = "<group>"; };
 		9CBA7D0615E6E83200778484 /* ProfileDataCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileDataCell.m; sourceTree = "<group>"; };
 		9CBA7D0715E6E83200778484 /* ProfileDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileDataCell.xib; sourceTree = "<group>"; };
@@ -879,12 +889,26 @@
 			path = "@1x";
 			sourceTree = "<group>";
 		};
+		9C75E1AF15EAA9A5009E3461 /* GRCustomSpinnerView */ = {
+			isa = PBXGroup;
+			children = (
+				9C75E1B015EAA9A5009E3461 /* GRCustomSpinnerView.h */,
+				9C75E1B115EAA9A5009E3461 /* GRCustomSpinnerView.m */,
+				9C75E1B215EAA9A5009E3461 /* GRCustomSpinnerView.xib */,
+			);
+			name = GRCustomSpinnerView;
+			path = Classes/Main/GRCustomSpinnerView;
+			sourceTree = "<group>";
+		};
 		9CBA7D0215E6E7EC00778484 /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
 				9CBA7D1515E6E87400778484 /* UserProfileViewController.h */,
 				9CBA7D1615E6E87400778484 /* UserProfileViewController.m */,
 				9CBA7D1415E6E87400778484 /* UserProfileViewController.xib */,
+				9C75E1B515EAAA4A009E3461 /* ChangePasswordViewController.h */,
+				9C75E1B615EAAA4A009E3461 /* ChangePasswordViewController.m */,
+				9C75E1B715EAAA4B009E3461 /* ChangePasswordViewController.xib */,
 				9CBA7D0415E6E83200778484 /* User Profile Cells */,
 			);
 			name = "User Profile";
@@ -1320,6 +1344,7 @@
 		C0FE21B414F4431500F03DFF /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
+				9C75E1AF15EAA9A5009E3461 /* GRCustomSpinnerView */,
 				C047536114F4B40C00B3AD79 /* BorderedSpinnerView.h */,
 				C047536214F4B40C00B3AD79 /* BorderedSpinnerView.m */,
 				C047536314F4B40C00B3AD79 /* BorderedSpinnerView.xib */,
@@ -1639,6 +1664,8 @@
 				9C58284515E9552B006543A2 /* divider_teal_tan.png in Resources */,
 				9C58284615E9552B006543A2 /* renameFile in Resources */,
 				9C58284715E9552B006543A2 /* splashscreen.png in Resources */,
+				9C75E1B415EAA9A5009E3461 /* GRCustomSpinnerView.xib in Resources */,
+				9C75E1B915EAAA4C009E3461 /* ChangePasswordViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1704,6 +1731,8 @@
 				9C246A9015E72FE20094293B /* DealViewController.m in Sources */,
 				9C246A9415E735BB0094293B /* ContactInfoCell.m in Sources */,
 				9C5827E715E94502006543A2 /* MapViewCell.m in Sources */,
+				9C75E1B315EAA9A5009E3461 /* GRCustomSpinnerView.m in Sources */,
+				9C75E1B815EAAA4C009E3461 /* ChangePasswordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
