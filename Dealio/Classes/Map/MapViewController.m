@@ -53,6 +53,15 @@
     [self clearAndAddLocationPins];
 }
 
+//- (MKAnnotationView *)mapView:(MKMapView *)map viewForAnnotation:(id <MKAnnotation>)annotation
+//{
+//    if ([annotation isKindOfClass:[MKUserLocation class]])
+//    {
+//        ((MKUserLocation *)annotation).title = @"My Current Location";
+//        return nil;  //return nil to use default blue dot view
+//    }
+//}
+
 - (IBAction)locateUserPressed:(id)sender
 {
     [self zoomOnUserLocation];
@@ -70,7 +79,18 @@
 
 -(void)clearAndAddLocationPins
 {
-    [userMapView removeAnnotations:userMapView.annotations];
+    NSMutableArray *toRemove = [NSMutableArray new];
+
+    for (id annotation in userMapView.annotations)
+    {
+        if (annotation != userMapView.userLocation)
+        {
+            [toRemove addObject:annotation];
+        }
+        [userMapView removeAnnotations:toRemove];
+    }
+    [userMapView removeAnnotations:toRemove];
+
 
     for (NSUInteger i =0; i < DealData.instance.dealList.count; i++)
     {
@@ -86,6 +106,7 @@
         annotationPoint.subtitle = [dealData objectForKey:@"businessname"];
         [userMapView addAnnotation:annotationPoint];
     }
+    userMapView.showsUserLocation = YES;
 }
 
 @end
