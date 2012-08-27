@@ -8,7 +8,6 @@
 
 #import "XMLParser.h"
 #import "XMLElement.h"
-
 @implementation XMLParser
 
 @synthesize xmlParser;

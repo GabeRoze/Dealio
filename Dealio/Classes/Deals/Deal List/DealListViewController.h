@@ -22,7 +22,6 @@
 
     BOOL filterViewDisplayed;
     BOOL firstLoadFinished;
-
 }
 
 @property (nonatomic, assign) int currentSelectedDay;
@@ -35,7 +34,6 @@
 @property (strong, nonatomic) XMLParser* parser;
 @property (strong, nonatomic) NSMutableArray* dealData;
 @property (strong, nonatomic) DealViewController* dealViewController;
-@property (strong, nonatomic) BorderedSpinnerView* borderedSpinnerView;
 @property (strong, nonatomic) CLLocation* currentLocation;
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (weak, nonatomic) IBOutlet UIImageView *saturdaybutton;
@@ -55,7 +53,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *fridayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *saturdayLabel;
 
--(void) favoritesButtonPressed:(NSNotification*) notification;
 -(void) reloadDataForInfo:(NSString*)data;
 -(void)parseXMLFile:(NSData*)data;
 -(void) connectToServer:(NSString*)data;

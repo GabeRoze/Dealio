@@ -419,4 +419,11 @@
     return 0;
 }
 
++(CGFloat)calculateCellHeightWithString:(NSString *)string forWidth:(CGFloat)width
+{
+    UIFont *cellFont = [UIFont fontWithName:@"TimesNewRomanPSMT" size:16.0];
+    CGSize constraintSize = CGSizeMake(width, MAXFLOAT);
+    CGSize labelSize = [string sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+    return labelSize.height+25;
+}
 @end

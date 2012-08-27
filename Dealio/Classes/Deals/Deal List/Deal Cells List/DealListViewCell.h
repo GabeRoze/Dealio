@@ -11,6 +11,8 @@
 @interface DealListViewCell : UITableViewCell
 {
     UIActivityIndicatorView* spinner;
+    
+    IBOutlet UIImageView *backgroundImage;
 }
 
 @property (copy, nonatomic) NSString *restaurantName;

@@ -25,6 +25,19 @@
 @synthesize dealTime;
 @synthesize restaurantLogo;
 
+
+-(id)init
+{
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"DealListViewCell"
+                                                 owner:self
+                                               options:nil];
+    self = [nib objectAtIndex:0];
+
+    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+
+    return self;
+}
+
 -(void) createAndDisplaySpinner
 {
     if (spinner)//if (spinner != nil)

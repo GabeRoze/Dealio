@@ -13,9 +13,10 @@
 #import "DealListViewCell.h"
 #import "XMLParser.h"
 #import "CalculationHelper.h"
-#import "BorderedSpinnerView.h"
 #import "Models.h"
 #import "UIAlertView+Blocks.h"
+#import "Models.h"
+#import "GRCustomSpinnerView.h"
 
 @implementation DealListViewController
 
@@ -27,7 +28,6 @@
 @synthesize FAVORITES_MODE;
 @synthesize parser;
 @synthesize dealViewController;
-@synthesize borderedSpinnerView;
 @synthesize locationManager;
 @synthesize currentLocation;
 @synthesize saturdaybutton;
@@ -62,8 +62,6 @@ static DealListViewController *instance;
     [self initFilterButton];
     [self initDayButtons];
 
-    borderedSpinnerView = [[BorderedSpinnerView alloc] init];
-
     [self loadWithCurrentDay];
 }
 
@@ -72,47 +70,9 @@ static DealListViewController *instance;
 {
     firstLoadFinished = YES;
 }
-/* only called when memory is low
-- (void)viewDidUnload
-{
-    //[self stopSpinner];
-    [borderedSpinnerView.view removeFromSuperview];
-    [self setTable:nil];
-    [self setSaturdaybutton:nil];
-    [self setSundayButton:nil];
-    [self setMondayButton:nil];
-    [self setMondayButton:nil];
-    [self setTuesdayButton:nil];
-    [self setWednesdayButton:nil];
-    [self setThursdayButton:nil];
-    [self setFridayButton:nil];
-    [self setSundayLabel:nil];
-    [self setMondayLabel:nil];
-    [self setTuesdayLabel:nil];
-    [self setWednesdayLabel:nil];
-    [self setThursdayLabel:nil];
-    [self setFridayLabel:nil];
-    [self setSundayLabel:nil];
-    [self setSaturdayLabel:nil];
-    [self setFilterButton:nil];
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    self.listData = nil;
-    self.dealData = nil;
-    self.dayButtons = nil;
-}
-*/
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
 
 #pragma mark -
 #pragma mark Handle UI Interation
-
 -(void) reloadDataForInfo:(NSString *)data
 {
     if (SearchLocation.instance.savedAddressCoordinate.latitude == 9999
@@ -133,7 +93,6 @@ static DealListViewController *instance;
     }
     else
     {
-        [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
         [self connectToServer:data];
     }
 }
@@ -142,25 +101,17 @@ static DealListViewController *instance;
 #pragma mark Server Connectivity and XML
 -(void) connectToServer:(NSString*)data
 {
+    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
     CLLocationCoordinate2D coordinate = SearchLocation.instance.getLocation;
 
-    NSString* urlAsString = @"";
-    // NSString* emailString = [NSString stringWithFormat:@"?useremail=%@",(NSString*)[userData objectAtIndex:0] ];
-    // NSString* encryptedPassword = (NSString*)[userData objectAtIndex:1];
     NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",data];
     NSString *latitude = [NSString stringWithFormat:@"&userlat=%f", coordinate.latitude];
     NSString *longitude = [NSString stringWithFormat:@"&userlong=%f", coordinate.longitude];
     NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=%i", FilterData.instance.maximumSearchDistance];
-
-    urlAsString = [urlAsString stringByAppendingString:currentDay];
-    urlAsString = [urlAsString stringByAppendingString:latitude];
-    urlAsString = [urlAsString stringByAppendingString:longitude];
-    urlAsString = [urlAsString stringByAppendingString:maxDistance];
+    NSString* urlAsString = [NSString stringWithFormat:@"%@%@%@%@",currentDay, latitude, longitude, maxDistance];
 
     NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealheader-func.php/";
-
     NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:urlAsString];
-
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 
     [NSURLConnection
@@ -179,16 +130,14 @@ static DealListViewController *instance;
                       else if ([data length] == 0 && error == nil)
                       {
                           messageText = @"Server not responding";
-                          [borderedSpinnerView.view removeFromSuperview];
+                          [GRCustomSpinnerView.instance stopSpinner];
 
                       }
                       else if (error != nil)
                       {
                           messageText = @"Error occured during login";
-                          [borderedSpinnerView.view removeFromSuperview];
                       }
                   }];
-
 }
 
 -(void) parseXMLFile:(NSData*)data
@@ -197,47 +146,39 @@ static DealListViewController *instance;
     SearchLocation.instance.savedAddressCoordinate;
 //    CLLocation *location = [[CLLocation alloc] initWithLatitude:<#(CLLocationDegrees)latitude#> longitude:<#(CLLocationDegrees)longitude#>]
     //todo remove use of at
-    dealData = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
+    DealData.instance.dealList = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
     [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
 }
 
 -(void) serverResponseAcquired
 {
     [table reloadData];
-    [borderedSpinnerView.view removeFromSuperview];
+    [GRCustomSpinnerView.instance stopSpinner];
 }
 
 #pragma mark -
 #pragma mark Table View Data Source Methods
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dealData count];
+    return DealData.instance.dealList.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString* CellTableIdentifier = @"CellTableIdentifier";
-
-    static BOOL nibsRegistered = NO;
-    if (!nibsRegistered)
-    {
-        UINib* nib = [UINib nibWithNibName:@"DealListViewCell" bundle:nil];
-        [tableView registerNib:nib forCellReuseIdentifier:CellTableIdentifier];
-        nibsRegistered = YES;
-    }
-
     DealListViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
 
-    NSUInteger row = [indexPath row];
-    NSDictionary* rowData = [self.dealData objectAtIndex:row];
+    if (!cell)
+    {
+        cell = [DealListViewCell new];
+    }
+
+    NSDictionary* rowData = [DealData.instance.dealList objectAtIndex:indexPath.row];
 
     cell.restaurantName = [rowData objectForKey:@"businessname"];
     cell.dealName = [rowData objectForKey:@"dealname"];
-
-//    NSString* dealRating = [CalculationHelper convertLikesToRating:[rowData objectForKey:@"numlikes"] dislikes: [rowData objectForKey:@"dislike"]];
-
     cell.rating = [NSString stringWithFormat:@"%@ Love it!", [rowData objectForKey:@"numlikes"]];
-    cell.distance = [rowData objectForKey:@"distance"];//[rowData objectForKey:@"distance"];
+    cell.distance = [rowData objectForKey:@"distance"];
     [cell setLogoWithString:(NSString*)[rowData objectForKey:@"logoname"]];
 
     return cell;
@@ -252,7 +193,7 @@ static DealListViewController *instance;
 {
     NSUInteger row = [indexPath row];
 
-    NSDictionary* rowData = [self.dealData objectAtIndex:row];
+    NSDictionary* rowData = [DealData.instance.dealList objectAtIndex:row];
     [self.dealViewController loadDealFromList:rowData];
 
     [self presentModalViewController:self.dealViewController animated:YES];
@@ -292,7 +233,6 @@ static DealListViewController *instance;
     UIImageView *selectedDayButton = (UIImageView *) [dayButtons objectAtIndex:day];
     UILabel *currentDayLabel = (UILabel *)[dayLabels objectAtIndex:day];
 
-
     //change selected day button to selected color
     selectedDayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_dark.png"]];
     [currentDayLabel setTextColor:[UIColor whiteColor]];
@@ -308,21 +248,12 @@ static DealListViewController *instance;
 
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer *)sender;
     UIImageView *selectedDayButton = (UIImageView *) tapGestureRecognizer.view;
-//    UILabel *currentDayLabel = (UILabel *)[dayLabels objectAtIndex:selectedDayButton.tag];
 
     //change all colors to normal
     [self disableAllDays];
     [self highlightDay:selectedDayButton.tag];
 
-    //change selected day button to selected color
-//    selectedDayButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_dark.png"]];
-//    [currentDayLabel setTextColor:[UIColor whiteColor]];
-
-    //load new days data
-//    [self.view.superview insertSubview:borderedSpinnerView.view aboveSubview:self.view];
     [self reloadDataForInfo:[CalculationHelper convertIntToDay:selectedDayButton.tag]];
-//    [self reloadDataForInfo:[NSString stringWithFormat:@"%i",selectedDayButton.tag]];
-//    self.currentSelectedDay = selectedDayButton.tag;
 }
 
 -(void)disableAllDays
@@ -334,13 +265,6 @@ static DealListViewController *instance;
         UILabel *dayLabel = (UILabel *)[dayLabels objectAtIndex:i];
         [dayLabel setTextColor:[UIColor brownColor]];
     }
-}
-
--(void)favoritesButtonPressed:(NSNotification*) notification
-{
-//    [borderedSpinnerView.view removeFromSuperview];
-    [borderedSpinnerView stopSpinner];
-    [self reloadDataForInfo:@"Favorites"];
 }
 
 #pragma mark - Class Initiation
@@ -409,8 +333,8 @@ static DealListViewController *instance;
     [currentDayLabel setTextColor:[UIColor whiteColor]];
 
     //alloc required vars
-    self.dealData = [[NSMutableArray alloc] init];
-    dealViewController = [[DealViewController alloc] init];
+//    self.dealData = [[NSMutableArray alloc] init];
+    dealViewController = [DealViewController new];
 
     //Show loading bar and reload the data
     [self reloadDataForInfo:[CalculationHelper convertIntToDay:(weekday-1)]];

@@ -172,14 +172,14 @@
 						<int key="IBUIContentMode">2</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
-					<object class="IBUIImageView" id="44368343">
+					<object class="IBUIImageView" id="274167235">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{280, 0}, {40, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<object class="NSColor" key="IBUIBackgroundColor" id="988538704">
+						<object class="NSColor" key="IBUIBackgroundColor" id="912442614">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
@@ -194,7 +194,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="57346692"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<reference key="IBUIBackgroundColor" ref="988538704"/>
+						<reference key="IBUIBackgroundColor" ref="912442614"/>
 						<int key="IBUIContentMode">4</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -540,7 +540,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">filterBackground</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="44368343"/>
+						<reference key="destination" ref="274167235"/>
 					</object>
 					<int key="connectionID">112</int>
 				</object>
@@ -589,7 +589,7 @@
 							<reference ref="76958387"/>
 							<reference ref="1001254877"/>
 							<reference ref="145031041"/>
-							<reference ref="44368343"/>
+							<reference ref="274167235"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -686,7 +686,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">111</int>
-						<reference key="object" ref="44368343"/>
+						<reference key="object" ref="274167235"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>

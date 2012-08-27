@@ -10,8 +10,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "CalculationHelper.h"
+#import "Models.h"
 
-@implementation     MapViewController
+@implementation MapViewController
 
 @synthesize userMapView;
 
@@ -38,46 +39,19 @@
     }
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
     [self zoomOnUserLocation];
-
-    /*
-     CLLocationCoordinate2D mapCenter = mapView.centerCoordinate;
-     mapCenter = [mapView
-     convertPoint:CGPointMake(1,mapView.frame.size.height/2.0)
-     toCoordinateFromView:mapView];
-     [mapView setCenterCoordinate:mapCenter animated:YES];
-
-
-     MKCoordinateRegion theRegion = mapView.region;
-
-     // Zoom out
-     theRegion.span.longitudeDelta *= 0.01;
-     theRegion.span.latitudeDelta *= 0.01;
-     [mapView setRegion:theRegion animated:YES];
-     */
-    // Do any additional setup after loading the view from its nib.
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 
-//- (void)viewDidUnload
-//{
-//    [self setUserMapView:nil];
-//    [super viewDidUnload];
-//}
-
-//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-//{
-//    Return YES for supported orientations
-//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-//}
-
-
+    [self clearAndAddLocationPins];
+}
 
 - (IBAction)locateUserPressed:(id)sender
 {
@@ -92,7 +66,26 @@
     zoomIn.center.latitude = userMapView.userLocation.location.coordinate.latitude;
     zoomIn.center.longitude = userMapView.userLocation.location.coordinate.longitude;
     [userMapView setRegion:zoomIn animated:YES];
+}
 
+-(void)clearAndAddLocationPins
+{
+    [userMapView removeAnnotations:userMapView.annotations];
+
+    for (NSUInteger i =0; i < DealData.instance.dealList.count; i++)
+    {
+        NSDictionary* dealData = [DealData.instance.dealList objectAtIndex:i];
+        CLLocationCoordinate2D annotationCoord;
+
+        annotationCoord.latitude = [[dealData objectForKey:@"latitude"] floatValue];
+        annotationCoord.longitude = [[dealData objectForKey:@"longitude"] floatValue];
+
+        MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+        annotationPoint.coordinate = annotationCoord;
+        annotationPoint.title = [dealData objectForKey:@"dealname"];
+        annotationPoint.subtitle = [dealData objectForKey:@"businessname"];
+        [userMapView addAnnotation:annotationPoint];
+    }
 }
 
 @end

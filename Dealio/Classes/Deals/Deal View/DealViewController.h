@@ -7,40 +7,31 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @class XMLParser;
 
-@interface DealViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DealViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
 {
     BOOL userCommentPosted;
     UIActivityIndicatorView* spinner;
 
+    IBOutlet UILabel *dealNameLabel;
+    IBOutlet UILabel *distanceLabel;
+    IBOutlet UIImageView *dealImageView;
 }
 
-
-@property (assign, nonatomic) NSString* liked;
-@property (assign, nonatomic) NSString* favorited;
-@property (assign, nonatomic) NSString* commented;
-@property (strong, nonatomic) NSArray* computers;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 @property (weak, nonatomic) IBOutlet UITableView *table;
-@property (strong, nonatomic) NSString* description;
-@property (strong, nonatomic) NSString* messageText;
 @property (strong, nonatomic) XMLParser* parser;
 @property (strong, nonatomic) NSMutableDictionary* dealListData;
 @property (strong, nonatomic) NSMutableDictionary* parserData;
 @property (strong, nonatomic) NSMutableArray* comments;
 
-
-- (IBAction)returnToDealsListView:(id)sender;
-
-
 -(void) loadDealFromList:(NSDictionary*)data;
-
 -(void)parseXMLFile:(NSData*)data;
 -(void) stopSpinner;
 -(void) createAndDisplaySpinner;
--(void) connectToServer:(NSArray*)data;
-
+-(void) connectToServer:(NSString*)data;
+- (IBAction)backTapped:(id)sender;
 
 @end

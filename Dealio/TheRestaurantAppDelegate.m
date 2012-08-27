@@ -47,7 +47,7 @@
 
 
 //    [[UINavigationBar appearance] setBackground:[UIImage imageNamed:@"topnav.png"
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"topnav.png"] forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"topnav.png"] forBarMetrics:UIBarMetricsDefault];
 //    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
 //    [image setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_light.png"]]];
 //    [[UINavigationBar appearance] setBackgroundImage:image.image forBarMetrics:UIBarMetricsDefault];
@@ -84,10 +84,10 @@
 
 //    UILabel* dealListLabel = [CalculationHelper createNavBarLabelWithTitle:@"Dealio"];
 //    [dealListview.view addSubview:dealListLabel];
-    UILabel* filterLabel = [CalculationHelper createNavBarLabelWithTitle:@"Filters"];
-    [filterView.view addSubview:filterLabel];
-    UILabel* mapLabel = [CalculationHelper createNavBarLabelWithTitle:@"Map"];
-    [mapView.view addSubview:mapLabel];
+//    UILabel* filterLabel = [CalculationHelper createNavBarLabelWithTitle:@"Filters"];
+//    [filterView.view addSubview:filterLabel];
+//    UILabel* mapLabel = [CalculationHelper createNavBarLabelWithTitle:@"Map"];
+//    [mapView.view addSubview:mapLabel];
 
     return YES;
 }
