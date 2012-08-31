@@ -1,5 +1,5 @@
 //
-// 
+//
 //  The Restaurant
 //
 //  Created by Gabe Rozenberg on 11-12-22.
@@ -11,7 +11,7 @@
 @class XMLParser;
 @class BorderedSpinnerView;
 
-@interface RegistrationViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
+@interface RegistrationViewControllerold : UIViewController <UITableViewDelegate, UITableViewDataSource, UIAlertViewDelegate> {
       UIActivityIndicatorView* spinner;
 }
 
@@ -52,6 +52,6 @@
 -(void) connectToServer:(NSArray*)userData;
 -(void)parseXMLFile:(NSData*)data;
 -(void) attemptRegister;
--(void) registerSuccess; 
+-(void) registerSuccess;
 
 @end

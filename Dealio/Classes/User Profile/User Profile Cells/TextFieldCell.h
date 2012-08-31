@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface TextFieldCell : UITableViewCell
+{
+    IBOutlet UIImageView *backgroundImage;
+}
 
-@property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (strong, nonatomic) IBOutlet UITextField *cellTextField;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
 
 @end

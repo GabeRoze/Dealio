@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class RegistrationViewController;
+#import "RegistrationViewController.h"
 @class XMLParser;
 @class BorderedSpinnerView;
 

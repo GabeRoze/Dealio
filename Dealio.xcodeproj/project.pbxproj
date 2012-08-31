@@ -26,6 +26,12 @@
 		9C153CAF15E0B7A900365E2C /* DealioService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153CAE15E0B7A900365E2C /* DealioService.m */; };
 		9C153CB315E1379C00365E2C /* AddressTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C153CB215E1379B00365E2C /* AddressTextFieldCell.m */; };
 		9C153CB715E137E100365E2C /* AddressTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C153CB615E137E000365E2C /* AddressTextFieldCell.xib */; };
+		9C22FC8915EC3CC100160159 /* TipUsAddressTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C22FC8715EC3CC100160159 /* TipUsAddressTextFieldCell.m */; };
+		9C22FC8A15EC3CC100160159 /* TipUsAddressTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C22FC8815EC3CC100160159 /* TipUsAddressTextFieldCell.xib */; };
+		9C22FC8D15EC447B00160159 /* cb_glossy_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C22FC8B15EC447B00160159 /* cb_glossy_off.png */; };
+		9C22FC8E15EC447B00160159 /* cb_glossy_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C22FC8C15EC447B00160159 /* cb_glossy_on.png */; };
+		9C22FC9115EC448F00160159 /* cb_glossy_off@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C22FC8F15EC448F00160159 /* cb_glossy_off@2x.png */; };
+		9C22FC9215EC448F00160159 /* cb_glossy_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C22FC9015EC448F00160159 /* cb_glossy_on@2x.png */; };
 		9C246A7C15E72D9B0094293B /* DealListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C246A7715E72D9B0094293B /* DealListViewCell.m */; };
 		9C246A7D15E72D9B0094293B /* DealListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C246A7815E72D9B0094293B /* DealListViewCell.xib */; };
 		9C246A7E15E72D9B0094293B /* DealListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C246A7A15E72D9B0094293B /* DealListViewController.m */; };
@@ -115,6 +121,26 @@
 		9C75E23515EAE080009E3461 /* DealioMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C75E23415EAE080009E3461 /* DealioMapAnnotation.m */; };
 		9C75E23C15EAFF49009E3461 /* DealViewDescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C75E23B15EAFF48009E3461 /* DealViewDescriptionCell.m */; };
 		9C75E23E15EAFF8B009E3461 /* DealViewDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C75E23D15EAFF8B009E3461 /* DealViewDescriptionCell.xib */; };
+		9C75E24715EBA8C3009E3461 /* TableHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C75E24615EBA8C3009E3461 /* TableHeaderCell.m */; };
+		9C75E24915EBA8D0009E3461 /* TableHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C75E24815EBA8D0009E3461 /* TableHeaderCell.xib */; };
+		9C75E24C15EBA911009E3461 /* SelectDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C75E24B15EBA911009E3461 /* SelectDayCell.m */; };
+		9C75E24E15EBA923009E3461 /* SelectDayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C75E24D15EBA922009E3461 /* SelectDayCell.xib */; };
+		9C75E25115EBA96B009E3461 /* PickerDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C75E25015EBA96B009E3461 /* PickerDisplayCell.m */; };
+		9C75E25315EBA975009E3461 /* PickerDisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C75E25215EBA974009E3461 /* PickerDisplayCell.xib */; };
+		9C75E25C15EBAD3C009E3461 /* TipUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C75E25A15EBAD3A009E3461 /* TipUsViewController.m */; };
+		9C75E25D15EBAD3C009E3461 /* TipUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C75E25B15EBAD3B009E3461 /* TipUsViewController.xib */; };
+		9C79BE3315F0FF5D00A6D7A9 /* ButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C79BE3215F0FF5C00A6D7A9 /* ButtonCell.m */; };
+		9C79BE3515F0FF8100A6D7A9 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C79BE3415F0FF8000A6D7A9 /* ButtonCell.xib */; };
+		9C7D73DA15EE5191000F55A3 /* RegistrationViewControllerold.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D73D815EE5191000F55A3 /* RegistrationViewControllerold.m */; };
+		9C7D73DB15EE5191000F55A3 /* RegistrationViewControllerold.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C7D73D915EE5191000F55A3 /* RegistrationViewControllerold.xib */; };
+		9C7D73DF15EE51ED000F55A3 /* SideBySideTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D73DE15EE51ED000F55A3 /* SideBySideTextFieldCell.m */; };
+		9C7D73E115EE526D000F55A3 /* SideBySideTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C7D73E015EE526D000F55A3 /* SideBySideTextFieldCell.xib */; };
+		9C7D73E415EE53D3000F55A3 /* MaleFemaleSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D73E315EE53D3000F55A3 /* MaleFemaleSelectionCell.m */; };
+		9C7D73E615EE53E7000F55A3 /* MaleFemaleSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C7D73E515EE53E7000F55A3 /* MaleFemaleSelectionCell.xib */; };
+		9C7D73EF15EE55B0000F55A3 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D73ED15EE55B0000F55A3 /* RegistrationViewController.m */; };
+		9C7D73F015EE55B0000F55A3 /* RegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C7D73EE15EE55B0000F55A3 /* RegistrationViewController.xib */; };
+		9C7D73F315EE56BC000F55A3 /* TOSCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C7D73F215EE56BC000F55A3 /* TOSCell.m */; };
+		9C7D73F515EE56CD000F55A3 /* TOSCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C7D73F415EE56CC000F55A3 /* TOSCell.xib */; };
 		9CBA7D6715E6F64100778484 /* background_tan_dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CBA7D3315E6F64100778484 /* background_tan_dark@2x.png */; };
 		9CBA7D6815E6F64100778484 /* background_tan_light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CBA7D3415E6F64100778484 /* background_tan_light@2x.png */; };
 		9CBA7D6915E6F64100778484 /* background_tan_medium@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CBA7D3515E6F64100778484 /* background_tan_medium@2x.png */; };
@@ -168,8 +194,6 @@
 		9CFC347115DA03D7008C47B0 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFC347015DA03D7008C47B0 /* filter.png */; };
 		C047535814F4B3C800B3AD79 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C047534E14F4B3C600B3AD79 /* LoginViewController.m */; };
 		C047535914F4B3C800B3AD79 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C047534F14F4B3C700B3AD79 /* LoginViewController.xib */; };
-		C047535A14F4B3C800B3AD79 /* RegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C047535114F4B3C700B3AD79 /* RegistrationViewController.m */; };
-		C047535B14F4B3C800B3AD79 /* RegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C047535214F4B3C700B3AD79 /* RegistrationViewController.xib */; };
 		C047535C14F4B3C800B3AD79 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C047535414F4B3C800B3AD79 /* RootViewController.m */; };
 		C047535E14F4B3C800B3AD79 /* TabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C047535714F4B3C800B3AD79 /* TabBarController.xib */; };
 		C047537214F4B40D00B3AD79 /* BorderedSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C047536214F4B40C00B3AD79 /* BorderedSpinnerView.m */; };
@@ -320,6 +344,13 @@
 		9C153CB115E1379B00365E2C /* AddressTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTextFieldCell.h; sourceTree = "<group>"; };
 		9C153CB215E1379B00365E2C /* AddressTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTextFieldCell.m; sourceTree = "<group>"; };
 		9C153CB615E137E000365E2C /* AddressTextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressTextFieldCell.xib; sourceTree = "<group>"; };
+		9C22FC8615EC3CC000160159 /* TipUsAddressTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipUsAddressTextFieldCell.h; sourceTree = "<group>"; };
+		9C22FC8715EC3CC100160159 /* TipUsAddressTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipUsAddressTextFieldCell.m; sourceTree = "<group>"; };
+		9C22FC8815EC3CC100160159 /* TipUsAddressTextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipUsAddressTextFieldCell.xib; sourceTree = "<group>"; };
+		9C22FC8B15EC447B00160159 /* cb_glossy_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cb_glossy_off.png; sourceTree = "<group>"; };
+		9C22FC8C15EC447B00160159 /* cb_glossy_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cb_glossy_on.png; sourceTree = "<group>"; };
+		9C22FC8F15EC448F00160159 /* cb_glossy_off@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cb_glossy_off@2x.png"; sourceTree = "<group>"; };
+		9C22FC9015EC448F00160159 /* cb_glossy_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cb_glossy_on@2x.png"; sourceTree = "<group>"; };
 		9C246A7615E72D9B0094293B /* DealListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealListViewCell.h; sourceTree = "<group>"; };
 		9C246A7715E72D9B0094293B /* DealListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealListViewCell.m; sourceTree = "<group>"; };
 		9C246A7815E72D9B0094293B /* DealListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealListViewCell.xib; sourceTree = "<group>"; };
@@ -435,6 +466,36 @@
 		9C75E23A15EAFF48009E3461 /* DealViewDescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealViewDescriptionCell.h; sourceTree = "<group>"; };
 		9C75E23B15EAFF48009E3461 /* DealViewDescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealViewDescriptionCell.m; sourceTree = "<group>"; };
 		9C75E23D15EAFF8B009E3461 /* DealViewDescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DealViewDescriptionCell.xib; sourceTree = "<group>"; };
+		9C75E24515EBA8C3009E3461 /* TableHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeaderCell.h; sourceTree = "<group>"; };
+		9C75E24615EBA8C3009E3461 /* TableHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeaderCell.m; sourceTree = "<group>"; };
+		9C75E24815EBA8D0009E3461 /* TableHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableHeaderCell.xib; sourceTree = "<group>"; };
+		9C75E24A15EBA911009E3461 /* SelectDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDayCell.h; sourceTree = "<group>"; };
+		9C75E24B15EBA911009E3461 /* SelectDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDayCell.m; sourceTree = "<group>"; };
+		9C75E24D15EBA922009E3461 /* SelectDayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectDayCell.xib; sourceTree = "<group>"; };
+		9C75E24F15EBA96A009E3461 /* PickerDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerDisplayCell.h; sourceTree = "<group>"; };
+		9C75E25015EBA96B009E3461 /* PickerDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerDisplayCell.m; sourceTree = "<group>"; };
+		9C75E25215EBA974009E3461 /* PickerDisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerDisplayCell.xib; sourceTree = "<group>"; };
+		9C75E25915EBAD39009E3461 /* TipUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TipUsViewController.h; sourceTree = "<group>"; };
+		9C75E25A15EBAD3A009E3461 /* TipUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TipUsViewController.m; sourceTree = "<group>"; };
+		9C75E25B15EBAD3B009E3461 /* TipUsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TipUsViewController.xib; sourceTree = "<group>"; };
+		9C79BE3115F0FF5C00A6D7A9 /* ButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonCell.h; sourceTree = "<group>"; };
+		9C79BE3215F0FF5C00A6D7A9 /* ButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonCell.m; sourceTree = "<group>"; };
+		9C79BE3415F0FF8000A6D7A9 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		9C7D73D715EE5191000F55A3 /* RegistrationViewControllerold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationViewControllerold.h; sourceTree = "<group>"; };
+		9C7D73D815EE5191000F55A3 /* RegistrationViewControllerold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewControllerold.m; sourceTree = "<group>"; };
+		9C7D73D915EE5191000F55A3 /* RegistrationViewControllerold.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationViewControllerold.xib; sourceTree = "<group>"; };
+		9C7D73DD15EE51ED000F55A3 /* SideBySideTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBySideTextFieldCell.h; sourceTree = "<group>"; };
+		9C7D73DE15EE51ED000F55A3 /* SideBySideTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBySideTextFieldCell.m; sourceTree = "<group>"; };
+		9C7D73E015EE526D000F55A3 /* SideBySideTextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideBySideTextFieldCell.xib; sourceTree = "<group>"; };
+		9C7D73E215EE53D3000F55A3 /* MaleFemaleSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaleFemaleSelectionCell.h; sourceTree = "<group>"; };
+		9C7D73E315EE53D3000F55A3 /* MaleFemaleSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaleFemaleSelectionCell.m; sourceTree = "<group>"; };
+		9C7D73E515EE53E7000F55A3 /* MaleFemaleSelectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MaleFemaleSelectionCell.xib; sourceTree = "<group>"; };
+		9C7D73EC15EE55AF000F55A3 /* RegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationViewController.h; sourceTree = "<group>"; };
+		9C7D73ED15EE55B0000F55A3 /* RegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationViewController.m; sourceTree = "<group>"; };
+		9C7D73EE15EE55B0000F55A3 /* RegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationViewController.xib; sourceTree = "<group>"; };
+		9C7D73F115EE56BC000F55A3 /* TOSCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TOSCell.h; sourceTree = "<group>"; };
+		9C7D73F215EE56BC000F55A3 /* TOSCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TOSCell.m; sourceTree = "<group>"; };
+		9C7D73F415EE56CC000F55A3 /* TOSCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TOSCell.xib; sourceTree = "<group>"; };
 		9CBA7D3315E6F64100778484 /* background_tan_dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_tan_dark@2x.png"; sourceTree = "<group>"; };
 		9CBA7D3415E6F64100778484 /* background_tan_light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_tan_light@2x.png"; sourceTree = "<group>"; };
 		9CBA7D3515E6F64100778484 /* background_tan_medium@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background_tan_medium@2x.png"; sourceTree = "<group>"; };
@@ -489,9 +550,6 @@
 		C047534D14F4B3C600B3AD79 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/Main/LoginViewController.h; sourceTree = "<group>"; };
 		C047534E14F4B3C600B3AD79 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/Main/LoginViewController.m; sourceTree = "<group>"; };
 		C047534F14F4B3C700B3AD79 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Classes/Main/LoginViewController.xib; sourceTree = "<group>"; };
-		C047535014F4B3C700B3AD79 /* RegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegistrationViewController.h; path = Classes/Main/RegistrationViewController.h; sourceTree = "<group>"; };
-		C047535114F4B3C700B3AD79 /* RegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegistrationViewController.m; path = Classes/Main/RegistrationViewController.m; sourceTree = "<group>"; };
-		C047535214F4B3C700B3AD79 /* RegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegistrationViewController.xib; path = Classes/Main/RegistrationViewController.xib; sourceTree = "<group>"; };
 		C047535314F4B3C700B3AD79 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = Classes/Main/RootViewController.h; sourceTree = "<group>"; };
 		C047535414F4B3C800B3AD79 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootViewController.m; path = Classes/Main/RootViewController.m; sourceTree = "<group>"; };
 		C047535714F4B3C800B3AD79 /* TabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TabBarController.xib; path = Classes/Main/TabBarController.xib; sourceTree = "<group>"; };
@@ -796,6 +854,8 @@
 			isa = PBXGroup;
 			children = (
 				9C5827EC15E9552B006543A2 /* .renameFile.swp */,
+				9C22FC8B15EC447B00160159 /* cb_glossy_off.png */,
+				9C22FC8C15EC447B00160159 /* cb_glossy_on.png */,
 				9C5827ED15E9552B006543A2 /* background_tan_dark.png */,
 				9C5827EE15E9552B006543A2 /* background_tan_light.png */,
 				9C5827EF15E9552B006543A2 /* background_tan_medium.png */,
@@ -946,6 +1006,71 @@
 			path = Classes/Favorites;
 			sourceTree = "<group>";
 		};
+		9C75E24315EBA86D009E3461 /* Tip Us */ = {
+			isa = PBXGroup;
+			children = (
+				9C75E25915EBAD39009E3461 /* TipUsViewController.h */,
+				9C75E25A15EBAD3A009E3461 /* TipUsViewController.m */,
+				9C75E25B15EBAD3B009E3461 /* TipUsViewController.xib */,
+				9C75E24415EBA88C009E3461 /* Tip Us Cells */,
+			);
+			name = "Tip Us";
+			path = "Classes/Tip Us";
+			sourceTree = "<group>";
+		};
+		9C75E24415EBA88C009E3461 /* Tip Us Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9C22FC8615EC3CC000160159 /* TipUsAddressTextFieldCell.h */,
+				9C22FC8715EC3CC100160159 /* TipUsAddressTextFieldCell.m */,
+				9C22FC8815EC3CC100160159 /* TipUsAddressTextFieldCell.xib */,
+				9C75E24515EBA8C3009E3461 /* TableHeaderCell.h */,
+				9C75E24615EBA8C3009E3461 /* TableHeaderCell.m */,
+				9C75E24815EBA8D0009E3461 /* TableHeaderCell.xib */,
+				9C75E24A15EBA911009E3461 /* SelectDayCell.h */,
+				9C75E24B15EBA911009E3461 /* SelectDayCell.m */,
+				9C75E24D15EBA922009E3461 /* SelectDayCell.xib */,
+				9C75E24F15EBA96A009E3461 /* PickerDisplayCell.h */,
+				9C75E25015EBA96B009E3461 /* PickerDisplayCell.m */,
+				9C75E25215EBA974009E3461 /* PickerDisplayCell.xib */,
+			);
+			path = "Tip Us Cells";
+			sourceTree = "<group>";
+		};
+		9C7D73D615EE5191000F55A3 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				9C7D73DC15EE51BB000F55A3 /* Registration Cells */,
+				9C7D73D715EE5191000F55A3 /* RegistrationViewControllerold.h */,
+				9C7D73D815EE5191000F55A3 /* RegistrationViewControllerold.m */,
+				9C7D73D915EE5191000F55A3 /* RegistrationViewControllerold.xib */,
+				9C7D73EC15EE55AF000F55A3 /* RegistrationViewController.h */,
+				9C7D73ED15EE55B0000F55A3 /* RegistrationViewController.m */,
+				9C7D73EE15EE55B0000F55A3 /* RegistrationViewController.xib */,
+			);
+			name = Registration;
+			path = Classes/Registration;
+			sourceTree = "<group>";
+		};
+		9C7D73DC15EE51BB000F55A3 /* Registration Cells */ = {
+			isa = PBXGroup;
+			children = (
+				9C7D73DD15EE51ED000F55A3 /* SideBySideTextFieldCell.h */,
+				9C7D73DE15EE51ED000F55A3 /* SideBySideTextFieldCell.m */,
+				9C7D73E015EE526D000F55A3 /* SideBySideTextFieldCell.xib */,
+				9C7D73E215EE53D3000F55A3 /* MaleFemaleSelectionCell.h */,
+				9C7D73E315EE53D3000F55A3 /* MaleFemaleSelectionCell.m */,
+				9C7D73E515EE53E7000F55A3 /* MaleFemaleSelectionCell.xib */,
+				9C7D73F115EE56BC000F55A3 /* TOSCell.h */,
+				9C7D73F215EE56BC000F55A3 /* TOSCell.m */,
+				9C7D73F415EE56CC000F55A3 /* TOSCell.xib */,
+				9C79BE3115F0FF5C00A6D7A9 /* ButtonCell.h */,
+				9C79BE3215F0FF5C00A6D7A9 /* ButtonCell.m */,
+				9C79BE3415F0FF8000A6D7A9 /* ButtonCell.xib */,
+			);
+			path = "Registration Cells";
+			sourceTree = "<group>";
+		};
 		9CBA7D2815E6F64100778484 /* Version 1.0 */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,6 +1084,8 @@
 		9CBA7D3215E6F64100778484 /* @2x */ = {
 			isa = PBXGroup;
 			children = (
+				9C22FC8F15EC448F00160159 /* cb_glossy_off@2x.png */,
+				9C22FC9015EC448F00160159 /* cb_glossy_on@2x.png */,
 				9CBA7D3315E6F64100778484 /* background_tan_dark@2x.png */,
 				9CBA7D3415E6F64100778484 /* background_tan_light@2x.png */,
 				9CBA7D3515E6F64100778484 /* background_tan_medium@2x.png */,
@@ -1278,8 +1405,10 @@
 				9C75E22D15EAD0D2009E3461 /* Favorites */,
 				C0FE21B614F4433A00F03DFF /* Deals */,
 				C0FE21B314F4431200F03DFF /* Map */,
+				9C7D73D615EE5191000F55A3 /* Registration */,
 				C0FE21B214F442E100F03DFF /* Filters */,
 				9C75E20815EACFCC009E3461 /* User Profile */,
+				9C75E24315EBA86D009E3461 /* Tip Us */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1327,9 +1456,6 @@
 				C047534D14F4B3C600B3AD79 /* LoginViewController.h */,
 				C047534E14F4B3C600B3AD79 /* LoginViewController.m */,
 				C047534F14F4B3C700B3AD79 /* LoginViewController.xib */,
-				C047535014F4B3C700B3AD79 /* RegistrationViewController.h */,
-				C047535114F4B3C700B3AD79 /* RegistrationViewController.m */,
-				C047535214F4B3C700B3AD79 /* RegistrationViewController.xib */,
 				C047535314F4B3C700B3AD79 /* RootViewController.h */,
 				C047535414F4B3C800B3AD79 /* RootViewController.m */,
 				C047535714F4B3C800B3AD79 /* TabBarController.xib */,
@@ -1464,7 +1590,6 @@
 				C0FE226C14F4499200F03DFF /* FiltersViewController.xib in Resources */,
 				C0FE226F14F4499200F03DFF /* ProfileViewController.xib in Resources */,
 				C047535914F4B3C800B3AD79 /* LoginViewController.xib in Resources */,
-				C047535B14F4B3C800B3AD79 /* RegistrationViewController.xib in Resources */,
 				C047535E14F4B3C800B3AD79 /* TabBarController.xib in Resources */,
 				C047537314F4B40D00B3AD79 /* BorderedSpinnerView.xib in Resources */,
 				C04753C314F4B71100B3AD79 /* MapViewController.xib in Resources */,
@@ -1645,6 +1770,21 @@
 				9C75E22C15EACFCC009E3461 /* UserProfileViewController.xib in Resources */,
 				9C75E23215EAD0D2009E3461 /* FavoritesViewController.xib in Resources */,
 				9C75E23E15EAFF8B009E3461 /* DealViewDescriptionCell.xib in Resources */,
+				9C75E24915EBA8D0009E3461 /* TableHeaderCell.xib in Resources */,
+				9C75E24E15EBA923009E3461 /* SelectDayCell.xib in Resources */,
+				9C75E25315EBA975009E3461 /* PickerDisplayCell.xib in Resources */,
+				9C75E25D15EBAD3C009E3461 /* TipUsViewController.xib in Resources */,
+				9C22FC8A15EC3CC100160159 /* TipUsAddressTextFieldCell.xib in Resources */,
+				9C22FC8D15EC447B00160159 /* cb_glossy_off.png in Resources */,
+				9C22FC8E15EC447B00160159 /* cb_glossy_on.png in Resources */,
+				9C22FC9115EC448F00160159 /* cb_glossy_off@2x.png in Resources */,
+				9C22FC9215EC448F00160159 /* cb_glossy_on@2x.png in Resources */,
+				9C7D73DB15EE5191000F55A3 /* RegistrationViewControllerold.xib in Resources */,
+				9C7D73E115EE526D000F55A3 /* SideBySideTextFieldCell.xib in Resources */,
+				9C7D73E615EE53E7000F55A3 /* MaleFemaleSelectionCell.xib in Resources */,
+				9C7D73F015EE55B0000F55A3 /* RegistrationViewController.xib in Resources */,
+				9C7D73F515EE56CD000F55A3 /* TOSCell.xib in Resources */,
+				9C79BE3515F0FF8100A6D7A9 /* ButtonCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1662,7 +1802,6 @@
 				C0FE226D14F4499200F03DFF /* FilterViewCell.m in Sources */,
 				C0FE226E14F4499200F03DFF /* ProfileViewController.m in Sources */,
 				C047535814F4B3C800B3AD79 /* LoginViewController.m in Sources */,
-				C047535A14F4B3C800B3AD79 /* RegistrationViewController.m in Sources */,
 				C047535C14F4B3C800B3AD79 /* RootViewController.m in Sources */,
 				C047537214F4B40D00B3AD79 /* BorderedSpinnerView.m in Sources */,
 				C047537414F4B40D00B3AD79 /* CalculationHelper.m in Sources */,
@@ -1706,6 +1845,17 @@
 				9C75E23115EAD0D2009E3461 /* FavoritesViewController.m in Sources */,
 				9C75E23515EAE080009E3461 /* DealioMapAnnotation.m in Sources */,
 				9C75E23C15EAFF49009E3461 /* DealViewDescriptionCell.m in Sources */,
+				9C75E24715EBA8C3009E3461 /* TableHeaderCell.m in Sources */,
+				9C75E24C15EBA911009E3461 /* SelectDayCell.m in Sources */,
+				9C75E25115EBA96B009E3461 /* PickerDisplayCell.m in Sources */,
+				9C75E25C15EBAD3C009E3461 /* TipUsViewController.m in Sources */,
+				9C22FC8915EC3CC100160159 /* TipUsAddressTextFieldCell.m in Sources */,
+				9C7D73DA15EE5191000F55A3 /* RegistrationViewControllerold.m in Sources */,
+				9C7D73DF15EE51ED000F55A3 /* SideBySideTextFieldCell.m in Sources */,
+				9C7D73E415EE53D3000F55A3 /* MaleFemaleSelectionCell.m in Sources */,
+				9C7D73EF15EE55B0000F55A3 /* RegistrationViewController.m in Sources */,
+				9C7D73F315EE56BC000F55A3 /* TOSCell.m in Sources */,
+				9C79BE3315F0FF5D00A6D7A9 /* ButtonCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

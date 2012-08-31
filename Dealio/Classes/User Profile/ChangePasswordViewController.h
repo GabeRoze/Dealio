@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChangePasswordViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ChangePasswordViewController : UIViewController
 {
-    IBOutlet UIImageView *backgroundImage;
+    IBOutlet UITextField *currentPasswordTextField;
+    IBOutlet UITextField *newPasswordTextField;
+    IBOutlet UITextField *confirmNewPasswordTextfield;
 }
-@property (strong, nonatomic) IBOutlet UITableView *changePasswordTable;
+
+- (IBAction)cancelTapped:(id)sender;
+- (IBAction)changePasswordOKTapped:(id)sender;
 @end

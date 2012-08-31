@@ -34,6 +34,7 @@
     self = [nib objectAtIndex:0];
 
     backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+    [dealNameLabel setFont:[UIFont fontWithName:@"Rokkitt" size:dealNameLabel.font.pointSize]];
 
     return self;
 }

@@ -6,12 +6,12 @@
 //  Copyright (c) 2011 University of Waterloo. All rights reserved.
 //
 
-#import "RegistrationViewController.h"
+#import "RegistrationViewControllerold.h"
 #import "XMLParser.h"
 #import "CalculationHelper.h"
 #import "BorderedSpinnerView.h"
 
-@implementation RegistrationViewController
+@implementation RegistrationViewControllerold
 @synthesize registerButtonOutlet;
 @synthesize table;
 @synthesize parser;

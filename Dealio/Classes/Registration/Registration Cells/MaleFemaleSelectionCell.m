@@ -1,21 +1,19 @@
 //
-//  TextFieldCell.m
+//  MaleFemaleSelectionCell.m
 //  Dealio
 //
-//  Created by Gabe Rozenberg on 12-08-26.
+//  Created by Gabe Rozenberg on 12-08-29.
 //  Copyright (c) 2012 University of Waterloo. All rights reserved.
 //
 
-#import "TextFieldCell.h"
+#import "MaleFemaleSelectionCell.h"
 
-@implementation TextFieldCell
+@implementation MaleFemaleSelectionCell
 
-@synthesize cellTextField;
-@synthesize backgroundImage;
 
 -(id)init
 {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TextFieldCell"
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"MaleFemaleSelectionCell"
                                                  owner:self
                                                options:nil];
     self = [nib objectAtIndex:0];

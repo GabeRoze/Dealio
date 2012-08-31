@@ -9,146 +9,48 @@
 #import "ChangePasswordViewController.h"
 #import "GRCustomSpinnerView.h"
 #import "TextFieldCell.h"
+#import "GRCustomSpinnerView.h"
 
 @implementation ChangePasswordViewController
-@synthesize changePasswordTable;
 
-
-
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
 
-    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_dark.png"]];
-    changePasswordTable.delegate = self;
-    changePasswordTable.dataSource = self;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundTapped:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+-(IBAction)backgroundTapped:(id)sender
 {
-    return 2;
+    [self.view removeFromSuperview];
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (IBAction)currentPasswordEntered:(id)sender 
 {
-    if (section == 0)
-    {
-        return 1;
-    }
-    else if (section == 1)
-    {
-        return 2;
-    }
+    [newPasswordTextField becomeFirstResponder];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (IBAction)newPasswordEntered:(id)sender 
 {
-    static NSString *CellIdentifier = @"CellIdentifier";
-
-
-    if (indexPath.section == 0)
-    {
-        if (indexPath.row == 0)
-        {
-            CellIdentifier = @"TextFieldCellIdentifier";
-
-            TextFieldCell *textFieldCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-            if (!textFieldCell)
-            {
-                textFieldCell = [TextFieldCell new];
-            }
-
-
-//            textFieldCell.passwordTextField.text = @"asd";
-//            [textFieldCell.textField setPlaceholder:@"Enter Current Password"];
-
-            return textFieldCell;
-//            [textField addTarget:self action:@selector(passwordEntered:) forControlEvents:UIControlEventEditingDidEndOnExit];
-        }
-    }
-    else if (indexPath.section == 1)
-    {
-        if (indexPath.row == 0)
-        {
-            CellIdentifier = @"ChangePasswordCellIdentifier";
-
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-            if (!cell)
-            {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-
-            cell.textLabel.textAlignment = UITextAlignmentCenter;
-            cell.textLabel.text = @"Change Password";
-
-            return cell;
-        }
-        if (indexPath.row == 1)
-        {
-            CellIdentifier = @"CancelCellIdentifier";
-
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-            if (!cell)
-            {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-
-            cell.textLabel.textAlignment = UITextAlignmentCenter;
-            cell.textLabel.text = @"Cancel";
-
-            return cell;
-        }
-    }
+    [confirmNewPasswordTextfield becomeFirstResponder];
 }
 
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (IBAction)confirmNewPasswordEntered:(id)sender 
 {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    if (indexPath.section == 1)
-    {
-        if (indexPath.row == 0)
-        {
-            //perform password checking
-//            [GRCustomSpinnerView.instance addSpinnerToView:self.view];
-            //call register
-            //on success display password successfully changed
-        }
-        else if (indexPath.row == 1)
-        {
-            [self dismissModalViewControllerAnimated:YES];
-        }
-    }
+    [confirmNewPasswordTextfield resignFirstResponder];
 }
 
-
-
--(void)passwordEntered:(UITextField*)source
+- (IBAction)cancelTapped:(id)sender 
 {
-    [self setCellAccessoryViewFirstResponder:[NSIndexPath indexPathForRow:1 inSection:0]];
+    [self.view removeFromSuperview];
 }
 
--(void)newPasswordEntered: (UITextField*)source
+- (IBAction)changePasswordOKTapped:(id)sender 
 {
-    [self setCellAccessoryViewFirstResponder:[NSIndexPath indexPathForRow:2 inSection:0]];
+    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+    //todo connect to server and try to change password
+    
 }
 
--(void) passwordConfirmEntered: (UITextField*)source
-{
-}
-
--(void)setCellAccessoryViewFirstResponder:(NSIndexPath *)indexPath
-{
-    UITableViewCell* cell = [changePasswordTable cellForRowAtIndexPath:indexPath];
-    [cell.accessoryView becomeFirstResponder];
-}
-
-- (void)viewDidUnload {
-    [self setChangePasswordTable:nil];
-    [super viewDidUnload];
-}
 @end

@@ -7,20 +7,25 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-#import "AddressTextFieldCell.h"
+#import "TipUsAddressTextFieldCell.h"
 #import "ActionSheetPicker.h"
 #import "UIAlertView+Blocks.h"
+#import "ContactInfoCell.h"
 
-@implementation AddressTextFieldCell
+@implementation TipUsAddressTextFieldCell
 
 @synthesize addressTextField;
 
 -(id)init
 {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"AddressTextFieldCell"
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TipUsAddressTextFieldCell"
                                                  owner:self
                                                options:nil];
     self = [nib objectAtIndex:0];
+
+    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+    [self setAddressWithLatitude:SearchLocation.instance.getCurrentLocation.latitude longitude:SearchLocation.instance.getCurrentLocation.longitude];
+
 
     return self;
 }
@@ -31,10 +36,6 @@
 
 - (IBAction)addressTextFieldEditingDidEnd:(id)sender
 {
-    [NSUserDefaults.standardUserDefaults setObject:addressTextField.text forKey:@"savedAddress"];
-    SearchLocation.instance.savedAddressString = addressTextField.text;
-
-//    if (addressTextField.text.length > 0)
     [self geoCodeAddressWithString:addressTextField.text];
 }
 
@@ -47,7 +48,7 @@
             if (placemarks.count == 1)
             {
                 CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                [self saveCoordinates:placemark.location.coordinate];
+                self.addressTextField.text = [placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
             }
             else if (placemarks.count > 1)
             {
@@ -69,36 +70,53 @@
                             addressLine = [NSString stringWithFormat:@"%@, %@", addressLine, currAddress];
                         }
                     }
-//                    NSLog(@"address line %@", addressLine);
                     [addressArray addObject:addressLine];
                 }
 
                 ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue)
                 {
                     CLPlacemark *placemark = [placemarks objectAtIndex:selectedIndex];
-                    [self saveCoordinates:placemark.location.coordinate];
+                    self.addressTextField.text = [placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
                 };
                 [ActionSheetStringPicker showPickerWithTitle:@"Select Address" rows:addressArray initialSelection:0 doneBlock:done cancelBlock:nil origin:self];
             }
         }
         else
         {
-            CLLocationCoordinate2D emptyCoordinate;
-            emptyCoordinate.latitude = 9999;
-            emptyCoordinate.longitude = 9999;
-            [self saveCoordinates:emptyCoordinate];
+            RIButtonItem *okayButton = [RIButtonItem item];
+            okayButton.label = @"Okay";
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Address"
+                                                                message:@"Please enter another address"
+                                                       cancelButtonItem:okayButton
+                                                       otherButtonItems:nil];
+            [alertView show];
+            [addressTextField becomeFirstResponder];
         }
     }];
 }
 
 
--(void)saveCoordinates:(CLLocationCoordinate2D)coordinate2D
+-(void)setAddressWithLatitude:(double)latitude longitude:(double)longitude
 {
-    SearchLocation.instance.savedAddressCoordinate = coordinate2D;
-    double longitude = coordinate2D.longitude;
-    double latitude = coordinate2D.latitude;
-    [NSUserDefaults.standardUserDefaults setDouble:latitude forKey:@"savedLongitude"];
-    [NSUserDefaults.standardUserDefaults setDouble:longitude forKey:@"savedLatitude"];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error)
+    {
+        dispatch_async(dispatch_get_main_queue(),^ {
+            if (placemarks.count == 1)
+            {
+                CLPlacemark *place = [placemarks objectAtIndex:0];
+                NSLog(@"place %@", place.addressDictionary);
+//                NSString *address = [NSString stringWithFormat:@"%@, %@", [place.addressDictionary objectForKey:@"Street"], [place.addressDictionary objectForKey:@"City"]];
+//                addressTextField.text = address;
+                NSArray *addressArray = [place.addressDictionary objectForKey:@"FormattedAddressLines"];
+                NSString *address = [NSString stringWithFormat:@"%@, %@, %@", [addressArray objectAtIndex:0], [addressArray objectAtIndex:1], [addressArray objectAtIndex:2]];
+                addressTextField.text = address;
+
+            }
+        });
+    }];
 }
 
 @end

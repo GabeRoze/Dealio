@@ -1,21 +1,21 @@
 //
-//  TextFieldCell.m
+//  PickerDisplayCell.m
 //  Dealio
 //
-//  Created by Gabe Rozenberg on 12-08-26.
+//  Created by Gabe Rozenberg on 12-08-27.
 //  Copyright (c) 2012 University of Waterloo. All rights reserved.
 //
 
-#import "TextFieldCell.h"
+#import "PickerDisplayCell.h"
+#import "ActionSheetPicker.h"
 
-@implementation TextFieldCell
-
-@synthesize cellTextField;
-@synthesize backgroundImage;
+@implementation PickerDisplayCell
+@synthesize descriptionLabel;
+@synthesize timeLabel;
 
 -(id)init
 {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"TextFieldCell"
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PickerDisplayCell"
                                                  owner:self
                                                options:nil];
     self = [nib objectAtIndex:0];
@@ -24,5 +24,6 @@
 
     return self;
 }
+
 
 @end

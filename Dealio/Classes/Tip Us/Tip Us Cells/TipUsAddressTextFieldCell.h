@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Models.h"
 
-@interface AddressTextFieldCell : UITableViewCell
+@interface TipUsAddressTextFieldCell : UITableViewCell
 {
+    IBOutlet UIImageView *backgroundImage;
 }
 
 @property (strong, nonatomic) IBOutlet UITextField *addressTextField;
 
-
+-(void)setAddressWithLatitude:(double)latitude longitude:(double)longitude;
 -(void)geoCodeAddressWithString:(NSString *)address;
 - (IBAction)addressTextFieldDonePressed:(id)sender;
 - (IBAction)addressTextFieldEditingDidEnd:(id)sender;
