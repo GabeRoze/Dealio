@@ -38,17 +38,7 @@
 
 -(IBAction)changePasswordTapped:(id)sender
 {
-//    NSLog(@"password change tap");
-    ChangePasswordViewController *changePasswordViewController = [[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
-    TheRestaurantAppDelegate *theRestaurantAppDelegate = (TheRestaurantAppDelegate *)[[UIApplication sharedApplication] delegate];
-//    [self.superview addSubview:changePasswordViewController.view];
-
-//    UserProfileViewController *userProfileViewController = (UserProfileViewController *)[theRestaurantAppDelegate.rootController.viewControllers objectAtIndex:0];
-//    [userProfileViewController.view addSubview:changePasswordViewController.view];
-//    [NSNotificationCenter.defaultCenter postNotificationName:@"presentChangePasswordView" object:nil];
-    [theRestaurantAppDelegate.rootController presentModalViewController:changePasswordViewController animated:YES];
-
-//    [theRestaurantAppDelegate.rootController presentModalViewController:changePasswordViewController animated:YES];
+    [NSNotificationCenter.defaultCenter postNotificationName:@"presentChangePasswordView" object:nil];
 }
 
 -(IBAction)feedbackTapped:(id)sender

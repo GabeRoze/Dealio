@@ -1919,6 +1919,8 @@
 		C0FE21A514F4410F00F03DFF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dealio/Dealio-Prefix.pch";
 				INFOPLIST_FILE = "Dealio/Dealio-Info.plist";
@@ -1927,6 +1929,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "60014B1E-6EF8-46AC-8946-549F2BEEAE83";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "60014B1E-6EF8-46AC-8946-549F2BEEAE83";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1934,6 +1938,8 @@
 		C0FE21A614F4410F00F03DFF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dealio/Dealio-Prefix.pch";
 				INFOPLIST_FILE = "Dealio/Dealio-Info.plist";
@@ -1942,6 +1948,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "60014B1E-6EF8-46AC-8946-549F2BEEAE83";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "60014B1E-6EF8-46AC-8946-549F2BEEAE83";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1970,6 +1978,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dealio/Dealio-Prefix.pch";
 				INFOPLIST_FILE = "Dealio/Dealio-Info.plist";
@@ -1978,6 +1988,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "60014B1E-6EF8-46AC-8946-549F2BEEAE83";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "60014B1E-6EF8-46AC-8946-549F2BEEAE83";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Ad Hoc";

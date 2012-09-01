@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "XMLParser.h"
+#import "ChangePasswordViewController.h"
 
 @interface UserProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
     IBOutlet UITableView *table;
     XMLParser *parser;
+    ChangePasswordViewController *changePasswordViewController;
 }
 
 @end

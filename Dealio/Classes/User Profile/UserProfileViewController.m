@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import <CoreGraphics/CoreGraphics.h>
 #import "UserProfileViewController.h"
 #import "UserProfileNameCell.h"
 #import "TableFooterCell.h"
@@ -50,24 +51,29 @@
             });
         });
     }
-                                  andFailure:^{
-                                      [GRCustomSpinnerView.instance stopSpinner];
-                                      //
-                                  }];
+            andFailure:^{
+                [GRCustomSpinnerView.instance stopSpinner];
+                //
+            }];
 }
 
 -(void)presentChangePasswordView
 {
-    ChangePasswordViewController *changePasswordViewController = [[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
+    changePasswordViewController = [[ChangePasswordViewController alloc] initWithNibName:@"ChangePasswordViewController" bundle:nil];
+    CGRect frame = changePasswordViewController.view.frame;
+    frame.origin.y = -self.view.frame.size.height;
+    changePasswordViewController.view.frame = frame;
+    changePasswordViewController.view.alpha = 0;
+    [self.view addSubview:changePasswordViewController.view];
 
-    TheRestaurantAppDelegate *theRestaurantAppDelegate = (TheRestaurantAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [theRestaurantAppDelegate.window addSubview:changePasswordViewController.view];
-
-
-//    changePasswordViewController.view.alpha = 0.5;
-//    [self presentModalViewController:changePasswordViewController animated:YES];
-//    [self.navigationController presentViewController:changePasswordViewController animated:YES completion:nil];
-//    [self.view addSubview:changePasswordViewController.view];
+    [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+        CGRect rect = changePasswordViewController.view.frame;
+        rect.origin.y = 0;
+        changePasswordViewController.view.frame = rect;
+        changePasswordViewController.view.alpha = 1.0;
+    } completion:^(BOOL finished){
+        [changePasswordViewController.currentPasswordTextField becomeFirstResponder];
+    }];
 }
 
 
