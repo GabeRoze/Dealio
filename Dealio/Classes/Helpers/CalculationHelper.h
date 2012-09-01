@@ -11,7 +11,7 @@
 
 @interface CalculationHelper : NSObject
 
-
++(NSString *)checkStringNull:(NSString *)str;
 +(NSString *)getAddressStringFromPlacemark:(CLPlacemark *)placemark;
 + (NSString *) platformString;
 +(NSString*) convertLikesToRating:(NSString*)likes dislikes:(NSString*)dislikes;

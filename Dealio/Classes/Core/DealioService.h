@@ -11,5 +11,7 @@
 @interface DealioService : NSObject
 
 +(void)loginWithEmail:(NSString *)email password:(NSString *)password onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure;
++(void)getUserProfileWithSuccess:(void (^)(NSData *xmlData))success andFailure:(void (^)())failure;
+
 
 @end

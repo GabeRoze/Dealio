@@ -13,13 +13,12 @@
 #import "ThreeButtonTableCell.h"
 #import "ChangePasswordViewController.h"
 #import "GRCustomSpinnerView.h"
+#import "XMLElement.h"
 #import "TheRestaurantAppDelegate.h"
 #import "LoginViewController.h"
-
-
-@interface UserProfileViewController ()
-
-@end
+#import "DealioService.h"
+#import "Models.h"
+#import "CalculationHelper.h"
 
 @implementation UserProfileViewController
 
@@ -30,6 +29,31 @@
     [self.navigationController setNavigationBarHidden:YES];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(presentChangePasswordView) name:@"presentChangePasswordView" object:nil];
 
+}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+
+    self.navigationController.navigationBarHidden = YES;
+    [DealioService getUserProfileWithSuccess:^(NSData *data){
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            parser = [[XMLParser alloc] initXMLParser:data];
+            NSLog(@"parser data %@",parser.userFunction);
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [GRCustomSpinnerView.instance stopSpinner];
+                [table reloadData];
+            });
+        });
+    }
+                                  andFailure:^{
+                                      [GRCustomSpinnerView.instance stopSpinner];
+                                      //
+                                  }];
 }
 
 -(void)presentChangePasswordView
@@ -66,10 +90,18 @@
         {
             userProfileNameCell = [UserProfileNameCell new];
         }
-        userProfileNameCell.nameLabel.text = @"hi Gabe Rozenberg!";
+        NSString *firstName = [parser.userFunction objectForKey:@"userfirstname"];
+        NSString *lastName = [parser.userFunction objectForKey:@"userlastname"];
         [userProfileNameCell.nameLabel setFont:[UIFont fontWithName:@"Eurofurenceregular" size:26]];
 
-        userProfileNameCell.emailLabel.text = @"(gebe1987@gmail.com)";
+        if (firstName.length < 1)
+        {
+            firstName = @"";
+            lastName = @"";
+        }
+
+        userProfileNameCell.nameLabel.text = [NSString stringWithFormat:@"hi %@ %@!", firstName, lastName];
+        userProfileNameCell.emailLabel.text = [NSString stringWithFormat:@"(%@)", UserData.instance.email];
 
         return userProfileNameCell;
     }
@@ -115,8 +147,11 @@
             profileDataCell = [ProfileDataCell new];
         }
 
+        NSString *numFavorited = [parser.userFunction objectForKey:@"userfavoritedcount"];
+
         profileDataCell.leftImage.image = [UIImage imageNamed:@"button_favorite.png"];
-        profileDataCell.textLabel.text = @"Favorited 4 deals";
+        numFavorited = [CalculationHelper checkStringNull:numFavorited];
+        profileDataCell.textLabel.text = [NSString stringWithFormat:@"Favorited %@ deals", numFavorited];
 
         return profileDataCell;
     }
@@ -130,9 +165,10 @@
         {
             profileDataCell = [ProfileDataCell new];
         }
-
+        NSString *numCommented = [parser.userFunction objectForKey:@"usercommentcount"];
         profileDataCell.leftImage.image = [UIImage imageNamed:@"button_comment.png"];
-        profileDataCell.textLabel.text = @"Commented 3 times";
+        numCommented = [CalculationHelper checkStringNull:numCommented];
+        profileDataCell.textLabel.text = [NSString stringWithFormat:@"Commented %@ times", numCommented];
 
         return profileDataCell;
 
@@ -147,9 +183,10 @@
         {
             profileDataCell = [ProfileDataCell new];
         }
-
+        NSString *numLiked = [parser.userFunction objectForKey:@"userlikecount"];
         profileDataCell.leftImage.image = [UIImage imageNamed:@"button_love.png"];
-        profileDataCell.textLabel.text = @"Loved 9 deals";
+        numLiked = [CalculationHelper checkStringNull:numLiked];
+        profileDataCell.textLabel.text = [NSString stringWithFormat:@"Loved %@ deals", numLiked];
 
         return profileDataCell;
     }
@@ -164,8 +201,10 @@
             profileDataCell = [ProfileDataCell new];
         }
 
+        NSString *numChecked = [parser.userFunction objectForKey:@"usercheckedincount"];
         profileDataCell.leftImage.image = [UIImage imageNamed:@"button_checkin.png"];
-        profileDataCell.textLabel.text = @"Checked in at 0 restaurants";
+        numChecked = [CalculationHelper checkStringNull:numChecked];
+        profileDataCell.textLabel.text = [NSString stringWithFormat:@"Checked in at %@ restaurants", numChecked];
 
         return profileDataCell;
     }
@@ -180,8 +219,10 @@
             profileDataCell = [ProfileDataCell new];
         }
 
+        NSString *numShared = [parser.userFunction objectForKey:@"usersharecount"];
         profileDataCell.leftImage.image = [UIImage imageNamed:@"button_share.png"];
-        profileDataCell.textLabel.text = @"Shared 0 times";
+        numShared = [CalculationHelper checkStringNull:numShared];
+        profileDataCell.textLabel.text = [NSString stringWithFormat:@"Shared %@ times", numShared];
 
         return profileDataCell;
     }
@@ -196,8 +237,10 @@
             profileDataCell = [ProfileDataCell new];
         }
 
+        NSString *numTipped = [parser.userFunction objectForKey:@"usertipcount"];
         profileDataCell.leftImage.image = [UIImage imageNamed:@"button_tipus.png"];
-        profileDataCell.textLabel.text = @"Tipped us 5 deals";
+        numTipped = [CalculationHelper checkStringNull:numTipped];
+        profileDataCell.textLabel.text = [NSString stringWithFormat:@"Tipped us %@ deals", numTipped];
 
         return profileDataCell;
     }
@@ -212,8 +255,10 @@
             profileDataCell = [ProfileDataCell new];
         }
 
+        NSString *numPoints = [parser.userFunction objectForKey:@"userpoint"];
         profileDataCell.leftImage.image = [UIImage imageNamed:@"button_points.png"];
-        profileDataCell.textLabel.text = @"You have a total of 530 points";
+        numPoints = [CalculationHelper checkStringNull:numPoints];
+        profileDataCell.textLabel.text = [NSString stringWithFormat:@"You have a total of %@ points", numPoints];
 
         return profileDataCell;
     }

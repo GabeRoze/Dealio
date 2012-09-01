@@ -16,13 +16,28 @@
 #import "PickerDisplayCell.h"
 #import "UIActionSheet+Blocks.h"
 #import "MapViewCell.h"
+#import "DealioService.h"
 
 @implementation TipUsViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
     self.navigationController.navigationBarHidden = YES;
+    [DealioService getUserProfileWithSuccess:^(NSData *data){
+
+
+    }
+            andFailure:^{
+
+            }];
+    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

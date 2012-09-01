@@ -13,6 +13,15 @@
 
 @implementation CalculationHelper
 
++(NSString *)checkStringNull:(NSString *)str
+{
+    if (str.length < 1)
+    {
+        return @"";
+    }
+    return str;
+}
+
 +(NSString *)getAddressStringFromPlacemark:(CLPlacemark *)placemark
 {
     NSArray *formattedAddressLines = [placemark.addressDictionary objectForKey:@"FormattedAddressLines"];

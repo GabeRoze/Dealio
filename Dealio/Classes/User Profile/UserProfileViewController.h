@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XMLParser.h"
 
 @interface UserProfileViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
     IBOutlet UITableView *table;
+    XMLParser *parser;
 }
 
 @end

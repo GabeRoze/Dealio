@@ -67,7 +67,6 @@
 								<string key="NSFrame">{{46, 11}, {249, 21}}</string>
 								<reference key="NSSuperview" ref="46588027"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -96,7 +95,7 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrameSize">{300, 43}</string>
+						<string key="NSFrameSize">{320, 43}</string>
 						<reference key="NSSuperview" ref="464242750"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="926694772"/>
@@ -119,7 +118,6 @@
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				<int key="IBUISelectionStyle">2</int>
-				<int key="IBUIAccessoryType">1</int>
 				<reference key="IBUIContentView" ref="46588027"/>
 				<string key="IBUIReuseIdentifier">ContactInfoCellIdentifier</string>
 			</object>

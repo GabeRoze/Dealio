@@ -8,6 +8,7 @@
 
 #import "DealioService.h"
 #import "CalculationHelper.h"
+#import "Models.h"
 
 @implementation DealioService
 
@@ -43,6 +44,31 @@
                   }];
 }
 
++(void)getUserProfileWithSuccess:(void (^)(NSData *xmlData))success andFailure:(void (^)())failure
+{
+    NSString *command = @"cmd=profileretrieve";
+    NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",UserData.instance.email];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", command,emailString];
+    NSString* functionUrl = @"http://dealio.cinnux.com/app/newuserstart-func.php/";
+    NSMutableURLRequest *urlRequest = [CalculationHelper getURLRequest:functionUrl withData:urlString];
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                              queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                          NSLog (@"HTML = %@", html);
+                          success(data);
+                      }
+                      else
+                      {
+                          failure();
+                      }
+                  }];
+}
 
 
 @end

@@ -25,7 +25,7 @@
 #pragma mark - View lifecycle
 -(void)displaySpinner
 {
-    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [spinner setCenter:CGPointMake(spinnerImageView.bounds.size.width/2.0,spinnerImageView.bounds.size.height/2.0)];
     [spinnerImageView addSubview:spinner];
     [spinner startAnimating];

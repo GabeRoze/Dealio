@@ -740,10 +740,6 @@
 		9C153C9B15E0216600365E2C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				9CFC343515D7403F008C47B0 /* Connectivity */,
-				C0FE21B114F442D200F03DFF /* Helpers */,
-				C0FE21B414F4431500F03DFF /* Main Views */,
-				9C153CCE15E1504600365E2C /* Model */,
 			);
 			name = Core;
 			path = Classes/Core;
@@ -774,6 +770,9 @@
 		9C153CCD15E14F8800365E2C /* Old */ = {
 			isa = PBXGroup;
 			children = (
+				C047536114F4B40C00B3AD79 /* BorderedSpinnerView.h */,
+				C047536214F4B40C00B3AD79 /* BorderedSpinnerView.m */,
+				C047536314F4B40C00B3AD79 /* BorderedSpinnerView.xib */,
 				9C153CB015E1323700365E2C /* Old Filters */,
 				C047536614F4B40C00B3AD79 /* CINSegmentedControl.h */,
 				C047536714F4B40C00B3AD79 /* CINSegmentedControl.m */,
@@ -795,6 +794,7 @@
 				9C153C9D15E0217800365E2C /* Models.m */,
 			);
 			name = Model;
+			path = Classes/Core;
 			sourceTree = "<group>";
 		};
 		9C246A7415E72D9B0094293B /* Deal List */ = {
@@ -1147,7 +1147,6 @@
 				C047537114F4B40C00B3AD79 /* XMLParser.m */,
 			);
 			name = Connectivity;
-			path = ../..;
 			sourceTree = "<group>";
 		};
 		C0655F3814F5721200869736 /* Version 2 */ = {
@@ -1400,7 +1399,12 @@
 		C0FE21B014F442CA00F03DFF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				9C75E1AF15EAA9A5009E3461 /* GRCustomSpinnerView */,
+				9CFC343515D7403F008C47B0 /* Connectivity */,
 				9C75E1CA15EACF61009E3461 /* Third Party */,
+				C0FE21B114F442D200F03DFF /* Helpers */,
+				C0FE21B414F4431500F03DFF /* Main Views */,
+				9C153CCE15E1504600365E2C /* Model */,
 				9C153C9B15E0216600365E2C /* Core */,
 				9C75E22D15EAD0D2009E3461 /* Favorites */,
 				C0FE21B614F4433A00F03DFF /* Deals */,
@@ -1420,7 +1424,6 @@
 				C047536514F4B40C00B3AD79 /* CalculationHelper.m */,
 			);
 			name = Helpers;
-			path = ../..;
 			sourceTree = "<group>";
 		};
 		C0FE21B214F442E100F03DFF /* Filters */ = {
@@ -1449,10 +1452,6 @@
 		C0FE21B414F4431500F03DFF /* Main Views */ = {
 			isa = PBXGroup;
 			children = (
-				9C75E1AF15EAA9A5009E3461 /* GRCustomSpinnerView */,
-				C047536114F4B40C00B3AD79 /* BorderedSpinnerView.h */,
-				C047536214F4B40C00B3AD79 /* BorderedSpinnerView.m */,
-				C047536314F4B40C00B3AD79 /* BorderedSpinnerView.xib */,
 				C047534D14F4B3C600B3AD79 /* LoginViewController.h */,
 				C047534E14F4B3C600B3AD79 /* LoginViewController.m */,
 				C047534F14F4B3C700B3AD79 /* LoginViewController.xib */,
@@ -1465,7 +1464,6 @@
 				C0FE21B514F4431800F03DFF /* Login and Register Cells */,
 			);
 			name = "Main Views";
-			path = ../..;
 			sourceTree = "<group>";
 		};
 		C0FE21B514F4431800F03DFF /* Login and Register Cells */ = {
