@@ -11,6 +11,7 @@
 
 @implementation Models
 
+
 @end
 
 @implementation FilterData
@@ -129,7 +130,7 @@
 + (DealData*)instance
 {
     static DealData* instance = nil;
-    
+
     if (!instance)
     {
         instance = [DealData new];
@@ -146,5 +147,26 @@
     }
     return self;
 }
-    
+
+
+@end
+
+
+@implementation UserData
+
+@synthesize email;
+@synthesize firstName;
+@synthesize lastName;
+
++(UserData *)instance
+{
+    static UserData * instance = nil;
+
+    if (!instance)
+    {
+        instance = [UserData new];
+    }
+    return instance;
+}
+
 @end

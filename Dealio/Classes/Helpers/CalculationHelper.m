@@ -170,6 +170,8 @@
     NSData *myRequestData = [NSData dataWithBytes: [urlAsString UTF8String] length:[urlAsString length]];
     NSURL* url = [NSURL URLWithString:functionURL];
 
+    NSLog(@"function url : %@ data %@", functionURL,data);
+
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     [urlRequest setTimeoutInterval:30.0f];
     [urlRequest setHTTPMethod:@"POST"];

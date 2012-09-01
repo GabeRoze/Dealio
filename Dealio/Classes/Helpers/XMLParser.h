@@ -20,6 +20,7 @@
 @property (strong, nonatomic) XMLElement* currentElementPointer;
 @property (strong, nonatomic) NSMutableDictionary* favoriteResult;
 @property (strong, nonatomic) NSMutableDictionary* loginResult;
+@property (strong, nonatomic) NSMutableDictionary* userFunction;
 @property (strong, nonatomic) NSMutableDictionary* registerResult;
 @property (strong, nonatomic) NSMutableDictionary* dealItem;
 @property (strong, nonatomic) NSMutableDictionary* featuredDeal;

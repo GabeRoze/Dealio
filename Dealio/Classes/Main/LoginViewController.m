@@ -15,6 +15,7 @@
 #import "BorderedSpinnerView.h"
 #import "DealioService.h"
 #import "GRCustomSpinnerView.h"
+#import "Models.h"
 
 @implementation LoginViewController
 @synthesize emailField;
@@ -118,15 +119,14 @@
         [GRCustomSpinnerView.instance addSpinnerToView:self.view];
         messageText = @"Attempting to connect to server";
 
-        [DealioService loginWithEmail:@"a" password:@"a" onSuccess:^(NSData *data){
+        [DealioService loginWithEmail:[userData objectAtIndex:0] password:[userData objectAtIndex:1] onSuccess:^(NSData *data){
+
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 parser = [[XMLParser alloc] initXMLParser:data];
-
-                NSLog(@"parse login %@", parser.loginResult);
-                messageText = [parser.loginResult objectForKey:@"message"];
-                //set userfirstname
-                //set userlastname
-                //set useremail
+                messageText = [parser.userFunction objectForKey:@"message"];
+                UserData.instance.firstName = [parser.userFunction objectForKey:@"userfirstname"];
+                UserData.instance.lastName = [parser.userFunction objectForKey:@"userlastname"];
+                UserData.instance.email = [userData objectAtIndex:0];
 
                 dispatch_async( dispatch_get_main_queue(), ^{
                     [GRCustomSpinnerView.instance stopSpinner];
@@ -155,7 +155,7 @@
     field = (UITextField*) cell1.accessoryView;
     field.text = @"";
 
-    TheRestaurantAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    TheRestaurantAppDelegate *appDelegate = (TheRestaurantAppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate loginSuccess];
 }
 

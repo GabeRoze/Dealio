@@ -177,7 +177,7 @@
             addressTextFieldCell = [TipUsAddressTextFieldCell new];
         }
 
-//        addressTextFieldCell.addressTextField.userInteractionEnabled = NO;
+//        addressTextFieldCell.addressTextField
         //todo -address text field cell changed - update the map;
 
         return  addressTextFieldCell;

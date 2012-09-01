@@ -32,8 +32,8 @@
                   completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
                       if ([data length] > 0 && error == nil)
                       {
-//                          NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//                          NSLog (@"HTML = %@", html);
+                          NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                          NSLog (@"HTML = %@", html);
                           success(data);
                       }
                       else

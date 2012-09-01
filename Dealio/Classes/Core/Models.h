@@ -45,3 +45,13 @@
 
 + (DealData*)instance;
 @end
+
+@interface UserData : NSObject
+
++(UserData *)instance;
+
+@property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
+
+@end

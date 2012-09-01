@@ -22,6 +22,7 @@
 @synthesize favoriteResult;
 @synthesize registerResult;
 @synthesize featuredDeal;
+@synthesize userFunction;
 
 - (XMLParser *)initXMLParser:(NSData*)data {
 
@@ -55,9 +56,9 @@
 
 -(void) parser:(NSXMLParser*)parser
         didStartElement:(NSString*)elementName
-           namespaceURI:(NSString *)namespaceURI
-          qualifiedName:(NSString *)qName
-             attributes:(NSDictionary *)attributeDict
+        namespaceURI:(NSString *)namespaceURI
+        qualifiedName:(NSString *)qName
+        attributes:(NSDictionary *)attributeDict
 {
     if ([elementName isEqualToString:@"loginresult"])
     {
@@ -66,6 +67,18 @@
             loginResult = [[NSMutableDictionary alloc] init];
             dealTagStatus = @"Login info began";
         }
+    }
+    else if ([elementName isEqualToString:@"userfunction"])
+    {
+        if (!userFunction)
+        {
+            userFunction = [NSMutableDictionary new];
+            dealTagStatus = @"User function began";
+        }
+    }
+    else if ([dealTagStatus isEqualToString:@"User function began"])
+    {
+        currentTag = elementName;
     }
     else if ([dealTagStatus isEqualToString:@"Login info began"])
     {
@@ -148,6 +161,7 @@
 -(void) parser:(NSXMLParser *)parser
         foundCharacters:(NSString *)string
 {
+
     if ([self.currentElementPointer.text length] > 0)
     {
         self.currentElementPointer.text = [self.currentElementPointer.text stringByAppendingString:string];
@@ -155,6 +169,7 @@
     else
     {
         self.currentElementPointer.text = string;
+        NSLog(string);
         //add result for login
         if ([dealTagStatus isEqualToString:@"Login info began"] && currentTag!= NULL)
         {
@@ -195,6 +210,13 @@
             [dealComments insertObject:string atIndex:commentCount];
             commentCount++;
         }
+        else if ([dealTagStatus isEqualToString:@"User function began"]
+                && currentTag.length > 0
+                && string.length > 0
+                && ![string isEqualToString:@"\n"])
+        {
+            [userFunction setObject:string forKey:currentTag];
+        }
     }
 }
 
@@ -224,8 +246,8 @@
 }
 
 //dispose of currentelemntpointer cuz document ended
--(void)parserDidEndDocument:(NSXMLParser *)parser {
-
+-(void)parserDidEndDocument:(NSXMLParser *)parser
+{
     self.currentElementPointer = nil;
 }
 
