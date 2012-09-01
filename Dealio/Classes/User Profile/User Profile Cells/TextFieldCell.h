@@ -15,5 +15,6 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *cellTextField;
 @property (strong, nonatomic) IBOutlet UIImageView *backgroundImage;
+- (IBAction)textFieldDidEndOnExit:(id)sender;
 
 @end

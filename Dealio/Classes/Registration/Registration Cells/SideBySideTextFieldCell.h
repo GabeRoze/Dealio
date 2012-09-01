@@ -14,4 +14,6 @@
 }
 @property (strong, nonatomic) IBOutlet UITextField *leftTextField;
 @property (strong, nonatomic) IBOutlet UITextField *rightTextField;
+- (IBAction)firstNameDidEndOnExit:(id)sender;
+- (IBAction)lastNameDidEndOnExit:(id)sender;
 @end

@@ -10,4 +10,6 @@
 
 @interface DealioService : NSObject
 
++(void)loginWithEmail:(NSString *)email password:(NSString *)password onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure;
+
 @end

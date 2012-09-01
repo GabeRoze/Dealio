@@ -177,6 +177,7 @@
             addressTextFieldCell = [TipUsAddressTextFieldCell new];
         }
 
+//        addressTextFieldCell.addressTextField.userInteractionEnabled = NO;
         //todo -address text field cell changed - update the map;
 
         return  addressTextFieldCell;
@@ -296,6 +297,7 @@
     }
     else if (indexPath.row == 8)
     {
+        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         TipUsAddressTextFieldCell *tipUsAddressTextFieldCell = (TipUsAddressTextFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         tipUsAddressTextFieldCell.addressTextField.becomeFirstResponder;
     }
@@ -310,7 +312,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 

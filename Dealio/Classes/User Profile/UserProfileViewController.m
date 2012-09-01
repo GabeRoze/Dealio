@@ -14,6 +14,7 @@
 #import "ChangePasswordViewController.h"
 #import "GRCustomSpinnerView.h"
 #import "TheRestaurantAppDelegate.h"
+#import "LoginViewController.h"
 
 
 @interface UserProfileViewController ()
@@ -286,13 +287,16 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 
     if (indexPath.row == 12)
     {
 //        [GRCustomSpinnerView.instance addSpinnerToView:self.view];
         //call logout
         //upon success load the login view
+        LoginViewController *loginViewController = [LoginViewController new];
+        [self presentModalViewController:loginViewController animated:YES];
+
     }
 }
 

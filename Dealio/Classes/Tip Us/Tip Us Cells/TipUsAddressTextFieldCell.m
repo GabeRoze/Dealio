@@ -11,6 +11,7 @@
 #import "ActionSheetPicker.h"
 #import "UIAlertView+Blocks.h"
 #import "ContactInfoCell.h"
+#import "CalculationHelper.h"
 
 @implementation TipUsAddressTextFieldCell
 
@@ -48,7 +49,7 @@
             if (placemarks.count == 1)
             {
                 CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                self.addressTextField.text = [placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
+                self.addressTextField.text = [CalculationHelper getAddressStringFromPlacemark:placemark];
             }
             else if (placemarks.count > 1)
             {
@@ -56,21 +57,7 @@
 
                 for(CLPlacemark *placemark in placemarks)
                 {
-                    NSArray *formattedAddressLines = [placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
-                    NSString *addressLine = @"";
-                    for (NSUInteger i = 0; i < formattedAddressLines.count; i++)
-                    {
-                        NSString *currAddress = [formattedAddressLines objectAtIndex:i];
-                        if (i == 0)
-                        {
-                            addressLine = currAddress;
-                        }
-                        else
-                        {
-                            addressLine = [NSString stringWithFormat:@"%@, %@", addressLine, currAddress];
-                        }
-                    }
-                    [addressArray addObject:addressLine];
+                    [addressArray addObject:[CalculationHelper getAddressStringFromPlacemark:placemark]];
                 }
 
                 ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue)

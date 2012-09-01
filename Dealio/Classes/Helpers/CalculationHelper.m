@@ -13,6 +13,25 @@
 
 @implementation CalculationHelper
 
++(NSString *)getAddressStringFromPlacemark:(CLPlacemark *)placemark
+{
+    NSArray *formattedAddressLines = [placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
+    NSString *addressLine = @"";
+    for (NSUInteger i = 0; i < formattedAddressLines.count; i++)
+    {
+        NSString *currAddress = [formattedAddressLines objectAtIndex:i];
+        if (i == 0)
+        {
+            addressLine = currAddress;
+        }
+        else
+        {
+            addressLine = [NSString stringWithFormat:@"%@, %@", addressLine, currAddress];
+        }
+    }
+    return addressLine;
+}
+
 + (NSString *) platform
 {
     size_t size;
@@ -148,8 +167,7 @@
 +(NSMutableURLRequest*) getURLRequest:(NSString*)functionURL withData:(NSString*)data
 {
     NSString* urlAsString = data;
-    NSLog(@"urlstr: %@", urlAsString);
-    NSData *myRequestData = [NSData dataWithBytes: [urlAsString UTF8String] length: [urlAsString length]];
+    NSData *myRequestData = [NSData dataWithBytes: [urlAsString UTF8String] length:[urlAsString length]];
     NSURL* url = [NSURL URLWithString:functionURL];
 
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];

@@ -12,6 +12,7 @@
 {
     IBOutlet UITableView *table;
     BOOL optionalInfoPresent;
+    IBOutlet UIImageView *backgroundImage;
 }
 
 @end

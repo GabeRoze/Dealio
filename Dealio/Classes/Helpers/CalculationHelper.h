@@ -12,7 +12,7 @@
 @interface CalculationHelper : NSObject
 
 
-
++(NSString *)getAddressStringFromPlacemark:(CLPlacemark *)placemark;
 + (NSString *) platformString;
 +(NSString*) convertLikesToRating:(NSString*)likes dislikes:(NSString*)dislikes;
 +(NSString*) convertIntToDay:(int)num;

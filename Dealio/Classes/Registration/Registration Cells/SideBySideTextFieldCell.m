@@ -24,4 +24,9 @@
     return self;
 }
 
+- (IBAction)firstNameDidEndOnExit:(id)sender {
+}
+
+- (IBAction)lastNameDidEndOnExit:(id)sender {
+}
 @end

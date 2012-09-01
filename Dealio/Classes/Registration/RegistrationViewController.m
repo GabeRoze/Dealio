@@ -24,6 +24,8 @@
 {
     [super viewDidLoad];
     optionalInfoPresent = NO;
+    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -102,6 +104,7 @@
 
         textFieldCell.backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_light.png"]];
         textFieldCell.cellTextField.placeholder = @"Password";
+        textFieldCell.cellTextField.secureTextEntry = YES;
         [textFieldCell.cellTextField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
 
         return textFieldCell;
@@ -257,7 +260,7 @@
     }
     else if ((indexPath.row == 9 && !optionalInfoPresent) || (indexPath.row == 14 && optionalInfoPresent))
     {
-        cellID = @"ButtonCellIdentifier";
+        cellID = @"CancelButtonCellIdentifier";
 
         ButtonCell *buttonCell = [tableView dequeueReusableCellWithIdentifier:cellID];
 
@@ -290,7 +293,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 
     if (indexPath.row == 5 && optionalInfoPresent)
     {
@@ -306,5 +309,10 @@
     {
         [self dismissModalViewControllerAnimated:YES];
     }
+    //ifwhat does dealio first responder
+    //scroll to top
+    //add selector for editing did end
+    //undo anitation
+    //same for age ethnicity and income
 }
 @end

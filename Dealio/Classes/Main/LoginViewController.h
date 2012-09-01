@@ -11,11 +11,10 @@
 @class XMLParser;
 @class BorderedSpinnerView;
 
-
-@interface LoginViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
-    UIActivityIndicatorView* spinner;
+@interface LoginViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+{
+//    UIActivityIndicatorView* spinner;
 }
-
 
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -23,7 +22,7 @@
 @property (strong, nonatomic) NSString* messageText;
 @property (strong, nonatomic) RegistrationViewController* registrationViewController;
 @property (weak, nonatomic) IBOutlet UITableView *table;
-@property (strong, nonatomic) BorderedSpinnerView* borderedSpinnerView;
+//@property (strong, nonatomic) BorderedSpinnerView* borderedSpinnerView;
 
 -(IBAction)emailFieldDoneEditing:(id)sender;
 -(IBAction)loginDone:(id)sender;
@@ -36,10 +35,10 @@
 -(void) animateView: (UITextField*) textField distance:(int)distance;
 -(void)loginSuccess;
 -(void) attemptLogin;
--(void)parseXMLFile:(NSData*)data;
--(void) stopSpinner;
--(void) createAndDisplaySpinner;
--(void) connectToServer:(NSArray*)userData;
+//-(void)parseXMLFile:(NSData*)data;
+//-(void) stopSpinner;
+//-(void) createAndDisplaySpinner;
+//-(void) connectToServer:(NSArray*)userData;
 
 @end
 
