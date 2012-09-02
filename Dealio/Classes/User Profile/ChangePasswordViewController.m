@@ -12,6 +12,7 @@
 #import "GRCustomSpinnerView.h"
 #import "UIAlertView+Blocks.h"
 #import "DealioService.h"
+#import "XMLParser.h"
 
 @implementation ChangePasswordViewController
 @synthesize currentPasswordTextField;
@@ -67,22 +68,45 @@
 
 -(void)changePassword
 {
-   if  ([self verifyPasswords])
-   {
-       [GRCustomSpinnerView.instance addSpinnerToView:self.view];
-       [DealioService changePasswordWithNewPassword:confirmNewPasswordTextfield.text onSuccess:^(NSData *data){
-        [GRCustomSpinnerView.instance stopSpinner];
-           [self displayAlertWithButtonTitle:@"Paswword Successfully Changed!" andAction:^{
-               currentPasswordTextField.text = @"";
-               newPasswordTextField.text = @"";
-               confirmNewPasswordTextfield.text = @"";
-               [self fadeView];
-           }];
+    if  ([self verifyPasswords])
+    {
+        [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+        [DealioService changePasswordWithNewPassword:confirmNewPasswordTextfield.text currentPassword:currentPasswordTextField.text onSuccess:^(NSData *data){
+            [GRCustomSpinnerView.instance stopSpinner];
 
-       } andFailure:^{
-           [GRCustomSpinnerView.instance stopSpinner];
-       }];
-   }
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                XMLParser *parser = [[XMLParser alloc] initXMLParser:data];
+                NSString *messageText = [parser.userFunction objectForKey:@"message"];
+
+                if ([messageText isEqualToString:@"success"])
+                {
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                        [GRCustomSpinnerView.instance stopSpinner];
+                        currentPasswordTextField.text = @"";
+                        newPasswordTextField.text = @"";
+                        confirmNewPasswordTextfield.text = @"";
+                        [self displayAlertWithButtonTitle:@"Paswword Successfully Changed!" andAction:^{
+                            [self fadeView];
+                        }];
+                    });
+                }
+                else if ([messageText isEqualToString:@"fail"])
+                {
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                        [GRCustomSpinnerView.instance stopSpinner];
+                        [self displayAlertWithButtonTitle:@"Current password is incorrect" andAction:^{
+                            [currentPasswordTextField becomeFirstResponder];
+                        }];
+                    });
+                }
+            });
+        }
+                andFailure:^{
+                    [GRCustomSpinnerView.instance stopSpinner];
+                    [self displayAlertWithButtonTitle:@"Server error, try again later" andAction:^{
+                    }];
+                }];
+    }
 }
 
 -(BOOL)verifyPasswords

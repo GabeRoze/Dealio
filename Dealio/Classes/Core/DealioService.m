@@ -66,12 +66,13 @@
 }
 
 
-+(void)changePasswordWithNewPassword:(NSString *)newPassword onSuccess:(void (^)(NSData *xmlData))success andFailure:(void (^)())failure
++(void)changePasswordWithNewPassword:(NSString *)newPassword currentPassword:(NSString *)currentPassword onSuccess:(void (^)(NSData *xmlData))success andFailure:(void (^)())failure
 {
     NSString *command = @"cmd=changepw";
+    NSString *command2 = [NSString stringWithFormat:@"&cmd2=%@", newPassword];
     NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",UserData.instance.email];
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", command,emailString];
-    //todo add newPW
+    NSString *curPassword = [NSString stringWithFormat:@"&userpw=%@", currentPassword];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@", command, command2, emailString, curPassword];
     NSString* functionUrl = @"http://dealio.cinnux.com/app/newuserstart-func.php/";
     NSMutableURLRequest *urlRequest = [CalculationHelper getURLRequest:functionUrl withData:urlString];
 
