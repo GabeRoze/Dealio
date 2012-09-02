@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *rightTextField;
 - (IBAction)firstNameDidEndOnExit:(id)sender;
 - (IBAction)lastNameDidEndOnExit:(id)sender;
+- (IBAction)firstNameEditingChanged:(id)sender;
+- (IBAction)lastNameEditingChanged:(id)sender;
 @end

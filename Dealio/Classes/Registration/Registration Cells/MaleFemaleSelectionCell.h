@@ -13,8 +13,8 @@
     IBOutlet UIImageView *backgroundImage;
     IBOutlet UIImageView *maleImage;
     IBOutlet UIImageView *femaleImage;
-
-    NSString *sex;
-
 }
+
+-(void)setSexToSavedData;
+
 @end

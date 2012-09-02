@@ -7,9 +7,10 @@
 //
 
 #import "MaleFemaleSelectionCell.h"
+#import "Models.h"
+
 
 @implementation MaleFemaleSelectionCell
-
 
 -(id)init
 {
@@ -35,16 +36,38 @@
 
     if (selectedImage.tag == 0)
     {
-        sex = @"male";
         maleImage.highlighted = YES;
         femaleImage.highlighted = NO;
+        RegistrationData.instance.sex = @"male";
     }
     else if (selectedImage.tag == 1)
     {
-        sex = @"female";
+        RegistrationData.instance.sex = @"female";
         maleImage.highlighted = NO;
         femaleImage.highlighted = YES;
     }
+}
+
+-(void)setSexToSavedData
+{
+
+    if ([RegistrationData.instance.sex isEqualToString:@"male"])
+    {
+        maleImage.highlighted = YES;
+        femaleImage.highlighted = NO;
+    }
+    else if ([RegistrationData.instance.sex isEqualToString:@"female"])
+    {
+        maleImage.highlighted = NO;
+        femaleImage.highlighted = YES;
+    }
+    else
+    {
+        maleImage.highlighted = NO;
+        femaleImage.highlighted = NO;
+    }
+
+
 }
 
 @end

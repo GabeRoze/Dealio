@@ -55,3 +55,24 @@
 @property (strong, nonatomic) NSString *lastName;
 
 @end
+
+
+@interface RegistrationData : NSObject
+
+@property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
+@property (strong, nonatomic) NSString *password;
+@property (strong, nonatomic) NSString *sex;
+@property (strong, nonatomic) NSString *foodDescription;
+@property (assign, nonatomic) int age;
+@property (strong, nonatomic) NSString *ageString;
+@property (assign, nonatomic) int ethnicity;
+@property (strong, nonatomic) NSString *ethnicityString;
+@property (assign, nonatomic) int income;
+@property (strong, nonatomic) NSString *incomeString;
+@property (assign, nonatomic) BOOL acceptedTOS;
+
++(RegistrationData *)instance;
+
+@end

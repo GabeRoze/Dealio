@@ -95,4 +95,40 @@
 }
 
 
++(void)registerUser:(void (^)(NSData *xmlData))success andFailure:(void (^)())failure
+{
+    RegistrationData *registrationData = RegistrationData.instance;
+    NSString *command = @"cmd=register";
+    NSString* userEmail = [NSString stringWithFormat:@"&useremail=%@",registrationData.email];
+    NSString* userPassword = [NSString stringWithFormat:@"&userpw=%@",registrationData.password];
+    NSString* userFirstName = [NSString stringWithFormat:@"&userfirstname=%@",registrationData.firstName];
+    NSString* userLastName = [NSString stringWithFormat:@"&userlastname=%@",registrationData.lastName];
+    NSString* gender = [NSString stringWithFormat:@"&gender=%@",registrationData.sex];
+    NSString* foodDescription = [NSString stringWithFormat:@"&fooddescription=%@",registrationData.foodDescription];
+    NSString* age = [NSString stringWithFormat:@"&age=%i",registrationData.age];
+    NSString* ethnicity = [NSString stringWithFormat:@"&ethnicity=%i",registrationData.ethnicity];
+    NSString* income = [NSString stringWithFormat:@"&income=%i",registrationData.income];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@", command, userEmail, userPassword, userFirstName, userLastName, gender, foodDescription, age, ethnicity, income];
+    NSString* functionUrl = @"http://dealio.cinnux.com/app/newuserstart-func.php/";
+    NSMutableURLRequest *urlRequest = [CalculationHelper getURLRequest:functionUrl withData:urlString];
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                              queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                          NSLog (@"HTML = %@", html);
+                          success(data);
+                      }
+                      else
+                      {
+                          failure();
+                      }
+                  }];
+
+}
+
 @end

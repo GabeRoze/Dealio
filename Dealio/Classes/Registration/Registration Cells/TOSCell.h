@@ -13,5 +13,9 @@
     IBOutlet UIWebView *tosText;
     IBOutlet UIImageView *backgroundImage;
 }
+
 @property (strong, nonatomic) IBOutlet UIImageView *checkBox;
+
+-(void)setCheckboxFromData;
+
 @end

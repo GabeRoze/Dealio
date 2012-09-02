@@ -7,8 +7,10 @@
 //
 
 #import "TOSCell.h"
+#import "Models.h"
 
 @implementation TOSCell
+
 @synthesize checkBox;
 
 -(id)init
@@ -31,6 +33,13 @@
 -(IBAction)checkBoxTapped:(id)sender
 {
     checkBox.highlighted = !checkBox.highlighted;
+
+    RegistrationData.instance.acceptedTOS = checkBox.highlighted;
+}
+
+-(void)setCheckboxFromData
+{
+    checkBox.highlighted = RegistrationData.instance.acceptedTOS;
 }
 
 @end

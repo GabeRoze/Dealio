@@ -7,6 +7,7 @@
 //
 
 #import "SideBySideTextFieldCell.h"
+#import "Models.h"
 
 @implementation SideBySideTextFieldCell
 @synthesize leftTextField;
@@ -18,15 +19,29 @@
                                                  owner:self
                                                options:nil];
     self = [nib objectAtIndex:0];
-    
+
     backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_light.png"]];
-    
+
     return self;
 }
 
-- (IBAction)firstNameDidEndOnExit:(id)sender {
+- (IBAction)firstNameDidEndOnExit:(id)sender
+{
+    [RegistrationData instance].firstName = leftTextField.text;
 }
 
-- (IBAction)lastNameDidEndOnExit:(id)sender {
+- (IBAction)lastNameDidEndOnExit:(id)sender
+{
+    [RegistrationData instance].lastName = rightTextField.text;
+}
+
+- (IBAction)firstNameEditingChanged:(id)sender
+{
+    [RegistrationData instance].firstName = leftTextField.text;
+}
+
+- (IBAction)lastNameEditingChanged:(id)sender
+{
+    [RegistrationData instance].lastName = rightTextField.text;
 }
 @end

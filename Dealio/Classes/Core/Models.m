@@ -170,3 +170,45 @@
 }
 
 @end
+
+@implementation RegistrationData
+
+@synthesize email;
+@synthesize firstName;
+@synthesize lastName;
+@synthesize password;
+@synthesize sex;
+@synthesize foodDescription;
+@synthesize age;
+@synthesize ageString;
+@synthesize ethnicity;
+@synthesize ethnicityString;
+@synthesize income;
+@synthesize incomeString;
+@synthesize acceptedTOS;
+
+-(id)init
+{
+    if (self = [super init])
+    {
+        sex = @"0";
+        foodDescription = @"";
+        age = 0;
+        ethnicity = 0;
+        income = 0;
+    }
+    return self;
+}
+
++(RegistrationData *)instance
+{
+    static RegistrationData *instance = nil;
+
+    if (!instance)
+    {
+         instance = [RegistrationData new];
+    }
+    return instance;
+}
+
+@end

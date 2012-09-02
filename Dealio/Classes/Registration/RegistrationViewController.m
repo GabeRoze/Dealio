@@ -17,6 +17,12 @@
 #import "ButtonCell.h"
 #import "PickerDisplayCell.h"
 #import "ActionSheetPicker.h"
+#import "AlertHelper.h"
+#import "Models.h"
+#import "CalculationHelper.h"
+#import "DealioService.h"
+#import "XMLParser.h"
+#import "GRCustomSpinnerView.h"
 
 @implementation RegistrationViewController
 
@@ -85,6 +91,7 @@
             textFieldCell = [TextFieldCell new];
         }
 
+        textFieldCell.cellType = EmailCell;
         textFieldCell.backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_light.png"]];
         textFieldCell.cellTextField.placeholder = @"Email Address";
         [textFieldCell.cellTextField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -102,6 +109,7 @@
             textFieldCell = [TextFieldCell new];
         }
 
+        textFieldCell.cellType = PasswordCell;
         textFieldCell.backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_light.png"]];
         textFieldCell.cellTextField.placeholder = @"Password";
         textFieldCell.cellTextField.secureTextEntry = YES;
@@ -168,11 +176,13 @@
             maleFemaleSelectionCell =  [MaleFemaleSelectionCell new];
         }
 
+        [maleFemaleSelectionCell setSexToSavedData];
+
         return maleFemaleSelectionCell;
     }
     else if (indexPath.row == 7 && optionalInfoPresent)
     {
-        cellID = @"TextFieldCellIdentifier";
+        cellID = @"TextFieldCellIdentifierWhatDoesDealMean";
 
         TextFieldCell *textFieldCell = [tableView dequeueReusableCellWithIdentifier:cellID];
 
@@ -181,10 +191,15 @@
             textFieldCell = [TextFieldCell new];
         }
 
+        textFieldCell.cellType = FoodDescriptionCell;
         textFieldCell.backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
         textFieldCell.cellTextField.placeholder = @"What does a DEAL mean to you?";
-//        [textFieldCell.cellTextField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
         [textFieldCell.cellTextField addTarget:self action:@selector(whatDoesDealioBeganEditing:) forControlEvents:UIControlEventEditingDidBegin];
+
+        if (RegistrationData.instance.foodDescription.length > 0)
+        {
+            textFieldCell.cellTextField.text = RegistrationData.instance.foodDescription;
+        }
 
         return textFieldCell;
     }
@@ -199,6 +214,8 @@
             tosCell = [TOSCell new];
         }
 
+        [tosCell setCheckboxFromData];
+
         return tosCell;
     }
     else if ((indexPath.row == 8 && !optionalInfoPresent) || (indexPath.row == 13 && optionalInfoPresent))
@@ -211,6 +228,8 @@
         {
             buttonCell = [ButtonCell new];
         }
+
+        buttonCell.buttonLabel.text = @"Submit";
 
         return buttonCell;
     }
@@ -226,12 +245,14 @@
         }
 
         pickerDisplayCell.descriptionLabel.text = @"Age";
-        if (pickerDisplayCell.timeLabel.text.length < 1)
+        if (RegistrationData.instance.age == 0)
         {
             pickerDisplayCell.timeLabel.text = @"Prefer not to say";
-            age = 0;
         }
-
+        else
+        {
+            pickerDisplayCell.timeLabel.text = RegistrationData.instance.ageString;
+        }
         return pickerDisplayCell;
     }
     else if (indexPath.row == 9 && optionalInfoPresent)
@@ -246,12 +267,14 @@
         }
 
         pickerDisplayCell.descriptionLabel.text = @"Ethnicity";
-        if (pickerDisplayCell.timeLabel.text.length < 1)
+        if (RegistrationData.instance.ethnicity == 0)
         {
             pickerDisplayCell.timeLabel.text = @"Prefer not to say";
-            ethnicity = 0;
         }
-
+        else
+        {
+            pickerDisplayCell.timeLabel.text = RegistrationData.instance.ethnicityString;
+        }
         return pickerDisplayCell;
     }
     else if (indexPath.row == 10 && optionalInfoPresent)
@@ -267,12 +290,14 @@
 
         pickerDisplayCell.descriptionLabel.text = @"Income";
 
-        if (pickerDisplayCell.timeLabel.text.length < 1)
+        if (RegistrationData.instance.income == 0)
         {
             pickerDisplayCell.timeLabel.text = @"Prefer not to say";
-            income = 0;
         }
-
+        else
+        {
+            pickerDisplayCell.timeLabel.text = RegistrationData.instance.incomeString;
+        }
         return pickerDisplayCell;
     }
     else if ((indexPath.row == 9 && !optionalInfoPresent) || (indexPath.row == 14 && optionalInfoPresent))
@@ -324,7 +349,11 @@
     }
     else if ((indexPath.row == 8 && !optionalInfoPresent) || (indexPath.row == 13 && optionalInfoPresent))
     {
-        NSLog(@"SUBMIT");
+        if  ([self validateSubmitFields])
+        {
+            [self submit];
+        }
+
     }
     else if ((indexPath.row == 9 && !optionalInfoPresent) || (indexPath.row == 14 && optionalInfoPresent))
     {
@@ -335,7 +364,8 @@
         ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
             PickerDisplayCell *pickerDisplayCell = (PickerDisplayCell *)[tableView cellForRowAtIndexPath:indexPath];
             pickerDisplayCell.timeLabel.text = selectedValue;
-            age = selectedIndex;
+            RegistrationData.instance.ageString = selectedValue;
+            RegistrationData.instance.age = selectedIndex;
         };
         ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
 
@@ -347,8 +377,9 @@
     {
         ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
             PickerDisplayCell *pickerDisplayCell = (PickerDisplayCell *)[tableView cellForRowAtIndexPath:indexPath];
-            pickerDisplayCell.timeLabel.text = selectedValue    ;
-            ethnicity = selectedIndex;
+            pickerDisplayCell.timeLabel.text = selectedValue;
+            RegistrationData.instance.ethnicityString = selectedValue;
+            RegistrationData.instance.ethnicity = selectedIndex;
         };
         ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
 
@@ -361,7 +392,8 @@
         ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
             PickerDisplayCell *pickerDisplayCell = (PickerDisplayCell *)[tableView cellForRowAtIndexPath:indexPath];
             pickerDisplayCell.timeLabel.text = selectedValue;
-            income = selectedIndex;
+            RegistrationData.instance.incomeString = selectedValue;
+            RegistrationData.instance.income = selectedIndex;
         };
         ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
 
@@ -376,14 +408,114 @@
     [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
 
+-(BOOL)validateSubmitFields
+{
+    RegistrationData *registrationData = RegistrationData.instance;
+
+    if (registrationData.firstName.length < 1)
+    {
+        SideBySideTextFieldCell *sidebySideTextFieldCell = (SideBySideTextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Enter First Name" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [sidebySideTextFieldCell.leftTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+    else if (registrationData.lastName.length < 1)
+    {
+        SideBySideTextFieldCell *sidebySideTextFieldCell = (SideBySideTextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Enter Last Name" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [sidebySideTextFieldCell.rightTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+    else if (registrationData.email.length < 1)
+    {
+        TextFieldCell *textFieldCell = (TextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Enter Email" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [textFieldCell.cellTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+    else if (registrationData.password.length < 1)
+    {
+        TextFieldCell *textFieldCell = (TextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Enter Password" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [textFieldCell.cellTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+            //validate email
+    else if (![CalculationHelper NSStringIsValidEmail:registrationData.email])
+    {
+        TextFieldCell *textFieldCell = (TextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Invalid Email" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [textFieldCell.cellTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+    else if (registrationData.password.length < 8)
+    {
+        TextFieldCell *textFieldCell = (TextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Password Must Contain At Least 8 Characters" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [textFieldCell.cellTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+    else if (![CalculationHelper doesPasswordContainsLettersAndNumbers:registrationData.password])
+    {
+        NSLog(@"password must containl etters and numbers");
+        TextFieldCell *textFieldCell = (TextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Passwore Must Contain Letters And Numbers" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [textFieldCell.cellTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+    else if (!registrationData.acceptedTOS)
+    {
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"You must accept the terms of agreement" andAction:^{
+        }];
+        return NO;
+    }
+    return YES;
+}
+
 -(void)submit
 {
-    //submit
-    [NSIndexPath indexPathForRow:1 inSection:0];
+    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+    [DealioService registerUser:^(NSData *data){
 
-    SideBySideTextFieldCell *bySideTextFieldCell = (SideBySideTextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            XMLParser *parser = [[XMLParser alloc] initXMLParser:data];
+            NSString *messageText = [parser.userFunction objectForKey:@"message"];
 
-
-
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [GRCustomSpinnerView.instance stopSpinner];
+                if ([messageText isEqualToString:@"emailsuccess"])
+                {
+                    [AlertHelper displayAlertWithOKButtonUsingTitle:@"Account Successfully Created" withMessage:@"Check your email to verify your account" andAction:^{
+                        [self dismissModalViewControllerAnimated:YES];
+                    }];
+                }
+                else if ([messageText isEqualToString:@"emailfail"])
+                {
+                    //todo - when does this occur
+                }
+                else if ([messageText isEqualToString:@"exist"])
+                {
+                    [AlertHelper displayAlertWithOKButtonUsingTitle:@"Email Exists" withMessage:@"Please use another email" andAction:nil];
+                }
+            });
+        });
+    } andFailure:^{
+        [GRCustomSpinnerView.instance stopSpinner];
+        [AlertHelper displayWebConnectionFail];
+    }];
 }
 @end

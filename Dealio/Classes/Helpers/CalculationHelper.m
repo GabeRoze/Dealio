@@ -231,26 +231,14 @@
 +(BOOL) doesPasswordContainsLettersAndNumbers:(NSString *)checkString
 {
     NSString *alphaRegex = @"[A-Z0-9a-z]|[A-Za-z]+[0-9]+|[0-9]+[A-Za-z]+";
-    //not[A-Za-z] OR [0-9]
     NSPredicate *alphaTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", alphaRegex];
     BOOL containsLetters = [alphaTest evaluateWithObject:checkString];
-    /*
-     NSString *numRegex = @"[0-9]*";
-     NSPredicate *numTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numRegex];
-     BOOL containsNumbers = [numTest evaluateWithObject:checkString];
-     */
-    NSLog(@"contains letters?  %d", containsLetters);
-    /*
-     NSLog(@"contains numbers??  %d", containsNumbers);
-     */
     if (containsLetters == YES)
     {
-        NSLog(@"YESPASS!");
         return YES;
     }
     else
     {
-        NSLog(@"NO FAIL!");
         return NO;
     }
 }

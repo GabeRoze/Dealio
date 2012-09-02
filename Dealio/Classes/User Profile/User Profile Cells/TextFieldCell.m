@@ -7,11 +7,13 @@
 //
 
 #import "TextFieldCell.h"
+#import "Models.h"
 
 @implementation TextFieldCell
 
 @synthesize cellTextField;
 @synthesize backgroundImage;
+@synthesize cellType;
 
 -(id)init
 {
@@ -25,6 +27,37 @@
     return self;
 }
 
-- (IBAction)textFieldDidEndOnExit:(id)sender {
+- (IBAction)textFieldDidEndOnExit:(id)sender
+{
+    if (cellType == EmailCell)
+    {
+        RegistrationData.instance.email = cellTextField.text;
+    }
+    else if (cellType == PasswordCell)
+    {
+        RegistrationData.instance.password = cellTextField.text;
+    }
+    else if (cellType == FoodDescriptionCell)
+    {
+        RegistrationData.instance.foodDescription = cellTextField.text;
+    }
 }
+
+- (IBAction)textFieldEditingChanged:(id)sender
+{
+    if (cellType == EmailCell)
+    {
+        RegistrationData.instance.email = cellTextField.text;
+    }
+    else if (cellType == PasswordCell)
+    {
+        RegistrationData.instance.password = cellTextField.text;
+    }
+    else if (cellType == FoodDescriptionCell)
+    {
+        RegistrationData.instance.foodDescription = cellTextField.text;
+    }
+}
+
 @end
+
