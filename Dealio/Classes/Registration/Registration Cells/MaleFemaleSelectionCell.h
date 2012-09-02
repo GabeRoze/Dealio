@@ -11,5 +11,10 @@
 @interface MaleFemaleSelectionCell : UITableViewCell
 {
     IBOutlet UIImageView *backgroundImage;
+    IBOutlet UIImageView *maleImage;
+    IBOutlet UIImageView *femaleImage;
+
+    NSString *sex;
+
 }
 @end

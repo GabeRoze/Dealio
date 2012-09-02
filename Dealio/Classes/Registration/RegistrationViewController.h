@@ -13,6 +13,11 @@
     IBOutlet UITableView *table;
     BOOL optionalInfoPresent;
     IBOutlet UIImageView *backgroundImage;
+
+    int age;
+    int ethnicity;
+    int income;
+
 }
 
 @end

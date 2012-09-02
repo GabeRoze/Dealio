@@ -184,6 +184,7 @@
         textFieldCell.backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
         textFieldCell.cellTextField.placeholder = @"What does a DEAL mean to you?";
 //        [textFieldCell.cellTextField setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
+        [textFieldCell.cellTextField addTarget:self action:@selector(whatDoesDealioBeganEditing:) forControlEvents:UIControlEventEditingDidBegin];
 
         return textFieldCell;
     }
@@ -225,6 +226,11 @@
         }
 
         pickerDisplayCell.descriptionLabel.text = @"Age";
+        if (pickerDisplayCell.timeLabel.text.length < 1)
+        {
+            pickerDisplayCell.timeLabel.text = @"Prefer not to say";
+            age = 0;
+        }
 
         return pickerDisplayCell;
     }
@@ -240,6 +246,11 @@
         }
 
         pickerDisplayCell.descriptionLabel.text = @"Ethnicity";
+        if (pickerDisplayCell.timeLabel.text.length < 1)
+        {
+            pickerDisplayCell.timeLabel.text = @"Prefer not to say";
+            ethnicity = 0;
+        }
 
         return pickerDisplayCell;
     }
@@ -255,6 +266,12 @@
         }
 
         pickerDisplayCell.descriptionLabel.text = @"Income";
+
+        if (pickerDisplayCell.timeLabel.text.length < 1)
+        {
+            pickerDisplayCell.timeLabel.text = @"Prefer not to say";
+            income = 0;
+        }
 
         return pickerDisplayCell;
     }
@@ -305,14 +322,63 @@
         optionalInfoPresent = YES;
         [tableView reloadData];
     }
+    else if ((indexPath.row == 8 && !optionalInfoPresent) || (indexPath.row == 13 && optionalInfoPresent))
+    {
+        NSLog(@"SUBMIT");
+    }
     else if ((indexPath.row == 9 && !optionalInfoPresent) || (indexPath.row == 14 && optionalInfoPresent))
     {
         [self dismissModalViewControllerAnimated:YES];
     }
-    //ifwhat does dealio first responder
-    //scroll to top
-    //add selector for editing did end
-    //undo anitation
-    //same for age ethnicity and income
+    else if (indexPath.row == 8 && optionalInfoPresent)
+    {
+        ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+            PickerDisplayCell *pickerDisplayCell = (PickerDisplayCell *)[tableView cellForRowAtIndexPath:indexPath];
+            pickerDisplayCell.timeLabel.text = selectedValue;
+            age = selectedIndex;
+        };
+        ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
+
+        };
+        NSArray *ages = [NSArray arrayWithObjects:@"Prefer not to say", @"Under 10", @"10 - 19", @"20 - 29",@"30 - 39", @"40 - 49", @"50 - 59", @"Over 60", nil];
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Your Age" rows:ages initialSelection:0 doneBlock:done cancelBlock:cancel origin:self.view];
+    }
+    else if (indexPath.row == 9 && optionalInfoPresent)
+    {
+        ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+            PickerDisplayCell *pickerDisplayCell = (PickerDisplayCell *)[tableView cellForRowAtIndexPath:indexPath];
+            pickerDisplayCell.timeLabel.text = selectedValue    ;
+            ethnicity = selectedIndex;
+        };
+        ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
+
+        };
+        NSArray *ethnicities = [NSArray arrayWithObjects:@"Prefer not to say", @"Caucasian", @"African American/Black", @"Hispanic/Latino", @"Asian", @"Middle Eastern", @"Pacific Islander", @"Native American/Alaskan", @"Other", nil];
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Your Ethnicity" rows:ethnicities initialSelection:0 doneBlock:done cancelBlock:cancel origin:self.view];
+    }
+    else if (indexPath.row == 10 && optionalInfoPresent)
+    {
+        ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue) {
+            PickerDisplayCell *pickerDisplayCell = (PickerDisplayCell *)[tableView cellForRowAtIndexPath:indexPath];
+            pickerDisplayCell.timeLabel.text = selectedValue;
+            income = selectedIndex;
+        };
+        ActionStringCancelBlock cancel = ^(ActionSheetStringPicker *picker) {
+
+        };
+        NSArray *incomes = [NSArray arrayWithObjects:@"Prefer not to say", @"Under $10,000", @"$10,000 - $25,000", @"$25,000 - $40,000", @"$40,000 - $60,000", @"$60,000 - $85,000", @"Over $85,000" ,nil];
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Your Income" rows:incomes initialSelection:0 doneBlock:done cancelBlock:cancel origin:self.view];
+    }
+}
+
+-(void)whatDoesDealioBeganEditing:(id)sender
+{
+    [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+-(void)submit
+{
+    //verify all cell data
+    //submit
 }
 @end
