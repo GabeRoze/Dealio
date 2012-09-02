@@ -378,7 +378,12 @@
 
 -(void)submit
 {
-    //verify all cell data
     //submit
+    [NSIndexPath indexPathForRow:1 inSection:0];
+
+    SideBySideTextFieldCell *bySideTextFieldCell = (SideBySideTextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+
+
+
 }
 @end
