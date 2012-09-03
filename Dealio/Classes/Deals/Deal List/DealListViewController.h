@@ -22,6 +22,9 @@
 
     BOOL filterViewDisplayed;
     BOOL firstLoadFinished;
+    
+    IBOutlet UIImageView *backgroundImage;
+    IBOutlet UILabel *navBarTitleLabel;
 }
 
 @property (nonatomic, assign) int currentSelectedDay;

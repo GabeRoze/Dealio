@@ -29,7 +29,14 @@
 
     [self.navigationController setNavigationBarHidden:YES];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(presentChangePasswordView) name:@"presentChangePasswordView" object:nil];
+    
+    topBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_light.png"]];
+    
+    bottomBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
 
+
+
+    
 }
 
 

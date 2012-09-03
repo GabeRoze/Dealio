@@ -15,6 +15,8 @@
     IBOutlet UITableView *table;
     XMLParser *parser;
     ChangePasswordViewController *changePasswordViewController;
+    IBOutlet UIImageView *topBackgroundImage;
+    IBOutlet UIImageView *bottomBackgroundImage;
 }
 
 @end

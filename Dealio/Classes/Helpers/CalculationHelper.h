@@ -27,5 +27,6 @@
 +(NSString *)convertFloatToString:(double)r;
 +(int)convertMaximumDistanceStringToInt:(NSString *)maximumDistanceString;
 +(CGFloat)calculateCellHeightWithString:(NSString *)string forWidth:(CGFloat)width;
++(NSString *)formatDistance:(NSString *)distance;
 
 @end

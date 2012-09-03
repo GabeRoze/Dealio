@@ -20,7 +20,7 @@
                                                options:nil];
     self = [nib objectAtIndex:0];
 
-    NSString *tosTextHTML = @"I agree to the <a href =\"www.dealio.com\">Terms of Service</a>";
+    NSString *tosTextHTML = @"I agree to the <a href =\"http://dealio.cinnux.com/pre-release-terms-of-service/\">Terms of Service</a>";
     [tosText loadHTMLString:tosTextHTML baseURL:nil];
     backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
 
@@ -40,6 +40,17 @@
 -(void)setCheckboxFromData
 {
     checkBox.highlighted = RegistrationData.instance.acceptedTOS;
+}
+
+#pragma mark UIWebViewDelegate
+-(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
+        [[UIApplication sharedApplication] openURL:[request URL]];
+        return NO;
+    }
+    return YES;
 }
 
 @end

@@ -169,7 +169,6 @@
     else
     {
         self.currentElementPointer.text = string;
-        NSLog(string);
         //add result for login
         if ([dealTagStatus isEqualToString:@"Login info began"] && currentTag!= NULL)
         {

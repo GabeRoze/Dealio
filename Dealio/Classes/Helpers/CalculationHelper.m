@@ -246,7 +246,7 @@
 +(NSMutableArray*) sortAndFormatDealListData:(NSMutableArray*)xmlData atLocation:(CLLocation*)currentLocation
 {
     //Perform distance calculation
-    NSMutableArray* returnArray = [[NSMutableArray alloc] init];
+    NSMutableArray* returnArray = [NSMutableArray new];
 
 //    NSLog(@"xml data %@", xmlData);
 
@@ -265,50 +265,43 @@
 //        [returnArray addObject:rowData];
 //    }
 
-
-
-
-
-    NSArray *sortedArray = [[NSMutableArray alloc] init];
-
+//    NSArray *sortedArray = [[NSMutableArray alloc] init];
 //    sortedArray = [self quicksort:xmlData];
 
 
 
-    NSSortDescriptor *sortDescriptor;
-    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES];
-    NSMutableArray *sortDescriptors = [NSMutableArray arrayWithObject:sortDescriptor];
+//    NSSortDescriptor *sortDescriptor;
+//    sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"distance" ascending:YES];
+//    NSMutableArray *sortDescriptors = [NSMutableArray arrayWithObject:sortDescriptor];
 //    NSArray *sortedArray;
-    sortedArray = [xmlData sortedArrayUsingDescriptors:sortDescriptors];
-    NSLog(@"sorted array %@", xmlData);
-    NSLog(@"sorted array count %i", sortedArray.count);
-    NSLog(@"xml data array count %i", xmlData.count);
-
-//    NSLog(@"first objec %@", [sortedArray objectAtIndex:0]);
+//    sortedArray = [xmlData sortedArrayUsingDescriptors:sortDescriptors];
+//    NSLog(@"sorted array %@", xmlData);
+//    NSLog(@"sorted array count %i", sortedArray.count);
+//    NSLog(@"xml data array count %i", xmlData.count);
 
 
-    //format sorted results
-    for (id object in xmlData)
-    {
-        NSMutableDictionary* rowData = (NSMutableDictionary*)object;
-
-        NSString* distanceString = [rowData objectForKey:@"distance"];
-
-        float distanceFloat = [distanceString floatValue];
-
-        if (distanceFloat < 1000)
-        {
-            int distanceInt = (int) distanceFloat;
-            distanceString = [NSString stringWithFormat:@"(%im)", distanceInt];
-        }
-        else
-        {
-            distanceFloat = distanceFloat/1000;
-            distanceString = [NSString stringWithFormat:@"(%.1fkm)", distanceFloat];
-        }
-        [rowData setObject:distanceString forKey:@"distance"];
-    }
-    return [[NSMutableArray alloc] initWithArray:sortedArray];
+//    //format sorted results
+//    for (id object in xmlData)
+//    {
+//        NSMutableDictionary* rowData = (NSMutableDictionary*)object;
+//
+//        NSString* distanceString = [rowData objectForKey:@"distance"];
+//
+//        float distanceFloat = [distanceString floatValue];
+//
+//        if (distanceFloat < 1000)
+//        {
+//            int distanceInt = (int) distanceFloat;
+//            distanceString = [NSString stringWithFormat:@"(%im)", distanceInt];
+//        }
+//        else
+//        {
+//            distanceFloat = distanceFloat/1000;
+//            distanceString = [NSString stringWithFormat:@"(%.1fkm)", distanceFloat];
+//        }
+//        [rowData setObject:distanceString forKey:@"distance"];
+//    }
+    return [[NSMutableArray alloc] initWithArray:xmlData];
 }
 
 +(NSMutableArray*)mergeSort:(NSMutableArray*)unsortedArray
@@ -443,4 +436,24 @@
     CGSize labelSize = [string sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
     return labelSize.height+25;
 }
+
++(NSString *)formatDistance:(NSString *)distance
+{
+    NSString *distanceString = nil;
+    float distanceFloat = [distance floatValue];
+
+    if (distanceFloat < 1000)
+    {
+        int distanceInt = (int) distanceFloat;
+        distanceString = [NSString stringWithFormat:@"(%im)", distanceInt];
+    }
+    else
+    {
+        distanceFloat = distanceFloat/1000;
+        distanceString = [NSString stringWithFormat:@"(%.1fkm)", distanceFloat];
+    }
+
+    return distanceString;
+}
+
 @end

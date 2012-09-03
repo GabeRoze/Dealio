@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TOSCell : UITableViewCell
+@interface TOSCell : UITableViewCell <UIWebViewDelegate>
 {
     IBOutlet UIWebView *tosText;
     IBOutlet UIImageView *backgroundImage;

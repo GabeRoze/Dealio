@@ -46,6 +46,13 @@
     ImageCache* imageCache = [[ImageCache alloc] init];
 
 
+    UIImage *gradientImage44 = [[UIImage imageNamed:@"background_teal_light.png"]
+        resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [[UINavigationBar appearance] setBackgroundImage:gradientImage44
+        forBarMetrics:UIBarMetricsDefault];
+
+
+
 //    [[UINavigationBar appearance] setBackground:[UIImage imageNamed:@"topnav.png"
 //    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"topnav.png"] forBarMetrics:UIBarMetricsDefault];
 //    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];

@@ -33,8 +33,27 @@
                                                options:nil];
     self = [nib objectAtIndex:0];
 
-//    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
-    [dealNameLabel setFont:[UIFont fontWithName:@"Rokkitt" size:dealNameLabel.font.pointSize]];
+    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+    [dealNameLabel setFont:[UIFont fontWithName:@"Rokkitt-Bold" size:dealNameLabel.font.pointSize]];
+
+
+    NSArray* familyNames = [UIFont familyNames];
+
+    familyNames = [familyNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+
+    for (NSString* familyName in familyNames)
+    {
+        NSLog(@"%@", familyName);
+
+        NSArray* fontNames = [UIFont fontNamesForFamilyName:familyName];
+
+        fontNames = [fontNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+
+        for (NSString* fontName in fontNames)
+        {
+            NSLog(@"* %@", fontName);
+        }
+    }
 
     return self;
 }
@@ -65,6 +84,10 @@
     if (!str)
     {
         NSLog(@"no logo value");
+    }
+    else if ([str isEqualToString:@"bulk/Dealio.png"])
+    {
+        self.restaurantLogoImageView.image = [UIImage imageNamed:@"default_logo.png"];
     }
     else if ([[ImageCache sharedImageCache] checkForImage:str])
     {

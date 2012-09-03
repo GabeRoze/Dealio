@@ -56,6 +56,10 @@ static DealListViewController *instance;
 {
     [super viewDidLoad];
 
+    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+    [navBarTitleLabel setFont:[UIFont fontWithName:@"Eurofurenceregular" size:navBarTitleLabel.font.pointSize]];
+
+
     firstLoadFinished = NO;
     instance = self;
 
@@ -146,7 +150,8 @@ static DealListViewController *instance;
     SearchLocation.instance.savedAddressCoordinate;
 //    CLLocation *location = [[CLLocation alloc] initWithLatitude:<#(CLLocationDegrees)latitude#> longitude:<#(CLLocationDegrees)longitude#>]
     //todo remove use of at
-    DealData.instance.dealList = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
+//    DealData.instance.dealList = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
+    DealData.instance.dealList = parser.dealListArray;
     [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
 }
 
@@ -178,7 +183,7 @@ static DealListViewController *instance;
     cell.restaurantName = [rowData objectForKey:@"businessname"];
     cell.dealName = [rowData objectForKey:@"dealname"];
     cell.rating = [NSString stringWithFormat:@"%@ Love it!", [rowData objectForKey:@"numlikes"]];
-    cell.distance = [rowData objectForKey:@"distance"];
+    cell.distance = [CalculationHelper formatDistance:[rowData objectForKey:@"distance"]];
     [cell setLogoWithString:(NSString*)[rowData objectForKey:@"logoname"]];
 
     return cell;

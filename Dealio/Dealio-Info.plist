@@ -54,6 +54,7 @@
 		<string>eurof56.ttf</string>
 		<string>eurof75.ttf</string>
 		<string>Rokkitt.otf</string>
+		<string>RokkittBold.ttf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
