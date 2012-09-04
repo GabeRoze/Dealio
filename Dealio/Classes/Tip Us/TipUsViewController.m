@@ -20,6 +20,7 @@
 #import "ActionSheetPicker.h"
 #import "Models.h"
 #import "ButtonCell.h"
+#import "AlertHelper.h"
 
 @implementation TipUsViewController
 
@@ -360,6 +361,12 @@
     {
         NSLog(@"submit");
         //todo - submit data
+        if ([self validateTipUsData])
+        {
+
+        }
+
+
     }
 
     return indexPath;
@@ -370,6 +377,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+/*
 #pragma mark - Picker View Data Source and Delegate
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -453,7 +461,7 @@
         }
     }
 }
-
+*/
 -(void)selectLastAnnotation:(MKMapView *)mapView
 {
     [mapView selectAnnotation:[mapView.annotations objectAtIndex:0] animated:YES];
@@ -462,6 +470,67 @@
 -(void)addressDidBeginEditing:(id)sender
 {
     [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
+-(BOOL)validateTipUsData
+{
+    if (TipUsData.instance.businessName.length < 1)
+    {
+        TextFieldCell *textFieldCell = (TextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Enter Restaurant Name" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [textFieldCell.cellTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+    else if (TipUsData.instance.dealName.length < 1)
+    {
+        TextFieldCell *textFieldCell = (TextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Enter Deal Name" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [textFieldCell.cellTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+    else if (TipUsData.instance.detail.length < 1)
+    {
+        TextFieldCell *textFieldCell = (TextFieldCell *)[table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Enter Deal Description" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [textFieldCell.cellTextField becomeFirstResponder];
+        }];
+        return NO;
+    }
+
+    int sum = 0;
+    for (NSUInteger i = 0; i < TipUsData.instance.days.count; i++)
+    {
+        sum += [[TipUsData.instance.days objectAtIndex:i] intValue];
+    }
+
+    if (sum > 0)
+    {
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"What day does this deal happen?" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }];
+        return NO;
+    }
+    else if (TipUsData.instance.openTime < 0)
+    {
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Select Open Time" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }];
+        return NO;
+    }
+    else if (TipUsData.instance.closeTime < 0)
+    {
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Select Close Time" andAction:^{
+            [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }];
+        return NO;
+    }
+
+    return YES;
 }
 
 @end
