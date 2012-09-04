@@ -41,6 +41,18 @@
     {
         RegistrationData.instance.foodDescription = cellTextField.text;
     }
+    else if (cellType == RestaurantNameCell)
+    {
+        TipUsData.instance.businessName = cellTextField.text;
+    }
+    else if (cellType == DealNameCell)
+    {
+        TipUsData.instance.dealName = cellTextField.text;
+    }
+    else if (cellType == DealDetailCell)
+    {
+        TipUsData.instance.detail = cellTextField.text;
+    }
 }
 
 - (IBAction)textFieldEditingChanged:(id)sender
@@ -56,6 +68,18 @@
     else if (cellType == FoodDescriptionCell)
     {
         RegistrationData.instance.foodDescription = cellTextField.text;
+    }
+    else if (cellType == RestaurantNameCell)
+    {
+        TipUsData.instance.businessName = cellTextField.text;
+    }
+    else if (cellType == DealNameCell)
+    {
+        TipUsData.instance.dealName = cellTextField.text;
+    }
+    else if (cellType == DealDetailCell)
+    {
+        TipUsData.instance.detail = cellTextField.text;
     }
 }
 

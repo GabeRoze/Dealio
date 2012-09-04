@@ -27,6 +27,7 @@
     [likeSelectionArea addGestureRecognizer:tapGestureRecognizer];
     tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(favoriteAreaTapped:)];
     [favoriteSelectionArea addGestureRecognizer:tapGestureRecognizer];
+    [dealNameLabel setFont:[UIFont fontWithName:@"Rokkitt-Bold" size:dealNameLabel.font.pointSize]];
 
     return self;
 }

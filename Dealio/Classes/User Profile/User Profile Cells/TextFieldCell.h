@@ -11,6 +11,9 @@ typedef enum
     EmailCell,
     PasswordCell,
     FoodDescriptionCell,
+    RestaurantNameCell,
+    DealNameCell,
+    DealDetailCell,
 }CellType;
 
 #import <UIKit/UIKit.h>

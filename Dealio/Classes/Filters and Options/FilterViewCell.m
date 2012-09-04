@@ -30,13 +30,15 @@
 }
 
 -(void) setFilterStatus:(BOOL)n {
-    
+
     //Set filterStatus to YES (the filter is applied - check mark/minus button[to remove])
-    if (n == YES) {
+    if (n == YES)
+    {
         [changeFilterButton setImage:[UIImage imageNamed:@"34-circle-minus.png"] forState:UIControlStateNormal];
         filterStatus = YES;
     }
-    else {
+    else
+    {
         [changeFilterButton setImage:[UIImage imageNamed:@"33-circle-plus.png"] forState:UIControlStateNormal];
         filterStatus = NO;
     }
@@ -45,7 +47,7 @@
 
 /*
 - (IBAction)changeFilterPressed:(id)sender {
-    
+
     //if filter == yes, remove checkmark / change button to plus
     if (filterStatus == YES ){
         [changeFilterButton setImage:[UIImage imageNamed:@"33-circle-plus.png"] forState:UIControlStateNormal];
@@ -58,8 +60,8 @@
         filterStatus = NO;
 
     }
-    
-    
+
+
 }
  */
 

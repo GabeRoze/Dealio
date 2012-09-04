@@ -112,6 +112,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="881081388"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUITag">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIImage" ref="135034050"/>
 								<reference key="IBUIHighlightedImage" ref="911111413"/>
@@ -146,6 +147,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="873156691"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUITag">2</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIImage" ref="135034050"/>
 								<reference key="IBUIHighlightedImage" ref="911111413"/>
@@ -180,6 +182,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="837087578"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUITag">3</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIImage" ref="135034050"/>
 								<reference key="IBUIHighlightedImage" ref="911111413"/>
@@ -214,6 +217,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="176080534"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUITag">4</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIImage" ref="135034050"/>
 								<reference key="IBUIHighlightedImage" ref="911111413"/>
@@ -226,6 +230,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="6590753"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUITag">5</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIImage" ref="135034050"/>
 								<reference key="IBUIHighlightedImage" ref="911111413"/>
@@ -260,6 +265,7 @@
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="620079936"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<int key="IBUITag">6</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<reference key="IBUIImage" ref="135034050"/>
 								<reference key="IBUIHighlightedImage" ref="911111413"/>
@@ -458,19 +464,19 @@
 							<reference ref="154132461"/>
 							<reference ref="192887887"/>
 							<reference ref="881081388"/>
-							<reference ref="1046512287"/>
 							<reference ref="489479808"/>
 							<reference ref="873156691"/>
 							<reference ref="529273387"/>
 							<reference ref="837087578"/>
 							<reference ref="319339194"/>
 							<reference ref="176080534"/>
-							<reference ref="826129553"/>
 							<reference ref="6590753"/>
 							<reference ref="561877531"/>
 							<reference ref="620079936"/>
 							<reference ref="686498223"/>
+							<reference ref="1046512287"/>
 							<reference ref="801545842"/>
+							<reference ref="826129553"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

@@ -29,14 +29,10 @@
 
     [self.navigationController setNavigationBarHidden:YES];
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(presentChangePasswordView) name:@"presentChangePasswordView" object:nil];
-    
+
     topBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_light.png"]];
-    
+
     bottomBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
-
-
-
-    
 }
 
 
@@ -105,7 +101,7 @@
         }
         NSString *firstName = [parser.userFunction objectForKey:@"userfirstname"];
         NSString *lastName = [parser.userFunction objectForKey:@"userlastname"];
-        [userProfileNameCell.nameLabel setFont:[UIFont fontWithName:@"Eurofurenceregular" size:26]];
+        [userProfileNameCell.nameLabel setFont:[UIFont fontWithName:@"Rokkitt-Bold" size:30]];
 
         if (firstName.length < 1)
         {

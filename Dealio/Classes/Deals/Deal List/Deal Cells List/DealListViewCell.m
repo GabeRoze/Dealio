@@ -36,25 +36,6 @@
     backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
     [dealNameLabel setFont:[UIFont fontWithName:@"Rokkitt-Bold" size:dealNameLabel.font.pointSize]];
 
-
-    NSArray* familyNames = [UIFont familyNames];
-
-    familyNames = [familyNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
-    for (NSString* familyName in familyNames)
-    {
-        NSLog(@"%@", familyName);
-
-        NSArray* fontNames = [UIFont fontNamesForFamilyName:familyName];
-
-        fontNames = [fontNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-
-        for (NSString* fontName in fontNames)
-        {
-            NSLog(@"* %@", fontName);
-        }
-    }
-
     return self;
 }
 

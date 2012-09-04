@@ -7,6 +7,7 @@
 //
 
 #import "SelectDayCell.h"
+#import "Models.h"
 
 @implementation SelectDayCell
 
@@ -39,6 +40,15 @@
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer *)sender;
     UIImageView *button = (UIImageView *) tapGestureRecognizer.view;
     button.highlighted = !button.highlighted;
+
+    if (button.highlighted)
+    {
+        [TipUsData.instance.days insertObject:@"1" atIndex:button.tag];
+    }
+    else
+    {
+        [TipUsData.instance.days insertObject:@"0" atIndex:button.tag];
+    }
 }
 
 @end

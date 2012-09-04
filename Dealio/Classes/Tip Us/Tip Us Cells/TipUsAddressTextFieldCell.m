@@ -12,6 +12,7 @@
 #import "UIAlertView+Blocks.h"
 #import "ContactInfoCell.h"
 #import "CalculationHelper.h"
+#import "Models.h"
 
 @implementation TipUsAddressTextFieldCell
 
@@ -33,6 +34,7 @@
 
 - (IBAction)addressTextFieldDonePressed:(id)sender
 {
+
 }
 
 - (IBAction)addressTextFieldEditingDidEnd:(id)sender
@@ -50,6 +52,10 @@
             {
                 CLPlacemark *placemark = [placemarks objectAtIndex:0];
                 self.addressTextField.text = [CalculationHelper getAddressStringFromPlacemark:placemark];
+                TipUsData.instance.address  = [CalculationHelper getAddressStringFromPlacemark:placemark];
+                TipUsData.instance.longitude = [NSString stringWithFormat:@"%f",placemark.location.coordinate.longitude];
+                TipUsData.instance.latitude = [NSString stringWithFormat:@"%f",placemark.location.coordinate.latitude];
+                [NSNotificationCenter.defaultCenter postNotificationName:@"mapChanged" object:nil];
             }
             else if (placemarks.count > 1)
             {
@@ -64,6 +70,10 @@
                 {
                     CLPlacemark *placemark = [placemarks objectAtIndex:selectedIndex];
                     self.addressTextField.text = [placemark.addressDictionary objectForKey:@"FormattedAddressLines"];
+                    TipUsData.instance.address  = [CalculationHelper getAddressStringFromPlacemark:placemark];
+                    TipUsData.instance.longitude = [NSString stringWithFormat:@"%f",placemark.location.coordinate.longitude];
+                    TipUsData.instance.latitude = [NSString stringWithFormat:@"%f",placemark.location.coordinate.latitude];
+                    [NSNotificationCenter.defaultCenter postNotificationName:@"mapChanged" object:nil];
                 };
                 [ActionSheetStringPicker showPickerWithTitle:@"Select Address" rows:addressArray initialSelection:0 doneBlock:done cancelBlock:nil origin:self];
             }
@@ -94,12 +104,10 @@
             if (placemarks.count == 1)
             {
                 CLPlacemark *place = [placemarks objectAtIndex:0];
-                NSLog(@"place %@", place.addressDictionary);
-//                NSString *address = [NSString stringWithFormat:@"%@, %@", [place.addressDictionary objectForKey:@"Street"], [place.addressDictionary objectForKey:@"City"]];
-//                addressTextField.text = address;
                 NSArray *addressArray = [place.addressDictionary objectForKey:@"FormattedAddressLines"];
                 NSString *address = [NSString stringWithFormat:@"%@, %@, %@", [addressArray objectAtIndex:0], [addressArray objectAtIndex:1], [addressArray objectAtIndex:2]];
                 addressTextField.text = address;
+                TipUsData.instance.address = address;
 
             }
         });

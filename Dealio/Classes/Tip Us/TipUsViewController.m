@@ -17,12 +17,18 @@
 #import "UIActionSheet+Blocks.h"
 #import "MapViewCell.h"
 #import "DealioService.h"
+#import "ActionSheetPicker.h"
+#import "Models.h"
+#import "ButtonCell.h"
 
 @implementation TipUsViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    TipUsData.instance;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -34,10 +40,12 @@
 
 
     }
-            andFailure:^{
+                                  andFailure:^{
 
-            }];
-    
+                                  }];
+
+    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -73,6 +81,7 @@
         }
 
         [textFieldCell.cellTextField setPlaceholder:@"Restaurant Name"];
+        textFieldCell.cellType = RestaurantNameCell;
 
         return textFieldCell;
     }
@@ -88,6 +97,7 @@
         }
 
         textFieldCell.cellTextField.placeholder = @"What's the Dealio?";
+        textFieldCell.cellType = DealNameCell;
 
         return textFieldCell;
     }
@@ -103,6 +113,7 @@
         }
 
         textFieldCell.cellTextField.placeholder = @"A little detail about the deal";
+        textFieldCell.cellType = DealDetailCell;
 
         return textFieldCell;
     }
@@ -146,7 +157,11 @@
         }
 
         pickerDisplayCell.descriptionLabel.text = @"From";
-        pickerDisplayCell.timeLabel.text = @"Open";
+
+        if (pickerDisplayCell.timeLabel.text.length < 1)
+        {
+            pickerDisplayCell.timeLabel.text = @"Select Open Time";
+        }
 
         return  pickerDisplayCell;
     }
@@ -162,7 +177,11 @@
         }
 
         pickerDisplayCell.descriptionLabel.text = @"To";
-        pickerDisplayCell.timeLabel.text = @"Close";
+
+        if (pickerDisplayCell.timeLabel.text.length < 1)
+        {
+            pickerDisplayCell.timeLabel.text = @"Select Close Time";
+        }
 
         return  pickerDisplayCell;
     }
@@ -192,6 +211,8 @@
             addressTextFieldCell = [TipUsAddressTextFieldCell new];
         }
 
+        [addressTextFieldCell.addressTextField addTarget:self action:@selector(addressDidBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
+
 //        addressTextFieldCell.addressTextField
         //todo -address text field cell changed - update the map;
 
@@ -208,27 +229,39 @@
             mapViewCell = [MapViewCell new];
         }
 
-        CLLocationCoordinate2D annotationCoord;
 
-        annotationCoord.latitude = SearchLocation.instance.getCurrentLocation.latitude;
-        annotationCoord.longitude = SearchLocation.instance.getCurrentLocation.longitude;
+        TipUsAddressTextFieldCell *tipUsAddressTextFieldCell = (TipUsAddressTextFieldCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]];
 
-        [mapViewCell.mapView removeAnnotations:mapViewCell.mapView.annotations];
+        if (tipUsAddressTextFieldCell.addressTextField.text.length < 1)
+        {
 
-        MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
-        annotationPoint.coordinate = annotationCoord;
-//            annotationPoint.title = //text field title
-//            annotationPoint.subtitle = [dealListData objectForKey:@"businessname"];
-        //other text field title
-        [mapViewCell.mapView addAnnotation:annotationPoint];
+            CLLocationCoordinate2D annotationCoord;
 
-        MKCoordinateRegion zoomIn = mapViewCell.mapView.region;
-        zoomIn.span.latitudeDelta = 0.01;
-        zoomIn.span.longitudeDelta = 0.01;
-        zoomIn.center.latitude = annotationCoord.latitude;
-        zoomIn.center.longitude = annotationCoord.longitude;
-        [mapViewCell.mapView setRegion:zoomIn animated:YES];
-        [self performSelector:@selector(selectLastAnnotation:) withObject:mapViewCell.mapView afterDelay:1.0f];
+            annotationCoord.latitude = SearchLocation.instance.getCurrentLocation.latitude;
+            annotationCoord.longitude = SearchLocation.instance.getCurrentLocation.longitude;
+
+            [mapViewCell.mapView removeAnnotations:mapViewCell.mapView.annotations];
+
+            MKPointAnnotation *annotationPoint = [[MKPointAnnotation alloc] init];
+            annotationPoint.coordinate = annotationCoord;
+            [mapViewCell.mapView addAnnotation:annotationPoint];
+
+            MKCoordinateRegion zoomIn = mapViewCell.mapView.region;
+            zoomIn.span.latitudeDelta = 0.01;
+            zoomIn.span.longitudeDelta = 0.01;
+            zoomIn.center.latitude = annotationCoord.latitude;
+            zoomIn.center.longitude = annotationCoord.longitude;
+            [mapViewCell.mapView setRegion:zoomIn animated:YES];
+
+            [mapViewCell.mapView setShowsUserLocation:NO];
+
+            TipUsData.instance.longitude = [NSString stringWithFormat:@"%f", annotationCoord.longitude];
+            TipUsData.instance.latitude = [NSString stringWithFormat:@"%f", annotationCoord.latitude];
+            //set address
+
+            [self performSelector:@selector(selectLastAnnotation:) withObject:mapViewCell.mapView afterDelay:1.0f];
+        }
+
 
         return mapViewCell;
     }
@@ -248,6 +281,21 @@
         [tableViewCell addSubview:backgroundImage];
 
         return tableViewCell;
+    }
+    else if (indexPath.row == 12)
+    {
+        CellTableIdentifier = @"ButtonCellIdentifier";
+
+        ButtonCell *buttonCell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
+
+        if (!buttonCell)
+        {
+            buttonCell = [ButtonCell new];
+        }
+
+        buttonCell.buttonLabel.text = @"Submit";
+
+        return buttonCell;
     }
 }
 
@@ -281,45 +329,37 @@
     else if (indexPath.row == 6)
     {
         [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-
-        RIButtonItem *cancelButton = [RIButtonItem item];
-        cancelButton.action = ^{
-            //close the views
+        ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue)
+        {
+            PickerDisplayCell *pickerDisplayCell = (PickerDisplayCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:6 inSection:0]];
+            pickerDisplayCell.timeLabel.text = selectedValue;
+            TipUsData.instance.openTime = selectedIndex;
         };
-        [cancelButton setLabel:@"Cancel"];
+        NSArray *times = [NSArray arrayWithObjects:@"Open", @"8 am", @"9 am", @"10 am", @"11 am", @"12 pm", @"1 pm", @"2 pm", @"3 pm", @"4 pm", @"5 pm", @"6 pm", @"7 pm", @"8 pm", @"9 pm", nil];
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Open Time" rows:times initialSelection:0 doneBlock:done cancelBlock:nil origin:self.view];
 
-        RIButtonItem *selectButton = [RIButtonItem item];
-        selectButton.action = ^{
-            //close the views
-            //use selected element in text field
-        };
-        selectButton.label = @"Select";
-
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Open Time"
-                                                         cancelButtonItem:cancelButton destructiveButtonItem:selectButton otherButtonItems:nil];
-
-        UIPickerView *myPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 235, 320, 200)];
-        myPickerView.delegate = self;
-        myPickerView.showsSelectionIndicator = YES;
-//        [self.view addSubview:myPickerView];
-
-        [actionSheet addSubview:myPickerView];
-        [self.view addSubview: actionSheet];
     }
     else if (indexPath.row == 7)
     {
-        //same shit as row = 6
-    }
-    else if (indexPath.row == 8)
+        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        ActionStringDoneBlock done = ^(ActionSheetStringPicker *picker, NSInteger selectedIndex, id selectedValue)
+        {
+            PickerDisplayCell *pickerDisplayCell = (PickerDisplayCell *)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:7 inSection:0]];
+            pickerDisplayCell.timeLabel.text = selectedValue;
+            TipUsData.instance.closeTime = selectedIndex;
+        };
+        NSArray *times = [NSArray arrayWithObjects:@"10 am", @"11 am", @"12 pm", @"1 pm", @"2 pm", @"3 pm", @"4 pm", @"5 pm", @"6 pm", @"7 pm", @"8 pm", @"9 pm", @"10 pm", @"Close", nil];
+        [ActionSheetStringPicker showPickerWithTitle:@"Select Open Time" rows:times initialSelection:0 doneBlock:done cancelBlock:nil origin:self.view];    }
+    else if (indexPath.row == 9)
     {
         [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         TipUsAddressTextFieldCell *tipUsAddressTextFieldCell = (TipUsAddressTextFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
-        tipUsAddressTextFieldCell.addressTextField.becomeFirstResponder;
+        [tipUsAddressTextFieldCell.addressTextField becomeFirstResponder];
     }
-    else if (indexPath.row == 11)
+    else if (indexPath.row == 12)
     {
-        //todo - arrange all data
-        //connect to web with data
+        NSLog(@"submit");
+        //todo - submit data
     }
 
     return indexPath;
@@ -330,9 +370,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-
 #pragma mark - Picker View Data Source and Delegate
-
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 4;
@@ -418,6 +456,12 @@
 
 -(void)selectLastAnnotation:(MKMapView *)mapView
 {
-    [mapView selectAnnotation:[mapView.annotations lastObject] animated:YES];
+    [mapView selectAnnotation:[mapView.annotations objectAtIndex:0] animated:YES];
 }
+
+-(void)addressDidBeginEditing:(id)sender
+{
+    [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:9 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
+
 @end

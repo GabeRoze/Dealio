@@ -76,3 +76,21 @@
 +(RegistrationData *)instance;
 
 @end
+
+
+@interface TipUsData : NSObject
+
+@property (strong, nonatomic) NSString *businessName;
+@property (strong, nonatomic) NSString *dealName;
+@property (strong, nonatomic) NSString *detail;
+@property (strong, nonatomic) NSString *address;
+@property (strong, nonatomic) NSString *latitude;
+@property (strong, nonatomic) NSString *longitude;
+@property (strong, nonatomic) NSMutableArray *days;
+@property (assign, nonatomic) int openTime;
+@property (assign, nonatomic) int closeTime;
+
+
++(TipUsData *)instance;
+
+@end

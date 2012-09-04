@@ -212,3 +212,41 @@
 }
 
 @end
+
+
+@implementation TipUsData
+
+@synthesize businessName;
+@synthesize dealName;
+@synthesize detail;
+@synthesize address;
+@synthesize latitude;
+@synthesize longitude;
+@synthesize days;
+@synthesize openTime;
+@synthesize closeTime;
+
+-(id)init
+{
+    if (self == [super init])
+    {
+        days = [[NSMutableArray alloc] initWithObjects:@"0", @"0", @"0", @"0", @"0", @"0" ,@"0", nil];
+        openTime = -1;
+        closeTime = -1;
+    }
+    return self;
+
+}
+
++(TipUsData *)instance
+{
+    static TipUsData *instance = nil;
+
+    if (!instance)
+    {
+        instance = [TipUsData new];
+    }
+    return instance;
+}
+
+@end

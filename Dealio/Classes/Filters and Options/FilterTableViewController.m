@@ -80,8 +80,8 @@
         {
             tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellTableIdentifier];
         }
-        tableViewCell.detailTextLabel.font = [UIFont fontWithName:@"Eurofurencebold" size:22];
-        tableViewCell.detailTextLabel.textColor = [UIColor cyanColor];
+        tableViewCell.detailTextLabel.font = [UIFont fontWithName:@"Rokkitt-Bold" size:26];
+        tableViewCell.detailTextLabel.textColor = [UIColor colorWithRed:0 green:131.0/255.0 blue:121.0/255.0 alpha:1.0];
         tableViewCell.detailTextLabel.text = @"Filters";
         tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
 

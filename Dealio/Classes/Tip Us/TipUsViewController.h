@@ -11,6 +11,7 @@
 @interface TipUsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     IBOutlet UITableView *table;
+    IBOutlet UIImageView *backgroundImage;
 }
 
 @end

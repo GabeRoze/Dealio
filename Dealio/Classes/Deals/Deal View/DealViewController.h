@@ -19,7 +19,9 @@
     IBOutlet UILabel *dealNameLabel;
     IBOutlet UILabel *distanceLabel;
     IBOutlet UIImageView *dealImageView;
-}
+    
+    IBOutlet UIImageView *topBackgroundImage;
+    IBOutlet UIImageView *bottomBackgroundImage;}
 
 @property (weak, nonatomic) IBOutlet UITableView *table;
 @property (strong, nonatomic) XMLParser* parser;

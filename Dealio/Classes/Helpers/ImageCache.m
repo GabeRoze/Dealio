@@ -27,10 +27,9 @@ static ImageCache* imageCacheInstance;
         imageDictionary = [[NSMutableDictionary alloc] init];
         arrayCount = 0;
 
+        [self setImageWithUIImage:[UIImage imageNamed:@"default_logo.png"] withString:@"bulk/Dealio.png"];
     }
-
     return self;
-
 }
 
 /*

@@ -42,17 +42,25 @@
 {
     [super viewDidLoad];
 
-    [self.table setSeparatorColor:[UIColor clearColor]];
-    [self.table setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+//    [self.table setSeparatorColor:[UIColor clearColor]];
+//    [self.table setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+
+
+    topBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+
+    bottomBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 
-    distanceLabel.text = [dealListData objectForKey:@"distance"];
+    distanceLabel.text = [CalculationHelper formatDistance:[dealListData objectForKey:@"distance"]];
     dealNameLabel.text = [dealListData objectForKey:@"businessname"];
     dealImageView.image = [ImageCache.sharedImageCache getImage:[dealListData objectForKey:@"logoname"]];
+    distanceLabel.font = [UIFont fontWithName:@"Rokkitt-bold" size:distanceLabel.font.pointSize];
+    dealNameLabel.font = [UIFont fontWithName:@"Rokkitt" size:dealNameLabel.font.pointSize];
 }
 
 - (IBAction)returnToDealsListView:(id)sender
@@ -392,7 +400,7 @@
 
 -(void)selectLastAnnotation:(MKMapView *)mapView
 {
-    [mapView selectAnnotation:[mapView.annotations lastObject] animated:YES];
+    [mapView selectAnnotation:[mapView.annotations objectAtIndex:0] animated:YES];
 }
 
 @end
