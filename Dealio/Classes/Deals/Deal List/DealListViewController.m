@@ -198,8 +198,8 @@ static DealListViewController *instance;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary* rowData = [DealData.instance.dealList objectAtIndex:indexPath.row];
-    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
-    [self.dealViewController loadDealFromList:rowData];
+//    [self.dealViewController loadDealFromList:rowData];
+    self.dealViewController.dealListData = [NSMutableDictionary dictionaryWithDictionary:rowData];
     [self presentModalViewController:self.dealViewController animated:YES];
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -244,7 +244,6 @@ static DealListViewController *instance;
 
 -(IBAction)dayButtonTapped:(id)sender
 {
-
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer *)sender;
     UIImageView *selectedDayButton = (UIImageView *) tapGestureRecognizer.view;
 
@@ -260,7 +259,6 @@ static DealListViewController *instance;
     {
         [self reloadDataForInfo:[CalculationHelper convertIntToDay:selectedDayButton.tag]];
     }
-
 }
 
 -(void)disableAllDays

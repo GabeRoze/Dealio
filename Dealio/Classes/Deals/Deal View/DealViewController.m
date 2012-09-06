@@ -49,14 +49,13 @@
     dealImageView.image = [ImageCache.sharedImageCache getImage:[dealListData objectForKey:@"logoname"]];
     distanceLabel.font = [UIFont fontWithName:@"Rokkitt-bold" size:distanceLabel.font.pointSize];
     dealNameLabel.font = [UIFont fontWithName:@"Rokkitt" size:dealNameLabel.font.pointSize];
+
+    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+    [self loadDealFromList:nil];
 }
 
 -(void)loadDealFromList:(NSDictionary *)dealDictionary
 {
-    self.dealListData = [NSMutableDictionary dictionaryWithDictionary:dealDictionary];
-    [table reloadData];
-
-
     [DealioService getDealWithUID:[dealListData objectForKey:@"uid"] onSuccess:^(NSData *data){
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -73,99 +72,8 @@
     } onFailure:nil];
 }
 
-//- (IBAction)returnToDealsListView:(id)sender
-//{
-//    [self dismissModalViewControllerAnimated:YES];
-//}
-
-//#pragma mark -
-//#pragma mark Sever Connection and XML
-//-(void) connectToServer:(NSString*)data
-//{
-//    //attempt to connect to server
-//    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php";
-//
-//    NSString* phpData = [NSString stringWithFormat:@"uid=%@",data ];
-//    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:phpData];
-//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//
-//    [NSURLConnection
-//            sendAsynchronousRequest:urlRequest
-//                              queue:queue
-//                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
-//
-//                      if ([data length] > 0 && error == nil) {
-//                          NSString* html = [[NSString alloc]
-//                                  initWithData:data
-//                                      encoding:NSUTF8StringEncoding];
-//
-//                          NSLog (@"Deal Info HTML = %@", html);
-//
-//                          // parse file
-//                          [self performSelectorInBackground:@selector(parseXMLFile:) withObject:data];
-//
-//                      }
-//                      else if ([data length] == 0 && error == nil) {
-//                          NSLog(@"Nothing was downloaded.");
-//                          [self stopSpinner];
-//                      }
-//                      else if (error != nil) {
-//                          NSLog(@"Error happened = %@", error);
-//                          [self stopSpinner];
-//                      }
-//                  }];
-//}
-
-
-
-//-(void) parseXMLFile:(NSData*)data
-//{
-//    parser = [[XMLParser alloc] initXMLParser:data];
-//    [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
-//}
-//
-//-(void) reloadTableData
-//{
-//    [table reloadData];
-//}
-
-//-(void) serverResponseAcquired
-//{
-//    NSLog(@"parser.dealitem: %@", parser.dealItem);
-//    parserData = [NSMutableDictionary dictionaryWithDictionary:parser.dealItem];
-//    NSLog(@"comments: %@", parser.dealComments);
-//    comments = parser.dealComments;
-//
-//    [table reloadData];
-//
-//    stop spinner
-//    [self stopSpinner];
-//}
-
-#pragma mark -
-#pragma mark Spinner
-//-(void) createAndDisplaySpinner
-//{
-//    if (spinner != nil)
-//    {
-//        [self stopSpinner];
-//    }
-//
-//    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//    [spinner setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2 ,[UIScreen mainScreen].bounds.size.height/2)];
-//    [self.view addSubview:spinner];
-//    [spinner startAnimating];
-//}
-
-//-(void) stopSpinner
-//{
-//    [spinner stopAnimating];
-//    [spinner removeFromSuperview];
-//}
-
 #pragma mark -
 #pragma mark Table Data Source Method
-
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 8;
@@ -369,41 +277,6 @@
         return [CalculationHelper calculateCellHeightWithString:[parserData objectForKey:@"description"] forWidth:300]+30;
     }
 }
-
-
-//specifes row selection
-//-(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return indexPath;
-//}
-
-
-//#pragma mark - MKMapViewDelegate
-//
-//- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-//
-//    static NSString *identifier = @"MyLocation";
-//    if ([annotation isKindOfClass:[DealioMapAnnotation class]]) {
-//
-//        MKPinAnnotationView *annotationView = (MKPinAnnotationView *) [_mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
-//        if (annotationView == nil)
-//        {
-//            annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
-//        }
-//        else
-//        {
-//            annotationView.annotation = annotation;
-//        }
-//
-//        annotationView.enabled = YES;
-//        annotationView.canShowCallout = YES;
-//        annotationView.image=[UIImage imageNamed:@"arrest.png"];//here we use a nice image instead of the default pins
-//
-//        return annotationView;
-//    }
-//
-//    return nil;
-//}
 
 -(void)selectLastAnnotation:(MKMapView *)mapView
 {
