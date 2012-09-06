@@ -24,9 +24,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *dealNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *numberLikesLabel;
 @property (strong, nonatomic) IBOutlet UILabel *addToFavoritesLabel;
-
+@property (strong, nonatomic) NSString *uid;
 
 -(void)setLiked:(BOOL)isLiked;
 -(void)setFavorited:(BOOL)isFavorited;
-
+-(void)loadInitialValuesWithFavorited:(NSString *)isFavorited liked:(NSString *)isLiked;
 @end

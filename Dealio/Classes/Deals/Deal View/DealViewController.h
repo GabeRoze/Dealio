@@ -14,6 +14,7 @@
 @interface DealViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate>
 {
     BOOL userCommentPosted;
+    BOOL viewJustLoaded;
     UIActivityIndicatorView* spinner;
 
     IBOutlet UILabel *dealNameLabel;

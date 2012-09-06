@@ -14,6 +14,74 @@
 
 @implementation DealioService
 
++(void)updateLikedForUID:(NSString *)uid onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
+{
+    NSString* functionUrl = @"http://dealio.cinnux.com/app/newuserstart-func.php/";
+    NSString *command1 = @"cmd=submitlike";
+    NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",UserData.instance.email];
+    NSString* uidString = [NSString stringWithFormat:@"&uid=%@",uid];
+
+
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@", command1, emailString, uidString];
+    NSMutableURLRequest *urlRequest = [CalculationHelper getURLRequest:functionUrl withData:urlString];
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                              queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
+
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc]
+                                  initWithData:data
+                                      encoding:NSUTF8StringEncoding];
+                          NSLog (@"Deal Like Response HTML = %@", html);
+                          success(data);
+                      }
+                      else
+                      {
+                          [self webConnectionFailed];
+                      }
+                  }];
+}
+
++(void)updateFavoritedForUID:(NSString *)uid command:(NSString *)command onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
+{
+    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php";
+    NSString *command1 = @"cmd=updatefav";
+    NSString* command2 = [NSString stringWithFormat:@"&cmd2=%@",command];
+    NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",UserData.instance.email];
+    NSString* uidString = [NSString stringWithFormat:@"&uid=%@",uid];
+
+
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@", command1, command2, emailString, uidString];
+    NSString* functionUrl = @"http://dealio.cinnux.com/app/newuserstart-func.php/";
+    NSMutableURLRequest *urlRequest = [CalculationHelper getURLRequest:functionUrl withData:urlString];
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                              queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
+
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc]
+                                  initWithData:data
+                                      encoding:NSUTF8StringEncoding];
+                          NSLog (@"Deal Info HTML = %@", html);
+                          success(data);
+                      }
+                      else
+                      {
+                          [self webConnectionFailed];
+                      }
+                  }];
+}
+
 +(void)getDealWithUID:(NSString *)uid onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
 {
     NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php";

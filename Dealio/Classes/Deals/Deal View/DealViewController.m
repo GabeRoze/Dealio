@@ -62,6 +62,7 @@
             parser = [[XMLParser alloc] initXMLParser:data];
 
             dispatch_async( dispatch_get_main_queue(), ^{
+                viewJustLoaded = YES;
                 parserData = [NSMutableDictionary dictionaryWithDictionary:parser.dealItem];
                 comments = parser.dealComments;
                 [table reloadData];
@@ -94,6 +95,13 @@
             dealViewDetailCell = [DealViewDetailCell new];
         }
 
+        if (viewJustLoaded)
+        {
+            [dealViewDetailCell loadInitialValuesWithFavorited:[parserData objectForKey:@"userfavorited"] liked:[parserData objectForKey:@"userliked"]];
+            viewJustLoaded = NO;
+        }
+
+        dealViewDetailCell.uid = [dealListData objectForKey:@"uid"];
         dealViewDetailCell.dealNameLabel.text = [dealListData objectForKey:@"dealname"];
         dealViewDetailCell.numberLikesLabel.text = [NSString stringWithFormat:@"%@ Loved it!", [dealListData objectForKey:@"numlikes"]];
 

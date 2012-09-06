@@ -7,11 +7,16 @@
 //
 
 #import "DealViewDetailCell.h"
+#import "DealioService.h"
+#import "XMLParser.h"
+#import "GRCustomSpinnerView.h"
 
 @implementation DealViewDetailCell
+
 @synthesize dealNameLabel;
 @synthesize numberLikesLabel;
 @synthesize addToFavoritesLabel;
+@synthesize uid;
 
 
 -(id)init
@@ -34,37 +39,85 @@
 
 -(IBAction)likeAreaTapped:(id)sender
 {
-    NSLog(@"LIKED");
+    //todo find out initial like number
 
-    //todo connect to web
-    //in success block
-    [self setLiked:!liked];
-    //fail block - present warning
+    [DealioService updateLikedForUID:uid onSuccess:^(NSData *data) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            XMLParser *parser = [[XMLParser alloc] initXMLParser:data];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [GRCustomSpinnerView.instance stopSpinner];
+                NSMutableDictionary *parserData = [NSMutableDictionary dictionaryWithDictionary:parser.userFunction];
+
+                if ([[parserData objectForKey:@"message"] isEqualToString:@"fail"])
+                {
+                    NSLog(@"failed to like");
+                    [DealioService webConnectionFailed];
+                }
+                else
+                {
+                    [self setLiked:!liked numLikes:[[parserData objectForKey:@"message"] intValue]];
+                }
+            });
+        });
+    }
+                           onFailure:nil];
 }
 
 -(IBAction)favoriteAreaTapped:(id)sender
 {
-    NSLog(@"FAVORITED");
+    //todo - fix for add/remove likes
 
-    //todo connect to web
-    //in success block
-    [self setFavorited:!favorited];
-    //fail block - present warning
+    NSString *command = nil;
+
+    if (favorited)
+    {
+        command = @"remove";
+    }
+    else
+    {
+        command = @"add";
+    }
+
+    [DealioService updateFavoritedForUID:uid command:command onSuccess:^(NSData *data){
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            XMLParser *parser = [[XMLParser alloc] initXMLParser:data];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [GRCustomSpinnerView.instance stopSpinner];
+                NSMutableDictionary *parserData = [NSMutableDictionary dictionaryWithDictionary:parser.userFunction];
+
+                if ([[parserData objectForKey:@"message"] isEqualToString:@"success"])
+                {
+                    [self setFavorited:!favorited];
+
+                }
+                else
+                {
+                    NSLog(@"failed to favorite");
+                    [DealioService webConnectionFailed];
+                }
+            });
+        });
+    }
+                               onFailure:nil];
 }
 
--(void)setLiked:(BOOL)isLiked
+-(void)setLiked:(BOOL)isLiked numLikes:(int)numLikes;
 {
     liked = isLiked;
 
     if (liked)
     {
-        //todo - enable like image
+        numberLikesLabel.text = [NSString stringWithFormat:@"%i Loved it!", numLikes];
         likedLabel.text = @"You did too!";
+        likeButton.image = [UIImage imageNamed:@"button_love.png"];
     }
     else
     {
-        //todo -disable like image
+        numberLikesLabel.text = [NSString stringWithFormat:@"%i Loved it!", numLikes];
         likedLabel.text = @"Did you love it?";
+        likeButton.image = [UIImage imageNamed:@"button_love_s.png"];
     }
 }
 
@@ -74,12 +127,34 @@
 
     if (favorited)
     {
-        //todo - enable favorite image
+        favoriteButton.image = [UIImage imageNamed:@"button_favorite_s.png"];
     }
     else
     {
-        //todo -disable favorite image
+        favoriteButton.image = [UIImage imageNamed:@"button_favorite.png"];
     }
 }
+
+-(void)loadInitialValuesWithFavorited:(NSString *)isFavorited liked:(NSString *)isLiked
+{
+    if ([isFavorited isEqualToString:@"0"])
+    {
+        [self setFavorited:NO];
+    }
+    else
+    {
+        [self setFavorited:YES];
+    }
+
+    if ([isLiked isEqualToString:@"0"])
+    {
+        [self setLiked:NO];
+    }
+    else
+    {
+        [self setLiked:YES];
+    }
+}
+
 
 @end
