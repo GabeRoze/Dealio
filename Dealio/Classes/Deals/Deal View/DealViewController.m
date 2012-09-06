@@ -18,6 +18,9 @@
 #import "DealioMapAnnotation.h"
 #import "DealViewDescriptionCell.h"
 #import "ImageCache.h"
+#import "GRCustomSpinnerView.h"
+#import "DealioService.h"
+#import "Models.h"
 
 @implementation DealViewController
 
@@ -27,29 +30,14 @@
 @synthesize parser;
 @synthesize parserData;
 
--(void)loadDealFromList:(NSDictionary *)data
-{
-    self.dealListData = [NSMutableDictionary dictionaryWithDictionary:data];
-
-    [self connectToServer:[dealListData objectForKey:@"uid"]];
-    [table reloadData];
-    [self createAndDisplaySpinner];
-}
-
 #pragma mark -
 #pragma mark - View lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-//    [self.table setSeparatorColor:[UIColor clearColor]];
-//    [self.table setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-
-
     topBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
-
     bottomBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
-
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -63,98 +51,117 @@
     dealNameLabel.font = [UIFont fontWithName:@"Rokkitt" size:dealNameLabel.font.pointSize];
 }
 
-- (IBAction)returnToDealsListView:(id)sender
+-(void)loadDealFromList:(NSDictionary *)dealDictionary
 {
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-#pragma mark -
-#pragma mark Sever Connection and XML
--(void) connectToServer:(NSString*)data
-{
-    //attempt to connect to server
-    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php";
-
-    NSString* phpData = [NSString stringWithFormat:@"uid=%@",data ];
-    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:phpData];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-
-    [NSURLConnection
-            sendAsynchronousRequest:urlRequest
-                              queue:queue
-                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
-
-                      if ([data length] > 0 && error == nil) {
-                          NSString* html = [[NSString alloc]
-                                  initWithData:data
-                                      encoding:NSUTF8StringEncoding];
-
-                          NSLog (@"Deal Info HTML = %@", html);
-
-                          // parse file
-                          [self performSelectorInBackground:@selector(parseXMLFile:) withObject:data];
-
-                      }
-                      else if ([data length] == 0 && error == nil) {
-                          NSLog(@"Nothing was downloaded.");
-                          [self stopSpinner];
-                      }
-                      else if (error != nil) {
-                          NSLog(@"Error happened = %@", error);
-                          [self stopSpinner];
-                      }
-                  }];
-}
-
-- (IBAction)backTapped:(id)sender
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
--(void) parseXMLFile:(NSData*)data
-{
-    parser = [[XMLParser alloc] initXMLParser:data];
-    [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
-}
-
--(void) reloadTableData
-{
-    [table reloadData];
-}
-
--(void) serverResponseAcquired
-{
-    NSLog(@"parser.dealitem: %@", parser.dealItem);
-    parserData = [NSMutableDictionary dictionaryWithDictionary:parser.dealItem];
-    NSLog(@"comments: %@", parser.dealComments);
-    comments = parser.dealComments;
-
+    self.dealListData = [NSMutableDictionary dictionaryWithDictionary:dealDictionary];
     [table reloadData];
 
-    // stop spinner
-    [self stopSpinner];
+
+    [DealioService getDealWithUID:[dealListData objectForKey:@"uid"] onSuccess:^(NSData *data){
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            parser = [[XMLParser alloc] initXMLParser:data];
+
+            dispatch_async( dispatch_get_main_queue(), ^{
+                parserData = [NSMutableDictionary dictionaryWithDictionary:parser.dealItem];
+                comments = parser.dealComments;
+                [table reloadData];
+                [GRCustomSpinnerView.instance stopSpinner];
+            });
+        });
+
+    } onFailure:nil];
 }
+
+//- (IBAction)returnToDealsListView:(id)sender
+//{
+//    [self dismissModalViewControllerAnimated:YES];
+//}
+
+//#pragma mark -
+//#pragma mark Sever Connection and XML
+//-(void) connectToServer:(NSString*)data
+//{
+//    //attempt to connect to server
+//    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php";
+//
+//    NSString* phpData = [NSString stringWithFormat:@"uid=%@",data ];
+//    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:phpData];
+//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+//
+//    [NSURLConnection
+//            sendAsynchronousRequest:urlRequest
+//                              queue:queue
+//                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
+//
+//                      if ([data length] > 0 && error == nil) {
+//                          NSString* html = [[NSString alloc]
+//                                  initWithData:data
+//                                      encoding:NSUTF8StringEncoding];
+//
+//                          NSLog (@"Deal Info HTML = %@", html);
+//
+//                          // parse file
+//                          [self performSelectorInBackground:@selector(parseXMLFile:) withObject:data];
+//
+//                      }
+//                      else if ([data length] == 0 && error == nil) {
+//                          NSLog(@"Nothing was downloaded.");
+//                          [self stopSpinner];
+//                      }
+//                      else if (error != nil) {
+//                          NSLog(@"Error happened = %@", error);
+//                          [self stopSpinner];
+//                      }
+//                  }];
+//}
+
+
+
+//-(void) parseXMLFile:(NSData*)data
+//{
+//    parser = [[XMLParser alloc] initXMLParser:data];
+//    [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
+//}
+//
+//-(void) reloadTableData
+//{
+//    [table reloadData];
+//}
+
+//-(void) serverResponseAcquired
+//{
+//    NSLog(@"parser.dealitem: %@", parser.dealItem);
+//    parserData = [NSMutableDictionary dictionaryWithDictionary:parser.dealItem];
+//    NSLog(@"comments: %@", parser.dealComments);
+//    comments = parser.dealComments;
+//
+//    [table reloadData];
+//
+//    stop spinner
+//    [self stopSpinner];
+//}
 
 #pragma mark -
 #pragma mark Spinner
--(void) createAndDisplaySpinner
-{
-    if (spinner != nil)
-    {
-        [self stopSpinner];
-    }
+//-(void) createAndDisplaySpinner
+//{
+//    if (spinner != nil)
+//    {
+//        [self stopSpinner];
+//    }
+//
+//    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//    [spinner setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2 ,[UIScreen mainScreen].bounds.size.height/2)];
+//    [self.view addSubview:spinner];
+//    [spinner startAnimating];
+//}
 
-    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [spinner setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2 ,[UIScreen mainScreen].bounds.size.height/2)];
-    [self.view addSubview:spinner];
-    [spinner startAnimating];
-}
-
--(void) stopSpinner
-{
-    [spinner stopAnimating];
-    [spinner removeFromSuperview];
-}
+//-(void) stopSpinner
+//{
+//    [spinner stopAnimating];
+//    [spinner removeFromSuperview];
+//}
 
 #pragma mark -
 #pragma mark Table Data Source Method
@@ -365,10 +372,10 @@
 
 
 //specifes row selection
--(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return indexPath;
-}
+//-(NSIndexPath*)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return indexPath;
+//}
 
 
 //#pragma mark - MKMapViewDelegate
@@ -403,4 +410,8 @@
     [mapView selectAnnotation:[mapView.annotations objectAtIndex:0] animated:YES];
 }
 
+- (IBAction)backTapped:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
 @end

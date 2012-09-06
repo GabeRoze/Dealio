@@ -210,7 +210,6 @@
             currentDay.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"selected_day_button_color"]];
             UILabel *currentDayLabel = (UILabel *)[DealListViewController.instance.dayLabels objectAtIndex:(DealListViewController.instance.currentSelectedDay)];
             [currentDayLabel setTextColor:[UIColor whiteColor]];
-            [DealListViewController.instance reloadDataForInfo:[CalculationHelper convertIntToDay:(DealListViewController.instance.currentSelectedDay)]];
             DealListViewController.instance.filterButtonTapped;
         }
     }

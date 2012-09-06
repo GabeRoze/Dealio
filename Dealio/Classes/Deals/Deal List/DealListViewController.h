@@ -22,11 +22,12 @@
 
     BOOL filterViewDisplayed;
     BOOL firstLoadFinished;
-    
+
     IBOutlet UIImageView *backgroundImage;
     IBOutlet UILabel *navBarTitleLabel;
 }
 
+@property (assign, nonatomic) BOOL filterViewDisplayed;
 @property (nonatomic, assign) int currentSelectedDay;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (assign, nonatomic) BOOL FAVORITES_MODE;

@@ -20,6 +20,7 @@
 
 @implementation DealListViewController
 
+@synthesize filterViewDisplayed;
 @synthesize currentSelectedDay;
 @synthesize listData;
 @synthesize table;
@@ -196,11 +197,9 @@ static DealListViewController *instance;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUInteger row = [indexPath row];
-
-    NSDictionary* rowData = [DealData.instance.dealList objectAtIndex:row];
+    NSDictionary* rowData = [DealData.instance.dealList objectAtIndex:indexPath.row];
+    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
     [self.dealViewController loadDealFromList:rowData];
-
     [self presentModalViewController:self.dealViewController animated:YES];
 
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -215,7 +214,6 @@ static DealListViewController *instance;
 #pragma mark - Button Taps
 -(void)filterButtonTapped
 {
-    //todo bug - deselect filter button doesn't highlight a day - should reload page
     if (!filterViewDisplayed)
     {
         filterViewDisplayed = YES;
@@ -246,10 +244,6 @@ static DealListViewController *instance;
 
 -(IBAction)dayButtonTapped:(id)sender
 {
-    if (filterViewDisplayed)
-    {
-        [self filterButtonTapped];
-    }
 
     UITapGestureRecognizer *tapGestureRecognizer = (UITapGestureRecognizer *)sender;
     UIImageView *selectedDayButton = (UIImageView *) tapGestureRecognizer.view;
@@ -258,7 +252,15 @@ static DealListViewController *instance;
     [self disableAllDays];
     [self highlightDay:selectedDayButton.tag];
 
-    [self reloadDataForInfo:[CalculationHelper convertIntToDay:selectedDayButton.tag]];
+    if (filterViewDisplayed)
+    {
+        [self filterButtonTapped];
+    }
+    else
+    {
+        [self reloadDataForInfo:[CalculationHelper convertIntToDay:selectedDayButton.tag]];
+    }
+
 }
 
 -(void)disableAllDays

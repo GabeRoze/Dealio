@@ -19,7 +19,7 @@
     IBOutlet UILabel *dealNameLabel;
     IBOutlet UILabel *distanceLabel;
     IBOutlet UIImageView *dealImageView;
-    
+
     IBOutlet UIImageView *topBackgroundImage;
     IBOutlet UIImageView *bottomBackgroundImage;}
 
@@ -29,11 +29,11 @@
 @property (strong, nonatomic) NSMutableDictionary* parserData;
 @property (strong, nonatomic) NSMutableArray* comments;
 
--(void) loadDealFromList:(NSDictionary*)data;
--(void)parseXMLFile:(NSData*)data;
--(void) stopSpinner;
--(void) createAndDisplaySpinner;
--(void) connectToServer:(NSString*)data;
+-(void) loadDealFromList:(NSDictionary*)dealDictionary;
+//-(void)parseXMLFile:(NSData*)data;
+//-(void) stopSpinner;
+//-(void) createAndDisplaySpinner;
+//-(void) connectToServer:(NSString*)data;
 - (IBAction)backTapped:(id)sender;
 
 @end

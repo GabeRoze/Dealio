@@ -21,6 +21,8 @@
 #import "Models.h"
 #import "ButtonCell.h"
 #import "AlertHelper.h"
+#import "GRCustomSpinnerView.h"
+#import "XMLParser.h"
 
 @implementation TipUsViewController
 
@@ -35,18 +37,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
     self.navigationController.navigationBarHidden = YES;
-    [DealioService getUserProfileWithSuccess:^(NSData *data){
-
-
-    }
-                                  andFailure:^{
-
-                                  }];
-
     backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
-
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -359,10 +351,40 @@
     }
     else if (indexPath.row == 12)
     {
-        NSLog(@"submit");
-        //todo - submit data
         if ([self validateTipUsData])
         {
+            [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+
+            self.navigationController.navigationBarHidden = YES;
+            [DealioService getUserProfileWithSuccess:^(NSData *data){
+
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    XMLParser *parser = [[XMLParser alloc] initXMLParser:data];
+                    NSLog(@"parser data %@",parser.userFunction);
+                    NSString *messageText = [parser.userFunction objectForKey:@"message"];
+
+                    dispatch_async( dispatch_get_main_queue(), ^{
+                        [GRCustomSpinnerView.instance stopSpinner];
+
+                        if ([messageText isEqualToString:@"emailsuccess"])
+                        {
+                            [AlertHelper displayAlertWithOKButtonUsingTitle:@"Tip Sent!" withMessage:@"WE WILL DOS TUFF LATERSSS" andAction:^{
+                                [self dismissModalViewControllerAnimated:YES];
+                            }];
+                        }
+                        else if ([messageText isEqualToString:@"emailfail"])
+                        {
+                            //todo - when does this occur
+                        }
+
+                    });
+                });
+            }
+                                          andFailure:^{
+                                              [GRCustomSpinnerView.instance stopSpinner];
+                                              [AlertHelper displayWebConnectionFail];
+                                          }];
+
 
         }
 

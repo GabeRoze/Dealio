@@ -9,8 +9,38 @@
 #import "DealioService.h"
 #import "CalculationHelper.h"
 #import "Models.h"
+#import "GRCustomSpinnerView.h"
+#import "AlertHelper.h"
 
 @implementation DealioService
+
++(void)getDealWithUID:(NSString *)uid onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
+{
+    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php";
+
+    NSString* phpData = [NSString stringWithFormat:@"uid=%@",uid ];
+    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:phpData];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                              queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
+
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc]
+                                  initWithData:data
+                                      encoding:NSUTF8StringEncoding];
+                          NSLog (@"Deal Info HTML = %@", html);
+                          success(data);
+                      }
+                      else
+                      {
+                          [self webConnectionFailed];
+                      }
+                  }];
+}
 
 +(void)loginWithEmail:(NSString *)email password:(NSString *)password onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
 {
@@ -34,7 +64,8 @@
                       }
                       else
                       {
-                          failure();
+//                          failure();
+                          [self webConnectionFailed];
                       }
                   }];
 }
@@ -60,7 +91,8 @@
                       }
                       else
                       {
-                          failure();
+//                          failure();
+                          [self webConnectionFailed];
                       }
                   }];
 }
@@ -89,7 +121,8 @@
                       }
                       else
                       {
-                          failure();
+//                          failure();
+                          [self webConnectionFailed];
                       }
                   }];
 }
@@ -125,10 +158,77 @@
                       }
                       else
                       {
-                          failure();
+//                          failure();
+                          [self webConnectionFailed];
                       }
                   }];
+}
 
++(void)sendTip:(void (^)(NSData *xmlData))success andFailure:(void (^)())failure
+{
+    TipUsData *tipUsData = TipUsData.instance;
+    NSString *command = @"cmd=tip";
+    NSString* businessName = [NSString stringWithFormat:@"&businessname=%@",tipUsData.businessName];
+    NSString* dealName = [NSString stringWithFormat:@"&dealname=%@",tipUsData.dealName];
+    NSString* detail = [NSString stringWithFormat:@"&detail=%@",tipUsData.detail];
+    NSString* address = [NSString stringWithFormat:@"&address=%@",tipUsData.address];
+    NSString* latitude = [NSString stringWithFormat:@"&latitude=%@",tipUsData.latitude];
+    NSString* longitude = [NSString stringWithFormat:@"&longitude=%@",tipUsData.longitude];
+    NSString* sunday = [NSString stringWithFormat:@"&sun=%@", [tipUsData.days objectAtIndex:0]];
+    NSString* monday = [NSString stringWithFormat:@"&mon=%@", [tipUsData.days objectAtIndex:1]];
+    NSString* tuesday = [NSString stringWithFormat:@"&tue=%@", [tipUsData.days objectAtIndex:2]];
+    NSString* wednesday = [NSString stringWithFormat:@"&wed=%@", [tipUsData.days objectAtIndex:3]];
+    NSString* thursday = [NSString stringWithFormat:@"&thu=%@", [tipUsData.days objectAtIndex:4]];
+    NSString* friday = [NSString stringWithFormat:@"&fri=%@", [tipUsData.days objectAtIndex:5]];
+    NSString* saturday = [NSString stringWithFormat:@"&sat=%@", [tipUsData.days objectAtIndex:6]];
+    NSString* openTime = [NSString stringWithFormat:@"&open=%i",tipUsData.openTime];
+    NSString* closeTime = [NSString stringWithFormat:@"&open=%i",tipUsData.closeTime];
+
+    NSString *urlString = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",
+                                                     command,
+                                                     businessName,
+                                                     dealName,
+                                                     detail,
+                                                     address,
+                                                     latitude,
+                                                     longitude,
+                                                     sunday,
+                                                     monday,
+                                                     tuesday,
+                                                     wednesday,
+                                                     thursday,
+                                                     friday,
+                                                     saturday,
+                                                     sunday,
+                                                     openTime,
+                                                     closeTime];
+    NSString* functionUrl = @"http://dealio.cinnux.com/app/newuserstart-func.php/";
+    NSMutableURLRequest *urlRequest = [CalculationHelper getURLRequest:functionUrl withData:urlString];
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                              queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                          NSLog (@"HTML = %@", html);
+                          success(data);
+                      }
+                      else
+                      {
+//                          failure();
+                          [self webConnectionFailed];
+                      }
+                  }];
+}
+
+
++(void)webConnectionFailed
+{
+    [GRCustomSpinnerView.instance stopSpinner];
+    [AlertHelper displayWebConnectionFail];
 }
 
 @end

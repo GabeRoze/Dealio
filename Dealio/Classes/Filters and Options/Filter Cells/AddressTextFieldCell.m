@@ -97,8 +97,8 @@
     SearchLocation.instance.savedAddressCoordinate = coordinate2D;
     double longitude = coordinate2D.longitude;
     double latitude = coordinate2D.latitude;
-    [NSUserDefaults.standardUserDefaults setDouble:latitude forKey:@"savedLongitude"];
-    [NSUserDefaults.standardUserDefaults setDouble:longitude forKey:@"savedLatitude"];
+    [NSUserDefaults.standardUserDefaults setDouble:longitude forKey:@"savedLongitude"];
+    [NSUserDefaults.standardUserDefaults setDouble:latitude forKey:@"savedLatitude"];
 }
 
 @end
