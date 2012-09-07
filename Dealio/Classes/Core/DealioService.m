@@ -14,6 +14,38 @@
 
 @implementation DealioService
 
++(void)getDealListForDay:(NSString *)day onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
+{
+    CLLocationCoordinate2D coordinate = SearchLocation.instance.getLocation;
+    NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",day];
+    NSString *latitude = [NSString stringWithFormat:@"&userlat=%f", coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"&userlong=%f", coordinate.longitude];
+    NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=%i", FilterData.instance.maximumSearchDistance];
+    NSString* urlAsString = [NSString stringWithFormat:@"%@%@%@%@",currentDay, latitude, longitude, maxDistance];
+
+    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealheader-func.php/";
+    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:urlAsString];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                              queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error)
+                  {
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc]
+                                  initWithData:data
+                                      encoding:NSUTF8StringEncoding];
+//                          NSLog(@"html %@", html);
+                      }
+                      else
+                      {
+
+                      }
+                  }];
+}
+
 +(void)updateLikedForUID:(NSString *)uid onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
 {
     NSString* functionUrl = @"http://dealio.cinnux.com/app/newuserstart-func.php/";

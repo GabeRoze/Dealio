@@ -58,8 +58,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *saturdayLabel;
 
 -(void) reloadDataForInfo:(NSString*)data;
--(void)parseXMLFile:(NSData*)data;
--(void) connectToServer:(NSString*)data;
+//-(void)parseXMLFile:(NSData*)data;
+//-(void) connectToServer:(NSString*)data;
 -(void)filterButtonTapped;
 +(DealListViewController *)instance;
 

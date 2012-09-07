@@ -17,6 +17,7 @@
 #import "UIAlertView+Blocks.h"
 #import "Models.h"
 #import "GRCustomSpinnerView.h"
+#import "DealioService.h"
 
 @implementation DealListViewController
 
@@ -98,52 +99,72 @@ static DealListViewController *instance;
     }
     else
     {
-        [self connectToServer:data];
+//        [self connectToServer:data];
+        [self getDealListWithDay:data];
     }
 }
 
-#pragma mark -
-#pragma mark Server Connectivity and XML
--(void) connectToServer:(NSString*)data
+-(void)getDealListWithDay:(NSString *)day
 {
-    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
-    CLLocationCoordinate2D coordinate = SearchLocation.instance.getLocation;
+    [DealioService getDealListForDay:day  onSuccess:^(NSData *data){
 
-    NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",data];
-    NSString *latitude = [NSString stringWithFormat:@"&userlat=%f", coordinate.latitude];
-    NSString *longitude = [NSString stringWithFormat:@"&userlong=%f", coordinate.longitude];
-    NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=%i", FilterData.instance.maximumSearchDistance];
-    NSString* urlAsString = [NSString stringWithFormat:@"%@%@%@%@",currentDay, latitude, longitude, maxDistance];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            parser = [[XMLParser alloc] initXMLParser:data];
+            SearchLocation.instance.savedAddressCoordinate;
+            DealData.instance.dealList = parser.dealListArray;
+            //todo set comments
 
-    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealheader-func.php/";
-    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:urlAsString];
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [table reloadData];
+                [GRCustomSpinnerView.instance stopSpinner];
+            });
+        });
 
-    [NSURLConnection
-            sendAsynchronousRequest:urlRequest
-                              queue:queue
-                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error)
-                  {
-                      if ([data length] > 0 && error == nil)
-                      {
-                          NSString* html = [[NSString alloc]
-                                  initWithData:data
-                                      encoding:NSUTF8StringEncoding];
-//                          NSLog(@"html %@", html);
-                          [self performSelectorInBackground:@selector(parseXMLFile:) withObject:data];
-                      }
-                      else if ([data length] == 0 && error == nil)
-                      {
-                          messageText = @"Server not responding";
-                          [GRCustomSpinnerView.instance stopSpinner];
-
-                      }
-                      else if (error != nil)
-                      {
-                          messageText = @"Error occured during login";
-                      }
-                  }];
+    } onFailure:nil];
 }
+
+//#pragma mark -
+//#pragma mark Server Connectivity and XML
+//-(void) connectToServer:(NSString*)data
+//{
+//    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+//    CLLocationCoordinate2D coordinate = SearchLocation.instance.getLocation;
+//
+//    NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",data];
+//    NSString *latitude = [NSString stringWithFormat:@"&userlat=%f", coordinate.latitude];
+//    NSString *longitude = [NSString stringWithFormat:@"&userlong=%f", coordinate.longitude];
+//    NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=%i", FilterData.instance.maximumSearchDistance];
+//    NSString* urlAsString = [NSString stringWithFormat:@"%@%@%@%@",currentDay, latitude, longitude, maxDistance];
+//
+//    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealheader-func.php/";
+//    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:urlAsString];
+//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+//
+//    [NSURLConnection
+//            sendAsynchronousRequest:urlRequest
+//                              queue:queue
+//                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error)
+//                  {
+//                      if ([data length] > 0 && error == nil)
+//                      {
+//                          NSString* html = [[NSString alloc]
+//                                  initWithData:data
+//                                      encoding:NSUTF8StringEncoding];
+////                          NSLog(@"html %@", html);
+//                          [self performSelectorInBackground:@selector(parseXMLFile:) withObject:data];
+//                      }
+//                      else if ([data length] == 0 && error == nil)
+//                      {
+//                          messageText = @"Server not responding";
+//                          [GRCustomSpinnerView.instance stopSpinner];
+//
+//                      }
+//                      else if (error != nil)
+//                      {
+//                          messageText = @"Error occured during login";
+//                      }
+//                  }];
+//}
 
 -(void) parseXMLFile:(NSData*)data
 {
