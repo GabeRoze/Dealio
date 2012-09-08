@@ -22,5 +22,7 @@ typedef enum
 @property (strong, nonatomic) IBOutlet UIImageView *leftImageView;
 @property (strong, nonatomic) IBOutlet UILabel *contactLabel;
 @property (assign, nonatomic) ContactType contactType;
+@property (strong, nonatomic) NSString *longitude;
+@property (strong, nonatomic) NSString *latitude;
 
 @end

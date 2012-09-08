@@ -28,5 +28,5 @@
 
 -(void)setLiked:(BOOL)isLiked;
 -(void)setFavorited:(BOOL)isFavorited;
--(void)loadInitialValuesWithFavorited:(NSString *)isFavorited liked:(NSString *)isLiked;
+-(void)loadInitialValuesWithFavorited:(NSString *)isFavorited liked:(NSString *)isLiked numLikes:(NSString *)numLikes;
 @end

@@ -106,11 +106,13 @@ static DealListViewController *instance;
 
 -(void)getDealListWithDay:(NSString *)day
 {
-    [DealioService getDealListForDay:day  onSuccess:^(NSData *data){
+    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+
+    [DealioService getDealListForDay:day onSuccess:^(NSData *data){
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             parser = [[XMLParser alloc] initXMLParser:data];
-            SearchLocation.instance.savedAddressCoordinate;
+//            SearchLocation.instance.savedAddressCoordinate;
             DealData.instance.dealList = parser.dealListArray;
             //todo set comments
 

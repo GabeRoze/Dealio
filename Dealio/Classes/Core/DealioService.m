@@ -37,11 +37,12 @@
                           NSString* html = [[NSString alloc]
                                   initWithData:data
                                       encoding:NSUTF8StringEncoding];
-//                          NSLog(@"html %@", html);
+                          NSLog (@"Deal Like Response HTML = %@", html);
+                          success(data);
                       }
                       else
                       {
-
+                          [self webConnectionFailed];
                       }
                   }];
 }
@@ -81,7 +82,6 @@
 
 +(void)updateFavoritedForUID:(NSString *)uid command:(NSString *)command onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
 {
-    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php";
     NSString *command1 = @"cmd=updatefav";
     NSString* command2 = [NSString stringWithFormat:@"&cmd2=%@",command];
     NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",UserData.instance.email];

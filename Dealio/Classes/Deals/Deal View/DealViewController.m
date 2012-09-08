@@ -95,24 +95,27 @@
             dealViewDetailCell = [DealViewDetailCell new];
         }
 
+        dealViewDetailCell.uid = [dealListData objectForKey:@"uid"];
+
         if (viewJustLoaded)
         {
-            [dealViewDetailCell loadInitialValuesWithFavorited:[parserData objectForKey:@"userfavorited"] liked:[parserData objectForKey:@"userliked"]];
+            [dealViewDetailCell loadInitialValuesWithFavorited:[parserData objectForKey:@"userfavorited"] liked:[parserData objectForKey:@"userliked"] numLikes:[dealListData objectForKey:@"numlikes"]];
             viewJustLoaded = NO;
-        }
-
-        dealViewDetailCell.uid = [dealListData objectForKey:@"uid"];
-        dealViewDetailCell.dealNameLabel.text = [dealListData objectForKey:@"dealname"];
-        dealViewDetailCell.numberLikesLabel.text = [NSString stringWithFormat:@"%@ Loved it!", [dealListData objectForKey:@"numlikes"]];
-
-        if ([[parserData objectForKey:@"userliked"] isEqualToString:@"1"])
-        {
-            [dealViewDetailCell setLiked:YES];
         }
         else
         {
-            [dealViewDetailCell setLiked:NO];
+            dealViewDetailCell.dealNameLabel.text = [dealListData objectForKey:@"dealname"];
+//            dealViewDetailCell.numberLikesLabel.text = [NSString stringWithFormat:@"%@ Loved it!", [dealListData objectForKey:@"numlikes"]];
         }
+
+//        if ([[parserData objectForKey:@"userliked"] isEqualToString:@"1"])
+//        {
+//            [dealViewDetailCell setLiked:YES];
+//        }
+//        else
+//        {
+//            [dealViewDetailCell setLiked:NO];
+//        }
 
         return dealViewDetailCell;
     }
@@ -179,6 +182,8 @@
         contactInfoCell.leftImageView.image = [UIImage imageNamed:@"button_map.png"];
         contactInfoCell.contactType = address;
         contactInfoCell.contactLabel.text =  [parserData objectForKey:@"storeaddress"];
+        contactInfoCell.longitude = [dealListData objectForKey:@"longitude"];
+        contactInfoCell.latitude = [dealListData objectForKey:@"latitude"];
 
         return contactInfoCell;
     }

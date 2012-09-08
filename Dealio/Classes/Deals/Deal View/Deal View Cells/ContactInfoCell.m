@@ -6,13 +6,17 @@
 //  Copyright (c) 2012 University of Waterloo. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import "ContactInfoCell.h"
+#import "Models.h"
 
 @implementation ContactInfoCell
 
 @synthesize leftImageView;
 @synthesize contactLabel;
 @synthesize contactType;
+@synthesize longitude;
+@synthesize latitude;
 
 -(id)init
 {
@@ -33,18 +37,26 @@
 {
     if (contactType == phone)
     {
-        //todo - dial phone
-        NSLog(@"Dial %@", contactLabel.text);
+        NSString *phone = [contactLabel.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:
+                [NSString stringWithFormat:@"tel://%@", phone]]];
     }
     else if (contactType == website)
     {
-        NSLog(@"Open %@", contactLabel.text);
-        //todo - open website
+        [[UIApplication sharedApplication] openURL:
+                [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", contactLabel.text]]];
     }
     else if (contactType == address)
     {
-        NSLog(@"Direct to %@", contactLabel.text);
-        //todo open directions to address
+        CLLocationCoordinate2D start = SearchLocation.instance.getCurrentLocation;
+        CLLocationCoordinate2D destination;
+        destination.longitude = [longitude doubleValue];
+        destination.latitude = [latitude doubleValue];
+
+        NSString *googleMapsURLString = [NSString stringWithFormat:@"http://maps.google.com/?saddr=%f,%f&daddr=%f,%f",
+                                         start.latitude, start.longitude, destination.latitude, destination.longitude];
+
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:googleMapsURLString]];
     }
 }
 

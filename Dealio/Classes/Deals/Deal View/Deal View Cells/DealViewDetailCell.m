@@ -111,13 +111,13 @@
     {
         numberLikesLabel.text = [NSString stringWithFormat:@"%i Loved it!", numLikes];
         likedLabel.text = @"You did too!";
-        likeButton.image = [UIImage imageNamed:@"button_love.png"];
+        likeButton.image = [UIImage imageNamed:@"button_love_s.png"];
     }
     else
     {
         numberLikesLabel.text = [NSString stringWithFormat:@"%i Loved it!", numLikes];
         likedLabel.text = @"Did you love it?";
-        likeButton.image = [UIImage imageNamed:@"button_love_s.png"];
+        likeButton.image = [UIImage imageNamed:@"button_love.png"];
     }
 }
 
@@ -135,7 +135,7 @@
     }
 }
 
--(void)loadInitialValuesWithFavorited:(NSString *)isFavorited liked:(NSString *)isLiked
+-(void)loadInitialValuesWithFavorited:(NSString *)isFavorited liked:(NSString *)isLiked numLikes:(NSString *)numLikes
 {
     if ([isFavorited isEqualToString:@"0"])
     {
@@ -148,11 +148,11 @@
 
     if ([isLiked isEqualToString:@"0"])
     {
-        [self setLiked:NO];
+        [self setLiked:NO numLikes:[numLikes intValue]];
     }
     else
     {
-        [self setLiked:YES];
+        [self setLiked:YES numLikes:[numLikes intValue]];
     }
 }
 
