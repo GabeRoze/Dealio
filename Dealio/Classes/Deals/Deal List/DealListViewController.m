@@ -7,7 +7,6 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-#import <CoreGraphics/CoreGraphics.h>
 #import "DealListViewController.h"
 #import "DealViewController.h"
 #import "DealListViewCell.h"
@@ -61,7 +60,6 @@ static DealListViewController *instance;
     backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
     [navBarTitleLabel setFont:[UIFont fontWithName:@"Eurofurenceregular" size:navBarTitleLabel.font.pointSize]];
 
-
     firstLoadFinished = NO;
     instance = self;
 
@@ -99,7 +97,6 @@ static DealListViewController *instance;
     }
     else
     {
-//        [self connectToServer:data];
         [self getDealListWithDay:data];
     }
 }
@@ -114,6 +111,10 @@ static DealListViewController *instance;
             parser = [[XMLParser alloc] initXMLParser:data];
 //            SearchLocation.instance.savedAddressCoordinate;
             DealData.instance.dealList = parser.dealListArray;
+            DealData.instance.featuredDeal = parser.featuredDeal;
+
+            NSLog(@"featured %@", DealData.instance.featuredDeal);
+
             //todo set comments
 
             dispatch_async( dispatch_get_main_queue(), ^{
@@ -125,71 +126,17 @@ static DealListViewController *instance;
     } onFailure:nil];
 }
 
-//#pragma mark -
-//#pragma mark Server Connectivity and XML
-//-(void) connectToServer:(NSString*)data
-//{
-//    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
-//    CLLocationCoordinate2D coordinate = SearchLocation.instance.getLocation;
-//
-//    NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",data];
-//    NSString *latitude = [NSString stringWithFormat:@"&userlat=%f", coordinate.latitude];
-//    NSString *longitude = [NSString stringWithFormat:@"&userlong=%f", coordinate.longitude];
-//    NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=%i", FilterData.instance.maximumSearchDistance];
-//    NSString* urlAsString = [NSString stringWithFormat:@"%@%@%@%@",currentDay, latitude, longitude, maxDistance];
-//
-//    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealheader-func.php/";
-//    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:urlAsString];
-//    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-//
-//    [NSURLConnection
-//            sendAsynchronousRequest:urlRequest
-//                              queue:queue
-//                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error)
-//                  {
-//                      if ([data length] > 0 && error == nil)
-//                      {
-//                          NSString* html = [[NSString alloc]
-//                                  initWithData:data
-//                                      encoding:NSUTF8StringEncoding];
-////                          NSLog(@"html %@", html);
-//                          [self performSelectorInBackground:@selector(parseXMLFile:) withObject:data];
-//                      }
-//                      else if ([data length] == 0 && error == nil)
-//                      {
-//                          messageText = @"Server not responding";
-//                          [GRCustomSpinnerView.instance stopSpinner];
-//
-//                      }
-//                      else if (error != nil)
-//                      {
-//                          messageText = @"Error occured during login";
-//                      }
-//                  }];
-//}
-
--(void) parseXMLFile:(NSData*)data
-{
-    parser = [[XMLParser alloc] initXMLParser:data];
-    SearchLocation.instance.savedAddressCoordinate;
-//    CLLocation *location = [[CLLocation alloc] initWithLatitude:<#(CLLocationDegrees)latitude#> longitude:<#(CLLocationDegrees)longitude#>]
-    //todo remove use of at
-//    DealData.instance.dealList = [CalculationHelper sortAndFormatDealListData:parser.dealListArray atLocation:currentLocation];
-    DealData.instance.dealList = parser.dealListArray;
-    [self performSelectorOnMainThread:@selector(serverResponseAcquired) withObject:nil waitUntilDone:YES];
-}
-
--(void) serverResponseAcquired
-{
-    [table reloadData];
-    [GRCustomSpinnerView.instance stopSpinner];
-}
-
 #pragma mark -
 #pragma mark Table View Data Source Methods
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return DealData.instance.dealList.count;
+    int rowCount = DealData.instance.dealList.count;
+
+    if (DealData.instance.featuredDeal)
+    {
+        rowCount++;
+    }
+    return rowCount;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -202,13 +149,52 @@ static DealListViewController *instance;
         cell = [DealListViewCell new];
     }
 
-    NSDictionary* rowData = [DealData.instance.dealList objectAtIndex:indexPath.row];
+    NSDictionary* rowData = nil;
+
+
+    if (!firstLoadFinished)
+    {
+        rowData = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"Loading ...",@"businessname",
+                                                                      @"", @"dealname",
+                                                                      @"", @"distance",
+                                                                      @"", @"numlikes", nil];
+        cell.userInteractionEnabled = NO;
+        cell.ratingLabel.text = @"";
+        cell.distance = @"";
+    }
+    else if (DealData.instance.featuredDeal && indexPath.row == 0)
+    {
+        rowData = DealData.instance.featuredDeal;
+        cell.featuredLabel.hidden = NO;
+        [cell setFeaturedBackground];
+        cell.userInteractionEnabled = YES;
+    }
+    else if (DealData.instance.featuredDeal && indexPath.row > 0)
+    {
+        rowData = [DealData.instance.dealList objectAtIndex:indexPath.row-1];
+        cell.featuredLabel.hidden = YES;
+        [cell setBackgroundWithPattern];
+        cell.userInteractionEnabled = YES;
+    }
+    else
+    {
+        rowData = [DealData.instance.dealList objectAtIndex:indexPath.row];
+        cell.featuredLabel.hidden = YES;
+        [cell setBackgroundWithPattern];
+        cell.userInteractionEnabled = YES;
+    }
+
+    if (firstLoadFinished)
+    {
+        cell.rating = [NSString stringWithFormat:@"%@ Love it!", [rowData objectForKey:@"numlikes"]];
+        cell.distance = [CalculationHelper formatDistance:[rowData objectForKey:@"distance"]];
+    }
 
     cell.restaurantName = [rowData objectForKey:@"businessname"];
     cell.dealName = [rowData objectForKey:@"dealname"];
-    cell.rating = [NSString stringWithFormat:@"%@ Love it!", [rowData objectForKey:@"numlikes"]];
-    cell.distance = [CalculationHelper formatDistance:[rowData objectForKey:@"distance"]];
     [cell setLogoWithString:(NSString*)[rowData objectForKey:@"logoname"]];
+
+    NSLog(@"first load finished %i", firstLoadFinished);
 
     return cell;
 }
@@ -220,8 +206,24 @@ static DealListViewController *instance;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary* rowData = [DealData.instance.dealList objectAtIndex:indexPath.row];
-//    [self.dealViewController loadDealFromList:rowData];
+    NSDictionary* rowData = nil;
+
+    if (!firstLoadFinished)
+    {
+    }
+    else if (DealData.instance.featuredDeal && indexPath.row == 0)
+    {
+        rowData = DealData.instance.featuredDeal;
+    }
+    else if (DealData.instance.featuredDeal && indexPath.row > 0)
+    {
+        rowData = [DealData.instance.dealList objectAtIndex:indexPath.row-1];
+    }
+    else
+    {
+        rowData = [DealData.instance.dealList objectAtIndex:indexPath.row];
+    }
+
     self.dealViewController.dealListData = [NSMutableDictionary dictionaryWithDictionary:rowData];
     [self presentModalViewController:self.dealViewController animated:YES];
 

@@ -42,6 +42,7 @@
 
 @property (nonatomic, strong) NSMutableArray *dealList;
 @property (nonatomic, strong) NSMutableArray *dealView;
+@property (nonatomic, strong) NSMutableDictionary *featuredDeal;
 
 + (DealData*)instance;
 @end

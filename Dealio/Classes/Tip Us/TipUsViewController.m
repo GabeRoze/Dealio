@@ -136,6 +136,8 @@
             selectDayCell = [SelectDayCell new];
         }
 
+        [selectDayCell setSelectedDaysFromMemory];
+
         return  selectDayCell;
     }
     else if (indexPath.row == 6)
@@ -260,23 +262,6 @@
     }
     else if (indexPath.row == 11)
     {
-        UITableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
-
-        if (!tableViewCell)
-        {
-            tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellTableIdentifier];
-        }
-        tableViewCell.textLabel.text = @"Submit";
-        tableViewCell.textLabel.textAlignment = UITextAlignmentCenter;
-
-        UIImageView *backgroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-        backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
-        [tableViewCell addSubview:backgroundImage];
-
-        return tableViewCell;
-    }
-    else if (indexPath.row == 12)
-    {
         CellTableIdentifier = @"ButtonCellIdentifier";
 
         ButtonCell *buttonCell = [tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
@@ -349,7 +334,14 @@
         TipUsAddressTextFieldCell *tipUsAddressTextFieldCell = (TipUsAddressTextFieldCell *)[tableView cellForRowAtIndexPath:indexPath];
         [tipUsAddressTextFieldCell.addressTextField becomeFirstResponder];
     }
-    else if (indexPath.row == 12)
+
+    return indexPath;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (indexPath.row == 11)
     {
         if ([self validateTipUsData])
         {
@@ -371,6 +363,8 @@
                             [AlertHelper displayAlertWithOKButtonUsingTitle:@"Tip Sent!" withMessage:@"WE WILL DOS TUFF LATERSSS" andAction:^{
                                 [self dismissModalViewControllerAnimated:YES];
                             }];
+
+                            //todo clear tipus saved data
                         }
                         else if ([messageText isEqualToString:@"emailfail"])
                         {
@@ -384,106 +378,11 @@
                                               [GRCustomSpinnerView.instance stopSpinner];
                                               [AlertHelper displayWebConnectionFail];
                                           }];
-
-
-        }
-
-
-    }
-
-    return indexPath;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-}
-
-/*
-#pragma mark - Picker View Data Source and Delegate
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 4;
-}
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    if (component == 0)
-    {
-        return 3;
-    }
-    else if (component == 1)
-    {
-        return 12;
-    }
-    else if (component == 2)
-    {
-        return 13;
-    }
-    else if (component == 3)
-    {
-        return 2;
-    }
-}
-
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
-{
-    if (component == 0)
-    {
-        return 50;
-    }
-    else if (component == 1)
-    {
-        return 50;
-    }
-    else if (component == 2)
-    {
-        return 50;
-    }
-    else if (component == 3)
-    {
-        return 50;
-    }
-}
-
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    if (component == 0)
-    {
-        if (row == 0)
-        {
-            return @"Open";
-        }
-        else if (row == 1)
-        {
-            return @"Close";
-        }
-        else if (row == 2)
-        {
-            return @"Time";
         }
     }
-    else if (component == 1)
-    {
-        return [NSString stringWithFormat:@"%i", row+1];
-    }
-    else if (component == 2)
-    {
-        return [NSString stringWithFormat:@"%i", row*5];
-    }
-    else if (component == 3)
-    {
-        if (row == 0)
-        {
-            return @"AM";
-        }
-        else if (row == 1)
-        {
-            return @"PM";
-        }
-    }
+
 }
-*/
+
 -(void)selectLastAnnotation:(MKMapView *)mapView
 {
     [mapView selectAnnotation:[mapView.annotations objectAtIndex:0] animated:YES];
@@ -530,9 +429,9 @@
         sum += [[TipUsData.instance.days objectAtIndex:i] intValue];
     }
 
-    if (sum > 0)
+    if (sum < 1)
     {
-        [AlertHelper displayAlertWithOKButtonUsingTitle:@"What day does this deal happen?" andAction:^{
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"When is the Dealio?" andAction:^{
             [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }];
         return NO;

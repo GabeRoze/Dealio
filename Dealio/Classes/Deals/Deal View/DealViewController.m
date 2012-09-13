@@ -100,22 +100,8 @@
         if (viewJustLoaded)
         {
             [dealViewDetailCell loadInitialValuesWithFavorited:[parserData objectForKey:@"userfavorited"] liked:[parserData objectForKey:@"userliked"] numLikes:[dealListData objectForKey:@"numlikes"]];
-            viewJustLoaded = NO;
-        }
-        else
-        {
             dealViewDetailCell.dealNameLabel.text = [dealListData objectForKey:@"dealname"];
-//            dealViewDetailCell.numberLikesLabel.text = [NSString stringWithFormat:@"%@ Loved it!", [dealListData objectForKey:@"numlikes"]];
         }
-
-//        if ([[parserData objectForKey:@"userliked"] isEqualToString:@"1"])
-//        {
-//            [dealViewDetailCell setLiked:YES];
-//        }
-//        else
-//        {
-//            [dealViewDetailCell setLiked:NO];
-//        }
 
         return dealViewDetailCell;
     }
@@ -293,7 +279,11 @@
 
 -(void)selectLastAnnotation:(MKMapView *)mapView
 {
-    [mapView selectAnnotation:[mapView.annotations objectAtIndex:0] animated:YES];
+    if (viewJustLoaded)
+    {
+        [mapView selectAnnotation:[mapView.annotations objectAtIndex:0] animated:YES];
+        viewJustLoaded = NO;
+    }
 }
 
 - (IBAction)backTapped:(id)sender

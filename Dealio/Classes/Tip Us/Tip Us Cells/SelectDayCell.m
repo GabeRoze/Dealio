@@ -51,4 +51,20 @@
     }
 }
 
+-(void)setSelectedDaysFromMemory
+{
+    for (NSUInteger i = 0; i < buttonArray.count; i++)
+    {
+        NSString *selected = [TipUsData.instance.days objectAtIndex:i];
+        UIImageView *image = (UIImageView *)[buttonArray objectAtIndex:i];
+        if ([selected isEqualToString:@"1"])
+        {
+            image.highlighted = YES;
+        }
+        else
+        {
+            image.highlighted = NO;
+        }
+    }
+}
 @end

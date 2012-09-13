@@ -19,8 +19,8 @@
 
     BOOL liked;
     BOOL favorited;
-
 }
+
 @property (strong, nonatomic) IBOutlet UILabel *dealNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *numberLikesLabel;
 @property (strong, nonatomic) IBOutlet UILabel *addToFavoritesLabel;

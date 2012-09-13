@@ -11,7 +11,7 @@
 @interface DealListViewCell : UITableViewCell
 {
     UIActivityIndicatorView* spinner;
-    
+
     IBOutlet UIImageView *backgroundImage;
 }
 
@@ -28,6 +28,7 @@
 @property (strong, nonatomic) IBOutlet UILabel* distanceLabel;
 @property (strong, nonatomic) IBOutlet UILabel* dealTimeLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *restaurantLogoImageView;
+@property (strong, nonatomic) IBOutlet UILabel *featuredLabel;
 
 
 -(void)setLogoWithString:(NSString*)str;
@@ -36,5 +37,7 @@
 
 -(void) createAndDisplaySpinner;
 -(void) stopSpinner;
+-(void)setFeaturedBackground;
+-(void)setBackgroundWithPattern;
 
 @end

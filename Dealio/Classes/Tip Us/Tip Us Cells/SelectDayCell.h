@@ -21,4 +21,7 @@
     NSArray *buttonArray;
 
 }
+
+-(void)setSelectedDaysFromMemory;
+
 @end

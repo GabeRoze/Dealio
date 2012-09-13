@@ -126,6 +126,7 @@
 
 @synthesize dealList;
 @synthesize dealView;
+@synthesize featuredDeal;
 
 + (DealData*)instance
 {
@@ -144,10 +145,10 @@
     {
         dealList = [NSMutableArray new];
         dealView = [NSMutableArray new];
+        featuredDeal = [NSMutableDictionary new];
     }
     return self;
 }
-
 
 @end
 

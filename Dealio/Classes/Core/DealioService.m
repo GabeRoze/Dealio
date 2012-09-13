@@ -37,7 +37,7 @@
                           NSString* html = [[NSString alloc]
                                   initWithData:data
                                       encoding:NSUTF8StringEncoding];
-                          NSLog (@"Deal Like Response HTML = %@", html);
+//                          NSLog (@"Deal Like Response HTML = %@", html);
                           success(data);
                       }
                       else
@@ -104,7 +104,7 @@
                           NSString* html = [[NSString alloc]
                                   initWithData:data
                                       encoding:NSUTF8StringEncoding];
-                          NSLog (@"Deal Info HTML = %@", html);
+//                          NSLog (@"Deal Info HTML = %@", html);
                           success(data);
                       }
                       else
@@ -116,10 +116,12 @@
 
 +(void)getDealWithUID:(NSString *)uid onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
 {
-    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php";
+    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newdealdetail-func.php/";
 
-    NSString* phpData = [NSString stringWithFormat:@"uid=%@",uid ];
-    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:phpData];
+    NSString* uidString = [NSString stringWithFormat:@"uid=%@",uid ];
+    NSString* emailString = [NSString stringWithFormat:@"&useremail=%@", UserData.instance.email];
+    NSString *urlData = [NSString stringWithFormat:@"%@%@", uidString, emailString];
+    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:urlData];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 
     [NSURLConnection
@@ -159,7 +161,7 @@
                       if ([data length] > 0 && error == nil)
                       {
                           NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                          NSLog (@"HTML = %@", html);
+//                          NSLog (@"HTML = %@", html);
                           success(data);
                       }
                       else
@@ -216,7 +218,7 @@
                       if ([data length] > 0 && error == nil)
                       {
                           NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                          NSLog (@"HTML = %@", html);
+//                          NSLog (@"HTML = %@", html);
                           success(data);
                       }
                       else
@@ -253,7 +255,7 @@
                       if ([data length] > 0 && error == nil)
                       {
                           NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                          NSLog (@"HTML = %@", html);
+//                          NSLog (@"HTML = %@", html);
                           success(data);
                       }
                       else

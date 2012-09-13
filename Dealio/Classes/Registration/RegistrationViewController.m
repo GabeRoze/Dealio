@@ -146,6 +146,7 @@
         tableHeaderCell.headerLabel.text = @"Optional Info";
         tableHeaderCell.headerBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
         tableHeaderCell.headerLeftImage.image = [UIImage imageNamed:@"button_info.png"];
+        tableHeaderCell.selectionStyle = UITableViewCellSelectionStyleGray;
 
 
         return tableHeaderCell;

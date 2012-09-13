@@ -18,7 +18,6 @@
 @synthesize addToFavoritesLabel;
 @synthesize uid;
 
-
 -(id)init
 {
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"DealViewDetailCell"
@@ -39,7 +38,7 @@
 
 -(IBAction)likeAreaTapped:(id)sender
 {
-    //todo find out initial like number
+    if (liked) return;
 
     [DealioService updateLikedForUID:uid onSuccess:^(NSData *data) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -137,6 +136,8 @@
 
 -(void)loadInitialValuesWithFavorited:(NSString *)isFavorited liked:(NSString *)isLiked numLikes:(NSString *)numLikes
 {
+    //todo update user data liked;
+
     if ([isFavorited isEqualToString:@"0"])
     {
         [self setFavorited:NO];

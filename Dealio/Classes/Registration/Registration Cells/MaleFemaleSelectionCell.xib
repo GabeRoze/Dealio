@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">11D50d</string>
+		<string key="IBDocument.SystemVersion">11E53</string>
 		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
-		<string key="IBDocument.AppKitVersion">1138.32</string>
-		<string key="IBDocument.HIToolboxVersion">568.00</string>
+		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">1181</string>
@@ -109,46 +109,45 @@
 							<object class="IBUIImageView" id="451381344">
 								<reference key="NSNextResponder" ref="175017875"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{77, 39}, {100, 44}}</string>
+								<string key="NSFrame">{{77, 14}, {100, 69}}</string>
 								<reference key="NSSuperview" ref="175017875"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="398681846"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MC41MzMzMzMzNjExIDAuNjY2NjY2Njg2NSAxAA</bytes>
+								<object class="NSColor" key="IBUIBackgroundColor" id="236466227">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MCAwAA</bytes>
 								</object>
+								<int key="IBUIContentMode">4</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">m.png</string>
+									<string key="NSResourceName">button_gender_m.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUIHighlightedImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">m_click.png</string>
+									<string key="NSResourceName">button_gender_m_s.png</string>
 								</object>
 							</object>
 							<object class="IBUIImageView" id="332306689">
 								<reference key="NSNextResponder" ref="175017875"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{212, 39}, {100, 44}}</string>
+								<string key="NSFrame">{{212, 14}, {100, 69}}</string>
 								<reference key="NSSuperview" ref="175017875"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">2</int>
-									<bytes key="NSRGB">MSAwLjUzMzMzMzM2MTEgMC42OTQxMTc2NjUzAA</bytes>
-								</object>
+								<reference key="IBUIBackgroundColor" ref="236466227"/>
+								<int key="IBUIContentMode">4</int>
 								<int key="IBUITag">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<object class="NSCustomResource" key="IBUIImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">f.png</string>
+									<string key="NSResourceName">button_gender_f.png</string>
 								</object>
 								<object class="NSCustomResource" key="IBUIHighlightedImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">f_click.png</string>
+									<string key="NSResourceName">button_gender_f_s.png</string>
 								</object>
 							</object>
 						</array>
@@ -157,10 +156,7 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="755504174"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MCAwAA</bytes>
-						</object>
+						<reference key="IBUIBackgroundColor" ref="236466227"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
@@ -322,10 +318,10 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="f.png">{45, 30}</string>
-			<string key="f_click.png">{45, 30}</string>
-			<string key="m.png">{45, 30}</string>
-			<string key="m_click.png">{45, 30}</string>
+			<string key="button_gender_f.png">{60, 68}</string>
+			<string key="button_gender_f_s.png">{60, 68}</string>
+			<string key="button_gender_m.png">{60, 68}</string>
+			<string key="button_gender_m_s.png">{60, 68}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>

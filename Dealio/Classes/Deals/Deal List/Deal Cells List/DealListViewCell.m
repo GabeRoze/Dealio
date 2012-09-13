@@ -17,6 +17,7 @@
 @synthesize distanceLabel;
 @synthesize dealTimeLabel;
 @synthesize restaurantLogoImageView;
+@synthesize featuredLabel;
 
 @synthesize restaurantName;
 @synthesize dealName;
@@ -33,11 +34,24 @@
                                                options:nil];
     self = [nib objectAtIndex:0];
 
-    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+    [self setBackgroundWithPattern];
     [dealNameLabel setFont:[UIFont fontWithName:@"Rokkitt-Bold" size:dealNameLabel.font.pointSize]];
 
     return self;
 }
+
+-(void)setBackgroundWithPattern
+{
+    backgroundImage.image = nil;
+    backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
+}
+
+-(void)setFeaturedBackground
+{
+    backgroundImage.backgroundColor = [UIColor clearColor];
+    backgroundImage.image = [UIImage imageNamed:@"featuredbg.png"];
+}
+
 
 -(void) createAndDisplaySpinner
 {
