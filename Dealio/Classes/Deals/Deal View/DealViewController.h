@@ -15,6 +15,7 @@
 {
     BOOL userCommentPosted;
     BOOL viewJustLoaded;
+    BOOL commentsVisible;
     UIActivityIndicatorView* spinner;
 
     IBOutlet UILabel *dealNameLabel;

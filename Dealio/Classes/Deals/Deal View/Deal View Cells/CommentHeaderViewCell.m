@@ -10,20 +10,14 @@
 
 @implementation CommentHeaderViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+-(id)init
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CommentHeaderViewCell"
+                                                 owner:self
+                                               options:nil];
+    self = [nib objectAtIndex:0];
+
     return self;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

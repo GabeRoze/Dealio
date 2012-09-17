@@ -21,6 +21,7 @@
 #import "GRCustomSpinnerView.h"
 #import "DealioService.h"
 #import "Models.h"
+#import "CommentHeaderViewCell.h"
 
 @implementation DealViewController
 
@@ -79,7 +80,7 @@
 #pragma mark Table Data Source Method
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 8;
+    return 9;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -249,7 +250,19 @@
 
         return tableFooterCell;
     }
-    else if (indexPath.row >= 8)
+    else if (indexPath.row == 8)
+    {
+        CellIdentifier = @"CommentHeaderViewCellIdentifier";
+
+        CommentHeaderViewCell *commentHeaderViewCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+        if (!commentHeaderViewCell)
+        {
+            commentHeaderViewCell = [CommentHeaderViewCell new];
+        }
+        return commentHeaderViewCell;
+    }
+    else if (indexPath.row >= 9 && commentsVisible)
     {
 
     }
@@ -276,6 +289,10 @@
     else if (indexPath.row == 6)
     {
         return [CalculationHelper calculateCellHeightWithString:[parserData objectForKey:@"description"] forWidth:300]+30;
+    }
+    else if (indexPath.row == 8)
+    {
+        return 40;
     }
 }
 
