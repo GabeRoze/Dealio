@@ -14,6 +14,40 @@
 
 @implementation DealioService
 
++(void)getFavoriteListForDay:(NSString *)day onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
+{
+    CLLocationCoordinate2D coordinate = SearchLocation.instance.getLocation;
+    NSString* currentDay = [NSString stringWithFormat:@"currentday=%@",day];
+    NSString *latitude = [NSString stringWithFormat:@"&userlat=%f", coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"&userlong=%f", coordinate.longitude];
+    NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",UserData.instance.email];
+//    NSString* maxDistance = [NSString stringWithFormat:@"&maxdistance=%i", FilterData.instance.maximumSearchDistance];
+    NSString* urlAsString = [NSString stringWithFormat:@"%@%@%@%@",currentDay, latitude, longitude, emailString];
+
+    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newfavoritedealheader-func.php/";
+    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:urlAsString];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                               queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error)
+                  {
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc]
+                                  initWithData:data
+                                      encoding:NSUTF8StringEncoding];
+                          NSLog (@"Favorite List Response HTML = %@", html);
+                          success(data);
+                      }
+                      else
+                      {
+                          [self webConnectionFailed];
+                      }
+                  }];
+}
+
 +(void)getDealListForDay:(NSString *)day onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
 {
     CLLocationCoordinate2D coordinate = SearchLocation.instance.getLocation;

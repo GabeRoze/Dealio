@@ -125,6 +125,7 @@
 @implementation DealData
 
 @synthesize dealList;
+@synthesize favoriteList;
 @synthesize dealView;
 @synthesize featuredDeal;
 
@@ -144,6 +145,7 @@
     if (self = [super init])
     {
         dealList = [NSMutableArray new];
+        favoriteList = [NSMutableArray new];
         dealView = [NSMutableArray new];
         featuredDeal = [NSMutableDictionary new];
     }
