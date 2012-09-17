@@ -22,6 +22,7 @@
 #import "DealioService.h"
 #import "Models.h"
 #import "CommentHeaderViewCell.h"
+#import "CommentViewCell.h"
 
 @implementation DealViewController
 
@@ -45,6 +46,8 @@
 {
     [super viewDidAppear:animated];
 
+    commentsVisible = NO;
+    comments = [NSMutableArray new];
     distanceLabel.text = [CalculationHelper formatDistance:[dealListData objectForKey:@"distance"]];
     dealNameLabel.text = [dealListData objectForKey:@"businessname"];
     dealImageView.image = [ImageCache.sharedImageCache getImage:[dealListData objectForKey:@"logoname"]];
@@ -62,12 +65,24 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             parser = [[XMLParser alloc] initXMLParser:data];
 
-            NSLog(@"comments %@", parser.dealComments);
+            NSMutableArray *commentArray = [NSMutableArray new];
+
+            for (NSUInteger i = 0; i < parser.dealComments.count; i+=3)
+            {
+                [commentArray addObject:[parser.dealComments objectAtIndex:i]];
+                [commentArray addObject:[parser.dealComments objectAtIndex:i+1]];
+                [commentArray addObject:[parser.dealComments objectAtIndex:i+2]];
+
+                [comments addObject:commentArray];
+                commentArray = [NSMutableArray new];
+            }
+
+            NSLog(@"parser comments %@", parser.dealComments);
+            NSLog(@"Comments %@", comments);
 
             dispatch_async( dispatch_get_main_queue(), ^{
                 viewJustLoaded = YES;
                 parserData = [NSMutableDictionary dictionaryWithDictionary:parser.dealItem];
-                comments = parser.dealComments;
                 [table reloadData];
                 [GRCustomSpinnerView.instance stopSpinner];
             });
@@ -80,7 +95,14 @@
 #pragma mark Table Data Source Method
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 9;
+    if (!commentsVisible)
+    {
+        return 9;
+    }
+    else
+    {
+        return comments.count + 9;
+    }
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -264,7 +286,24 @@
     }
     else if (indexPath.row >= 9 && commentsVisible)
     {
+        CellIdentifier = @"CommentViewCellIdentifier";
 
+        CommentViewCell *commentViewCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+        if (!commentViewCell)
+        {
+            commentViewCell = [CommentViewCell new];
+        }
+        NSLog(@"comments %@", comments);
+
+        NSArray *commentArray = [comments objectAtIndex:indexPath.row - 9];
+        NSString *commentText = [commentArray objectAtIndex:0];
+        NSString *commentUser = [commentArray objectAtIndex:1];
+        NSString *commentAge =  [commentArray objectAtIndex:2];
+
+        [commentViewCell setCommentTextViewWithString:commentText user:commentUser age:commentAge];
+
+        return commentViewCell;
     }
 }
 
@@ -294,6 +333,26 @@
     {
         return 40;
     }
+    else if (indexPath.row >= 9)
+    {
+        NSString *commentText = @"";
+        return [CalculationHelper calculateCellHeightWithString:commentText forWidth:320] + 70;
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if (indexPath.row == 8)
+    {
+        commentsVisible = !commentsVisible;
+
+        if (commentsVisible)
+        {
+            [tableView reloadData];
+        }
+    }
 }
 
 -(void)selectLastAnnotation:(MKMapView *)mapView
@@ -309,4 +368,5 @@
 {
     [self dismissModalViewControllerAnimated:YES];
 }
+
 @end

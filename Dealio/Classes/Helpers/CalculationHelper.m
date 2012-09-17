@@ -214,9 +214,7 @@
     return label;
 }
 /*taken from
-
  http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
-
  */
 +(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {
