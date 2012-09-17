@@ -70,7 +70,7 @@
                           NSString* html = [[NSString alloc]
                                   initWithData:data
                                       encoding:NSUTF8StringEncoding];
-                          NSLog (@"Deal Like Response HTML = %@", html);
+//                          NSLog (@"Deal Like Response HTML = %@", html);
                           success(data);
                       }
                       else

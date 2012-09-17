@@ -61,6 +61,8 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             parser = [[XMLParser alloc] initXMLParser:data];
 
+            NSLog(@"comments %@", parser.dealComments);
+
             dispatch_async( dispatch_get_main_queue(), ^{
                 viewJustLoaded = YES;
                 parserData = [NSMutableDictionary dictionaryWithDictionary:parser.dealItem];

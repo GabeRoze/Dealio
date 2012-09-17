@@ -78,7 +78,7 @@
 {
     if (!str)
     {
-        NSLog(@"no logo value");
+//        NSLog(@"no logo");
     }
     else if ([str isEqualToString:@"bulk/Dealio.png"])
     {

@@ -50,7 +50,6 @@
 
 -(void)setSexToSavedData
 {
-
     if ([RegistrationData.instance.sex isEqualToString:@"male"])
     {
         maleImage.highlighted = YES;
@@ -66,8 +65,6 @@
         maleImage.highlighted = NO;
         femaleImage.highlighted = NO;
     }
-
-
 }
 
 @end

@@ -77,6 +77,8 @@
 
         [sidebySideTextFieldCell.leftTextField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
         [sidebySideTextFieldCell.rightTextField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+        sidebySideTextFieldCell.leftTextField.text = RegistrationData.instance.firstName;
+        sidebySideTextFieldCell.rightTextField.text = RegistrationData.instance.lastName;
 
         return sidebySideTextFieldCell;
     }
@@ -95,6 +97,7 @@
         textFieldCell.backgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_teal_light.png"]];
         textFieldCell.cellTextField.placeholder = @"Email Address";
         [textFieldCell.cellTextField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+        textFieldCell.cellTextField.text = RegistrationData.instance.email;
 
         return textFieldCell;
     }
@@ -114,6 +117,7 @@
         textFieldCell.cellTextField.placeholder = @"Password";
         textFieldCell.cellTextField.secureTextEntry = YES;
         [textFieldCell.cellTextField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
+        textFieldCell.cellTextField.text = RegistrationData.instance.password;
 
         return textFieldCell;
     }
@@ -493,6 +497,7 @@
     [DealioService registerUser:^(NSData *data){
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [RegistrationData clearSavedData];
             XMLParser *parser = [[XMLParser alloc] initXMLParser:data];
             NSString *messageText = [parser.userFunction objectForKey:@"message"];
 

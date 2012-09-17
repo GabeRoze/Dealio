@@ -109,13 +109,8 @@ static DealListViewController *instance;
 
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             parser = [[XMLParser alloc] initXMLParser:data];
-//            SearchLocation.instance.savedAddressCoordinate;
             DealData.instance.dealList = parser.dealListArray;
             DealData.instance.featuredDeal = parser.featuredDeal;
-
-            NSLog(@"featured %@", DealData.instance.featuredDeal);
-
-            //todo set comments
 
             dispatch_async( dispatch_get_main_queue(), ^{
                 [table reloadData];
@@ -193,8 +188,6 @@ static DealListViewController *instance;
     cell.restaurantName = [rowData objectForKey:@"businessname"];
     cell.dealName = [rowData objectForKey:@"dealname"];
     [cell setLogoWithString:(NSString*)[rowData objectForKey:@"logoname"]];
-
-    NSLog(@"first load finished %i", firstLoadFinished);
 
     return cell;
 }

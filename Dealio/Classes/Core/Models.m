@@ -207,9 +207,27 @@
 
     if (!instance)
     {
-         instance = [RegistrationData new];
+        instance = [RegistrationData new];
     }
     return instance;
+}
+
++(void)clearSavedData
+{
+    RegistrationData.instance.email = nil;
+    RegistrationData.instance.firstName = nil;
+    RegistrationData.instance.lastName = nil;
+    RegistrationData.instance.password = nil;
+    RegistrationData.instance.sex = nil;
+    RegistrationData.instance.foodDescription = nil;
+    RegistrationData.instance.sex = nil;
+    RegistrationData.instance.age = 0;
+    RegistrationData.instance.ageString = @"0";
+    RegistrationData.instance.ethnicity = 0;
+    RegistrationData.instance.ethnicityString = @"0";
+    RegistrationData.instance.income = 0;
+    RegistrationData.instance.incomeString = @"0";
+    RegistrationData.instance.acceptedTOS = NO;
 }
 
 @end

@@ -75,6 +75,7 @@
 @property (assign, nonatomic) BOOL acceptedTOS;
 
 +(RegistrationData *)instance;
++(void)clearSavedData;
 
 @end
 
