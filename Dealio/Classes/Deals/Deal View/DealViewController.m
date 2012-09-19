@@ -23,6 +23,7 @@
 #import "Models.h"
 #import "CommentHeaderViewCell.h"
 #import "CommentViewCell.h"
+#import "AddCommentViewController.h"
 
 @implementation DealViewController
 
@@ -38,6 +39,7 @@
 {
     [super viewDidLoad];
 
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(presentAddCommentView) name:@"presentAddCommentView" object:nil];
     topBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
     bottomBackgroundImage.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"background_tan_light.png"]];
 }
@@ -46,6 +48,9 @@
 {
     [super viewDidAppear:animated];
 
+    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+
+    [table scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
     commentsVisible = NO;
     comments = [NSMutableArray new];
     distanceLabel.text = [CalculationHelper formatDistance:[dealListData objectForKey:@"distance"]];
@@ -54,11 +59,10 @@
     distanceLabel.font = [UIFont fontWithName:@"Rokkitt-bold" size:distanceLabel.font.pointSize];
     dealNameLabel.font = [UIFont fontWithName:@"Rokkitt" size:dealNameLabel.font.pointSize];
 
-    [GRCustomSpinnerView.instance addSpinnerToView:self.view];
-    [self loadDealFromList:nil];
+    [self loadDealFromList];
 }
 
--(void)loadDealFromList:(NSDictionary *)dealDictionary
+-(void)loadDealFromList
 {
     [DealioService getDealWithUID:[dealListData objectForKey:@"uid"] onSuccess:^(NSData *data){
 
@@ -76,9 +80,6 @@
                 [comments addObject:commentArray];
                 commentArray = [NSMutableArray new];
             }
-
-            NSLog(@"parser comments %@", parser.dealComments);
-            NSLog(@"Comments %@", comments);
 
             dispatch_async( dispatch_get_main_queue(), ^{
                 viewJustLoaded = YES;
@@ -294,7 +295,6 @@
         {
             commentViewCell = [CommentViewCell new];
         }
-        NSLog(@"comments %@", comments);
 
         NSArray *commentArray = [comments objectAtIndex:indexPath.row - 9];
         NSString *commentText = [commentArray objectAtIndex:0];
@@ -331,12 +331,14 @@
     }
     else if (indexPath.row == 8)
     {
-        return 40;
+        return 55;
     }
     else if (indexPath.row >= 9)
     {
-        NSString *commentText = @"";
-        return [CalculationHelper calculateCellHeightWithString:commentText forWidth:320] + 70;
+        NSArray *commentArray = [comments objectAtIndex:indexPath.row - 9];
+        NSString *commentText = [commentArray objectAtIndex:0];
+
+        return [CalculationHelper calculateCellHeightWithString:commentText forWidth:280] + 5 + COMMENT_HEIGHT_MODIFIER;
     }
 }
 
@@ -367,6 +369,13 @@
 - (IBAction)backTapped:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)presentAddCommentView
+{
+    AddCommentViewController *addCommentViewController = [[AddCommentViewController alloc] initWithNibName:@"AddCommentViewController" bundle:nil];
+    addCommentViewController.uid = [dealListData objectForKey:@"uid"];
+    [self presentModalViewController:addCommentViewController animated:YES];
 }
 
 @end

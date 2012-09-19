@@ -17,7 +17,15 @@
                                                options:nil];
     self = [nib objectAtIndex:0];
 
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(presentAddCommentView)];
+    [addCommentButton addGestureRecognizer:tapGestureRecognizer];
+
     return self;
+}
+
+-(void)presentAddCommentView
+{
+    [NSNotificationCenter.defaultCenter postNotificationName:@"presentAddCommentView" object:nil];
 }
 
 @end

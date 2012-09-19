@@ -6,9 +6,16 @@
 //  Copyright (c) 2012 University of Waterloo. All rights reserved.
 //
 
+#define COMMENT_HEIGHT_MODIFIER 30;
+
 #import <UIKit/UIKit.h>
 
 @interface CommentViewCell : UITableViewCell
+{
+    IBOutlet UIImageView *topBackground;
+    IBOutlet UIImageView *middleBackground;
+    IBOutlet UIImageView *botomBackground;
+}
 
 @property (strong, nonatomic) IBOutlet UITextView *commentTextView;
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;

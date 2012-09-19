@@ -14,6 +14,39 @@
 
 @implementation DealioService
 
++(void)submitComment:(NSString *)comment uid:(NSString *)uid onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
+{
+    NSString *command1 = @"cmd=submitcomment";
+    NSString* command2 = [NSString stringWithFormat:@"&cmd2=%@",comment];
+    NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",UserData.instance.email];
+    NSString* uidString = [NSString stringWithFormat:@"&uid=%@",uid];
+    NSString* userFirstName = [NSString stringWithFormat:@"&userfirstname=%@",UserData.instance.firstName];
+    NSString* userLastName = [NSString stringWithFormat:@"&userlastname=%@",UserData.instance.lastName];
+    NSString* urlAsString = [NSString stringWithFormat:@"%@%@%@%@%@%@",command1, command2, emailString, uidString, userFirstName ,userLastName];
+    NSString* functionURL = @"http://www.dealio.cinnux.com/app/newuserstart-func.php/";
+    NSMutableURLRequest* urlRequest = [CalculationHelper getURLRequest:functionURL withData:urlAsString];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                               queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error)
+                  {
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc]
+                                  initWithData:data
+                                      encoding:NSUTF8StringEncoding];
+                          NSLog (@"Comment Response HTML = %@", html);
+                          success(data);
+                      }
+                      else
+                      {
+                          [self webConnectionFailed];
+                      }
+                  }];
+}
+
 +(void)getFavoriteListForDay:(NSString *)day onSuccess:(void (^)(NSData *xmlData))success onFailure:(void (^)())failure
 {
     CLLocationCoordinate2D coordinate = SearchLocation.instance.getLocation;
@@ -263,6 +296,32 @@
                   }];
 }
 
++(void)forgotPassword:(NSString *)email onSuccess:(void (^)(NSData *xmlData))success andFailure:(void (^)())failure
+{
+    NSString *command = @"cmd=forgotpw";
+    NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",UserData.instance.email];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", command, emailString];
+    NSString* functionUrl = @"http://dealio.cinnux.com/app/newuserstart-func.php/";
+    NSMutableURLRequest *urlRequest = [CalculationHelper getURLRequest:functionUrl withData:urlString];
+
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    [NSURLConnection
+            sendAsynchronousRequest:urlRequest
+                              queue:queue
+                  completionHandler:^(NSURLResponse *response, NSData* data, NSError* error) {
+                      if ([data length] > 0 && error == nil)
+                      {
+                          NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                          NSLog (@"Forgot PW HTML = %@", html);
+                          success(data);
+                      }
+                      else
+                      {
+//                          failure();
+                          [self webConnectionFailed];
+                      }
+                  }];
+}
 
 +(void)registerUser:(void (^)(NSData *xmlData))success andFailure:(void (^)())failure
 {

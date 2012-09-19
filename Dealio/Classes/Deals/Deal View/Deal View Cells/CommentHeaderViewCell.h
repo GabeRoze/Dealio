@@ -11,6 +11,7 @@
 @interface CommentHeaderViewCell : UITableViewCell
 {
     IBOutlet UIImageView *backgroundImage;
+    IBOutlet UIImageView *addCommentButton;
 }
 
 @end

@@ -31,11 +31,7 @@
 @property (strong, nonatomic) NSMutableDictionary* parserData;
 @property (strong, nonatomic) NSMutableArray* comments;
 
--(void) loadDealFromList:(NSDictionary*)dealDictionary;
-//-(void)parseXMLFile:(NSData*)data;
-//-(void) stopSpinner;
-//-(void) createAndDisplaySpinner;
-//-(void) connectToServer:(NSString*)data;
+-(void) loadDealFromList;
 - (IBAction)backTapped:(id)sender;
 
 @end

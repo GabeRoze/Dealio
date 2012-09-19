@@ -99,6 +99,8 @@
 		9CA73A32160793B400049A3F /* CommentHeaderViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CA73A31160793B400049A3F /* CommentHeaderViewCell.xib */; };
 		9CA73A361607BA2C00049A3F /* CommentViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA73A351607BA2B00049A3F /* CommentViewCell.m */; };
 		9CA73A381607BA4F00049A3F /* CommentViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CA73A371607BA4F00049A3F /* CommentViewCell.xib */; };
+		9CA73A4A16090D1E00049A3F /* AddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA73A4816090D1E00049A3F /* AddCommentViewController.m */; };
+		9CA73A4B16090D1E00049A3F /* AddCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CA73A4916090D1E00049A3F /* AddCommentViewController.xib */; };
 		9CD94D8F15FCE9E900D9FA4C /* .renameFile.swp in Resources */ = {isa = PBXBuildFile; fileRef = 9CD94D1D15FCE9E900D9FA4C /* .renameFile.swp */; };
 		9CD94D9015FCE9E900D9FA4C /* background_tan_dark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD94D1E15FCE9E900D9FA4C /* background_tan_dark.png */; };
 		9CD94D9115FCE9E900D9FA4C /* background_tan_light.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD94D1F15FCE9E900D9FA4C /* background_tan_light.png */; };
@@ -214,6 +216,11 @@
 		9CD94DFF15FCE9E900D9FA4C /* splashscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD94D8E15FCE9E900D9FA4C /* splashscreen@2x.png */; };
 		9CD94E0115FCEACC00D9FA4C /* button_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD94E0015FCEACC00D9FA4C /* button_login.png */; };
 		9CD94E0315FCEAFF00D9FA4C /* button_signup.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CD94E0215FCEAFF00D9FA4C /* button_signup.png */; };
+		9CE7247F160A1706003B7A85 /* KeyboardToolBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CE7247E160A1706003B7A85 /* KeyboardToolBar.xib */; };
+		9CE7248B160A4065003B7A85 /* commentboxmiddle.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE72489160A4065003B7A85 /* commentboxmiddle.png */; };
+		9CE7248C160A4065003B7A85 /* commentboxtopbottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE7248A160A4065003B7A85 /* commentboxtopbottom.png */; };
+		9CE72490160A4080003B7A85 /* commentboxmiddle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE7248E160A4080003B7A85 /* commentboxmiddle@2x.png */; };
+		9CE72491160A4080003B7A85 /* commentboxtopbottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CE7248F160A4080003B7A85 /* commentboxtopbottom@2x.png */; };
 		9CFC33E915D72594008C47B0 /* unselected_day_button_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFC33E815D72594008C47B0 /* unselected_day_button_color.png */; };
 		9CFC343415D7313C008C47B0 /* selected_day_button_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFC343315D7313C008C47B0 /* selected_day_button_color.png */; };
 		9CFC346915D9FC7B008C47B0 /* 28-star.png in Resources */ = {isa = PBXBuildFile; fileRef = 9CFC346715D9FC7B008C47B0 /* 28-star.png */; };
@@ -486,6 +493,9 @@
 		9CA73A341607BA2B00049A3F /* CommentViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewCell.h; sourceTree = "<group>"; };
 		9CA73A351607BA2B00049A3F /* CommentViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewCell.m; sourceTree = "<group>"; };
 		9CA73A371607BA4F00049A3F /* CommentViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentViewCell.xib; sourceTree = "<group>"; };
+		9CA73A4716090D1E00049A3F /* AddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddCommentViewController.h; path = "Classes/Deals/Deal View/Add Comment/AddCommentViewController.h"; sourceTree = "<group>"; };
+		9CA73A4816090D1E00049A3F /* AddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddCommentViewController.m; path = "Classes/Deals/Deal View/Add Comment/AddCommentViewController.m"; sourceTree = "<group>"; };
+		9CA73A4916090D1E00049A3F /* AddCommentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddCommentViewController.xib; path = "Classes/Deals/Deal View/Add Comment/AddCommentViewController.xib"; sourceTree = "<group>"; };
 		9CD94D1D15FCE9E900D9FA4C /* .renameFile.swp */ = {isa = PBXFileReference; lastKnownFileType = file; path = .renameFile.swp; sourceTree = "<group>"; };
 		9CD94D1E15FCE9E900D9FA4C /* background_tan_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_tan_dark.png; sourceTree = "<group>"; };
 		9CD94D1F15FCE9E900D9FA4C /* background_tan_light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_tan_light.png; sourceTree = "<group>"; };
@@ -601,6 +611,11 @@
 		9CD94D8E15FCE9E900D9FA4C /* splashscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "splashscreen@2x.png"; sourceTree = "<group>"; };
 		9CD94E0015FCEACC00D9FA4C /* button_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_login.png; sourceTree = "<group>"; };
 		9CD94E0215FCEAFF00D9FA4C /* button_signup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = button_signup.png; path = "Dealio/Graphics/Version 1.0/@2x/button_signup.png"; sourceTree = SOURCE_ROOT; };
+		9CE7247E160A1706003B7A85 /* KeyboardToolBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardToolBar.xib; sourceTree = "<group>"; };
+		9CE72489160A4065003B7A85 /* commentboxmiddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentboxmiddle.png; sourceTree = "<group>"; };
+		9CE7248A160A4065003B7A85 /* commentboxtopbottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = commentboxtopbottom.png; sourceTree = "<group>"; };
+		9CE7248E160A4080003B7A85 /* commentboxmiddle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commentboxmiddle@2x.png"; sourceTree = "<group>"; };
+		9CE7248F160A4080003B7A85 /* commentboxtopbottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commentboxtopbottom@2x.png"; sourceTree = "<group>"; };
 		9CFC33E815D72594008C47B0 /* unselected_day_button_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unselected_day_button_color.png; path = "Graphics/Version 2/UI/Deals/unselected_day_button_color.png"; sourceTree = SOURCE_ROOT; };
 		9CFC343315D7313C008C47B0 /* selected_day_button_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selected_day_button_color.png; path = "Graphics/Version 2/UI/Deals/selected_day_button_color.png"; sourceTree = SOURCE_ROOT; };
 		9CFC346715D9FC7B008C47B0 /* 28-star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "28-star.png"; path = "Graphics/Version 2/Buttons/28-star.png"; sourceTree = SOURCE_ROOT; };
@@ -1083,6 +1098,17 @@
 			path = "Registration Cells";
 			sourceTree = "<group>";
 		};
+		9CA73A4516090CCC00049A3F /* Add Comment */ = {
+			isa = PBXGroup;
+			children = (
+				9CA73A4716090D1E00049A3F /* AddCommentViewController.h */,
+				9CA73A4816090D1E00049A3F /* AddCommentViewController.m */,
+				9CA73A4916090D1E00049A3F /* AddCommentViewController.xib */,
+				9CE7247E160A1706003B7A85 /* KeyboardToolBar.xib */,
+			);
+			name = "Add Comment";
+			sourceTree = "<group>";
+		};
 		9CBA7D2815E6F64100778484 /* Version 1.0 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1149,6 +1175,8 @@
 				9CD94D4C15FCE9E900D9FA4C /* button_webaddress.png */,
 				9CD94D4D15FCE9E900D9FA4C /* cb_glossy_off.png */,
 				9CD94D4E15FCE9E900D9FA4C /* cb_glossy_on.png */,
+				9CE72489160A4065003B7A85 /* commentboxmiddle.png */,
+				9CE7248A160A4065003B7A85 /* commentboxtopbottom.png */,
 				9CD94D4F15FCE9E900D9FA4C /* default_logo.png */,
 				9CD94D5015FCE9E900D9FA4C /* divider_tan_tan.png */,
 				9CD94D5115FCE9E900D9FA4C /* divider_teal_tan.png */,
@@ -1215,6 +1243,8 @@
 				9CD94D8715FCE9E900D9FA4C /* button_webaddress@2x.png */,
 				9CD94D8815FCE9E900D9FA4C /* cb_glossy_off@2x.png */,
 				9CD94D8915FCE9E900D9FA4C /* cb_glossy_on@2x.png */,
+				9CE7248E160A4080003B7A85 /* commentboxmiddle@2x.png */,
+				9CE7248F160A4080003B7A85 /* commentboxtopbottom@2x.png */,
 				9CD94D8A15FCE9E900D9FA4C /* default_logo@2x.png */,
 				9CD94D8B15FCE9E900D9FA4C /* divider_tan_tan@2x.png */,
 				9CD94D8C15FCE9E900D9FA4C /* divider_teal_tan@2x.png */,
@@ -1569,6 +1599,7 @@
 		C0FE21B614F4433A00F03DFF /* Deals */ = {
 			isa = PBXGroup;
 			children = (
+				9CA73A4516090CCC00049A3F /* Add Comment */,
 				9C246A8615E72FE20094293B /* Deal View */,
 				9C246A7415E72D9B0094293B /* Deal List */,
 			);
@@ -1902,6 +1933,12 @@
 				9CA03313160182B0007EC236 /* featuredbg.png in Resources */,
 				9CA73A32160793B400049A3F /* CommentHeaderViewCell.xib in Resources */,
 				9CA73A381607BA4F00049A3F /* CommentViewCell.xib in Resources */,
+				9CA73A4B16090D1E00049A3F /* AddCommentViewController.xib in Resources */,
+				9CE7247F160A1706003B7A85 /* KeyboardToolBar.xib in Resources */,
+				9CE7248B160A4065003B7A85 /* commentboxmiddle.png in Resources */,
+				9CE7248C160A4065003B7A85 /* commentboxtopbottom.png in Resources */,
+				9CE72490160A4080003B7A85 /* commentboxmiddle@2x.png in Resources */,
+				9CE72491160A4080003B7A85 /* commentboxtopbottom@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1976,6 +2013,7 @@
 				2A139EAB15F3B9F60021A570 /* AlertHelper.m in Sources */,
 				9CA73A2F1607939800049A3F /* CommentHeaderViewCell.m in Sources */,
 				9CA73A361607BA2C00049A3F /* CommentViewCell.m in Sources */,
+				9CA73A4A16090D1E00049A3F /* AddCommentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1999,7 +2037,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2014,6 +2053,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2024,7 +2065,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2033,6 +2075,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2051,8 +2095,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B1B9141F-2590-4184-8777-8BF17B2CF014";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B1B9141F-2590-4184-8777-8BF17B2CF014";
+				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2070,8 +2114,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B1B9141F-2590-4184-8777-8BF17B2CF014";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B1B9141F-2590-4184-8777-8BF17B2CF014";
+				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2082,7 +2126,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2091,6 +2136,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2101,7 +2148,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dealio/Dealio-Prefix.pch";
 				INFOPLIST_FILE = "Dealio/Dealio-Info.plist";
@@ -2110,8 +2157,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "B1B9141F-2590-4184-8777-8BF17B2CF014";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "60014B1E-6EF8-46AC-8946-549F2BEEAE83";
+				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Ad Hoc";

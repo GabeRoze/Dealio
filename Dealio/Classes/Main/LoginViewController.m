@@ -15,6 +15,7 @@
 #import "DealioService.h"
 #import "GRCustomSpinnerView.h"
 #import "Models.h"
+#import "AlertHelper.h"
 
 @implementation LoginViewController
 @synthesize emailField;
@@ -23,7 +24,6 @@
 @synthesize table;
 @synthesize parser;
 @synthesize messageText;
-//@synthesize borderedSpinnerView;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -46,6 +46,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(forgotPasswordTapped:)];
+    [forgotPasswordLabel addGestureRecognizer:tapGestureRecognizer];
 }
 
 - (void)viewDidUnload
@@ -56,11 +59,6 @@
     [super viewDidUnload];
 }
 
-//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-//{
-//    Return YES for supported orientations
-//    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-//}
 
 #pragma mark -
 #pragma mark Login Logic
@@ -134,7 +132,6 @@
                             onFailure:^{
                                 //todo display uifailure alert
                             }];
-
     }
 }
 
@@ -374,6 +371,53 @@
     UITableViewCell* cell1 = [table cellForRowAtIndexPath:a];
     [cell1.accessoryView resignFirstResponder];
     [self attemptLogin];
+}
+
+#pragma mark Forgot Password
+-(IBAction)forgotPasswordTapped:(id)sender
+{
+    UITableViewCell *tableViewCell = [table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    UITextField *textField = (UITextField *)tableViewCell.accessoryView;
+    NSString *email = textField.text;
+
+    if (email.length > 0)
+    {
+        [GRCustomSpinnerView.instance addSpinnerToView:self.view];
+
+        [DealioService forgotPassword:@"" onSuccess:^(NSData *data){
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                parser = [[XMLParser alloc] initXMLParser:data];
+                NSString *message = [parser.userFunction objectForKey:@"message"];
+            });
+
+            dispatch_async( dispatch_get_main_queue(), ^{
+                [GRCustomSpinnerView.instance stopSpinner];
+
+                if ([messageText isEqualToString:@"emailsuccess"])
+                {
+                    [AlertHelper displayAlertWithOKButtonUsingTitle:@"Email Sent" withMessage:@"Check your email for instructions on how to reset your password" andAction:nil];
+                }
+                else if ([messageText isEqualToString:@"emailfail"] || [messageText isEqualToString:@"noaccountfound"])
+                {
+                    [AlertHelper displayAlertWithOKButtonUsingTitle:@"No Account Found" withMessage:@"Check your email for instructions on how to reset your password" andAction:nil];
+                }
+                else
+                {
+                    [DealioService webConnectionFailed];
+                }
+
+
+            });
+
+        } andFailure:nil];
+    }
+    else
+    {
+        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Enter Your Email" withMessage:@"You will be emailed a confirmation to change your password" andAction:^{
+            [textField becomeFirstResponder];
+        }];
+    }
 }
 
 @end

@@ -14,6 +14,7 @@
 @interface LoginViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 {
 //    UIActivityIndicatorView* spinner;
+    IBOutlet UILabel *forgotPasswordLabel;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
