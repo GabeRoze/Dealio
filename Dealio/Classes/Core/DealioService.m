@@ -299,7 +299,7 @@
 +(void)forgotPassword:(NSString *)email onSuccess:(void (^)(NSData *xmlData))success andFailure:(void (^)())failure
 {
     NSString *command = @"cmd=forgotpw";
-    NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",UserData.instance.email];
+    NSString* emailString = [NSString stringWithFormat:@"&useremail=%@",email];
     NSString *urlString = [NSString stringWithFormat:@"%@%@", command, emailString];
     NSString* functionUrl = @"http://dealio.cinnux.com/app/newuserstart-func.php/";
     NSMutableURLRequest *urlRequest = [CalculationHelper getURLRequest:functionUrl withData:urlString];

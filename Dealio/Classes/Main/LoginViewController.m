@@ -384,32 +384,33 @@
     {
         [GRCustomSpinnerView.instance addSpinnerToView:self.view];
 
-        [DealioService forgotPassword:@"" onSuccess:^(NSData *data){
+        [DealioService forgotPassword:email onSuccess:^(NSData *data){
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                parser = [[XMLParser alloc] initXMLParser:data];
-                NSString *message = [parser.userFunction objectForKey:@"message"];
+
+                dispatch_async( dispatch_get_main_queue(), ^{
+                    parser = [[XMLParser alloc] initXMLParser:data];
+                    NSString *message = [parser.userFunction objectForKey:@"message"];
+                    [GRCustomSpinnerView.instance stopSpinner];
+
+                    if ([message isEqualToString:@"emailsuccess"])
+                    {
+                        [AlertHelper displayAlertWithOKButtonUsingTitle:@"Email Sent" withMessage:@"Check your email for instructions on how to reset your password" andAction:nil];
+                    }
+                    else if ([messageText isEqualToString:@"noaccountfound"])
+                    {
+                        [AlertHelper displayAlertWithOKButtonUsingTitle:@"No Account Found" withMessage:@"Please enter a valid email address or sign up for an account." andAction:nil];
+                    }
+                    else if ([message isEqualToString:@"noaccountfound"])
+                    {
+                        [AlertHelper displayAlertWithOKButtonUsingTitle:@"No Account Found" withMessage:@"Please enter a valid email address or sign up for an account." andAction:nil];
+                    }
+                    else
+                    {
+                        [DealioService webConnectionFailed];
+                    }
+                });
             });
-
-            dispatch_async( dispatch_get_main_queue(), ^{
-                [GRCustomSpinnerView.instance stopSpinner];
-
-                if ([messageText isEqualToString:@"emailsuccess"])
-                {
-                    [AlertHelper displayAlertWithOKButtonUsingTitle:@"Email Sent" withMessage:@"Check your email for instructions on how to reset your password" andAction:nil];
-                }
-                else if ([messageText isEqualToString:@"emailfail"] || [messageText isEqualToString:@"noaccountfound"])
-                {
-                    [AlertHelper displayAlertWithOKButtonUsingTitle:@"No Account Found" withMessage:@"Check your email for instructions on how to reset your password" andAction:nil];
-                }
-                else
-                {
-                    [DealioService webConnectionFailed];
-                }
-
-
-            });
-
         } andFailure:nil];
     }
     else
