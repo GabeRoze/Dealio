@@ -2085,8 +2085,8 @@
 		C0FE21A514F4410F00F03DFF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dealio/Dealio-Prefix.pch";
 				INFOPLIST_FILE = "Dealio/Dealio-Info.plist";
@@ -2095,8 +2095,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				PROVISIONING_PROFILE = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2104,8 +2104,8 @@
 		C0FE21A614F4410F00F03DFF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dealio/Dealio-Prefix.pch";
 				INFOPLIST_FILE = "Dealio/Dealio-Info.plist";
@@ -2114,8 +2114,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				PROVISIONING_PROFILE = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2147,8 +2147,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Dealio/Dealio-Prefix.pch";
 				INFOPLIST_FILE = "Dealio/Dealio-Info.plist";
@@ -2157,8 +2157,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				PROVISIONING_PROFILE = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Ad Hoc";
