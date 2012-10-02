@@ -40,6 +40,7 @@
 		9C246A9415E735BB0094293B /* ContactInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C246A9315E735BB0094293B /* ContactInfoCell.m */; };
 		9C246A9615E735CA0094293B /* ContactInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C246A9515E735CA0094293B /* ContactInfoCell.xib */; };
 		9C2FBAF915F5464E00229947 /* RokkittBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C2FBAF815F5464E00229947 /* RokkittBold.ttf */; };
+		9C33AC65161B331A0081801E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C33AC64161B331A0081801E /* Default-568h@2x.png */; };
 		9C5827E715E94502006543A2 /* MapViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5827E615E94502006543A2 /* MapViewCell.m */; };
 		9C5827EA15E94513006543A2 /* MapViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C5827E915E94513006543A2 /* MapViewCell.xib */; };
 		9C75E1AE15E9629B009E3461 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C75E1AD15E9629B009E3461 /* MessageUI.framework */; };
@@ -401,6 +402,7 @@
 		9C246A9315E735BB0094293B /* ContactInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfoCell.m; sourceTree = "<group>"; };
 		9C246A9515E735CA0094293B /* ContactInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactInfoCell.xib; sourceTree = "<group>"; };
 		9C2FBAF815F5464E00229947 /* RokkittBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RokkittBold.ttf; sourceTree = "<group>"; };
+		9C33AC64161B331A0081801E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9C5827E515E94502006543A2 /* MapViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewCell.h; sourceTree = "<group>"; };
 		9C5827E615E94502006543A2 /* MapViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewCell.m; sourceTree = "<group>"; };
 		9C5827E915E94513006543A2 /* MapViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewCell.xib; sourceTree = "<group>"; };
@@ -1383,6 +1385,7 @@
 		C0FE218114F4410E00F03DFF = {
 			isa = PBXGroup;
 			children = (
+				9C33AC64161B331A0081801E /* Default-568h@2x.png */,
 				C094C90A14F5B25400095CE6 /* Default@2x.png */,
 				C094C90814F5B24900095CE6 /* Default.png */,
 				C0FE21A714F4418400F03DFF /* Resources */,
@@ -1667,11 +1670,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0FE219B14F4410F00F03DFF /* InfoPlist.strings in Resources */,
-				C0FE21BB14F445F700F03DFF /* Entitlements.plist in Resources */,
 				C0FE21C214F448E900F03DFF /* PriceFilters.plist in Resources */,
 				C0FE21D614F4493C00F03DFF /* 960x640-old.png in Resources */,
 				C0FE21D714F4493C00F03DFF /* 960x640.png in Resources */,
 				C0FE21D814F4493C00F03DFF /* black.png in Resources */,
+				C0FE21BB14F445F700F03DFF /* Entitlements.plist in Resources */,
 				C0FE21D914F4493C00F03DFF /* default.png in Resources */,
 				C0FE21DA14F4493C00F03DFF /* info_background.jpg in Resources */,
 				C0FE21DB14F4493C00F03DFF /* info_background.png in Resources */,
@@ -1939,6 +1942,7 @@
 				9CE7248C160A4065003B7A85 /* commentboxtopbottom.png in Resources */,
 				9CE72490160A4080003B7A85 /* commentboxmiddle@2x.png in Resources */,
 				9CE72491160A4080003B7A85 /* commentboxtopbottom@2x.png in Resources */,
+				9C33AC65161B331A0081801E /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2037,8 +2041,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2053,8 +2057,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				PROVISIONING_PROFILE = "9EB557CB-46BB-46DA-9D0B-8F374754E792";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9EB557CB-46BB-46DA-9D0B-8F374754E792";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2065,8 +2069,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2075,8 +2079,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				PROVISIONING_PROFILE = "9EB557CB-46BB-46DA-9D0B-8F374754E792";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9EB557CB-46BB-46DA-9D0B-8F374754E792";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2095,8 +2099,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
+				PROVISIONING_PROFILE = "9D7E869C-D7EE-46FD-AA07-790BA9807A65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9D7E869C-D7EE-46FD-AA07-790BA9807A65";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2114,8 +2118,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
+				PROVISIONING_PROFILE = "9D7E869C-D7EE-46FD-AA07-790BA9807A65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9D7E869C-D7EE-46FD-AA07-790BA9807A65";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -2126,8 +2130,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alkarim Nasser (Q35L9C7L84)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Gabe Rozenberg (Z57QU9F44H)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2136,8 +2140,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA2EF52A-5F8E-404C-9E27-63AF621C8911";
+				PROVISIONING_PROFILE = "9EB557CB-46BB-46DA-9D0B-8F374754E792";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9EB557CB-46BB-46DA-9D0B-8F374754E792";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2157,8 +2161,8 @@
 					"\"$(SRCROOT)/Dealio/TestFlightSDK0.8.3\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F24665E-FFAC-4A66-B0E8-2CAE87DA7C3C";
+				PROVISIONING_PROFILE = "9D7E869C-D7EE-46FD-AA07-790BA9807A65";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9D7E869C-D7EE-46FD-AA07-790BA9807A65";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Ad Hoc";
